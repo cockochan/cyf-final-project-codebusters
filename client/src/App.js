@@ -7,8 +7,9 @@ import {
 	Link,
 } from "react-router-dom";
 import "./App.css";
+import Studentview from "./Components/Studentview.js";
 import { getMessage } from "./service";
-import Mentors from "./Components/Mentors";
+import Mentors from "./Components/Mentors.js";
 
 export function App() {
 	const [message, setMessage] = useState("Loading...");
@@ -20,14 +21,17 @@ export function App() {
 	return (
 		<main role="main">
 			<div>
-				<img className="logo" data-qa="logo" src={logo} alt="Just the React logo" />
+
 				<h1 className="message" data-qa="message">{message}</h1>
 			</div>
 			<Router>
-
+				<Link to="/Studentview">Home</Link>
 				<Switch>
 					<Route path="/Mentors">
 						<Mentors />
+					</Route>
+					<Route path="/Studentview">
+						<Studentview />
 					</Route>
 				</Switch>
 			</Router>
