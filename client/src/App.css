@@ -9,3 +9,26 @@
 .message:hover {
     background-color: yellow;
 }
+.allAnswers {
+    display: flex;
+   justify-content:space-between ;
+}
+.mentorCardAnswers{
+    margin:5px;
+}
+.card{
+    background-color: blueviolet; 
+    margin:15px;
+    max-height: 100px;;
+}
+.cardBox{
+    display: flex;
+    justify-items:center ;
+}
+.quizSection{
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: blueviolet;
+    height:100vh;
+
+}
