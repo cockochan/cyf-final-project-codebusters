@@ -10,7 +10,7 @@ import "./grid.css";
 import Studentview from "./Components/Students.js";
 import { getMessage } from "./service";
 import Mentors from "./Components/Mentors.js";
-import Questions from "/mockData/Questions.json";
+import Questions from "../mockData/Questions.json";
 export function App() {
 
 	// const [message, setMessage] = useState("Loading...");

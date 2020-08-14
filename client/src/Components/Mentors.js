@@ -5,7 +5,7 @@ import {
 	Route,
 	Link,
 } from "react-router-dom";
-import Questions from "../../mockData/Questions.json";
+
 import "../App.css";
 import "../grid.css";
 
