@@ -28,7 +28,13 @@
 .quizSection{
     flex-direction: row;
     flex-wrap: wrap;
-    border: blueviolet;
+    background-color: coral;
     height:100vh;
 
+}
+.code{
+    font-weight: 900;
+    color: turquoise;
+    padding:5px;
+    background-color: darkslategrey;
 }

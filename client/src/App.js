@@ -30,16 +30,16 @@ export function App() {
 				<nav className="col-4">
 					<ul>
 		  <li style={{ listStyleType: "none" }}>
-							<Link to="/Studentview">Home</Link>
+							<Link to="/Studentview">for students </Link>
 						</li>
 						<li style={{ listStyleType: "none" }}>
-							<Link to="/Mentors">mentors</Link>
+							<Link to="/Mentors"> for mentors</Link>
 						</li></ul></nav>
 				<Switch>
 					<Route path="/Mentors">
 						<Mentors />
 					</Route>
-					<Route path="/Studentview">
+					<Route path="/">
 						<Studentview />
 					</Route>
 				</Switch>

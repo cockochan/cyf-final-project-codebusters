@@ -1,7 +1,11 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable linebreak-style */
-import React, { useState, useEffect }  from "react";
+import React,{ useState } from "react";
+import Studentview from "./Studentview.js";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link,
+} from "react-router-dom";
 import  MockQuestions from "../MockQuestions.json";
 const Mentors = () => {
 	// const MockQuestionsParsed = MockQuestions.json();
@@ -38,15 +42,30 @@ const Mentors = () => {
 
 	return (
 		<div className='row'>
-			<div className="quizSection col-3">
-				<h1>your quiz</h1></div>
+			<Router>
+				<Link to="/">Home</Link>
+				<Switch>
+					<Route path="/Studentview">
+						<Studentview />
+					</Route>
+				</Switch>
+			</Router>
+
+			<div className="quizSection row">
+				<h1>your quiz</h1>
+			</div>
 			<div className='cardbox col-6'>
+
 				<div className='row'>
 					{results.map((quest)=>{
 
 						return (
 
 							<div className ='card col-4'>
+								<code className='code col-1'>{`
+  html { background: red; }
+  body { color: blue; }
+`}</code>
 								<label>
 									<input type="checkbox"
 
