@@ -7,10 +7,10 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import "./grid.css";
-import Studentview from "./Components/Studentview.js";
+import Studentview from "./Components/Students.js";
 import { getMessage } from "./service";
 import Mentors from "./Components/Mentors.js";
-import Questions from "../mockData/Questions.json";
+import mockQuestions from "../mockData/Questions.json";
 export function App() {
 
 	// const [message, setMessage] = useState("Loading...");
@@ -29,7 +29,7 @@ export function App() {
 				<nav className="col-4">
 					<ul>
 		  <li style={{ listStyleType: "none" }}>
-							<Link to="/Studentview">for students </Link>
+							<Link to="/Students">for students </Link>
 						</li>
 						<li style={{ listStyleType: "none" }}>
 							<Link to="/Mentors"> for mentors</Link>
