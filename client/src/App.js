@@ -30,7 +30,7 @@ export function App() {
 			<Router>
 				<nav className="col-4">
 					<ul><li style={{ listStyleType: "none" }}>
-						<Link to="/NewQuestion"> new question</Link>
+						<Link to="/NewQuestion">New question</Link>
 					</li>
 		  <li style={{ listStyleType: "none" }}>
 						<Link to="/Students">for students </Link>
