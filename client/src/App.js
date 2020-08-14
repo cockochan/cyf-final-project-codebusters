@@ -10,7 +10,9 @@ import "./grid.css";
 import Studentview from "./Components/Students.js";
 import { getMessage } from "./service";
 import Mentors from "./Components/Mentors.js";
-import Questions from "../mockData/Questions.json";
+import NewQuestion from "./Components/NewQuestion.js";
+
+import Questions from "../src/mockData/Questions.json";
 export function App() {
 
 	// const [message, setMessage] = useState("Loading...");
@@ -23,23 +25,30 @@ export function App() {
 		<main className='container'role="main">
 			<div>
 
-				<h1 className="message" data-qa="message">{message}</h1>
+
 			</div>
 			<Router>
 				<nav className="col-4">
-					<ul>
+					<ul><li style={{ listStyleType: "none" }}>
+						<Link to="/NewQuestion"> new question</Link>
+					</li>
 		  <li style={{ listStyleType: "none" }}>
-							<Link to="/Students">for students </Link>
-						</li>
-						<li style={{ listStyleType: "none" }}>
-							<Link to="/Mentors"> for mentors</Link>
-						</li></ul></nav>
+						<Link to="/Students">for students </Link>
+					</li>
+					<li style={{ listStyleType: "none" }}>
+						<Link to="/Mentors"> for mentors</Link>
+					</li>
+
+					</ul></nav>
 				<Switch>
 					<Route path="/Mentors">
 						<Mentors />
 					</Route>
 					<Route path="/">
 						<Studentview />
+					</Route>
+					<Route path="/NewQuestion">
+						<NewQuestion />
 					</Route>
 				</Switch>
 			</Router>
