@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import mockQuestions from "../mockData/Questions.json";
 import "./App.css";
-import "./grid.css";
-import Studentview from "./Components/Studentview.js";
+import "../grid.css";
+import Students from "./Components/Students.js";
 export function Mentors() {
 	const [questions,setQuestions]=useState(mockQuestions.json());
 	return(
