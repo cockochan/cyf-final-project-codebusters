@@ -30,26 +30,27 @@ export function App() {
 			<Router>
 				<nav className="col-4">
 					<ul><li style={{ listStyleType: "none" }}>
-						<Link to="/NewQuestion">New question</Link>
+						<Link to="/NewQuestion" exact='true'>New question</Link>
 					</li>
 		  <li style={{ listStyleType: "none" }}>
-						<Link to="/Students">for students </Link>
+						<Link to="/Students" exact='true'>for students </Link>
 					</li>
 					<li style={{ listStyleType: "none" }}>
-						<Link to="/Mentors"> for mentors</Link>
+						<Link to="/Mentors"exact='true'> for mentors</Link>
 					</li>
 
 					</ul></nav>
 				<Switch>
+					<Route exact path="/NewQuestion">
+						<NewQuestion />
+					</Route>
 					<Route path="/Mentors">
 						<Mentors />
 					</Route>
 					<Route path="/">
 						<Studentview />
 					</Route>
-					<Route path="/NewQuestion">
-						<NewQuestion />
-					</Route>
+
 				</Switch>
 			</Router>
 		</main>
