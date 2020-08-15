@@ -14,6 +14,7 @@ export default function NewQuestion() {
 		  answer_d: null,
 		  answer_e: null,
 		  answer_f: null,
+
 		},
 		multiple_correct_answers: "false",
 		correct_answers: {
@@ -27,7 +28,7 @@ export default function NewQuestion() {
 		explanation: "rmdir deletes an empty directory",
 		tip: null,
 		tags: [],
-		category: "linux",
+		code: "linux",
 		difficulty: "Easy",
 	  });
 	const [md, setMd] = useState("");
@@ -50,9 +51,9 @@ export default function NewQuestion() {
 			<textarea onKeyUp={(e) => textChanged(e)} />
 
 			<h1>answers</h1>
-			<label placeholder="answer_a"><input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
-				<input type='checkbox' />
-			</label>
+			<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
+			<input type='checkbox' />
+
 			<input placeholder="answer b" />
 			<input placeholder="answer c" />
 			<input placeholder="answer d" />

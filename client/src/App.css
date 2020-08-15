@@ -9,3 +9,16 @@
 .message:hover {
     background-color: yellow;
 }
+.card{
+    margin:5px;
+    border: 4px solid blue;
+}
+.quizzPage{
+    justify-items: center;
+    padding:10px;
+}
+.questionPage{
+    justify-items: center;
+    border: 4px solid blue;
+    height:100%
+}

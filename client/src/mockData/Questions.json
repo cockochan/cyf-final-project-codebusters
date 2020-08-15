@@ -27,7 +27,7 @@
     "difficulty": "Easy"
   },
   {
-    "id": 1,
+    "id": 2,
     "question": "How to delete a directory in Linux?",
     "description": "delete folder",
     "answers": {
@@ -54,7 +54,7 @@
     "difficulty": "Easy"
   },
   {
-    "id": 1,
+    "id": 3,
     "question": "How to delete a directory in Linux?",
     "description": "delete folder",
     "answers": {
@@ -81,7 +81,7 @@
     "difficulty": "Easy"
   },
   {
-    "id": 1,
+    "id": 4,
     "question": "How to delete a directory in Linux?",
     "description": "delete folder",
     "answers": {
@@ -108,7 +108,7 @@
     "difficulty": "Easy"
   },
   {
-    "id": 1,
+    "id": 5,
     "question": "How to delete a directory in Linux?",
     "description": "delete folder",
     "answers": {
@@ -135,7 +135,7 @@
     "difficulty": "Easy"
   },
   {
-    "id": 1,
+    "id": 6,
     "question": "How to delete a directory in Linux?",
     "description": "delete folder",
     "answers": {
@@ -162,7 +162,7 @@
     "difficulty": "Easy"
   },
   {
-    "id": 1,
+    "id": 7,
     "question": "How to delete a directory in Linux?",
     "description": "delete folder",
     "answers": {
@@ -189,7 +189,7 @@
     "difficulty": "Easy"
   },
   {
-    "id": 1,
+    "id": 8,
     "question": "How to delete a directory in Linux?",
     "description": "delete folder",
     "answers": {
@@ -216,7 +216,7 @@
     "difficulty": "Easy"
   },
   {
-    "id": 1,
+    "id": 9,
     "question": "How to delete a directory in Linux?",
     "description": "delete folder",
     "answers": {
@@ -243,7 +243,7 @@
     "difficulty": "Easy"
   },
   {
-    "id": 1,
+    "id": 10,
     "question": "How to delete a directory in Linux?",
     "description": "delete folder",
     "answers": {

@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import "./grid.css";
-import Studentview from "./Components/Students.js";
+import Students from "./Components/Students.js";
 import { getMessage } from "./service";
 import Mentors from "./Components/Mentors.js";
 import NewQuestion from "./Components/NewQuestion.js";
@@ -48,7 +48,7 @@ export function App() {
 						<Mentors />
 					</Route>
 					<Route path="/">
-						<Studentview />
+						<Students />
 					</Route>
 
 				</Switch>
