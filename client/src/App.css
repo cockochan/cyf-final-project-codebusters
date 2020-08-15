@@ -22,3 +22,11 @@
     border: 4px solid blue;
     height:100%
 }
+.newQuiz{
+    border: 4px solid blue;
+}
+.cardBlock{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

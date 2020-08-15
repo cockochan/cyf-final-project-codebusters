@@ -5,7 +5,7 @@ import Questions from "../mockData/Questions.json";
 export default function NewQuestion() {
 	const [questionToSet, setQuestionToSet]=useState( {
 		id: 1,
-		question: "How to delete a directory in Linux?",
+		question: null,
 		description: "delete folder",
 		answers: {
 		  answer_a: null,
@@ -45,20 +45,24 @@ export default function NewQuestion() {
 		);
 	};
 	return (
-		<div>
-			<div>{questionToSet.answers.answer_a}</div>
-			<h1>question</h1>
-			<textarea onKeyUp={(e) => textChanged(e)} />
+		<div className='col-12'>
+			<div>
+				<div>{questionToSet.answers.answer_a}</div>
+				<h1>question</h1>
+				<textarea onKeyUp={(e) => textChanged(e)} />
 
-			<h1>answers</h1>
-			<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
-			<input type='checkbox' />
+				<h1>answers</h1>
+				<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
+				<input type='checkbox' />
 
-			<input placeholder="answer b" />
-			<input placeholder="answer c" />
-			<input placeholder="answer d" />
-			<input placeholder="answer e" />
-			<ReactMarkdown source={md} />
+				<input placeholder="answer b" />
+				<input placeholder="answer c" />
+				<input placeholder="answer d" />
+				<input placeholder="answer e" />
+				<ReactMarkdown source={md} />
+
+			</div>
+			<button>submit answers</button>
 		</div>
 	);
 }

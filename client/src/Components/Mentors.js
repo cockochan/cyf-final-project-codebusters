@@ -12,31 +12,94 @@ import "../grid.css";
 
 export default function Mentors() {
 	const [fetchedQuestions,setfetchedQuestions]=useState(Questions);
-	console.log(fetchedQuestions.toString());
+	const [newQuizzQuestions, setNewQuizzQuestions]=useState([]);
+	const [newQuizz,setNewQuizz]=useState(	{
+		id: 1,
+		name: "javaScrypt week 1",
+		publiShingDate: "2020-08-04",
+		questions: [],
+	});
+	useEffect(() => {
+		if(newQuizz.questions!==null){
 
+
+			let newQuizQuestions = [];
+			newQuizQuestions = newQuizz.questions.map((selId)=>{
+
+				let found = (Questions.find((question)=>question.id==selId));
+				newQuizQuestions.push(found);
+
+
+				setNewQuizzQuestions(newQuizQuestions);
+
+			}
+			);
+		}
+	},[newQuizz]);
+	const addQuestion =(e)=>{
+		setNewQuizz({ ...newQuizz,
+			questions:[...newQuizz.questions,e.target.value],
+		},
+		);
+
+	};
 	if(fetchedQuestions){
 		return(<div className='row'>
-			{fetchedQuestions.map((quest)=>
-				<div className='col-3 card'>
-					<div>{quest.question}</div>
+			<div className='col-9 cardBlock'>
+				{fetchedQuestions.map((quest)=>
+					<div className='col-2 card'>
+						<input type="checkbox" id="horns" name="horns" value={quest.id} onChange={addQuestion} />
+						<label htmlFor="horns">add to quiz</label>
+						<div>{quest.question}</div>
+
+						<div className='answers'>
+							{Object.entries(quest.answers).map(([key, value]) =>{
+								// use keyName to get current key's name
+								return(
+									<div>
 
 
-					<div className='row answers'>
-						{Object.entries(quest.answers).map(([key, value]) =>{
-						// use keyName to get current key's name
-							return(
-								<div>
-									<input type="checkbox" id="horns" name="horns" />
-									<label htmlFor="horns">{value}</label>
+										<div className='col-6'>{value}</div>
 
-									{/* <div className='col-6'>{value}</div> */}
+									</div>);
 
-								</div>);
+							}
+			  )}</div>
 
-						}
-			  )}</div></div>
-			)
-			}</div>);
+
+			  </div>
+				)
+				}</div>
+
+			<div className='col-3 newQuiz'><h1>New quiz</h1>
+
+				{newQuizzQuestions.map((quest)=>
+					<div className='col-12 card'>
+						<input type="checkbox" id="horns" name="horns" value={quest.id} onChange={addQuestion} />
+						<label htmlFor="horns">add to quiz</label>
+						<div>{quest.question}</div>
+
+						<div className='answers'>
+							{Object.entries(quest.answers).map(([key, value]) =>{
+							// use keyName to get current key's name
+								return(
+									<div>
+
+
+										<div className='col-6'>{value}</div>
+
+									</div>);
+
+							}
+			  )}</div>
+
+
+			  </div>
+				)
+				}<button>submit new quizz</button></div>
+
+			)</div>
+		);
 	} else{
 		return(<div>no questions loaded</div>);
 	}

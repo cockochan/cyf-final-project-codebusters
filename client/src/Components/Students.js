@@ -57,7 +57,8 @@ export default function Students() {
 		console.log(quizzQuestions[questPageNum]);
 		return(
 			<div className='col-12 '>
-				<div>{quizzQuestions[questPageNum].question}</div>
+				{console.log(quizzQuestions.toString())}
+				{questPageNum<quizzQuestions.length?<div>{quizzQuestions[questPageNum].question}</div>:<div></div>}
 
 
 				<div className='questionPage'>
@@ -73,7 +74,9 @@ export default function Students() {
 							</div>);
 
 					}
-			  )}</div><button onClick={nextPage}>next page</button>;</div>);
+			  )}</div>
+				{(questPageNum<quizzQuestions.length? <button onClick={nextPage}>next page</button>:<button>submit test results</button>)}
+			</div>);
 
 	} else{
 		console.log(questPageNum);

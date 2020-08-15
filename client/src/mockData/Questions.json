@@ -55,7 +55,7 @@
   },
   {
     "id": 3,
-    "question": "How to delete a directory in Linux?",
+    "question": "How do you write 'Hello World' in an alert box?",
     "description": "delete folder",
     "answers": {
       "answer_a": "ls",
@@ -82,7 +82,7 @@
   },
   {
     "id": 4,
-    "question": "How to delete a directory in Linux?",
+    "question": "Inside which HTML element do we put the JavaScript?",
     "description": "delete folder",
     "answers": {
       "answer_a": "ls",
@@ -109,7 +109,7 @@
   },
   {
     "id": 5,
-    "question": "How to delete a directory in Linux?",
+    "question": "How to write an IF statement in JavaScript?",
     "description": "delete folder",
     "answers": {
       "answer_a": "ls",
@@ -128,7 +128,7 @@
       "answer_e_correct": "false",
       "answer_f_correct": "false"
     },
-    "explanation": "rmdir deletes an empty directory",
+    "explanation": "Which operator is used to assign a value to a variable?",
     "tip": null,
     "tags": [],
     "category": "linux",
@@ -136,7 +136,7 @@
   },
   {
     "id": 6,
-    "question": "How to delete a directory in Linux?",
+    "question": "What is the correct JavaScript syntax for opening a new window called 'w2' ?",
     "description": "delete folder",
     "answers": {
       "answer_a": "ls",
