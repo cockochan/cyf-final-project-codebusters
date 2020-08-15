@@ -61,7 +61,7 @@ export default function Students() {
 
 
 				<div className='questionPage'>
-					{Object.entries(quizzQuestions[questPageNum].answers).map(([key, value]) =>{
+					{Object.entries(quizzQuestions[questPageNum-1].answers).map(([key, value]) =>{
 					// use keyName to get current key's name
 						return(
 							<div>

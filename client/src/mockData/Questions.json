@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "question": "How to delete a directory in Linux?",
+    "question": "What is the correct JavaScript syntax to change the content of the HTML element below?",
     "description": "delete folder",
     "answers": {
       "answer_a": "ls",
