@@ -28,13 +28,13 @@
   },
   {
     "id": 2,
-    "question": "How to delete a directory in Linux?",
+    "question": "Which event occurs when the user clicks on an HTML element?",
     "description": "delete folder",
     "answers": {
-      "answer_a": "ls",
-      "answer_b": "delete",
-      "answer_c": "remove",
-      "answer_d": "rmdir",
+      "answer_a": "onmouseclick",
+      "answer_b": "onchange",
+      "answer_c": "onmouseclick",
+      "answer_d": "onclick",
       "answer_e": null,
       "answer_f": null
     },
@@ -74,7 +74,7 @@
       "answer_e_correct": "false",
       "answer_f_correct": "false"
     },
-    "explanation": "rmdir deletes an empty directory",
+    "explanation": "The external JavaScript file must contain the <script> tag.",
     "tip": null,
     "tags": [],
     "category": "linux",
