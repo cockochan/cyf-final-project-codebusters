@@ -43,6 +43,9 @@ export default function Mentors() {
 		);
 
 	};
+	const removeQuestion =(e)=>{
+		setNewQuizzQuestions(newQuizzQuestions.filter((obj) => obj.id != e.target.value));
+	};
 	if(fetchedQuestions){
 		return(<div className='row'>
 			<div className='col-9 cardBlock'>
@@ -75,7 +78,7 @@ export default function Mentors() {
 
 				{newQuizzQuestions.map((quest)=>
 					<div className='col-12 card'>
- 	<input type="checkbox" id="horns" name="horns" value={quest.id} onChange={addQuestion} />
+ 	<input type="checkbox" id="horns" name="horns" value={quest.id} onChange={removeQuestion} />
 						<label htmlFor="horns">add to quiz</label>
 						<div>{quest.question}</div>
 
