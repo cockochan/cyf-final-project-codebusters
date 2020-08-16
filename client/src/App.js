@@ -30,7 +30,7 @@ export function App() {
 			<Router>
 				<nav className="col-4">
 					<ul><li style={{ listStyleType: "none" }}>
-						<Link to="/NewQuestion" exact='true'>New question</Link>
+						<Link to="/NewQuestion" >New question</Link>
 					</li>
 		  <li style={{ listStyleType: "none" }}>
 						<Link to="/Students" exact='true'>for students </Link>
@@ -44,10 +44,10 @@ export function App() {
 					<Route exact path="/NewQuestion">
 						<NewQuestion />
 					</Route>
-					<Route path="/Mentors">
+					<Route exact path="/Mentors">
 						<Mentors />
 					</Route>
-					<Route path="/">
+					<Route exact path="/Students">
 						<Students />
 					</Route>
 

@@ -75,7 +75,7 @@ export default function Students() {
 
 					}
 			  )}</div>
-				{(questPageNum<quizzQuestions.length? <button onClick={nextPage}>next page</button>:<button>submit test results</button>)}
+				{(questPageNum<quizzQuestions.length? <button onClick={nextPage}>next page</button>:<button onClick={setsuccesfull}>submit test results</button>)}
 			</div>);
 
 	} else{

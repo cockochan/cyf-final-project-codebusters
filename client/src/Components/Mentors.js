@@ -75,7 +75,7 @@ export default function Mentors() {
 
 				{newQuizzQuestions.map((quest)=>
 					<div className='col-12 card'>
-						<input type="checkbox" id="horns" name="horns" value={quest.id} onChange={addQuestion} />
+ 	<input type="checkbox" id="horns" name="horns" value={quest.id} onChange={addQuestion} />
 						<label htmlFor="horns">add to quiz</label>
 						<div>{quest.question}</div>
 
