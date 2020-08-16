@@ -79,7 +79,7 @@ export default function Mentors() {
 				{newQuizzQuestions.map((quest)=>
 					<div className='col-12 card'>
  	<input type="checkbox" id="horns" name="horns" value={quest.id} onChange={removeQuestion} />
-						<label htmlFor="horns">add to quiz</label>
+						<label htmlFor="horns">remove from quizz</label>
 						<div>{quest.question}</div>
 
 						<div className='answers'>

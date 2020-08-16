@@ -55,10 +55,7 @@ export default function Students() {
 			</div>);
 
 		}else 	if(questPageNum>0&&quizzQuestions){
-			console.log(questPageNum);
-			console.log(quizzQuestions);
-			console.log(selectedQuizz);
-			console.log(quizzQuestions[questPageNum]);
+
 			return(
 				<div className='col-12 '>
 					{console.log(quizzQuestions.toString())}
