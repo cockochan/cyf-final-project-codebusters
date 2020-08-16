@@ -8,29 +8,29 @@ export default function NewQuestion() {
 		question: null,
 		description: "delete folder",
 		answers: {
-		  answer_a: null,
-		  answer_b: null,
-		  answer_c: null,
-		  answer_d: null,
-		  answer_e: null,
-		  answer_f: null,
+			answer_a: null,
+			answer_b: null,
+			answer_c: null,
+			answer_d: null,
+			answer_e: null,
+			answer_f: null,
 
 		},
 		multiple_correct_answers: "false",
 		correct_answers: {
-		  answer_a_correct: "false",
-		  answer_b_correct: "false",
-		  answer_c_correct: "false",
-		  answer_d_correct: "true",
-		  answer_e_correct: "false",
-		  answer_f_correct: "false",
+			answer_a_correct: "false",
+			answer_b_correct: "false",
+			answer_c_correct: "false",
+			answer_d_correct: "true",
+			answer_e_correct: "false",
+			answer_f_correct: "false",
 		},
 		explanation: "rmdir deletes an empty directory",
 		tip: null,
 		tags: [],
 		code: "linux",
 		difficulty: "Easy",
-	  });
+	});
 	const [md, setMd] = useState("");
 	const textChanged = (e) => {
 		setMd(e.target.value);
