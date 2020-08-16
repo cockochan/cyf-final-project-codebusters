@@ -48,7 +48,7 @@ export default function NewQuestion() {
 		<div className='col-12'>
 			<div>
 				<div>{questionToSet.answers.answer_a}</div>
-				<h1>question</h1>
+				<h1>question,use markdown</h1>
 				<textarea onKeyUp={(e) => textChanged(e)} />
 
 				<h1>answers</h1>
