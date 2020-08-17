@@ -101,7 +101,7 @@ export default function Mentors() {
 				)
 				}<button>submit new quizz</button></div>
 
-			)</div>
+		</div>
 		);
 	} else{
 		return(<div>no questions loaded</div>);
