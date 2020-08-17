@@ -50,10 +50,10 @@ export default function Mentors() {
 		return(<div className='row'>
 			<div className='col-9 cardBlock'>
 				{fetchedQuestions.map((quest)=>
-					<div className='col-2 card'>
-						<input type="checkbox" id="horns" name="horns" value={quest.id} onChange={addQuestion} />
+					<div className='col-3 card'>
+						<input className="quizCardCheckbox" type="checkbox" id="horns" name="horns" value={quest.id} onChange={addQuestion} />
 						<label htmlFor="horns">add to quiz</label>
-						<div>{quest.question}</div>
+						<div className="quizzQuestion">{quest.question}</div>
 
 						<div className='answers'>
 							{Object.entries(quest.answers).map(([key, value]) =>{
@@ -62,7 +62,7 @@ export default function Mentors() {
 									<div>
 
 
-										<div className='col-6'>{value}</div>
+										<div className='col-6 answer'>{value}</div>
 
 									</div>);
 

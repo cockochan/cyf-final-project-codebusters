@@ -10,23 +10,31 @@
     background-color: yellow;
 }
 .card{
-    margin:5px;
-    border: 4px solid blue;
+
+    border: 2px solid grey;
+
 }
 .quizzPage{
     justify-items: center;
     padding:10px;
+
 }
 .questionPage{
     justify-items: center;
-    border: 4px solid blue;
-    height:100%
+    border: 2px solid grey;
+   
 }
 .newQuiz{
-    border: 4px solid blue;
+    border: 2px solid grey;
 }
 .cardBlock{
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.answer{
+    padding:0.2em;
+}
+.quizzQuestion{
+    margin-top: 0.2em;
 }
