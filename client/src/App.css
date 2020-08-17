@@ -1,3 +1,4 @@
+
 .logo {
     width: 100px;
 }
@@ -25,7 +26,8 @@
    
 }
 .newQuiz{
-    border: 2px solid grey;
+    border: 2px solid black;
+
 }
 .cardBlock{
     display:flex;
@@ -36,5 +38,6 @@
     padding:0.2em;
 }
 .quizzQuestion{
+  
     margin-top: 0.2em;
 }
