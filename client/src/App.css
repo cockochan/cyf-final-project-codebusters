@@ -1,3 +1,4 @@
+
 .logo {
     width: 100px;
 }
@@ -8,4 +9,35 @@
 
 .message:hover {
     background-color: yellow;
+}
+.card{
+
+    border: 2px solid grey;
+
+}
+.quizzPage{
+    justify-items: center;
+    padding:10px;
+
+}
+.questionPage{
+    justify-items: center;
+    border: 2px solid grey;
+   
+}
+.newQuiz{
+    border: 2px solid black;
+
+}
+.cardBlock{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.answer{
+    padding:0.2em;
+}
+.quizzQuestion{
+  
+    margin-top: 0.2em;
 }
