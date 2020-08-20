@@ -1,13 +1,14 @@
 import React, { useState,useEffect } from "react";
 import Quizzez from "../mockData/Quizzez.json";
-import Questions from "../mockData/Questions.json";
-export default function Students() {
+// import Questions from "../mockData/Questions.json";
+export default function Students(props) {
+	console.log(props.quizes);
 	const [questPageNum,setQuestPageNum]=useState(0);
 	const [quizzQuestions,setQuizzQuestions]=useState(null);
 	const [selectedQuizz,setSelectedQuizz]=useState(null);
 	const [submittedSuccessfuly,setSubmittedSuccessfuly]=useState(false);
 	const quizzChosen=(quizN)=>{
-		const chosenQuiz= Quizzez.find((q)=>q.name==quizN);
+		const chosenQuiz= props.quizes.find((q)=>q.quiz_name==quizN);
 		setSelectedQuizz(chosenQuiz);
 	};
 	useEffect(() => {
@@ -17,7 +18,7 @@ export default function Students() {
 			let questionsToGo = [];
 			questionsToGo = selectedQuizz.questions.map((selId)=>{
 
-				let found = (Questions.find((question)=>question.id==selId));
+				let found = (props.questions.find((question)=>question.id==selId));
 				questionsToGo.push(found);
 
 
@@ -42,7 +43,7 @@ export default function Students() {
 
 					<select name="quizzez" id="quizzez" onChange={(e) => quizzChosen(e.target.value)}>
 						<option value="javaScrypt week 1">javaScrypt week 1</option>
-						<option value="turbo pascal">turbo pascal</option>
+						<option value="JS-week-1">turbo pascal</option>
 						<option value="assembley">assembley</option>
 						<option value="docker">docker</option>
 		  </select>
@@ -50,7 +51,7 @@ export default function Students() {
 			);
 		} else 	if(selectedQuizz&&questPageNum==0){
 			return(<div>
-				<h1>welcome to {selectedQuizz.name} quizz</h1>
+				<h1>welcome to {selectedQuizz.quiz_name} quizz</h1>
 				<button onClick={nextPage}>next page</button>
 			</div>);
 

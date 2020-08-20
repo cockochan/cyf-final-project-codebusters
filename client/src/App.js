@@ -12,14 +12,29 @@ import { getMessage } from "./service";
 import Mentors from "./Components/Mentors.js";
 import NewQuestion from "./Components/NewQuestion.js";
 
-import Questions from "../src/mockData/Questions.json";
+// import Questions from "../src/mockData/Questions.json";
 export function App() {
+	const [questions, setQuestions]=useState(null);
+	const [quizes, setQuizes]=useState(null);
+	if(questions!==null&&quizes!==null){
 
-	// const [message, setMessage] = useState("Loading...");
+	}
+	console.log(questions);
+	console.log(quizes);
+	useEffect(()=>{
+		fetch("http://localhost:3100/api/questions")
+			.then((res) => res.json())
+			.then((data) => setQuestions(data))
+			.catch((err) => console.error(err));
 
-	// useEffect(() => {
-	// 	getMessage().then((message) => setMessage(message));
-	// }, []);
+	},[]);
+	useEffect(()=>{
+		fetch("http://localhost:3100/api/quizes")
+			.then((res) => res.json())
+			.then((data) => setQuizes(data))
+			.catch((err) => console.error(err));
+
+	},[]);
 
 	return (
 		<main className='container'role="main">
@@ -45,10 +60,10 @@ export function App() {
 						<NewQuestion />
 					</Route>
 					<Route exact path="/Mentors">
-						<Mentors />
+						<Mentors questions={questions} quizes={quizes} />
 					</Route>
 					<Route exact path="/Students">
-						<Students />
+						<Students questions={questions} quizes={quizes} />
 					</Route>
 
 				</Switch>

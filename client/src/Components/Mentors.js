@@ -5,12 +5,12 @@ import {
 	Route,
 	Link,
 } from "react-router-dom";
-import Questions from "../mockData/Questions.json";
+// import Questions from "../mockData/Questions.json";
 
 import "../App.css";
 import "../grid.css";
 
-export default function Mentors() {
+export default function Mentors(props) {
 	const [fetchedQuestions,setfetchedQuestions]=useState(Questions);
 	const [newQuizzQuestions, setNewQuizzQuestions]=useState([]);
 	const [newQuizz,setNewQuizz]=useState(	{
@@ -26,7 +26,7 @@ export default function Mentors() {
 			let newQuizQuestions = [];
 			newQuizQuestions = newQuizz.questions.map((selId)=>{
 
-				let found = (Questions.find((question)=>question.id==selId));
+				let found = (props.questions.find((question)=>question.id==selId));
 				newQuizQuestions.push(found);
 
 
