@@ -15,7 +15,7 @@ export default function Mentors(props) {
 	const [newQuizzQuestions, setNewQuizzQuestions]=useState([]);
 	const [newQuizz,setNewQuizz]=useState(	{
 		_id: "",
-		name: "sample quiz",
+		name: "",
 		publiShingDate: "",
 		questions_id: [],
 	});
@@ -48,6 +48,15 @@ export default function Mentors(props) {
 		);
 
 	};
+
+	const newQuizName =(e)=>{
+		console.log(e.target.value);
+		setNewQuizz({ ...newQuizz,
+			name:e.target.value,
+		},
+		);
+
+	};
 	const removeQuestion =(e)=>{
 		setNewQuizzQuestions(newQuizzQuestions.filter((obj) => obj._id != e.target.value));
 	};
@@ -56,6 +65,7 @@ export default function Mentors(props) {
 			<div className='col-9 cardBlock'>
 				{props.questions.map((quest)=>
 					<div className='col-3 card'>
+
 						<input className="quizCardCheckbox" type="checkbox" id="horns" name="horns" value={quest._id} onChange={addQuestion} />
 						<label htmlFor="horns">add to quiz</label>
 						<div className="quizzQuestion">{quest.question}</div>
@@ -80,7 +90,7 @@ export default function Mentors(props) {
 				}</div>
 
 			<div className='col-3 newQuiz'><h1>New quiz</h1>
-
+				<input type='text' onKeyUp={newQuizName} placeholder={"new quiz name"} />
 				{newQuizzQuestions.map((quest)=>
 					<div className='col-12 card'>
  	<input type="checkbox" id="horns" name="horns" value={quest._id} onChange={removeQuestion} />
