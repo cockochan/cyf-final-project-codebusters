@@ -47,8 +47,8 @@ export default function Students(props) {
 
 					<select name="quizzez" id="quizzez" onChange={(e) => quizzChosen(e.target.value)}>
 						<option >select a quiz</option>
-						{props.quizes.map((quiz)=>{
-							return(<option value={quiz.name}>{quiz.name}</option>);
+						{props.quizes.map((quiz, index)=>{
+							return(<option key={index} value={quiz.name}>{quiz.name}</option>);
 						})}
 
 		  </select>
