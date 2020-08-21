@@ -92,9 +92,9 @@ export default function Mentors(props) {
 			<div className='col-3 newQuiz'><h1>New quiz</h1>
 				<input type='text' onKeyUp={newQuizName} placeholder={"new quiz name"} />
 				{newQuizzQuestions.map((quest)=>
-					<div className='col-12 card'>
- 	<input type="checkbox" id="horns" name="horns" value={quest._id} onChange={removeQuestion} />
-						<label htmlFor="horns">remove from quizz</label>
+					<div className='col-12 card' key={quest.question}>
+ 	<input key={quest._id+quest.question} type="checkbox" id="horns" name={quest._id+quest.question} value={quest._id} onChange={removeQuestion} />
+						<label htmlFor={quest._id+quest.question}>remove from quizz</label>
 						<div>{quest.question}</div>
 
 						<div className='answers'>
