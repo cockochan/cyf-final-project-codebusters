@@ -44,6 +44,19 @@ export default function Mentors(props) {
 			);
 		}
 	},[newQuizz]);
+
+	function thecheckfunction(e){
+		console.log(e);
+
+		if(e.target.checked == true){
+			addQuestion(e);
+		} else{
+
+			removeQuestion(e);
+		}
+	}
+
+
 	const addQuestion =(e)=>{
 		console.log(e.target.value);
 		setNewQuizz({ ...newQuizz,
@@ -71,7 +84,9 @@ export default function Mentors(props) {
 
 	};
 	const removeQuestion =(e)=>{
+
 		setNewQuizzQuestions(newQuizzQuestions.filter((obj) => obj._id != e.target.value));
+		e.target.checked="false";
 	};
 	if(props.questions){
 		return(<div className='row'>
@@ -79,7 +94,7 @@ export default function Mentors(props) {
 				{props.questions.map((quest)=>
 					<div className='col-3 card'>
 
-						<input className="quizCardCheckbox" type="checkbox" id="horns" name="horns" value={quest._id} onChange={addQuestion} />
+						<button id={quest._id} value={quest._id} onClick={addQuestion}>add to quiz</button>
 						<label htmlFor="horns">add to quiz</label>
 						<div className="quizzQuestion">{quest.question}</div>
 
@@ -106,7 +121,7 @@ export default function Mentors(props) {
 				<input type='text' onKeyUp={newQuizName} placeholder={"new quiz name"} />
 				{newQuizzQuestions.map((quest)=>
 					<div className='col-12 card' key={quest.question}>
- 	<input key={quest._id+quest.question} type="checkbox" id="horns" name={quest._id+quest.question} value={quest._id} onChange={removeQuestion} />
+ 	<button key={quest._id+quest.question} type="checkbox" checked='checked' id="horns" name={quest._id+quest.question} value={quest._id} onClick={removeQuestion} >x</button>
 						<label htmlFor={quest._id+quest.question}>remove from quizz</label>
 						<div>{quest.question}</div>
 
