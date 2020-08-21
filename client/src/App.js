@@ -19,8 +19,7 @@ export function App() {
 	if(questions!==null&&quizes!==null){
 
 	}
-	console.log(questions);
-	console.log(quizes);
+
 	useEffect(()=>{
 		fetch("http://localhost:3100/api/questions")
 			.then((res) => res.json())

@@ -3,22 +3,24 @@ import Quizzez from "../mockData/Quizzez.json";
 // import Questions from "../mockData/Questions.json";
 export default function Students(props) {
 	console.log(props.quizes);
+	console.log (props.questions);
 	const [questPageNum,setQuestPageNum]=useState(0);
 	const [quizzQuestions,setQuizzQuestions]=useState(null);
 	const [selectedQuizz,setSelectedQuizz]=useState(null);
 	const [submittedSuccessfuly,setSubmittedSuccessfuly]=useState(false);
 	const quizzChosen=(quizN)=>{
-		const chosenQuiz= props.quizes.find((q)=>q.quiz_name==quizN);
+		console.log(quizN);
+		const chosenQuiz= props.quizes.find((q)=>q.name==quizN);
 		setSelectedQuizz(chosenQuiz);
 	};
 	useEffect(() => {
 		if(selectedQuizz!==null){
-			console.log(selectedQuizz.questions);
+			console.log(selectedQuizz);
 
 			let questionsToGo = [];
-			questionsToGo = selectedQuizz.questions.map((selId)=>{
+			questionsToGo = selectedQuizz.questions_id.map((selId)=>{
 
-				let found = (props.questions.find((question)=>question.id==selId));
+				let found = (props.questions.find((question)=>question._id==selId));
 				questionsToGo.push(found);
 
 
@@ -42,16 +44,17 @@ export default function Students(props) {
 					<h1>Welcome to QuizzTime</h1>
 
 					<select name="quizzez" id="quizzez" onChange={(e) => quizzChosen(e.target.value)}>
-						<option value="javaScrypt week 1">javaScrypt week 1</option>
-						<option value="JS-week-1">turbo pascal</option>
-						<option value="assembley">assembley</option>
-						<option value="docker">docker</option>
+						<option >select a quiz</option>
+						{props.quizes.map((quiz)=>{
+							return(<option value={quiz.name}>{quiz.name}</option>);
+						})}
+
 		  </select>
 		  </div>
 			);
 		} else 	if(selectedQuizz&&questPageNum==0){
 			return(<div>
-				<h1>welcome to {selectedQuizz.quiz_name} quizz</h1>
+				<h1>welcome to {selectedQuizz.name} quizz</h1>
 				<button onClick={nextPage}>next page</button>
 			</div>);
 
@@ -59,7 +62,7 @@ export default function Students(props) {
 
 			return(
 				<div className='col-12 '>
-					{console.log(quizzQuestions.toString())}
+					{console.log(quizzQuestions)}
 					{questPageNum<quizzQuestions.length?<div>{quizzQuestions[questPageNum].question}</div>:<div></div>}
 
 

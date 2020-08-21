@@ -11,22 +11,26 @@ import "../App.css";
 import "../grid.css";
 
 export default function Mentors(props) {
-	const [fetchedQuestions,setfetchedQuestions]=useState(Questions);
+	// const [fetchedQuestions,setfetchedQuestions]=useState(props.questions);
 	const [newQuizzQuestions, setNewQuizzQuestions]=useState([]);
 	const [newQuizz,setNewQuizz]=useState(	{
-		id: 1,
-		name: "javaScrypt week 1",
-		publiShingDate: "2020-08-04",
-		questions: [],
+		_id: "",
+		name: "sample quiz",
+		publiShingDate: "",
+		questions_id: [],
 	});
+
+	console.log(props.questions);
+	console.log(props.quizes);
 	useEffect(() => {
+
 		if(newQuizz.questions!==null){
 
 
 			let newQuizQuestions = [];
-			newQuizQuestions = newQuizz.questions.map((selId)=>{
+			newQuizQuestions = newQuizz.questions_id.map((selId)=>{
 
-				let found = (props.questions.find((question)=>question.id==selId));
+				let found = (props.questions.find((question)=>question._id==selId));
 				newQuizQuestions.push(found);
 
 
@@ -37,21 +41,22 @@ export default function Mentors(props) {
 		}
 	},[newQuizz]);
 	const addQuestion =(e)=>{
+		console.log(e.target.value);
 		setNewQuizz({ ...newQuizz,
-			questions:[...newQuizz.questions,e.target.value],
+			questions_id:[...newQuizz.questions_id,e.target.value],
 		},
 		);
 
 	};
 	const removeQuestion =(e)=>{
-		setNewQuizzQuestions(newQuizzQuestions.filter((obj) => obj.id != e.target.value));
+		setNewQuizzQuestions(newQuizzQuestions.filter((obj) => obj._id != e.target.value));
 	};
-	if(fetchedQuestions){
+	if(props.questions){
 		return(<div className='row'>
 			<div className='col-9 cardBlock'>
-				{fetchedQuestions.map((quest)=>
+				{props.questions.map((quest)=>
 					<div className='col-3 card'>
-						<input className="quizCardCheckbox" type="checkbox" id="horns" name="horns" value={quest.id} onChange={addQuestion} />
+						<input className="quizCardCheckbox" type="checkbox" id="horns" name="horns" value={quest._id} onChange={addQuestion} />
 						<label htmlFor="horns">add to quiz</label>
 						<div className="quizzQuestion">{quest.question}</div>
 
@@ -78,7 +83,7 @@ export default function Mentors(props) {
 
 				{newQuizzQuestions.map((quest)=>
 					<div className='col-12 card'>
- 	<input type="checkbox" id="horns" name="horns" value={quest.id} onChange={removeQuestion} />
+ 	<input type="checkbox" id="horns" name="horns" value={quest._id} onChange={removeQuestion} />
 						<label htmlFor="horns">remove from quizz</label>
 						<div>{quest.question}</div>
 
