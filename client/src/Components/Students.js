@@ -22,7 +22,7 @@ export default function Students(props) {
 			let questionsToGo = [];
 			questionsToGo = selectedQuizz.questions_id.map((selId)=>{
 
-				let found = (props.questions.find((question)=>question._id.includes(selId.replace(/^"|"$/g, "").trim())));
+				let found = (props.questions.find((question)=>question._id.includes(selId.trim())));
 
 				questionsToGo.push(found);
 				console.log(selId,found);
