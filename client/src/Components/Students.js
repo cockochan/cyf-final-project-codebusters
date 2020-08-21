@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
-import ReactMarkdown from "react-markdown";
+// import Quizzez from "../mockData/Quizzez.json";
+// import Questions from "../mockData/Questions.json";
 export default function Students(props) {
 	console.log(props.quizes);
 	console.log (props.questions);
@@ -64,8 +65,7 @@ export default function Students(props) {
 			return(
 				<div className='col-12 '>
 					{console.log(quizzQuestions)}
-					{questPageNum<quizzQuestions.length?<ReactMarkdown source={quizzQuestions[questPageNum].question} />:<div></div>}
-
+					{questPageNum<quizzQuestions.length?<div>{quizzQuestions[questPageNum].question}</div>:<div></div>}
 
 
 					<div className='questionPage'>

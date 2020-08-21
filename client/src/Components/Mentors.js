@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link,
+} from "react-router-dom";
+// import Questions from "../mockData/Questions.json";
 
 import "../App.css";
 import "../grid.css";
@@ -12,9 +18,8 @@ export default function Mentors(props) {
 	const [newQuizz,setNewQuizz]=useState(	{
 		_id: "",
 		name: "",
-		publishingDate: "",
+		publiShingDate: "",
 		questions_id: [],
-
 	});
 
 
@@ -47,9 +52,8 @@ export default function Mentors(props) {
 		);
 
 	};
-
 	const sendQuiz =()=>{
-		fetch("http://localhost:3100/api/quiz", { method:"POST",headers: { "Content-Type": "application/json" },
+		fetch("http://localhost:3100/api/quiz", { method:"POST",headers: { "Content-type": "application/json" },
 			body: JSON.stringify(newQuizz) })
 			.then((response) => response.json())
 			.then((data) =>console.log(data))
@@ -71,15 +75,14 @@ export default function Mentors(props) {
 	};
 	if(props.questions){
 		return(<div className='row'>
-
 			<div className='col-9 cardBlock'>
 				{props.questions.map((quest)=>
 					<div className='col-3 card'>
 
 						<input className="quizCardCheckbox" type="checkbox" id="horns" name="horns" value={quest._id} onChange={addQuestion} />
 						<label htmlFor="horns">add to quiz</label>
-						{/* <div className="quizzQuestion">{quest.question}</div> */}
-						<ReactMarkdown source={quest.question} />
+						<div className="quizzQuestion">{quest.question}</div>
+
 						<div className='answers'>
 							{Object.entries(quest.answers).map(([key, value]) =>{
 								// use keyName to get current key's name

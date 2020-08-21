@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Questions from "../mockData/Questions.json";
 
-export default function NewQuestion(props) {
+export default function NewQuestion() {
 	const [questionToSet, setQuestionToSet]=useState( {
-
+		id: 1,
 		question: null,
 		description: "delete folder",
 		answers: {
@@ -31,7 +31,10 @@ export default function NewQuestion(props) {
 		code: "linux",
 		difficulty: "Easy",
 	});
-
+	const [md, setMd] = useState("");
+	const textChanged = (e) => {
+		setMd(e.target.value);
+	};
 	console.log( JSON.parse(JSON.stringify(Questions)));
 	const  answer_aChanged = (e) => {
 		setQuestionToSet({ ...questionToSet,
@@ -46,7 +49,7 @@ export default function NewQuestion(props) {
 			<div>
 				<div>{questionToSet.answers.answer_a}</div>
 				<h1>question,use markdown</h1>
-				<textarea onKeyUp={(e) => props.textChanged(e)} />
+				<textarea onKeyUp={(e) => textChanged(e)} />
 
 				<h1>answers</h1>
 				<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
@@ -56,7 +59,7 @@ export default function NewQuestion(props) {
 				<input placeholder="answer c" />
 				<input placeholder="answer d" />
 				<input placeholder="answer e" />
-				<ReactMarkdown source={props.md} />
+				<ReactMarkdown source={md} />
 
 			</div>
 			<button>submit answers</button>
