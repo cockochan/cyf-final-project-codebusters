@@ -8,12 +8,14 @@ export default function Students(props) {
 	const [quizzQuestions,setQuizzQuestions]=useState(null);
 	const [selectedQuizz,setSelectedQuizz]=useState(null);
 	const [submittedSuccessfuly,setSubmittedSuccessfuly]=useState(false);
+
 	const quizzChosen=(quizN)=>{
 		console.log(quizN);
 		const chosenQuiz= props.quizes.find((q)=>q.name==quizN);
 		setSelectedQuizz(chosenQuiz);
 	};
 	useEffect(() => {
+
 		if(selectedQuizz!==null){
 
 
@@ -69,14 +71,16 @@ export default function Students(props) {
 					<div className='questionPage'>
 						{Object.entries(quizzQuestions[questPageNum-1].answers).map(([key, value]) =>{
 							// use keyName to get current key's name
-							return(
-								<div>
-									<input type="checkbox" id="horns" name="horns" />
-									<label htmlFor="horns">{value}</label>
+							if(value){
+								return(
+									<div>
+										<input type="checkbox" id="horns" name="horns" />
+										<label htmlFor="horns">{value}</label>
 
-									{/* <div className='col-6'>{value}</div> */}
+										{/* <div className='col-6'>{value}</div> */}
 
-								</div>);
+									</div>);
+							}
 
 						}
 			  )}</div>
