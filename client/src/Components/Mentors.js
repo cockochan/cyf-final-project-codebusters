@@ -13,6 +13,8 @@ import "../grid.css";
 export default function Mentors(props) {
 	// const [fetchedQuestions,setfetchedQuestions]=useState(props.questions);
 	const [newQuizzQuestions, setNewQuizzQuestions]=useState([]);
+
+
 	const [newQuizz,setNewQuizz]=useState(	{
 		_id: "",
 		name: "",
@@ -20,9 +22,11 @@ export default function Mentors(props) {
 		questions_id: [],
 	});
 
+
 	console.log(props.questions);
 	console.log(props.quizes);
 	useEffect(() => {
+
 
 		if(newQuizz.questions!==null){
 
@@ -48,7 +52,16 @@ export default function Mentors(props) {
 		);
 
 	};
+	const sendQuiz =()=>{
+		fetch("http://localhost:3100/api/quiz", { method:"POST",headers: { "Content-type": "application/json" },
+			body: JSON.stringify(newQuizz) })
+			.then((response) => response.json())
+			.then((data) =>console.log(data))
+			.catch((err) => console.error(err));
 
+
+
+	};
 	const newQuizName =(e)=>{
 		console.log(e.target.value);
 		setNewQuizz({ ...newQuizz,
@@ -114,7 +127,7 @@ export default function Mentors(props) {
 
 			  </div>
 				)
-				}<button>submit new quizz</button></div>
+				}<button onClick={sendQuiz}>submit new quizz</button></div>
 
 		</div>
 		);
