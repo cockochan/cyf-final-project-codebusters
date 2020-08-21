@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -16,6 +17,11 @@ import NewQuestion from "./Components/NewQuestion.js";
 export function App() {
 	const [questions, setQuestions]=useState(null);
 	const [quizes, setQuizes]=useState(null);
+	const [md, setMd] = useState("");
+	const textChanged = (e) => {
+		setMd(e.target.value);
+	};
+
 	if(questions!==null&&quizes!==null){
 
 	}
@@ -56,10 +62,10 @@ export function App() {
 					</ul></nav>
 				<Switch>
 					<Route exact path="/NewQuestion">
-						<NewQuestion />
+						<NewQuestion md={md} textChanged={textChanged} />
 					</Route>
 					<Route exact path="/Mentors">
-						<Mentors questions={questions} quizes={quizes} />
+						<Mentors questions={questions} quizes={quizes} md={md} />
 					</Route>
 					<Route exact path="/Students">
 						<Students questions={questions} quizes={quizes} />
