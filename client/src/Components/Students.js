@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import Quizzez from "../mockData/Quizzez.json";
+// import Quizzez from "../mockData/Quizzez.json";
 // import Questions from "../mockData/Questions.json";
 export default function Students(props) {
 	console.log(props.quizes);
@@ -15,15 +15,15 @@ export default function Students(props) {
 	};
 	useEffect(() => {
 		if(selectedQuizz!==null){
-			console.log(selectedQuizz);
+
 
 			let questionsToGo = [];
 			questionsToGo = selectedQuizz.questions_id.map((selId)=>{
 
-				let found = (props.questions.find((question)=>question._id==selId));
+				let found = (props.questions.find((question)=>question._id.includes(selId.replace(/^"|"$/g, "").trim())));
+
 				questionsToGo.push(found);
-
-
+				console.log(selId,found);
 				setQuizzQuestions(questionsToGo);
 
 			}
