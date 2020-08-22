@@ -66,6 +66,7 @@ export default function Mentors(props) {
 		}
 	};
 	const sendQuiz =()=>{
+		alert("done");
 		fetch("http://localhost:3100/api/quiz", { method:"POST",headers: { "Content-type": "application/json" },
 			body: JSON.stringify(newQuizz) })
 			.then((response) => response.json())

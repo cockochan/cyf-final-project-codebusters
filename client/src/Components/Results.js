@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Results(props) {
+	fetchAllQuizes();
 	console.log(props.quizes);
 	return (
 		<div className='col-12'>

@@ -20,18 +20,25 @@ export function App() {
 
 	}
 
-	useEffect(()=>{
+	const fetchAllQuestions=()=>{
 		fetch("http://localhost:3100/api/questions")
 			.then((res) => res.json())
 			.then((data) => setQuestions(data))
 			.catch((err) => console.error(err));
-
-	},[]);
-	useEffect(()=>{
+	};
+	const fetchAllQuizes=()=>{
 		fetch("http://localhost:3100/api/quizes")
 			.then((res) => res.json())
 			.then((data) => setQuizes(data))
 			.catch((err) => console.error(err));
+	};
+
+	useEffect(()=>{
+		fetchAllQuestions();
+
+	},[]);
+	useEffect(()=>{
+		fetchAllQuizes();
 
 	},[]);
 
@@ -63,10 +70,10 @@ export function App() {
 						<Mentors questions={questions} quizes={quizes} />
 					</Route>
 					<Route exact path="/Results">
-						<Results questions={questions} quizes={quizes} />
+						<Results questions={questions} quizes={quizes} fetchAllQuizes={fetchAllQuizes} />
 					</Route>
 					<Route exact path="/Students">
-						<Students questions={questions} quizes={quizes} />
+						<Students questions={questions} quizes={quizes} fetchAllQuizes={fetchAllQuizes} />
 					</Route>
 
 					<Route exact path="/NewQuestion">
