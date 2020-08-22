@@ -11,7 +11,7 @@ import Students from "./Components/Students.js";
 import { getMessage } from "./service";
 import Mentors from "./Components/Mentors.js";
 import NewQuestion from "./Components/NewQuestion.js";
-
+import Results from "./Components/Results.js";
 // import Questions from "../src/mockData/Questions.json";
 export function App() {
 	const [questions, setQuestions]=useState(null);
@@ -43,28 +43,35 @@ export function App() {
 			</div>
 			<Router>
 				<nav className="col-4">
-					<ul><li style={{ listStyleType: "none" }}>
-						<Link to="/NewQuestion" >New question</Link>
-					</li>
+					<ul>
 		  <li style={{ listStyleType: "none" }}>
-						<Link to="/Students" exact='true'>for students </Link>
-					</li>
-					<li style={{ listStyleType: "none" }}>
-						<Link to="/Mentors"exact='true'> for mentors</Link>
-					</li>
-
+							<Link to="/Students" exact='true'>student </Link>
+						</li>
+						<li style={{ listStyleType: "none" }}>
+							<Link to="/Mentors"exact='true'> mentor</Link>
+						</li>
+						<li style={{ listStyleType: "none" }}>
+							<Link to="/Results"exact='true'> quiz rezults</Link>
+						</li>
+						<li style={{ listStyleType: "none" }}>
+							<Link to="/NewQuestion" >new question</Link>
+						</li>
 					</ul></nav>
 				<Switch>
-					<Route exact path="/NewQuestion">
-						<NewQuestion />
-					</Route>
+
 					<Route exact path="/Mentors">
 						<Mentors questions={questions} quizes={quizes} />
+					</Route>
+					<Route exact path="/Results">
+						<Results questions={questions} quizes={quizes} />
 					</Route>
 					<Route exact path="/Students">
 						<Students questions={questions} quizes={quizes} />
 					</Route>
 
+					<Route exact path="/NewQuestion">
+						<NewQuestion />
+					</Route>
 				</Switch>
 			</Router>
 		</main>

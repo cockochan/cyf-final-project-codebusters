@@ -16,7 +16,7 @@ export default function Mentors(props) {
 	const [refreshQuestions, setRefreshQuestions]=useState(false);
 
 	const [newQuizz,setNewQuizz]=useState(	{
-		_id: "",
+
 		name: "",
 		publiShingDate: "",
 		questions_id: [],
@@ -27,7 +27,6 @@ export default function Mentors(props) {
 	useEffect(() => {
 
 
-		// if(newQuizz.questions!==null){
 
 		const makeQuestions=()=>{
 			let newQuizQuestions = [];
@@ -38,21 +37,11 @@ export default function Mentors(props) {
 				setNewQuizzQuestions(newQuizQuestions);
 			}
 			);
-		// }
+
 		};
 		makeQuestions();
 	},[newQuizz.questions_id]);
 
-	// function thecheckfunction(e){
-	// 	console.log(e);
-
-	// 	if(e.target.checked == true){
-	// 		addQuestion(e);
-	// 	} else{
-
-	// 		removeQuestion(e);
-	// 	}
-	// }
 
 
 	const addQuestion =(e)=>{
@@ -62,6 +51,19 @@ export default function Mentors(props) {
 		},
 		);
 
+	};
+	const submitNewQ =()=>{
+		if(newQuizz.name.length<8){
+
+			alert("Quiz name should have at least 8 sybols");
+
+		} else if(newQuizzQuestions.length<5){
+
+			alert("Quizz  should have at least 5 questions");
+
+		} else{
+			sendQuiz();
+		}
 	};
 	const sendQuiz =()=>{
 		fetch("http://localhost:3100/api/quiz", { method:"POST",headers: { "Content-type": "application/json" },
@@ -74,11 +76,12 @@ export default function Mentors(props) {
 
 	};
 	const newQuizName =(e)=>{
-		console.log(e.target.value);
+
 		setNewQuizz({ ...newQuizz,
 			name:e.target.value,
 		},
 		);
+
 
 	};
 
@@ -107,12 +110,12 @@ export default function Mentors(props) {
 					<div className='col-3 card'>
 
 						<button id={quest._id} value={quest._id} onClick={addQuestion}>add to quiz</button>
-						<label htmlFor="horns">add to quiz</label>
+
 						<div className="quizzQuestion">{quest.question}</div>
 
 						<div className='answers'>
 							{Object.entries(quest.answers).map(([key, value]) =>{
-								// use keyName to get current key's name
+
 								return(
 									<div>
 
@@ -154,7 +157,7 @@ export default function Mentors(props) {
 
 			  </div>
 				)
-				}<button onClick={sendQuiz}>submit new quizz</button></div>
+				}<button onClick={submitNewQ}>submit new quizz</button></div>
 
 		</div>
 		);
