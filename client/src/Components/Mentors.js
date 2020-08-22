@@ -13,7 +13,7 @@ import "../grid.css";
 export default function Mentors(props) {
 	// const [fetchedQuestions,setfetchedQuestions]=useState(props.questions);
 	const [newQuizzQuestions, setNewQuizzQuestions]=useState([]);
-
+	const [refreshQuestions, setRefreshQuestions]=useState(false);
 
 	const [newQuizz,setNewQuizz]=useState(	{
 		_id: "",
@@ -23,38 +23,36 @@ export default function Mentors(props) {
 	});
 
 
-	console.log(props.questions);
-	console.log(props.quizes);
+
 	useEffect(() => {
 
 
-		if(newQuizz.questions!==null){
+		// if(newQuizz.questions!==null){
 
-
+		const makeQuestions=()=>{
 			let newQuizQuestions = [];
 			newQuizQuestions = newQuizz.questions_id.map((selId)=>{
 
 				let found = (props.questions.find((question)=>question._id==selId));
 				newQuizQuestions.push(found);
-
-
 				setNewQuizzQuestions(newQuizQuestions);
-
 			}
 			);
-		}
-	},[newQuizz]);
+		// }
+		};
+		makeQuestions();
+	},[newQuizz.questions_id]);
 
-	function thecheckfunction(e){
-		console.log(e);
+	// function thecheckfunction(e){
+	// 	console.log(e);
 
-		if(e.target.checked == true){
-			addQuestion(e);
-		} else{
+	// 	if(e.target.checked == true){
+	// 		addQuestion(e);
+	// 	} else{
 
-			removeQuestion(e);
-		}
-	}
+	// 		removeQuestion(e);
+	// 	}
+	// }
 
 
 	const addQuestion =(e)=>{
@@ -83,10 +81,24 @@ export default function Mentors(props) {
 		);
 
 	};
+
 	const removeQuestion =(e)=>{
+		console.log(newQuizz.questions_id);
+
+		let filterIdArr=newQuizz.questions_id.filter((boo) => {
+
+			return(boo!= e.target.value);
+
+		});
+		console.log(filterIdArr);
+		setNewQuizz({ ...newQuizz,
+			questions_id:filterIdArr,
+		},
+		setRefreshQuestions(!refreshQuestions)
+		);
 
 		setNewQuizzQuestions(newQuizzQuestions.filter((obj) => obj._id != e.target.value));
-		e.target.checked="false";
+		// e.target.checked="false";
 	};
 	if(props.questions){
 		return(<div className='row'>
@@ -121,7 +133,7 @@ export default function Mentors(props) {
 				<input type='text' onKeyUp={newQuizName} placeholder={"new quiz name"} />
 				{newQuizzQuestions.map((quest)=>
 					<div className='col-12 card' key={quest.question}>
- 	<button key={quest._id+quest.question} type="checkbox" checked='checked' id="horns" name={quest._id+quest.question} value={quest._id} onClick={removeQuestion} >x</button>
+ 	<button key={quest._id+quest.question} type="checkbox" checked='checked' id="horns" key={quest._id+quest.question} value={quest._id} onClick={removeQuestion} >x</button>
 						<label htmlFor={quest._id+quest.question}>remove from quizz</label>
 						<div>{quest.question}</div>
 
