@@ -38,12 +38,53 @@ export default function NewQuestion() {
 	console.log( JSON.parse(JSON.stringify(Questions)));
 	const  answer_aChanged = (e) => {
 		setQuestionToSet({ ...questionToSet,
-			answers:{
+			answers:{ ...questionToSet.answers,
 				answer_a:`${e.target.value}`,
 			},
 		},
 		);
 	};
+	const  answer_bChanged = (e) => {
+		setQuestionToSet({ ...questionToSet,
+			answers:{ ...questionToSet.answers,
+				answer_b:`${e.target.value}`,
+			},
+		},
+		);
+	};
+	const  answer_cChanged = (e) => {
+		setQuestionToSet({ ...questionToSet,
+			answers:{ ...questionToSet.answers,
+				answer_c:`${e.target.value}`,
+			},
+		},
+		);
+	};
+	const  answer_dChanged = (e) => {
+		setQuestionToSet({ ...questionToSet,
+			answers:{ ...questionToSet.answers,
+				answer_d:`${e.target.value}`,
+			},
+		},
+		);
+	};
+	const  answer_eChanged = (e) => {
+		setQuestionToSet({ ...questionToSet,
+			answers:{ ...questionToSet.answers,
+				answer_e:`${e.target.value}`,
+			},
+		},
+		);
+	};
+	const  answer_fChanged = (e) => {
+		setQuestionToSet({ ...questionToSet,
+			answers:{ ...questionToSet.answers,
+				answer_f:`${e.target.value}`,
+			},
+		},
+		);
+	};
+
 	return (
 		<div className='col-12'>
 			<div>
@@ -54,11 +95,19 @@ export default function NewQuestion() {
 				<h1>answers</h1>
 				<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
 				<input type='checkbox' />
+				<input onKeyUp={(e) => answer_bChanged(e)} placeholder="answer b" />
+				<input type='checkbox' />
 
-				<input placeholder="answer b" />
-				<input placeholder="answer c" />
-				<input placeholder="answer d" />
-				<input placeholder="answer e" />
+				<input onKeyUp={(e) => answer_cChanged(e)} placeholder="answer c" />
+				<input type='checkbox' />
+
+				<input onKeyUp={(e) => answer_dChanged(e)} placeholder="answer d" />
+				<input type='checkbox' />
+
+				<input onKeyUp={(e) => answer_eChanged(e)} placeholder="answer e" />
+				<input type='checkbox' />
+				<input onKeyUp={(e) => answer_eChanged(e)} placeholder="answer f" />
+				<input type='checkbox' />
 				<ReactMarkdown source={md} />
 
 			</div>
