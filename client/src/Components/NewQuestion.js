@@ -169,22 +169,35 @@ export default function NewQuestion() {
 
 
 			</div>
-			<button>submit answers</button>
+			<button>submit question</button>
 			<ReactMarkdown source={md} />
-			{questionToSet.code!=""?<div className='code'>{questionToSet.code}</div>:<div></div>}
-			<div>
+			<ReactMarkdown className='code'source={questionToSet.code} />
+			{/* {questionToSet.code!=""?<div className='code col-3'>{questionToSet.code}</div>:<div></div>} */}
+			<div className='row'>
 				<div>{questionToSet.answers.answer_a}</div>
-				{questionToSet.correct_answers.answer_a_correct==true?<div>correct answer</div>:<div>false answer</div>}
+				<div className='col-4'><strong>answer a is </strong>{` ${questionToSet.correct_answers.answer_a_correct}`}</div>
 			</div>
-			<div>
+			<div className='row'>
 				<div>{questionToSet.answers.answer_b}</div>
-				{questionToSet.correct_answers.answer_b_correct==true?<div>correct answer</div>:<div>false answer</div>}
+				<div className='col-4'><strong>answer b is </strong>{` ${questionToSet.correct_answers.answer_b_correct}`}</div>
 			</div>
 
-			<div>1."{questionToSet.answers.answer_c}</div>
-			<div>{questionToSet.answers.answer_d}</div>
-			<div>{questionToSet.answers.answer_e}</div>
-			<div>{questionToSet.answers.answer_f}</div>
-		</div>
+			<div className='row'>
+				<div>{questionToSet.answers.answer_c}</div>
+				<div className='col-4'><strong>answer c is </strong>{` ${questionToSet.correct_answers.answer_c_correct}`}</div>
+			</div>
+
+			<div className='row'>
+				<div>{questionToSet.answers.answer_d}</div>
+				<div className='col-4'><strong>answer d</strong>{` ${questionToSet.correct_answers.answer_d_correct}`}</div>
+			</div>
+			<div className='row'>
+				<div>{questionToSet.answers.answer_e}</div>
+				<div className='col-4'><strong>answer e is </strong>{` ${questionToSet.correct_answers.answer_e_correct}`}</div>
+			</div>
+			<div className='row'>
+				<div>{questionToSet.answers.answer_f}</div>
+				<div className='col-4'><strong>answer f </strong>{` ${questionToSet.correct_answers.answer_f_correct}`}</div>
+			</div></div>
 	);
 }
