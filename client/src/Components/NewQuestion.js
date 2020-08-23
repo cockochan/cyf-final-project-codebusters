@@ -21,19 +21,33 @@ export default function NewQuestion() {
 			answer_a_correct: "false",
 			answer_b_correct: "false",
 			answer_c_correct: "false",
-			answer_d_correct: "true",
+			answer_d_correct: "false",
 			answer_e_correct: "false",
 			answer_f_correct: "false",
 		},
 		explanation: "",
 		tip: null,
 		tags: [],
-		code: "linux",
+		code: "",
 		difficulty: "Easy",
 	});
 	const [md, setMd] = useState("");
+	const [cd, setCd] = useState("");
 	const textChanged = (e) => {
 		setMd(e.target.value);
+		setQuestionToSet({ ...questionToSet,
+			question: `${e.target.value}`,
+
+		},
+		);
+	};
+	const codeChanged = (e) => {
+		setCd(e.target.value);
+		setQuestionToSet({ ...questionToSet,
+			code: `${e.target.value}`,
+
+		},
+		);
 	};
 	console.log( JSON.parse(JSON.stringify(Questions)));
 	const  answer_aChanged = (e) => {
@@ -76,13 +90,7 @@ export default function NewQuestion() {
 		},
 		);
 	};
-	const answerASwitched=(event)=>{
-		setQuestionToSet({ ...questionToSet,
-			correct_answers:{ ...questionToSet.correct_answers,
-				answer_a_correct:event.target.checked?true:false,
-			},
-		});
-	};
+
 	const  answer_fChanged = (e) => {
 		setQuestionToSet({ ...questionToSet,
 			answers:{ ...questionToSet.answers,
@@ -91,34 +99,85 @@ export default function NewQuestion() {
 		},
 		);
 	};
-
+	//checkboxes for correct answers
+	const answerASwitched=(event)=>{
+		setQuestionToSet({ ...questionToSet,
+			correct_answers:{ ...questionToSet.correct_answers,
+				answer_a_correct:event.target.checked?true:false,
+			},
+		});
+	};
+	const answerBSwitched=(event)=>{
+		setQuestionToSet({ ...questionToSet,
+			correct_answers:{ ...questionToSet.correct_answers,
+				answer_b_correct:event.target.checked?true:false,
+			},
+		});
+	};
+	const answerCSwitched=(event)=>{
+		setQuestionToSet({ ...questionToSet,
+			correct_answers:{ ...questionToSet.correct_answers,
+				answer_c_correct:event.target.checked?true:false,
+			},
+		});
+	};
+	const answerDSwitched=(event)=>{
+		setQuestionToSet({ ...questionToSet,
+			correct_answers:{ ...questionToSet.correct_answers,
+				answer_d_correct:event.target.checked?true:false,
+			},
+		});
+	};
+	const answerESwitched=(event)=>{
+		setQuestionToSet({ ...questionToSet,
+			correct_answers:{ ...questionToSet.correct_answers,
+				answer_e_correct:event.target.checked?true:false,
+			},
+		});
+	};
+	const answerFSwitched=(event)=>{
+		setQuestionToSet({ ...questionToSet,
+			correct_answers:{ ...questionToSet.correct_answers,
+				answer_f_correct:event.target.checked?true:false,
+			},
+		});
+	};
 	return (
 		<div className='col-12'>
 			<div>
-				<div>{questionToSet.answers.answer_a}</div>
+
 				<h1>question,use markdown</h1>
 				<textarea onKeyUp={(e) => textChanged(e)} />
-
+				<h1>code illustration</h1>
+				<textarea onKeyUp={(e) => codeChanged(e)} />
 				<h1>answers</h1>
 				<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
 				<input type='checkbox' name={"answer a"} value={"a"} onChange={answerASwitched} />
 				<input onKeyUp={(e) => answer_bChanged(e)} placeholder="answer b" />
-				<input type='checkbox'name={"answer b"} value={"b"}  />
+				<input type='checkbox'name={"answer b"} value={"b"} onChange={answerBSwitched} />
 
 				<input onKeyUp={(e) => answer_cChanged(e)} placeholder="answer c" />
-				<input type='checkbox'name={"answer c"} value={"c"} />
+				<input type='checkbox'name={"answer c"} value={"c"} onChange={answerCSwitched} />
 
 				<input onKeyUp={(e) => answer_dChanged(e)} placeholder="answer d" />
-				<input type='checkbox'name={"answer d"} value={"d"}  />
+				<input type='checkbox'name={"answer d"} value={"d"} onChange={answerDSwitched}  />
 
-				<input onKeyUp={(e) => answer_eChanged(e)} placeholder="answer e" />
-				<input type='checkbox'name={"answer e"} value={"e"}  />
+				<input onKeyUp={(e) => answer_eChanged(e)} placeholder="answer e"  />
+				<input type='checkbox'name={"answer e"} value={"e"} onChange={answerESwitched} />
 				<input onKeyUp={(e) => answer_fChanged(e)} placeholder="answer f" />
-				<input type='checkbox' name={"answer f"} value={"f"}  />
-				<ReactMarkdown source={md} />
+				<input type='checkbox' name={"answer f"} value={"f"} onChange={answerFSwitched}  />
+
 
 			</div>
 			<button>submit answers</button>
+			<ReactMarkdown source={md} />
+			<div className='codeIllustration'>{questionToSet.code}</div>
+			<div>{questionToSet.answers.answer_a}</div>
+			<div>{questionToSet.answers.answer_b}</div>
+			<div>{questionToSet.answers.answer_c}</div>
+			<div>{questionToSet.answers.answer_d}</div>
+			<div>{questionToSet.answers.answer_e}</div>
+			<div>{questionToSet.answers.answer_f}</div>
 		</div>
 	);
 }
