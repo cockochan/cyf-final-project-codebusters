@@ -171,10 +171,17 @@ export default function NewQuestion() {
 			</div>
 			<button>submit answers</button>
 			<ReactMarkdown source={md} />
-			<div className='codeIllustration'>{questionToSet.code}</div>
-			<div>{questionToSet.answers.answer_a}</div>
-			<div>{questionToSet.answers.answer_b}</div>
-			<div>{questionToSet.answers.answer_c}</div>
+			{questionToSet.code!=""?<div className='code'>{questionToSet.code}</div>:<div></div>}
+			<div>
+				<div>{questionToSet.answers.answer_a}</div>
+				{questionToSet.correct_answers.answer_a_correct==true?<div>correct answer</div>:<div>false answer</div>}
+			</div>
+			<div>
+				<div>{questionToSet.answers.answer_b}</div>
+				{questionToSet.correct_answers.answer_b_correct==true?<div>correct answer</div>:<div>false answer</div>}
+			</div>
+
+			<div>1."{questionToSet.answers.answer_c}</div>
 			<div>{questionToSet.answers.answer_d}</div>
 			<div>{questionToSet.answers.answer_e}</div>
 			<div>{questionToSet.answers.answer_f}</div>

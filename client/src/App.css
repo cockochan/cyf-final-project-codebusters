@@ -41,3 +41,9 @@
   
     margin-top: 0.2em;
 }
+.code{
+    font-weight: 900;
+    color: turquoise;
+    padding:5px;
+    background-color: darkslategrey;
+}
