@@ -71,10 +71,10 @@ export function App() {
 						<Mentors questions={questions} quizes={quizes} />
 					</Route>
 					<Route exact path="/Results">
-						<Results questions={questions} quizes={quizes} fetchAllQuizes={fetchAllQuizes} />
+						<Results questions={questions} quizes={quizes} />
 					</Route>
 					<Route exact path="/Students">
-						<Students questions={questions} quizes={quizes} fetchAllQuizes={fetchAllQuizes} />
+						<Students questions={questions} quizes={quizes} />
 					</Route>
 
 					<Route exact path="/NewQuestion">
