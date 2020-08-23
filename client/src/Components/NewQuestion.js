@@ -76,6 +76,13 @@ export default function NewQuestion() {
 		},
 		);
 	};
+	const answerASwitched=(event)=>{
+		setQuestionToSet({ ...questionToSet,
+			correct_answers:{ ...questionToSet.correct_answers,
+				answer_a_correct:event.target.checked?true:false,
+			},
+		});
+	};
 	const  answer_fChanged = (e) => {
 		setQuestionToSet({ ...questionToSet,
 			answers:{ ...questionToSet.answers,
@@ -94,20 +101,20 @@ export default function NewQuestion() {
 
 				<h1>answers</h1>
 				<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
-				<input type='checkbox' />
+				<input type='checkbox' name={"answer a"} value={"a"} onChange={answerASwitched} />
 				<input onKeyUp={(e) => answer_bChanged(e)} placeholder="answer b" />
-				<input type='checkbox' />
+				<input type='checkbox'name={"answer b"} value={"b"}  />
 
 				<input onKeyUp={(e) => answer_cChanged(e)} placeholder="answer c" />
-				<input type='checkbox' />
+				<input type='checkbox'name={"answer c"} value={"c"} />
 
 				<input onKeyUp={(e) => answer_dChanged(e)} placeholder="answer d" />
-				<input type='checkbox' />
+				<input type='checkbox'name={"answer d"} value={"d"}  />
 
 				<input onKeyUp={(e) => answer_eChanged(e)} placeholder="answer e" />
-				<input type='checkbox' />
-				<input onKeyUp={(e) => answer_eChanged(e)} placeholder="answer f" />
-				<input type='checkbox' />
+				<input type='checkbox'name={"answer e"} value={"e"}  />
+				<input onKeyUp={(e) => answer_fChanged(e)} placeholder="answer f" />
+				<input type='checkbox' name={"answer f"} value={"f"}  />
 				<ReactMarkdown source={md} />
 
 			</div>
