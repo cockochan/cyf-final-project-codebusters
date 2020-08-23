@@ -41,6 +41,32 @@ export default function NewQuestion() {
 		},
 		);
 	};
+
+	const submitQuestion =()=>{
+		if(questionToSet.answers.answer_a.length<2){
+
+			alert("answer a should have at least 2sybols");
+
+			// } else if(newQuizzQuestions.length<5){
+
+			// 	alert("Quizz  should have at least 5 questions");
+
+		} else{
+			sendQestion();
+			alert("question submitted");
+		}
+	};
+	const sendQestion =()=>{
+		alert("done");
+		fetch("http://localhost:3100/api/question", { method:"POST",headers: { "Content-type": "application/json" },
+			body: JSON.stringify(questionToSet) })
+			.then((response) => response.json())
+			.then((data) =>console.log(data))
+			.catch((err) => console.error(err));
+
+
+
+	};
 	const codeChanged = (e) => {
 		setCd(e.target.value);
 		setQuestionToSet({ ...questionToSet,
@@ -146,10 +172,11 @@ export default function NewQuestion() {
 		<div className='col-12'>
 			<div>
 
-				<h1>question,use markdown</h1>
-				<textarea onKeyUp={(e) => textChanged(e)} />
+
 				<h1>code illustration</h1>
 				<textarea onKeyUp={(e) => codeChanged(e)} />
+				<h1>question,use markdown</h1>
+				<textarea onKeyUp={(e) => textChanged(e)} />
 				<h1>answers</h1>
 				<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
 				<input type='checkbox' name={"answer a"} value={"a"} onChange={answerASwitched} />
@@ -169,9 +196,10 @@ export default function NewQuestion() {
 
 
 			</div>
-			<button>submit question</button>
-			<ReactMarkdown source={md} />
+			<button onClick={submitQuestion}> submit question</button>
 			<ReactMarkdown className='code'source={questionToSet.code} />
+			<ReactMarkdown source={md} />
+
 			{/* {questionToSet.code!=""?<div className='code col-3'>{questionToSet.code}</div>:<div></div>} */}
 			<div className='row'>
 				<div>{questionToSet.answers.answer_a}</div>
