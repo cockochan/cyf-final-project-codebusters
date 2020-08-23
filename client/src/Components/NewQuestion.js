@@ -57,7 +57,7 @@ export default function NewQuestion() {
 		}
 	};
 	const sendQestion =()=>{
-		alert("done");
+
 		fetch("http://localhost:3100/api/question", { method:"POST",headers: { "Content-type": "application/json" },
 			body: JSON.stringify(questionToSet) })
 			.then((response) => response.json())
