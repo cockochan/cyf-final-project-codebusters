@@ -101,21 +101,30 @@ router.get("/quizes/search",(req, res)=>{
 	});
 });
 
-router.get("/results/search",(req, res)=>{
+router.get("/results/:id",(req, res)=>{
 	const client = getClient();
 	client.connect(()=>{
 		const db = client.db("quiz");
 		const collection = db.collection("results");
-		const quiz = { name:req.query.name };
-		collection.find(quiz).toArray((err, results)=>{
+
+		const quizId = req.params.id;
+		if (!mongodb.ObjectID.isValid(quizId)) {
+			return res.status(400).json("the 'Quiz Id' is not valid");
+		}
+		// const id = mongodb.ObjectID(quizId);
+		const quizResults = { quiz_id:quizId };
+		collection.find(quizResults).toArray((err, results)=>{
 			if(err){
 				res.status(500).send(err);
-			}else{
+			}else if(results.length>0){
 				res.status(200).send(results);
+			}else{
+				res.status(404).json("not found!");
 			}
 		});
 	});
 });
+
 router.get("/results",(req, res)=>{
 	const client = getClient();
 	client.connect(()=>{
@@ -159,11 +168,11 @@ router.get("/question/:id",(req, res)=>{
 			return res.status(400).json("the ID is not valid");
 		}
 		const id = mongodb.ObjectID(questionId);
-		collection.findOne(id,(err, questions)=>{
+		collection.findOne(id,(err, question)=>{
 			if(err){
 				res.status(500).send(err);
 			}else{
-				res.status(200).send(questions);
+				res.status(200).send(question);
 			}
 		});
 	});
