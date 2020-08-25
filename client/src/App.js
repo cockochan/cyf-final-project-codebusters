@@ -15,7 +15,7 @@ import NewQuestion from "./Components/NewQuestion.js";
 import Questions from "../src/mockData/Questions.json";
 export function App() {
 	const [questionData, setQuestionData]=useState({});
-	const [route, setRoute]=useState("quizes");
+	const [route, setRoute]=useState("quizzes");
 	useEffect(()=>{
 		fetch(`http://localhost:3100/api/${route}`)
 			.then((res) => res.json())

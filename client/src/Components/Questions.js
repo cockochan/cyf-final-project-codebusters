@@ -3,8 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import dayjs from "dayjs";
 
 const Questions = (props) => {
-
-	const [i, setI] = useState(0);
+	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [route, setRoute] = useState("");
 	const [fetchData, setFetchData] = useState([]);
 	const [requestOption, setRequestOption] = useState({ method: "GET" });
@@ -12,13 +11,12 @@ const Questions = (props) => {
 		question: "",
 		correct: "",
 		value: "",
-		quiz_id:props.quizId,
-		timestamp:"",
+		quiz_id: props.quizId,
+		timestamp: "",
 	});
-	console.log(props.quizName);
 	useEffect(() => {
 		fetch(
-			`http://localhost:3100/api/question/${props.fetchedData.questions_id[i]}`
+			`http://localhost:3100/api/question/${props.fetchedData.questions_id[currentQuestionIndex]}`
 		)
 			.then((res) => res.json())
 			.then((data) => setFetchData(data))
@@ -27,7 +25,11 @@ const Questions = (props) => {
 			.then((res) => res.json())
 			.then((data) => console.log(data))
 			.catch((err) => console.error(err));
-	}, [props.fetchedData.questions_id[i], route, requestOption]);
+	}, [
+		props.fetchedData.questions_id[currentQuestionIndex],
+		route,
+		requestOption,
+	]);
 
 	const submitHandler = (e) => {
 		setRoute("results");
@@ -37,10 +39,10 @@ const Questions = (props) => {
 			body: JSON.stringify(answer),
 		});
 		e.preventDefault();
-		setI(i + 1);
+		setCurrentQuestionIndex(currentQuestionIndex + 1);
 	};
 
-	const submitForm = ()=>{
+	const submitForm = () => {
 		setRoute("results");
 		setRequestOption({
 			method: "POST",
@@ -48,19 +50,18 @@ const Questions = (props) => {
 			body: JSON.stringify(answer),
 		});
 
-		if(i>=props.fetchedData.questions_id.length-1){
+		if (currentQuestionIndex >= props.fetchedData.questions_id.length - 1) {
 			alert("You submited the form successfully!");
 		}
 	};
 
 	const checkHandler = (e) => {
-		console.log(e.target.value);
 		setAnswer({
 			...answer,
 			question: fetchData.question,
 			value: e.target.value,
 			correct: fetchData.correct_answer === e.target.name,
-			timestamp :dayjs().format(),
+			timestamp: dayjs().format(),
 		});
 	};
 
@@ -153,7 +154,13 @@ const Questions = (props) => {
 					</FormGroup>
 					<hr style={{ margin: "40px 0" }} />
 				</FormGroup>
-				{i<props.fetchedData.questions_id.length-1?<Button>Next</Button>:<Button type="button" onClick={submitForm}>Submit</Button>}
+				{currentQuestionIndex < props.fetchedData.questions_id.length - 1 ? (
+					<Button>Next</Button>
+				) : (
+					<Button type="button" onClick={submitForm}>
+            Submit
+					</Button>
+				)}
 			</Form>
 		</div>
 	);
