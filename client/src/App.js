@@ -14,12 +14,14 @@ import NewQuestion from "./Components/NewQuestion.js";
 
 import Questions from "../src/mockData/Questions.json";
 export function App() {
-
-	// const [message, setMessage] = useState("Loading...");
-
-	// useEffect(() => {
-	// 	getMessage().then((message) => setMessage(message));
-	// }, []);
+	const [questionData, setQuestionData]=useState({});
+	const [route, setRoute]=useState("quizes");
+	useEffect(()=>{
+		fetch(`http://localhost:3100/api/${route}`)
+			.then((res) => res.json())
+			.then((data) => setQuestionData(data))
+			.catch((err) => console.error(err));
+	},[route]);
 
 	return (
 		<main className='container'role="main">
@@ -28,18 +30,20 @@ export function App() {
 
 			</div>
 			<Router>
-				<nav className="col-4">
-					<ul><li style={{ listStyleType: "none" }}>
+				<nav className="col-12">
+					<ul style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}><li style={{ listStyleType: "none" , padding:"20px 0",margin:"20px 0" }}>
 						<Link to="/NewQuestion" >New question</Link>
 					</li>
-		  <li style={{ listStyleType: "none" }}>
+		  <li style={{ listStyleType: "none", padding:"20px 0",margin:"20px 0" }}>
 						<Link to="/Students" exact='true'>for students </Link>
 					</li>
-					<li style={{ listStyleType: "none" }}>
+					<li style={{ listStyleType: "none", padding:"20px 0",margin:"20px 0" }}>
 						<Link to="/Mentors"exact='true'> for mentors</Link>
 					</li>
 
-					</ul></nav>
+					</ul>
+					<hr />
+				</nav>
 				<Switch>
 					<Route exact path="/NewQuestion">
 						<NewQuestion />
@@ -48,7 +52,7 @@ export function App() {
 						<Mentors />
 					</Route>
 					<Route exact path="/Students">
-						<Students />
+						{questionData.length >0?<Students questionData={questionData} />:<p>Loading...</p>}
 					</Route>
 
 				</Switch>
