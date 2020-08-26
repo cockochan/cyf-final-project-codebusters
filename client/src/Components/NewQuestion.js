@@ -16,20 +16,20 @@ export default function NewQuestion() {
 			answer_f: null,
 
 		},
-		multiple_correct_answers: "false",
+		multiple_correct_answers: false,
 		correct_answers: {
-			answer_a_correct: "false",
-			answer_b_correct: "false",
-			answer_c_correct: "false",
-			answer_d_correct: "false",
-			answer_e_correct: "false",
-			answer_f_correct: "false",
+			answer_a_correct: false,
+			answer_b_correct: false,
+			answer_c_correct: false,
+			answer_d_correct: false,
+			answer_e_correct: false,
+			answer_f_correct: false,
 		},
 		explanation: "",
 		tip: null,
 		tags: [],
-		code: "",
-		difficulty: "Easy",
+		question_code: "",
+		difficulty: "",
 	});
 	const [md, setMd] = useState("");
 	const [cd, setCd] = useState("");
@@ -46,11 +46,6 @@ export default function NewQuestion() {
 		if(questionToSet.answers.answer_a.length<2){
 
 			alert("answer a should have at least 2sybols");
-
-			// } else if(newQuizzQuestions.length<5){
-
-			// 	alert("Quizz  should have at least 5 questions");
-
 		} else{
 			sendQestion();
 			alert("question submitted");
@@ -63,15 +58,11 @@ export default function NewQuestion() {
 			.then((response) => response.json())
 			.then((data) =>console.log(data))
 			.catch((err) => console.error(err));
-
-
-
 	};
 	const codeChanged = (e) => {
 		setCd(e.target.value);
 		setQuestionToSet({ ...questionToSet,
-			code: `${e.target.value}`,
-
+			question_code: `${e.target.value}`,
 		},
 		);
 	};
@@ -177,6 +168,7 @@ export default function NewQuestion() {
 				<textarea onKeyUp={(e) => codeChanged(e)} />
 				<h1>question,use markdown</h1>
 				<textarea onKeyUp={(e) => textChanged(e)} />
+
 				<h1>answers</h1>
 				<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
 				<input type='checkbox' name={"answer a"} value={"a"} onChange={answerASwitched} />
@@ -193,14 +185,11 @@ export default function NewQuestion() {
 				<input type='checkbox'name={"answer e"} value={"e"} onChange={answerESwitched} />
 				<input onKeyUp={(e) => answer_fChanged(e)} placeholder="answer f" />
 				<input type='checkbox' name={"answer f"} value={"f"} onChange={answerFSwitched}  />
-
-
 			</div>
 			<button onClick={submitQuestion}> submit question</button>
-			<ReactMarkdown className='code'source={questionToSet.code} />
+			<ReactMarkdown className='code'source={questionToSet.question_code} />
 			<ReactMarkdown source={md} />
 
-			{/* {questionToSet.code!=""?<div className='code col-3'>{questionToSet.code}</div>:<div></div>} */}
 			<div className='row'>
 				<div>{questionToSet.answers.answer_a}</div>
 				<div className='col-4'><strong>answer a is </strong>{` ${questionToSet.correct_answers.answer_a_correct}`}</div>
