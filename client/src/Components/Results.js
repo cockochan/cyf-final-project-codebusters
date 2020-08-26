@@ -2,7 +2,6 @@ import React from "react";
 
 export default function Results(props) {
 
-	console.log(props.quizes);
 	if(props.quizes){
 		return (
 			<div className='col-12'>

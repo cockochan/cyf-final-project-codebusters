@@ -13,7 +13,6 @@ import Mentors from "./Components/Mentors.js";
 import NewQuestion from "./Components/NewQuestion.js";
 import Results from "./Components/Results.js";
 
-// import Questions from "../src/mockData/Questions.json";
 export function App() {
 	const [questions, setQuestions]=useState(null);
 	const [quizes, setQuizes]=useState(null);

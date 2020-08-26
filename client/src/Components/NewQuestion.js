@@ -36,7 +36,7 @@ export default function NewQuestion() {
 	const textChanged = (e) => {
 		setMd(e.target.value);
 		setQuestionToSet({ ...questionToSet,
-			question: `${e.target.value}`,
+			question: e.target.value,
 
 		},
 		);
@@ -56,21 +56,20 @@ export default function NewQuestion() {
 		fetch("http://localhost:3100/api/question", { method:"POST",headers: { "Content-type": "application/json" },
 			body: JSON.stringify(questionToSet) })
 			.then((response) => response.json())
-			.then((data) =>console.log(data))
 			.catch((err) => console.error(err));
 	};
 	const codeChanged = (e) => {
 		setCd(e.target.value);
 		setQuestionToSet({ ...questionToSet,
-			question_code: `${e.target.value}`,
+			question_code: e.target.value,
 		},
 		);
 	};
-	console.log( JSON.parse(JSON.stringify(Questions)));
+
 	const  answer_aChanged = (e) => {
 		setQuestionToSet({ ...questionToSet,
 			answers:{ ...questionToSet.answers,
-				answer_a:`${e.target.value}`,
+				answer_a:e.target.value,
 			},
 		},
 		);
@@ -78,7 +77,7 @@ export default function NewQuestion() {
 	const  answer_bChanged = (e) => {
 		setQuestionToSet({ ...questionToSet,
 			answers:{ ...questionToSet.answers,
-				answer_b:`${e.target.value}`,
+				answer_b:e.target.value,
 			},
 		},
 		);
@@ -86,7 +85,7 @@ export default function NewQuestion() {
 	const  answer_cChanged = (e) => {
 		setQuestionToSet({ ...questionToSet,
 			answers:{ ...questionToSet.answers,
-				answer_c:`${e.target.value}`,
+				answer_c:e.target.value,
 			},
 		},
 		);
@@ -94,7 +93,7 @@ export default function NewQuestion() {
 	const  answer_dChanged = (e) => {
 		setQuestionToSet({ ...questionToSet,
 			answers:{ ...questionToSet.answers,
-				answer_d:`${e.target.value}`,
+				answer_d:e.target.value,
 			},
 		},
 		);
@@ -102,7 +101,7 @@ export default function NewQuestion() {
 	const  answer_eChanged = (e) => {
 		setQuestionToSet({ ...questionToSet,
 			answers:{ ...questionToSet.answers,
-				answer_e:`${e.target.value}`,
+				answer_e:e.target.value,
 			},
 		},
 		);
@@ -111,7 +110,7 @@ export default function NewQuestion() {
 	const  answer_fChanged = (e) => {
 		setQuestionToSet({ ...questionToSet,
 			answers:{ ...questionToSet.answers,
-				answer_f:`${e.target.value}`,
+				answer_f:e.target.value,
 			},
 		},
 		);

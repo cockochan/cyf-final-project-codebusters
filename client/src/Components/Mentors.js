@@ -5,13 +5,10 @@ import {
 	Route,
 	Link,
 } from "react-router-dom";
-// import Questions from "../mockData/Questions.json";
-
 import "../App.css";
 import "../grid.css";
 
 export default function Mentors(props) {
-	// const [fetchedQuestions,setfetchedQuestions]=useState(props.questions);
 	const [newQuizzQuestions, setNewQuizzQuestions]=useState([]);
 	const [refreshQuestions, setRefreshQuestions]=useState(false);
 
@@ -42,15 +39,11 @@ export default function Mentors(props) {
 		makeQuestions();
 	},[newQuizz.questions_id]);
 
-
-
 	const addQuestion =(e)=>{
-		console.log(e.target.value);
 		setNewQuizz({ ...newQuizz,
 			questions_id:[...newQuizz.questions_id,e.target.value],
 		},
 		);
-
 	};
 	const submitNewQ =()=>{
 		if(newQuizz.name.length<8){
@@ -70,11 +63,7 @@ export default function Mentors(props) {
 		fetch("http://localhost:3100/api/quiz", { method:"POST",headers: { "Content-type": "application/json" },
 			body: JSON.stringify(newQuizz) })
 			.then((response) => response.json())
-			.then((data) =>console.log(data))
 			.catch((err) => console.error(err));
-
-
-
 	};
 	const newQuizName =(e)=>{
 
@@ -82,27 +71,18 @@ export default function Mentors(props) {
 			name:e.target.value,
 		},
 		);
-
-
 	};
 
 	const removeQuestion =(e)=>{
-		console.log(newQuizz.questions_id);
-
 		let filterIdArr=newQuizz.questions_id.filter((boo) => {
-
 			return(boo!= e.target.value);
-
 		});
-		console.log(filterIdArr);
 		setNewQuizz({ ...newQuizz,
 			questions_id:filterIdArr,
 		},
 		setRefreshQuestions(!refreshQuestions)
 		);
-
 		setNewQuizzQuestions(newQuizzQuestions.filter((obj) => obj._id != e.target.value));
-		// e.target.checked="false";
 	};
 	if(props.questions){
 		return(<div className='row'>
@@ -119,20 +99,13 @@ export default function Mentors(props) {
 
 								return(
 									<div>
-
-
 										<div className='col-6 answer'>{value}</div>
-
 									</div>);
-
 							}
 			  )}</div>
-
-
 			  </div>
 				)
 				}</div>
-
 			<div className='col-3 newQuiz'><h1>New quiz</h1>
 				<input type='text' onKeyUp={newQuizName} placeholder={"new quiz name"} />
 				{newQuizzQuestions.map((quest)=>

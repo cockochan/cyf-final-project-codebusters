@@ -2,8 +2,6 @@ import React, { useState,useEffect } from "react";
 // import Quizzez from "../mockData/Quizzez.json";
 // import Questions from "../mockData/Questions.json";
 export default function Students(props) {
-	console.log(props.quizes);
-	console.log (props.questions);
 	const [questPageNum,setQuestPageNum]=useState(0);
 	const [quizzQuestions,setQuizzQuestions]=useState(null);
 	const [selectedQuizz,setSelectedQuizz]=useState(null);
@@ -23,9 +21,7 @@ export default function Students(props) {
 			questionsToGo = selectedQuizz.questions_id.map((selId)=>{
 
 				let found = (props.questions.find((question)=>question._id.includes(selId.trim())));
-
 				questionsToGo.push(found);
-				console.log(selId,found);
 				setQuizzQuestions(questionsToGo);
 
 			}
@@ -64,7 +60,6 @@ export default function Students(props) {
 
 			return(
 				<div className='col-12 '>
-					{console.log(quizzQuestions)}
 					{questPageNum<quizzQuestions.length?<div>{quizzQuestions[questPageNum].question}</div>:<div></div>}
 
 
@@ -87,11 +82,6 @@ export default function Students(props) {
 					{(questPageNum<quizzQuestions.length? <button onClick={nextPage}>next page</button>:<button onClick={submitAnswers}>submit test results</button>)}
 				</div>);
 
-		} else{
-			console.log(questPageNum);
-			console.log(selectedQuizz);
-			console.log(quizzQuestions);
-			console.log(quizzQuestions[questPageNum]);
 		}
 	} else{
 		return(<h1>submitted successfuly</h1>);
