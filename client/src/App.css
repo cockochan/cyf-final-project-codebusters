@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@700&display=swap');
 .logo {
     width: 100px;
 }
@@ -38,6 +38,12 @@
     padding:0.2em;
 }
 .quizzQuestion{
-  
     margin-top: 0.2em;
+}
+.code{
+    font-weight: 900;
+    color: turquoise;
+    padding:5px;
+    background-color: darkslategrey;
+    font-family: 'Inconsolata', monospace;
 }

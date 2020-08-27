@@ -5,81 +5,113 @@ import {
 	Route,
 	Link,
 } from "react-router-dom";
-import Questions from "../mockData/Questions.json";
-
 import "../App.css";
 import "../grid.css";
 
-export default function Mentors() {
-	const [fetchedQuestions,setfetchedQuestions]=useState(Questions);
+export default function Mentors(props) {
 	const [newQuizzQuestions, setNewQuizzQuestions]=useState([]);
+	const [refreshQuestions, setRefreshQuestions]=useState(false);
+
 	const [newQuizz,setNewQuizz]=useState(	{
-		id: 1,
-		name: "javaScrypt week 1",
-		publiShingDate: "2020-08-04",
-		questions: [],
+
+		name: "",
+		publiShingDate: "",
+		questions_id: [],
 	});
+
+
+
 	useEffect(() => {
-		if(newQuizz.questions!==null){
 
 
+
+		const makeQuestions=()=>{
 			let newQuizQuestions = [];
-			newQuizQuestions = newQuizz.questions.map((selId)=>{
+			newQuizQuestions = newQuizz.questions_id.map((selId)=>{
 
-				let found = (Questions.find((question)=>question.id==selId));
+				let found = (props.questions.find((question)=>question._id==selId));
 				newQuizQuestions.push(found);
-
-
 				setNewQuizzQuestions(newQuizQuestions);
-
 			}
 			);
-		}
-	},[newQuizz]);
+
+		};
+		makeQuestions();
+	},[newQuizz.questions_id]);
+
 	const addQuestion =(e)=>{
 		setNewQuizz({ ...newQuizz,
-			questions:[...newQuizz.questions,e.target.value],
+			questions_id:[...newQuizz.questions_id,e.target.value],
 		},
 		);
+	};
+	const submitNewQ =()=>{
+		if(newQuizz.name.length<8){
 
+			alert("Quiz name should have at least 8 sybols");
+
+		} else if(newQuizzQuestions.length<5){
+
+			alert("Quizz  should have at least 5 questions");
+
+		} else{
+			sendQuiz();
+		}
 	};
+	const sendQuiz =()=>{
+		alert("done");
+		fetch("http://localhost:3100/api/quiz", { method:"POST",headers: { "Content-type": "application/json" },
+			body: JSON.stringify(newQuizz) })
+			.then((response) => response.json())
+			.catch((err) => console.error(err));
+	};
+	const newQuizName =(e)=>{
+
+		setNewQuizz({ ...newQuizz,
+			name:e.target.value,
+		},
+		);
+	};
+
 	const removeQuestion =(e)=>{
-		setNewQuizzQuestions(newQuizzQuestions.filter((obj) => obj.id != e.target.value));
+		let filterIdArr=newQuizz.questions_id.filter((boo) => {
+			return(boo!= e.target.value);
+		});
+		setNewQuizz({ ...newQuizz,
+			questions_id:filterIdArr,
+		},
+		setRefreshQuestions(!refreshQuestions)
+		);
+		setNewQuizzQuestions(newQuizzQuestions.filter((obj) => obj._id != e.target.value));
 	};
-	if(fetchedQuestions){
+	if(props.questions){
 		return(<div className='row'>
 			<div className='col-9 cardBlock'>
-				{fetchedQuestions.map((quest)=>
+				{props.questions.map((quest)=>
 					<div className='col-3 card'>
-						<input className="quizCardCheckbox" type="checkbox" id="horns" name="horns" value={quest.id} onChange={addQuestion} />
-						<label htmlFor="horns">add to quiz</label>
+
+						<button id={quest._id} value={quest._id} onClick={addQuestion}>add to quiz</button>
+
 						<div className="quizzQuestion">{quest.question}</div>
 
 						<div className='answers'>
 							{Object.entries(quest.answers).map(([key, value]) =>{
-								// use keyName to get current key's name
+
 								return(
 									<div>
-
-
 										<div className='col-6 answer'>{value}</div>
-
 									</div>);
-
 							}
 			  )}</div>
-
-
 			  </div>
 				)
 				}</div>
-
 			<div className='col-3 newQuiz'><h1>New quiz</h1>
-
+				<input type='text' onKeyUp={newQuizName} placeholder={"new quiz name"} />
 				{newQuizzQuestions.map((quest)=>
-					<div className='col-12 card'>
- 	<input type="checkbox" id="horns" name="horns" value={quest.id} onChange={removeQuestion} />
-						<label htmlFor="horns">remove from quizz</label>
+					<div className='col-12 card' key={quest.question}>
+ 	<button key={quest._id+quest.question} type="checkbox" checked='checked' id="horns" key={quest._id+quest.question} value={quest._id} onClick={removeQuestion} >x</button>
+						<label htmlFor={quest._id+quest.question}>remove from quizz</label>
 						<div>{quest.question}</div>
 
 						<div className='answers'>
@@ -99,7 +131,7 @@ export default function Mentors() {
 
 			  </div>
 				)
-				}<button>submit new quizz</button></div>
+				}<button onClick={submitNewQ}>submit new quizz</button></div>
 
 		</div>
 		);
