@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import Questions from "./Questions";
 
 const Students = (props) => {
-	const [route, setRoute] = useState("");
-	const [quizId, setQuizId] = useState("");
-	const [quizName, setQuizName] = useState("");
-	const [fetchedData, setFetchedData] = useState([]);
+  const [route, setRoute] = useState("");
+  const [quizId, setQuizId] = useState("");
+  const [quizName, setQuizName] = useState("");
+  const [fetchedData, setFetchedData] = useState([]);
 
-	useEffect(() => {
-		fetch(`http://localhost:3100/api/${route}`)
-			.then((res) => res.json())
-			.then((data) => setFetchedData(data))
-			.catch((err) => console.error(err));
-	}, [route]);
+  useEffect(() => {
+    fetch(`http://localhost:3100/api/${route}`)
+      .then((res) => res.json())
+      .then((data) => setFetchedData(data))
+      .catch((err) => console.error(err));
+  }, [route]);
 
 	const selectHandler = (event) => {
 		setRoute(`quizzes/${event.target.value}`);
