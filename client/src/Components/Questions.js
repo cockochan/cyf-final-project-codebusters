@@ -8,11 +8,12 @@ const Questions = (props) => {
 	const [fetchData, setFetchData] = useState([]);
 	const [requestOption, setRequestOption] = useState({ method: "GET" });
 	const [answer, setAnswer] = useState({
-		question: "",
+		question_id: "",
 		correct: "",
 		value: "",
 		quiz_id: props.quizId,
 		timestamp: "",
+		studentName: "",
 	});
 	useEffect(() => {
 		fetch(
@@ -39,16 +40,18 @@ const Questions = (props) => {
 			body: JSON.stringify(answer),
 		});
 		e.preventDefault();
+		e.target.reset;
 		setCurrentQuestionIndex(currentQuestionIndex + 1);
 	};
 
-	const submitForm = () => {
+	const submitForm = (event) => {
 		setRoute("results");
 		setRequestOption({
 			method: "POST",
 			headers: { "Content-type": "application/json" },
 			body: JSON.stringify(answer),
 		});
+		event.target.reset;
 
 		if (currentQuestionIndex >= props.fetchedData.questions_id.length - 1) {
 			alert("You submited the form successfully!");
@@ -58,7 +61,7 @@ const Questions = (props) => {
 	const checkHandler = (e) => {
 		setAnswer({
 			...answer,
-			question: fetchData.question,
+			question_id: fetchData._id,
 			value: e.target.value,
 			correct: fetchData.correct_answer === e.target.name,
 			timestamp: dayjs().format(),
@@ -76,10 +79,21 @@ const Questions = (props) => {
 		answer_e,
 		answer_f,
 	} = fetchData.answers;
+	const changeHandler = (e) => {
+		setAnswer({
+			...answer,
+			studentName: e.target.value,
+		});
+	};
 
 	return (
 		<div style={{ margin: "10%" }}>
 			<Form onSubmit={submitHandler}>
+				<input
+					type="text"
+					placeholder="Enter your name"
+					onChange={changeHandler}
+				/>
 				<FormGroup>
 					<FormGroup>
 						<p>{fetchData.question}</p>
@@ -89,10 +103,10 @@ const Questions = (props) => {
 						{answer_a ? (
 							<Input
 								type="radio"
-								name="answer"
+								name="answer_a"
 								value={answer_a}
 								onClick={checkHandler}
-							></Input>
+							/>
 						) : null}
 						{answer_a ? <Label for="answer_a">{answer_a}</Label> : null}
 					</FormGroup>
@@ -101,10 +115,10 @@ const Questions = (props) => {
 						{answer_b ? (
 							<Input
 								type="radio"
-								name="answer"
+								name="answer_b"
 								value={answer_b}
 								onClick={checkHandler}
-							></Input>
+							/>
 						) : null}
 						{answer_b ? <Label for="answer_b">{answer_b}</Label> : null}
 					</FormGroup>
@@ -112,10 +126,10 @@ const Questions = (props) => {
 						{answer_c ? (
 							<Input
 								type="radio"
-								name="answer"
+								name="answer_c"
 								value={answer_c}
 								onClick={checkHandler}
-							></Input>
+							/>
 						) : null}
 						{answer_c ? <Label for="answer_c">{answer_c}</Label> : null}
 					</FormGroup>
@@ -123,10 +137,10 @@ const Questions = (props) => {
 						{answer_d ? (
 							<Input
 								type="radio"
-								name="answer"
+								name="answer_d"
 								value={answer_d}
 								onClick={checkHandler}
-							></Input>
+							/>
 						) : null}
 						{answer_d ? <Label for="answer_d">{answer_d}</Label> : null}
 					</FormGroup>
@@ -134,10 +148,10 @@ const Questions = (props) => {
 						{answer_e ? (
 							<Input
 								type="radio"
-								name="answer"
+								name="answer_e"
 								value={answer_e}
 								onClick={checkHandler}
-							></Input>
+							/>
 						) : null}
 						{answer_e ? <Label for="answer_e">{answer_e}</Label> : null}
 					</FormGroup>
@@ -145,10 +159,10 @@ const Questions = (props) => {
 						{answer_f ? (
 							<Input
 								type="radio"
-								name="answer"
+								name="answer_f"
 								value={answer_f}
 								onClick={checkHandler}
-							></Input>
+							/>
 						) : null}
 						{answer_f ? <Label for="answer_f">{answer_f}</Label> : null}
 					</FormGroup>
