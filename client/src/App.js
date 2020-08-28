@@ -14,12 +14,12 @@ import NewQuestion from "./Components/NewQuestion.js";
 
 import Questions from "../src/mockData/Questions.json";
 export function App() {
-	const [questionData, setQuestionData]=useState({});
+	const [quizData, setQuizData]=useState({});
 	const [route, setRoute]=useState("quizzes");
 	useEffect(()=>{
 		fetch(`http://localhost:3100/api/${route}`)
 			.then((res) => res.json())
-			.then((data) => setQuestionData(data))
+			.then((data) => setQuizData(data))
 			.catch((err) => console.error(err));
 	},[route]);
 
@@ -52,7 +52,7 @@ export function App() {
 						<Mentors />
 					</Route>
 					<Route exact path="/Students">
-						{questionData.length >0?<Students questionData={questionData} />:<p>Loading...</p>}
+						{quizData.length >0?<Students quizData={quizData} />:<p>Loading...</p>}
 					</Route>
 
 				</Switch>

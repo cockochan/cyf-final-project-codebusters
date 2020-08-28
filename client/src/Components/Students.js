@@ -15,7 +15,7 @@ const Students = (props) => {
 	}, [route]);
 
 	const selectHandler = (event) => {
-		setRoute(`quizzes/search?name=${event.target.value}`);
+		setRoute(`quizzes/${event.target.value}`);
 		setQuizId(event.target.value);
 		setQuizName(event.target);
 	};
@@ -24,7 +24,7 @@ const Students = (props) => {
 		<div style={{ width: "50%", margin: "15%" }}>
 			<select onChange={selectHandler} style={{ padding: "10px" }}>
 				<option>Select a quiz</option>
-				{props.questionData.map((quiz) => {
+				{props.quizData.map((quiz) => {
 					return (
 						<option key={quiz._id} name={quiz.name} value={quiz._id}>
 							{quiz.name}
