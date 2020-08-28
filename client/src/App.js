@@ -8,6 +8,7 @@ import NewQuestion from "./Components/NewQuestion.js";
 import Results from "./Components/Results.js";
 
 export function App() {
+
 	const [questions, setQuestions] = useState(null);
 	const [quizes, setQuizes] = useState(null);
 	if (questions !== null && quizes !== null) {
@@ -17,6 +18,14 @@ export function App() {
 		fetch("http://localhost:3100/api/questions")
 			.then((res) => res.json())
 			.then((data) => setQuestions(data))
+
+	const [quizData, setQuizData]=useState({});
+	const [route, setRoute]=useState("quizzes");
+	useEffect(()=>{
+		fetch(`http://localhost:3100/api/${route}`)
+			.then((res) => res.json())
+			.then((data) => setQuizData(data))
+
 			.catch((err) => console.error(err));
 	};
 	const fetchAllQuizes = () => {
@@ -69,7 +78,10 @@ export function App() {
 						<Results questions={questions} quizes={quizes} />
 					</Route>
 					<Route exact path="/Students">
-						<Students questionData={quizes} fetchedData={questions} />
+
+
+						{quizData.length >0?<Students quizData={quizData} />:<p>Loading...</p>}
+
 					</Route>
 
 					<Route exact path="/NewQuestion">
