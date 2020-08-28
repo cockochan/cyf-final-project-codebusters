@@ -10,37 +10,22 @@ import Results from "./Components/Results.js";
 export function App() {
 
 	const [questions, setQuestions] = useState(null);
-	const [quizes, setQuizes] = useState(null);
-	if (questions !== null && quizes !== null) {
-	}
+	const [quizzes, setQuizzes] = useState([]);
+	const [route, setRoute] = useState("quizzes");
 
-	const fetchAllQuestions = () => {
-		fetch("http://localhost:3100/api/questions")
+	useEffect(() => {
+		fetch(
+			"http://localhost:3100/api/questions"
+		)
 			.then((res) => res.json())
 			.then((data) => setQuestions(data))
-
-	const [quizData, setQuizData]=useState({});
-	const [route, setRoute]=useState("quizzes");
-	useEffect(()=>{
+			.catch((err) => console.error(err));
 		fetch(`http://localhost:3100/api/${route}`)
 			.then((res) => res.json())
-			.then((data) => setQuizData(data))
-
+			.then((data) => setQuizzes(data))
 			.catch((err) => console.error(err));
-	};
-	const fetchAllQuizes = () => {
-		fetch("http://localhost:3100/api/quizzes")
-			.then((res) => res.json())
-			.then((data) => setQuizes(data))
-			.catch((err) => console.error(err));
-	};
+	}, [route]);
 
-	useEffect(() => {
-		fetchAllQuestions();
-	}, []);
-	useEffect(() => {
-		fetchAllQuizes();
-	}, []);
 
 	return (
 		<main className="container" role="main">
@@ -72,15 +57,15 @@ export function App() {
 				</nav>
 				<Switch>
 					<Route exact path="/Mentors">
-						<Mentors questions={questions} quizes={quizes} />
+						<Mentors questions={questions} quizes={quizzes} />
 					</Route>
 					<Route exact path="/Results">
-						<Results questions={questions} quizes={quizes} />
+						<Results questions={questions} quizes={quizzes} />
 					</Route>
 					<Route exact path="/Students">
 
 
-						{quizData.length >0?<Students quizData={quizData} />:<p>Loading...</p>}
+						{quizzes.length >0?<Students quizData={quizzes} />:<p>Loading...</p>}
 
 					</Route>
 
