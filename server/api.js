@@ -83,14 +83,18 @@ router.get("/quizzes", (req, res) => {
 	});
 });
 
-router.get("/quizzes/search", (req, res) => {
+router.get("/quizzes/:id", (req, res) => {
 	const client = getClient();
 	client.connect(() => {
 		const db = client.db("quiz");
 		const collection = db.collection("quizzes");
-		const quiz = { quiz_name: req.query.quiz_name };
+		const quizId = req.params.id;
+		if(!mongodb.ObjectID.isValid(quizId)){
+			return res.status(400).json("the 'id' is not correct!");
+		}
+		const id =mongodb.ObjectID(quizId);
 
-		collection.findOne(quiz, (err, questions) => {
+		collection.findOne(id, (err, questions) => {
 			if (err) {
 				res.status(500).send(err);
 			} else {
@@ -111,7 +115,7 @@ router.get("/results/:id", (req, res) => {
 		}
 		const quizResults = { quiz_id: quizId };
 
-		collection.find(quizResults).sort.toArray((err, results) => {
+		collection.find(quizResults).toArray((err, results) => {
 			if (err) {
 				res.status(500).send(err);
 			} else if (results.length > 0) {
