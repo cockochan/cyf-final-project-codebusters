@@ -69,7 +69,7 @@ export function App() {
 						<Results questions={questions} quizes={quizes} />
 					</Route>
 					<Route exact path="/Students">
-						<Students questions={questions} quizes={quizes} />
+						<Students questionData={quizes} fetchedData={questions} />
 					</Route>
 
 					<Route exact path="/NewQuestion">
