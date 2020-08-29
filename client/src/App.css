@@ -47,3 +47,21 @@
     background-color: darkslategrey;
     font-family: 'Inconsolata', monospace;
 }
+
+/*some styling for new question tab*/
+.primary{
+    size: 500px;
+    color:#192BF5;
+}
+
+.sumbit-button{
+    width: 18%;
+    height: 40px;
+    border-radius: 4px;
+    margin-top:20px;
+    margin-bottom: 20px;
+    border: 0px ;
+    font-size: large;
+    background-color: green;
+    color:blue;
+}

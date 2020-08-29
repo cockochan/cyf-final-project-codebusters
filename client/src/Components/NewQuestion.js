@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Questions from "../mockData/Questions.json";
+import '../App.css'
 
 export default function NewQuestion() {
 	const [questionToSet, setQuestionToSet]=useState( {
@@ -163,12 +164,13 @@ export default function NewQuestion() {
 			<div>
 
 
-				<h1>code illustration</h1>
-				<textarea onKeyUp={(e) => codeChanged(e)} />
-				<h1>question,use markdown</h1>
+				<h3 className='primary'>Type Your Question Here...</h3>
+				<textarea cols="50" rows="15" onKeyUp={(e) => codeChanged(e)} />
+				<h3 className='primary'>Question,use markdown</h3>
 				<textarea onKeyUp={(e) => textChanged(e)} />
 
-				<h1>answers</h1>
+				<h3 className='primary'>Answers</h3>
+				<h5>Hint: you can assign multible correct answers</h5>
 				<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
 				<input type='checkbox' name={"answer a"} value={"a"} onChange={answerASwitched} />
 				<input onKeyUp={(e) => answer_bChanged(e)} placeholder="answer b" />
@@ -185,7 +187,7 @@ export default function NewQuestion() {
 				<input onKeyUp={(e) => answer_fChanged(e)} placeholder="answer f" />
 				<input type='checkbox' name={"answer f"} value={"f"} onChange={answerFSwitched}  />
 			</div>
-			<button onClick={submitQuestion}> submit question</button>
+			<button className='sumbit-button' onClick={submitQuestion}> Submit Question</button>
 			<ReactMarkdown className='code'source={questionToSet.question_code} />
 			<ReactMarkdown source={md} />
 
