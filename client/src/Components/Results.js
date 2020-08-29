@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 
 export default function Results(props) {
 	const [studentNames, setStudentNames]=useState([]);
+	const [selQuizQuestions, setSelQuizQuestions]=useState([]);
 	const [answeredQuestons, setAnsweredQuestons]=useState([]);
 	const [allResults, setAllResults]=useState(null);
+	const [quizSelected, setQuizSelected]=useState(null);
 	const fetchResults =()=>{
 		fetch("http://localhost:3100/api/results/")
 			.then((response)=>response.json())
@@ -14,8 +16,28 @@ export default function Results(props) {
 		fetchResults();
 	},[]);
 
+	useEffect(() => {
+
+
+
+		const makeQuestions=()=>{
+			let newQuizQuestions = [];
+			selectedQuizQuestions = quizSelected.questions_id.map((selId)=>{
+
+				let found = (props.questions.find((question)=>question._id==selId));
+				newQuizQuestions.push(found);
+				setSelQuizQuestions(newQuizQuestions);
+			}
+			);
+
+		};
+		makeQuestions();
+	},[quizSelected]);
+
 	const quizzToSeeResultsChosen=(e)=>{
-		console.log(e.target.value);
+		console.log(e.target.id);
+		const selectedQuiz=props.quizes.find((quiz)=>(quiz._id=event.target.id));
+		setQuizSelected(selectedQuiz);
 	};
 	if(props.quizes&&allResults){
 		return (
@@ -23,11 +45,11 @@ export default function Results(props) {
 
 				<h1>Welcome to QuizzTime</h1>
 
-				<select name="quizzez" id="quizzez" onChange={(e) => quizzToSeeResultsChosen(e)}>
+				<select name="quizzez"  onChange={(e) => quizzToSeeResultsChosen(e)}>
 					<option >select a quiz</option>
 
 					{props.quizes.map((quiz)=>{
-						return(<option value={quiz.name}>{quiz.name}</option>);
+						return(<option value={quiz.name} id={quiz._id}>{quiz.name}</option>);
 					})}
 
 		  </select>
