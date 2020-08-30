@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export default function Results(props) {
 	const [studentNames, setStudentNames]=useState([]);
-	const [selQuizQuestions, setSelQuizQuestions]=useState([]);
+	const [selQuizQuestions, setSelQuizQuestions]=useState(null);
 	const [answeredQuestons, setAnsweredQuestons]=useState([]);
 	const [allResults, setAllResults]=useState(null);
 	const [quizSelected, setQuizSelected]=useState(null);
@@ -19,24 +19,26 @@ export default function Results(props) {
 	useEffect(() => {
 
 
+		if(quizSelected!==null){
+			const makeQuestions=()=>{
+				let selectedQuizQuestions= [];
+				selectedQuizQuestions = quizSelected.questions_id.map((selId)=>{
 
-		const makeQuestions=()=>{
-			let newQuizQuestions = [];
-			selectedQuizQuestions = quizSelected.questions_id.map((selId)=>{
+					let found = (props.questions.find((question)=>question._id==selId));
+					selectedQuizQuestions.push(found);
+					setSelQuizQuestions(selectedQuizQuestions);
+				}
+				);
 
-				let found = (props.questions.find((question)=>question._id==selId));
-				newQuizQuestions.push(found);
-				setSelQuizQuestions(newQuizQuestions);
-			}
-			);
+			};
+			makeQuestions();
+		}
 
-		};
-		makeQuestions();
 	},[quizSelected]);
 
 	const quizzToSeeResultsChosen=(e)=>{
-		console.log(e.target.id);
-		const selectedQuiz=props.quizes.find((quiz)=>(quiz._id=event.target.id));
+		console.log(e.target.value);
+		const selectedQuiz=props.quizes.find((quiz)=>(quiz._id=event.target.value));
 		setQuizSelected(selectedQuiz);
 	};
 	if(props.quizes&&allResults){
@@ -49,7 +51,7 @@ export default function Results(props) {
 					<option >select a quiz</option>
 
 					{props.quizes.map((quiz)=>{
-						return(<option value={quiz.name} id={quiz._id}>{quiz.name}</option>);
+						return(<option value={quiz._id} >{quiz.name}</option>);
 					})}
 
 		  </select>
@@ -58,8 +60,15 @@ export default function Results(props) {
 						setAnsweredQuestons([...answeredQuestons,res.question_id]);
 					}
 				})}
+				<div className='row'>
+					{selQuizQuestions?selQuizQuestions.map((question)=>{
+						return(
+							<div className='col-2'>{question.question}</div>);
+
+					}):<div></div>}</div>
 		  </div>
-		);
+		  );
+
 	} else{
 		return(<div>"no props"</div>);
 	}
