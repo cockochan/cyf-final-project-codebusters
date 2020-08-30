@@ -36,6 +36,23 @@ export default function Results(props) {
 
 	},[quizSelected]);
 
+	const makeNames=()=>{
+		let tempNames = [];
+		 allResults.map((oneAnswer)=>{
+
+			if(studentNames&&!tempNames.includes(oneAnswer.studentName)){
+				console.log(oneAnswer.studentName);
+				tempNames.push(oneAnswer.studentName);
+			}
+		});
+		setStudentNames(tempNames);
+	};
+	useEffect(() => {
+		if(allResults){
+			makeNames();
+		}
+	},[allResults]);
+
 	const quizzToSeeResultsChosen=(e)=>{
 		console.log(e.target.value);
 		const selectedQuiz=props.quizes.find((quiz)=>(quiz._id=event.target.value));
@@ -60,13 +77,24 @@ export default function Results(props) {
 						setAnsweredQuestons([...answeredQuestons,res.question_id]);
 					}
 				})}
-				<div className='row'>
-					{selQuizQuestions?selQuizQuestions.map((question)=>{
-						return(
-							<div className='col-2'>{question.question}</div>);
+				<div>
 
-					}):<div></div>}</div>
-		  </div>
+					<div className='row'>
+						{selQuizQuestions?selQuizQuestions.map((question)=>{
+							return(
+								<div className='col-2'>{question.question}</div>);
+
+						}):<div></div>}</div>
+					<div className='col-2'>
+						{studentNames&&quizSelected?studentNames.map((oneName)=>{
+							return(
+								<div>{oneName}</div>
+
+							);
+						}
+						):<div></div>}
+					</div>
+		  </div></div>
 		  );
 
 	} else{
