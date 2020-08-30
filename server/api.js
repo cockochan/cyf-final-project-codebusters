@@ -47,7 +47,7 @@ client.connect(() => {
 			tags,
 			difficulty,
 		} = req.body;
-		if (!question || !answers || correct_answers) {
+		if (!question || !answers || !correct_answers) {
 			return res.status(400).json("please try again!");
 		}
 		const questionObject = {
