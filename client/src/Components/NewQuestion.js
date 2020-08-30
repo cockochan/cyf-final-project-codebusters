@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import Questions from "../mockData/Questions.json";
+import { FormGroup } from "reactstrap";
 
 export default function NewQuestion() {
-	const [questionToSet, setQuestionToSet]=useState( {
-
-		question: null,
+	const [questionToSet, setQuestionToSet] = useState({
+		question: "",
 		description: "",
 		answers: {
-			answer_a: null,
-			answer_b: null,
-			answer_c: null,
-			answer_d: null,
-			answer_e: null,
-			answer_f: null,
-
+			answer_a: "",
+			answer_b: "",
+			answer_c: "",
+			answer_d: "",
+			answer_e: "",
+			answer_f: "",
 		},
 		multiple_correct_answers: false,
 		correct_answers: {
@@ -26,194 +24,148 @@ export default function NewQuestion() {
 			answer_f_correct: false,
 		},
 		explanation: "",
-		tip: null,
+		tip: "",
 		tags: [],
 		question_code: "",
 		difficulty: "",
 	});
-	const [md, setMd] = useState("");
-	const [cd, setCd] = useState("");
-	const textChanged = (e) => {
-		setMd(e.target.value);
-		setQuestionToSet({ ...questionToSet,
+
+	const [markdown, setMarkdown] = useState("");
+	const questionHandler = (e) => {
+		setMarkdown(e.target.value);
+		setQuestionToSet({
+			...questionToSet,
 			question: e.target.value,
-
-		},
-		);
+		});
 	};
-
-	const submitQuestion =()=>{
-		if(questionToSet.answers.answer_a.length<2){
-
-			alert("answer a should have at least 2sybols");
-		} else{
-			sendQestion();
-			alert("question submitted");
-		}
-	};
-	const sendQestion =()=>{
-
-		fetch("http://localhost:3100/api/question", { method:"POST",headers: { "Content-type": "application/json" },
-			body: JSON.stringify(questionToSet) })
+	const submitQuestion = () => {
+		fetch("http://localhost:3100/api/question", {
+			method: "POST",
+			headers: { "Content-type": "application/json" },
+			body: JSON.stringify(questionToSet),
+		})
 			.then((response) => response.json())
 			.catch((err) => console.error(err));
+		alert("question submitted");
 	};
-	const codeChanged = (e) => {
-		setCd(e.target.value);
-		setQuestionToSet({ ...questionToSet,
-			question_code: e.target.value,
-		},
-		);
+	const codeHandler = (event) => {
+		setQuestionToSet({
+			...questionToSet,
+			question_code: event.target.value,
+		});
 	};
 
-	const  answer_aChanged = (e) => {
-		setQuestionToSet({ ...questionToSet,
-			answers:{ ...questionToSet.answers,
-				answer_a:e.target.value,
+	const answerHandler = (event) => {
+		setQuestionToSet({
+			...questionToSet,
+			answers: {
+				...questionToSet.answers,
+				[event.target.name]: event.target.value,
 			},
-		},
-		);
-	};
-	const  answer_bChanged = (e) => {
-		setQuestionToSet({ ...questionToSet,
-			answers:{ ...questionToSet.answers,
-				answer_b:e.target.value,
-			},
-		},
-		);
-	};
-	const  answer_cChanged = (e) => {
-		setQuestionToSet({ ...questionToSet,
-			answers:{ ...questionToSet.answers,
-				answer_c:e.target.value,
-			},
-		},
-		);
-	};
-	const  answer_dChanged = (e) => {
-		setQuestionToSet({ ...questionToSet,
-			answers:{ ...questionToSet.answers,
-				answer_d:e.target.value,
-			},
-		},
-		);
-	};
-	const  answer_eChanged = (e) => {
-		setQuestionToSet({ ...questionToSet,
-			answers:{ ...questionToSet.answers,
-				answer_e:e.target.value,
-			},
-		},
-		);
+		});
 	};
 
-	const  answer_fChanged = (e) => {
-		setQuestionToSet({ ...questionToSet,
-			answers:{ ...questionToSet.answers,
-				answer_f:e.target.value,
-			},
-		},
-		);
-	};
-	//checkboxes for correct answers
-	const answerASwitched=(event)=>{
-		setQuestionToSet({ ...questionToSet,
-			correct_answers:{ ...questionToSet.correct_answers,
-				answer_a_correct:event.target.checked?true:false,
+	const answerCheck = (event) => {
+		setQuestionToSet({
+			...questionToSet,
+			correct_answers: {
+				...questionToSet.correct_answers,
+				[event.target.name]: event.target.checked ? true : false,
 			},
 		});
 	};
-	const answerBSwitched=(event)=>{
-		setQuestionToSet({ ...questionToSet,
-			correct_answers:{ ...questionToSet.correct_answers,
-				answer_b_correct:event.target.checked?true:false,
-			},
-		});
-	};
-	const answerCSwitched=(event)=>{
-		setQuestionToSet({ ...questionToSet,
-			correct_answers:{ ...questionToSet.correct_answers,
-				answer_c_correct:event.target.checked?true:false,
-			},
-		});
-	};
-	const answerDSwitched=(event)=>{
-		setQuestionToSet({ ...questionToSet,
-			correct_answers:{ ...questionToSet.correct_answers,
-				answer_d_correct:event.target.checked?true:false,
-			},
-		});
-	};
-	const answerESwitched=(event)=>{
-		setQuestionToSet({ ...questionToSet,
-			correct_answers:{ ...questionToSet.correct_answers,
-				answer_e_correct:event.target.checked?true:false,
-			},
-		});
-	};
-	const answerFSwitched=(event)=>{
-		setQuestionToSet({ ...questionToSet,
-			correct_answers:{ ...questionToSet.correct_answers,
-				answer_f_correct:event.target.checked?true:false,
-			},
-		});
-	};
+
 	return (
-		<div className='col-12'>
-			<div>
-
-
-				<h1>code illustration</h1>
-				<textarea onKeyUp={(e) => codeChanged(e)} />
-				<h1>question,use markdown</h1>
-				<textarea onKeyUp={(e) => textChanged(e)} />
-
-				<h1>answers</h1>
-				<input onKeyUp={(e) => answer_aChanged(e)} placeholder="answer a" />
-				<input type='checkbox' name={"answer a"} value={"a"} onChange={answerASwitched} />
-				<input onKeyUp={(e) => answer_bChanged(e)} placeholder="answer b" />
-				<input type='checkbox'name={"answer b"} value={"b"} onChange={answerBSwitched} />
-
-				<input onKeyUp={(e) => answer_cChanged(e)} placeholder="answer c" />
-				<input type='checkbox'name={"answer c"} value={"c"} onChange={answerCSwitched} />
-
-				<input onKeyUp={(e) => answer_dChanged(e)} placeholder="answer d" />
-				<input type='checkbox'name={"answer d"} value={"d"} onChange={answerDSwitched}  />
-
-				<input onKeyUp={(e) => answer_eChanged(e)} placeholder="answer e"  />
-				<input type='checkbox'name={"answer e"} value={"e"} onChange={answerESwitched} />
-				<input onKeyUp={(e) => answer_fChanged(e)} placeholder="answer f" />
-				<input type='checkbox' name={"answer f"} value={"f"} onChange={answerFSwitched}  />
-			</div>
-			<button onClick={submitQuestion}> submit question</button>
-			<ReactMarkdown className='code'source={questionToSet.question_code} />
-			<ReactMarkdown source={md} />
-
-			<div className='row'>
-				<div>{questionToSet.answers.answer_a}</div>
-				<div className='col-4'><strong>answer a is </strong>{` ${questionToSet.correct_answers.answer_a_correct}`}</div>
-			</div>
-			<div className='row'>
-				<div>{questionToSet.answers.answer_b}</div>
-				<div className='col-4'><strong>answer b is </strong>{` ${questionToSet.correct_answers.answer_b_correct}`}</div>
-			</div>
-
-			<div className='row'>
-				<div>{questionToSet.answers.answer_c}</div>
-				<div className='col-4'><strong>answer c is </strong>{` ${questionToSet.correct_answers.answer_c_correct}`}</div>
-			</div>
-
-			<div className='row'>
-				<div>{questionToSet.answers.answer_d}</div>
-				<div className='col-4'><strong>answer d</strong>{` ${questionToSet.correct_answers.answer_d_correct}`}</div>
-			</div>
-			<div className='row'>
-				<div>{questionToSet.answers.answer_e}</div>
-				<div className='col-4'><strong>answer e is </strong>{` ${questionToSet.correct_answers.answer_e_correct}`}</div>
-			</div>
-			<div className='row'>
-				<div>{questionToSet.answers.answer_f}</div>
-				<div className='col-4'><strong>answer f </strong>{` ${questionToSet.correct_answers.answer_f_correct}`}</div>
-			</div></div>
+		<div className="col-12">
+			<form className="survey-form" onSubmit={submitQuestion}>
+				<FormGroup className="question-elements">
+          Code Illustration:{" "}
+					<textarea onKeyUp={codeHandler} className="text-area" />
+          Question,use markdown:
+					<textarea onKeyUp={questionHandler} className="text-area" />
+				</FormGroup>
+				<FormGroup className="form-element">
+					<input
+						type="text"
+						onKeyUp={answerHandler}
+						placeholder="answer a"
+						name="answer_a"
+					/>
+					<input
+						type="checkbox"
+						name={"answer_a_correct"}
+						onChange={answerCheck}
+					/>
+				</FormGroup>
+				<FormGroup className="form-element">
+					<input
+						type="text"
+						onKeyUp={answerHandler}
+						placeholder="answer b"
+						name="answer_b"
+					/>
+					<input
+						type="checkbox"
+						name={"answer_b_correct"}
+						onChange={answerCheck}
+					/>
+				</FormGroup>
+				<FormGroup className="form-element">
+					<input
+						type="text"
+						onKeyUp={answerHandler}
+						placeholder="answer c"
+						name="answer_c"
+					/>
+					<input
+						type="checkbox"
+						name={"answer_c_correct"}
+						onChange={answerCheck}
+					/>
+				</FormGroup>
+				<FormGroup className="form-element">
+					<input
+						type="text"
+						onKeyUp={answerHandler}
+						placeholder="answer d"
+						name="answer_d"
+					/>
+					<input
+						type="checkbox"
+						name={"answer_d_correct"}
+						onChange={answerCheck}
+					/>
+				</FormGroup>
+				<FormGroup className="form-element">
+					<input
+						type="text"
+						onKeyUp={answerHandler}
+						placeholder="answer e"
+						name="answer_e"
+					/>
+					<input
+						type="checkbox"
+						name={"answer_e_correct"}
+						onChange={answerCheck}
+					/>
+				</FormGroup>
+				<FormGroup className="form-element">
+					<input
+						type="text"
+						onKeyUp={answerHandler}
+						placeholder="answer f"
+						name="answer_f"
+					/>
+					<input
+						type="checkbox"
+						name={"answer_f_correct"}
+						onChange={answerCheck}
+					/>
+				</FormGroup>
+				<button> submit question</button>
+			</form>
+			<ReactMarkdown className="code" source={questionToSet.question_code} />
+			<ReactMarkdown source={markdown} />
+		</div>
 	);
 }
