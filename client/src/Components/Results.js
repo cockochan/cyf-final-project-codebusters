@@ -64,7 +64,7 @@ export default function Results(props) {
 
 				<h1>Welcome to QuizzTime</h1>
 
-				<select name="quizzez"  onChange={(e) => quizzToSeeResultsChosen(e)}>
+				<select name="quizzez"  onChange={quizzToSeeResultsChosen}>
 					<option >select a quiz</option>
 
 					{props.quizes.map((quiz)=>{
@@ -72,6 +72,7 @@ export default function Results(props) {
 					})}
 
 		  </select>
+		  <table></table>
 		  {allResults.map((res)=>{
 					if(!answeredQuestons.find((answeredQuestion)=>res.question_id=answeredQuestion)) {
 						setAnsweredQuestons([...answeredQuestons,res.question_id]);
