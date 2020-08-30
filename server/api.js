@@ -1,13 +1,14 @@
 import { Router } from "express";
 import mongodb from "mongodb";
 import { getClient } from "./db";
-const cors = require("cors");
 
+const cors = require("cors");
 const router = new Router();
+
 router.use(cors());
+const client = getClient();
 
 router.get("/", (_, res, next) => {
-	const client = getClient();
 	client.connect((err) => {
 		if (err) {
 			return next(err);
@@ -17,9 +18,8 @@ router.get("/", (_, res, next) => {
 	});
 });
 
-router.get("/questions", (req, res) => {
-	const client = getClient();
-	client.connect(() => {
+client.connect(() => {
+	router.get("/questions", (req, res) => {
 		const db = client.db("quiz");
 		const collection = db.collection("questions");
 
@@ -31,45 +31,70 @@ router.get("/questions", (req, res) => {
 			}
 		});
 	});
-});
 
-router.post("/question", (req, res) => {
-	const client = getClient();
-	client.connect(() => {
+	router.post("/question", (req, res) => {
 		const db = client.db("quiz");
 		const collection = db.collection("questions");
-		const question = req.body;
+		const {
+			question,
+			question_code,
+			description,
+			answers,
+			multiple_correct_answers,
+			correct_answers,
+			explanation,
+			tip,
+			tags,
+			difficulty,
+		} = req.body;
+		if (!question || !answers || !correct_answers) {
+			return res.status(400).json("please try again!");
+		}
+		const questionObject = {
+			question: question,
+			question_code: question_code,
+			description: description,
+			answers: answers,
+			multiple_correct_answers: multiple_correct_answers,
+			correct_answers: correct_answers,
+			explanation: explanation,
+			tip: tip,
+			tags: tags,
+			difficulty: difficulty,
+		};
 
-		collection.insertOne(question, (err, question) => {
+		collection.insertOne(questionObject, (err, question) => {
 			if (err) {
 				res.status(500).send(err);
 			} else {
-				res.status(200).send(question);
+				res.status(200).json(question.ops[0]);
 			}
 		});
 	});
-});
 
-router.post("/quiz", (req, res) => {
-	const client = getClient();
-	client.connect(() => {
+	router.post("/quiz", (req, res) => {
 		const db = client.db("quiz");
 		const collection = db.collection("quizzes");
-		const question = req.body;
+		const { name, questions_id, publishingDate } = req.body;
+		const quizObject = {
+			name: name,
+			questions_id,
+			publishingDate: publishingDate,
+		};
+		if (!name || questions_id.length <= 0) {
+			return req.status(400).json("please provide the correct data!");
+		}
 
-		collection.insertOne(question, (err, quiz) => {
+		collection.insertOne(quizObject, (err, quiz) => {
 			if (err) {
 				res.status(500).send(err);
 			} else {
-				res.status(200).send(quiz);
+				res.status(200).send(quiz.ops[0]);
 			}
 		});
 	});
-});
 
-router.get("/quizzes", (req, res) => {
-	const client = getClient();
-	client.connect(() => {
+	router.get("/quizzes", (req, res) => {
 		const db = client.db("quiz");
 		const collection = db.collection("quizzes");
 
@@ -81,18 +106,15 @@ router.get("/quizzes", (req, res) => {
 			}
 		});
 	});
-});
 
-router.get("/quizzes/:id", (req, res) => {
-	const client = getClient();
-	client.connect(() => {
+	router.get("/quizzes/:id", (req, res) => {
 		const db = client.db("quiz");
 		const collection = db.collection("quizzes");
 		const quizId = req.params.id;
-		if(!mongodb.ObjectID.isValid(quizId)){
+		if (!mongodb.ObjectID.isValid(quizId)) {
 			return res.status(400).json("the 'id' is not correct!");
 		}
-		const id =mongodb.ObjectID(quizId);
+		const id = mongodb.ObjectID(quizId);
 
 		collection.findOne(id, (err, questions) => {
 			if (err) {
@@ -102,11 +124,8 @@ router.get("/quizzes/:id", (req, res) => {
 			}
 		});
 	});
-});
 
-router.get("/results/:id", (req, res) => {
-	const client = getClient();
-	client.connect(() => {
+	router.get("/results/:id", (req, res) => {
 		const db = client.db("quiz");
 		const collection = db.collection("results");
 		const quizId = req.params.id;
@@ -125,11 +144,8 @@ router.get("/results/:id", (req, res) => {
 			}
 		});
 	});
-});
 
-router.get("/results", (req, res) => {
-	const client = getClient();
-	client.connect(() => {
+	router.get("/results", (req, res) => {
 		const db = client.db("quiz");
 		const collection = db.collection("results");
 
@@ -141,16 +157,31 @@ router.get("/results", (req, res) => {
 			}
 		});
 	});
-});
 
-router.post("/results", (req, res) => {
-	const client = getClient();
-	client.connect(() => {
+	router.post("/results", (req, res) => {
+		const {
+			question_id,
+			correct,
+			value,
+			quiz_id,
+			timestamp,
+			studentName,
+		} = req.body;
+		if (!studentName || !value) {
+			return req.status(400).json("please provide the correct data!");
+		}
 		const db = client.db("quiz");
 		const collection = db.collection("results");
-		const question = req.body;
+		const resultObject = {
+			question_id: question_id,
+			correct: correct,
+			value: value,
+			quiz_id: quiz_id,
+			timestamp: timestamp,
+			studentName: studentName,
+		};
 
-		collection.insertOne(question, (err, result) => {
+		collection.insertOne(resultObject, (err, result) => {
 			if (err) {
 				res.status(500).send(err);
 			} else {
@@ -158,11 +189,8 @@ router.post("/results", (req, res) => {
 			}
 		});
 	});
-});
 
-router.get("/question/:id", (req, res) => {
-	const client = getClient();
-	client.connect(() => {
+	router.get("/question/:id", (req, res) => {
 		const db = client.db("quiz");
 		const collection = db.collection("questions");
 		const questionId = req.params.id;
@@ -170,7 +198,7 @@ router.get("/question/:id", (req, res) => {
 			return res.status(400).json("the ID is not valid");
 		}
 		const id = mongodb.ObjectID(questionId);
-		collection.findOne(id, (err, question) => {
+		collection.findOne({ _id: id }, (err, question) => {
 			if (err) {
 				res.status(500).send(err);
 			} else {
