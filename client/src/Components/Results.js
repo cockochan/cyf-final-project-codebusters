@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export default function Results(props) {
 	const [studentNames, setStudentNames]=useState([]);
-	const [selQuizQuestions, setSelQuizQuestions]=useState(null);
+	const [selQuizQuestions, setSelQuizQuestions]=useState([]);
 	const [answeredQuestons, setAnsweredQuestons]=useState([]);
 	const [allResults, setAllResults]=useState(null);
 	const [quizSelected, setQuizSelected]=useState(null);
@@ -57,6 +57,13 @@ export default function Results(props) {
 		console.log(e.target.value);
 		const selectedQuiz=props.quizes.find((quiz)=>(quiz._id=event.target.value));
 		setQuizSelected(selectedQuiz);
+		setSelQuizQuestions([]);
+		setAnsweredQuestons([]);
+		setQuizSelected(selectedQuiz);
+		if(quizSelected){
+			makeQuestions();
+		}
+
 	};
 	if(props.quizes&&allResults){
 		return (
@@ -75,26 +82,26 @@ export default function Results(props) {
 		  <table></table>
 		  {allResults.map((res)=>{
 					if(!answeredQuestons.find((answeredQuestion)=>res.question_id=answeredQuestion)) {
-						setAnsweredQuestons([...answeredQuestons,res.question_id]);
+						setAnsweredQuestons([...answeredQuestons,res]);
 					}
 				})}
 				<div>
+					<table>
+						<thead>
 
-					<div className='row'>
-						{selQuizQuestions?selQuizQuestions.map((question)=>{
-							return(
-								<div className='col-2'>{question.question}</div>);
+							<tr>{selQuizQuestions?selQuizQuestions.map((question)=>{
+								return(<th className='col-2'><p>{question.question}</p></th>);
+							}):<tr></tr>}</tr>
+							{studentNames&&quizSelected?studentNames.map((oneName)=>{
+								return(
+									<tr>{oneName}</tr>
 
-						}):<div></div>}</div>
-					<div className='col-2'>
-						{studentNames&&quizSelected?studentNames.map((oneName)=>{
-							return(
-								<div>{oneName}</div>
+								);
+							}
+							):<tr></tr>}
+						</thead>
 
-							);
-						}
-						):<div></div>}
-					</div>
+					</table>
 		  </div></div>
 		  );
 
