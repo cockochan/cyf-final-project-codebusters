@@ -39,6 +39,11 @@ export function App() {
 							</Link>
 						</li>
 						<li style={{ listStyleType: "none" }}>
+							<Link to="/ResultsTable" exact="true">
+                resultsTabe{" "}
+							</Link>
+						</li>
+						<li style={{ listStyleType: "none" }}>
 							<Link to="/Mentors" exact="true">
 								{" "}
                 mentor
@@ -68,7 +73,9 @@ export function App() {
 						{quizzes.length >0?<Students quizData={quizzes} />:<p>Loading...</p>}
 
 					</Route>
-
+					<Route exact path="/ResultsTabe">
+						<NewQuestion />
+					</Route>
 					<Route exact path="/NewQuestion">
 						<NewQuestion />
 					</Route>

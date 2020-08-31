@@ -81,10 +81,12 @@ export default function Results(props) {
 					})}
 
 		  </select>
-		  <table></table>
-		  {allResults.map((res)=>{
-					if(!answeredQuestons.find((answeredQuestion)=>res.question_id=answeredQuestion)) {
-						setAnsweredQuestons([...answeredQuestons,res]);
+
+		  {selQuizQuestions.map((res)=>{
+			  let tempAnsweredQuestion =[];
+					if(allResults.find((question)=>res.question_id==question.question_id)) {
+						tempAnsweredQuestion.push(question);
+						setAnsweredQuestons(tempAnsweredQuestion);
 					}
 				})}
 				<div>
@@ -99,12 +101,12 @@ export default function Results(props) {
 								console.log({ oneName });
 								const findQuestionResult=(actualQuestionId)=>{
 									const  studentsAttemptsOnQuestion=thisStudentRowResults.filter((res)=>{
-										console.log({ res,actualQuestionId });
-										return (res.question_id._id==actualQuestionId);
+										console.log({ res,actualQuestionId,studentsAttemptsOnQuestion });
+										return (res.question_id===actualQuestionId);
 									});
-									console.log({ studentsAttemptsOnQuestion });
+									console.log({ thisStudentRowResults, studentsAttemptsOnQuestion });
 
-									if(studentsAttemptsOnQuestion[0]&&studentsAttemptsOnQuestion[0].correct){
+									if(studentsAttemptsOnQuestion&&studentsAttemptsOnQuestion.correct){
 
 
 										return("corect");
@@ -115,9 +117,9 @@ export default function Results(props) {
 								return(
 
 									<tr><td>{oneName}</td>{selQuizQuestions?selQuizQuestions.map((question)=>{
-										const resultat = findQuestionResult(question._id);
+										// const resultat = findQuestionResult(question._id);
 
-										return(<th className={resultat}>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
+										return(<th className={findQuestionResult(question._id)}>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
 									}):null}</tr>
 
 								);

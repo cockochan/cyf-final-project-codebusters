@@ -50,3 +50,9 @@ table, th, td {
     background-color: darkslategrey;
     font-family: 'Inconsolata', monospace;
 }
+.correct{
+    background-color: green;
+}
+.incorect{
+    background-color: red;
+}
