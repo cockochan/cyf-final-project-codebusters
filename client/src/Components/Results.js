@@ -9,10 +9,12 @@ export default function Results(props) {
 	const fetchResults =()=>{
 		fetch("http://localhost:3100/api/results/")
 			.then((response)=>response.json())
-			.then((data)=>setAllResults(data));
+			.then((data)=>{
+				setAllResults(data);
+				console.log({ data });
+			});
 	};
 	useEffect(() => {
-
 		fetchResults();
 	},[]);
 
@@ -25,6 +27,7 @@ export default function Results(props) {
 				selectedQuizQuestions = quizSelected.questions_id.map((selId)=>{
 
 					let found = (props.questions.find((question)=>question._id==selId));
+					console.log({ found });
 					selectedQuizQuestions.push(found);
 					setSelQuizQuestions(selectedQuizQuestions);
 				}
@@ -55,15 +58,14 @@ export default function Results(props) {
 
 	const quizzToSeeResultsChosen=(e)=>{
 		console.log(e.target.value);
-		const selectedQuiz=props.quizes.find((quiz)=>(quiz._id=event.target.value));
+
+
+
+		const selectedQuiz=props.quizes.find((quiz)=>(quiz._id==e.target.value));
+		console.log(selectedQuiz);
 		setQuizSelected(selectedQuiz);
 		setSelQuizQuestions([]);
 		setAnsweredQuestons([]);
-		setQuizSelected(selectedQuiz);
-		if(quizSelected){
-			makeQuestions();
-		}
-
 	};
 	if(props.quizes&&allResults){
 		return (
@@ -89,16 +91,38 @@ export default function Results(props) {
 					<table>
 						<thead>
 
-							<tr>{selQuizQuestions?selQuizQuestions.map((question)=>{
-								return(<th className='col-2'><p>{question.question}</p></th>);
+							<tr><td></td>{selQuizQuestions?selQuizQuestions.map((question)=>{
+								return(<th className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
 							}):<tr></tr>}</tr>
-							{studentNames&&quizSelected?studentNames.map((oneName)=>{
+							{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName)=>{
+								const thisStudentRowResults=allResults.filter((answer)=>(answer.studentName==oneName));
+								console.log({ oneName });
+								const findQuestionResult=(actualQuestionId)=>{
+									const  studentsAttemptsOnQuestion=thisStudentRowResults.filter((res)=>{
+										console.log({ res,actualQuestionId });
+										return (res.question_id._id==actualQuestionId);
+									});
+									console.log({ studentsAttemptsOnQuestion });
+
+									if(studentsAttemptsOnQuestion[0]&&studentsAttemptsOnQuestion[0].correct){
+
+
+										return("corect");
+
+									}
+									return("incorect");
+								};
 								return(
-									<tr>{oneName}</tr>
+
+									<tr><td>{oneName}</td>{selQuizQuestions?selQuizQuestions.map((question)=>{
+										const resultat = findQuestionResult(question._id);
+
+										return(<th className={resultat}>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
+									}):null}</tr>
 
 								);
 							}
-							):<tr></tr>}
+							):null}
 						</thead>
 
 					</table>
