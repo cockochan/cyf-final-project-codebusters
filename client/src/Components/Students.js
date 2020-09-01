@@ -7,13 +7,13 @@ const Students = (props) => {
 	const [optionState, setOptionState] = useState("");
 	const [quizId, setQuizId] = useState("");
 	const [textMessage, setTextMessage] = useState("");
-	const [fetchedData, setFetchedData] = useState([]);
-	const [isSubmit, setIsSubmit] = useState(false);
+	const [quizData, setQuizData] = useState([]);
+	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	useEffect(() => {
 		fetch(`http://localhost:3100/api/${route}`)
 			.then((res) => res.json())
-			.then((data) => setFetchedData(data))
+			.then((data) => setQuizData(data))
 			.catch((err) => console.error(err));
 	}, [route]);
 
@@ -25,8 +25,14 @@ const Students = (props) => {
 
 	return (
 		<div className="survey-page">
-			{isSubmit?<Message setIsSubmit={setIsSubmit} textMessage={textMessage} />:null}
-			<select onChange={selectHandler} className="form-element" value={optionState}>
+			{isSubmitted ? (
+				<Message setIsSubmitted={setIsSubmitted} textMessage={textMessage} />
+			) : null}
+			<select
+				onChange={selectHandler}
+				className="form-element"
+				value={optionState}
+			>
 				<option>Select a quiz</option>
 				{props.quizData.map((quiz) => {
 					return (
@@ -36,11 +42,11 @@ const Students = (props) => {
 					);
 				})}
 			</select>
-			{fetchedData.questions_id ? (
+			{quizData.questions_id ? (
 				<Questions
-					fetchedData={fetchedData}
+					quizData={quizData}
 					quizId={quizId}
-					setIsSubmit={setIsSubmit}
+					setIsSubmitted={setIsSubmitted}
 					setTextMessage={setTextMessage}
 					setRoute={setRoute}
 					setOptionState={setOptionState}

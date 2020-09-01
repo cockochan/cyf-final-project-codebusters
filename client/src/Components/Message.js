@@ -5,8 +5,11 @@ const Message = (props) => {
 		<div className="message-container">
 			<h3>{props.textMessage} </h3>
 			<div className="close-container">
-				<span className="close-message" onClick={() => props.setIsSubmit(false)}>
-                    OK
+				<span
+					className="close-message"
+					onClick={() => props.setIsSubmitted(false)}
+				>
+          OK
 				</span>
 			</div>
 		</div>

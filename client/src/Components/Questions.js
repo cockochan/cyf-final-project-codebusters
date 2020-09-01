@@ -5,34 +5,31 @@ import dayjs from "dayjs";
 const Questions = (props) => {
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [route, setRoute] = useState("");
+	const [postData, setPostData] = useState({});
 	const [questionData, setQuestionData] = useState({});
 	const [requestOption, setRequestOption] = useState({ method: "GET" });
 	const [answer, setAnswer] = useState({
-		question_id: "",
-		correct: "",
+		question_id: props.quizData.questions_id[currentQuestionIndex],
+		correct: false,
 		value: "",
 		quiz_id: props.quizId,
-		timestamp: "",
+		timestamp: dayjs().format(),
 		studentName: "",
 	});
 	useEffect(() => {
 		fetch(
-			`http://localhost:3100/api/question/${props.fetchedData.questions_id[currentQuestionIndex]}`
+			`http://localhost:3100/api/question/${props.quizData.questions_id[currentQuestionIndex]}`
 		)
 			.then((res) => res.json())
 			.then((data) => setQuestionData(data))
 			.catch((err) => console.error(err));
 		fetch(`http://localhost:3100/api/${route}`, requestOption)
 			.then((res) => res.json())
-			.then((data) => console.log(data))
+			.then((data) => setPostData(data))
 			.catch((err) => console.error(err));
-	}, [
-		props.fetchedData.questions_id[currentQuestionIndex],
-		route,
-		requestOption,
-	]);
-
+	}, [props.quizData.questions_id[currentQuestionIndex], route, requestOption]);
 	const submitHandler = (e) => {
+		setCurrentQuestionIndex(currentQuestionIndex + 1);
 		setRoute("results");
 		setRequestOption({
 			method: "POST",
@@ -41,7 +38,13 @@ const Questions = (props) => {
 		});
 		e.preventDefault();
 		e.target.reset;
-		setCurrentQuestionIndex(currentQuestionIndex + 1);
+		setAnswer({
+			...answer,
+			question_id: props.quizData.questions_id[currentQuestionIndex + 1],
+			timestamp: dayjs().format(),
+			value: "",
+			correct: false,
+		});
 	};
 
 	const submitForm = (event) => {
@@ -52,7 +55,7 @@ const Questions = (props) => {
 			body: JSON.stringify(answer),
 		});
 		event.target.reset;
-		props.setIsSubmit(true);
+		props.setIsSubmitted(true);
 		props.setTextMessage("Form submitted successfully!");
 		props.setRoute("");
 		props.setOptionState("");
@@ -61,15 +64,13 @@ const Questions = (props) => {
 	const checkHandler = (e) => {
 		setAnswer({
 			...answer,
-			question_id: questionData._id,
 			value: e.target.value,
 			correct: questionData.correct_answer === e.target.id,
-			timestamp: dayjs().format(),
 		});
 	};
 
 	if (!questionData.answers) {
-		return <p>Loading...</p>;
+		return <p>There is no question to show</p>;
 	}
 	let {
 		answer_a,
@@ -98,8 +99,12 @@ const Questions = (props) => {
 			/>
 			<FormGroup>
 				<FormGroup className="answers">
-					<p><strong>{questionData.question}</strong></p>
-					{questionData.question_code ? <p>{questionData.question_code}</p> : null}
+					<p>
+						<strong>{questionData.question}</strong>
+					</p>
+					{questionData.question_code ? (
+						<p>{questionData.question_code}</p>
+					) : null}
 				</FormGroup>
 				<FormGroup className="answers">
 					{answer_a ? (
@@ -176,7 +181,7 @@ const Questions = (props) => {
 				</FormGroup>
 				<hr style={{ margin: "40px 0" }} />
 			</FormGroup>
-			{currentQuestionIndex < props.fetchedData.questions_id.length - 1 ? (
+			{currentQuestionIndex < props.quizData.questions_id.length - 1 ? (
 				<Button className="answers">Next</Button>
 			) : (
 				<Button type="button" onClick={submitForm} className="answers">
