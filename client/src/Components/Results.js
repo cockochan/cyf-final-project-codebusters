@@ -17,8 +17,11 @@ export default function Results(props) {
 
 	};
 
-	const findQuestionResult=(actualQuestionId)=>{
-		let studentsAttemptsOnQuestion = allResults.filter((el)=>el.question_id=actualQuestionId);
+	const findQuestionResult=(actualQuestionId, oneName)=>{
+		let resultsforThisQuestion = allResults.filter((el)=>el.question_id==actualQuestionId);
+		console.log({ resultsforThisQuestion });
+
+		let studentsAttemptsOnQuestion = resultsforThisQuestion.filter((el)=>el.studentName==oneName);
 		console.log({ studentsAttemptsOnQuestion });
 
 		if(studentsAttemptsOnQuestion.length==0){
@@ -28,13 +31,14 @@ export default function Results(props) {
 			console.log({ studentsAttemptsOnQuestion });
 		}
 
-		if(studentsAttemptsOnQuestion!==undefined&&studentsAttemptsOnQuestion.correct){
+		if(studentsAttemptsOnQuestion!==undefined&&studentsAttemptsOnQuestion[0].correct){
 
 
 			return("corect");
 
+		} else{
+			return("incorect");
 		}
-		return("incorect");
 	};
 	useEffect(() => {
 
@@ -135,7 +139,7 @@ export default function Results(props) {
 									<tr><td>{oneName}</td>{selQuizQuestions?selQuizQuestions.map((question)=>{
 										// const resultat = findQuestionResult(question._id);
 
-										return(<th className={findQuestionResult(question._id)}>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
+										return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
 									}):null}</tr>
 
 								);
