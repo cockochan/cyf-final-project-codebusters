@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 const Questions = (props) => {
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [route, setRoute] = useState("");
-	const [fetchData, setFetchData] = useState([]);
+	const [questionData, setQuestionData] = useState({});
 	const [requestOption, setRequestOption] = useState({ method: "GET" });
 	const [answer, setAnswer] = useState({
 		question_id: "",
@@ -20,7 +20,7 @@ const Questions = (props) => {
 			`http://localhost:3100/api/question/${props.fetchedData.questions_id[currentQuestionIndex]}`
 		)
 			.then((res) => res.json())
-			.then((data) => setFetchData(data))
+			.then((data) => setQuestionData(data))
 			.catch((err) => console.error(err));
 		fetch(`http://localhost:3100/api/${route}`, requestOption)
 			.then((res) => res.json())
@@ -54,19 +54,21 @@ const Questions = (props) => {
 		event.target.reset;
 		props.setIsSubmit(true);
 		props.setTextMessage("Form submitted successfully!");
+		props.setRoute("");
+		props.setOptionState("");
 	};
 
 	const checkHandler = (e) => {
 		setAnswer({
 			...answer,
-			question_id: fetchData._id,
+			question_id: questionData._id,
 			value: e.target.value,
-			correct: fetchData.correct_answer === e.target.id,
+			correct: questionData.correct_answer === e.target.id,
 			timestamp: dayjs().format(),
 		});
 	};
 
-	if (!fetchData.answers) {
+	if (!questionData.answers) {
 		return <p>Loading...</p>;
 	}
 	let {
@@ -76,7 +78,7 @@ const Questions = (props) => {
 		answer_d,
 		answer_e,
 		answer_f,
-	} = fetchData.answers;
+	} = questionData.answers;
 	const changeHandler = (e) => {
 		setAnswer({
 			...answer,
@@ -92,11 +94,12 @@ const Questions = (props) => {
 				onChange={changeHandler}
 				className="answers"
 				required
+				autoFocus
 			/>
 			<FormGroup>
 				<FormGroup className="answers">
-					<p><strong>{fetchData.question}</strong></p>
-					{fetchData.question_code ? <p>{fetchData.question_code}</p> : null}
+					<p><strong>{questionData.question}</strong></p>
+					{questionData.question_code ? <p>{questionData.question_code}</p> : null}
 				</FormGroup>
 				<FormGroup className="answers">
 					{answer_a ? (

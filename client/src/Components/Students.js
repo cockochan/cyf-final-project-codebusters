@@ -4,8 +4,8 @@ import Message from "./Message.js";
 
 const Students = (props) => {
 	const [route, setRoute] = useState("");
+	const [optionState, setOptionState] = useState("");
 	const [quizId, setQuizId] = useState("");
-	const [quizName, setQuizName] = useState("");
 	const [textMessage, setTextMessage] = useState("");
 	const [fetchedData, setFetchedData] = useState([]);
 	const [isSubmit, setIsSubmit] = useState(false);
@@ -20,13 +20,13 @@ const Students = (props) => {
 	const selectHandler = (event) => {
 		setRoute(`quizzes/${event.target.value}`);
 		setQuizId(event.target.value);
-		setQuizName(event.target);
+		setOptionState(event.target.value);
 	};
 
 	return (
 		<div className="survey-page">
 			{isSubmit?<Message setIsSubmit={setIsSubmit} textMessage={textMessage} />:null}
-			<select onChange={selectHandler} className="form-element">
+			<select onChange={selectHandler} className="form-element" value={optionState}>
 				<option>Select a quiz</option>
 				{props.quizData.map((quiz) => {
 					return (
@@ -40,9 +40,10 @@ const Students = (props) => {
 				<Questions
 					fetchedData={fetchedData}
 					quizId={quizId}
-					quizName={quizName}
 					setIsSubmit={setIsSubmit}
 					setTextMessage={setTextMessage}
+					setRoute={setRoute}
+					setOptionState={setOptionState}
 				/>
 			) : null}
 		</div>
