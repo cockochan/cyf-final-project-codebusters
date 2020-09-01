@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Questions from "./Questions";
+import Message from "./Message.js";
 
 const Students = (props) => {
 	const [route, setRoute] = useState("");
 	const [quizId, setQuizId] = useState("");
 	const [quizName, setQuizName] = useState("");
+	const [textMessage, setTextMessage] = useState("");
 	const [fetchedData, setFetchedData] = useState([]);
+	const [isSubmit, setIsSubmit] = useState(false);
 
 	useEffect(() => {
 		fetch(`http://localhost:3100/api/${route}`)
@@ -22,6 +25,7 @@ const Students = (props) => {
 
 	return (
 		<div className="survey-page">
+			{isSubmit?<Message setIsSubmit={setIsSubmit} textMessage={textMessage} />:null}
 			<select onChange={selectHandler} className="form-element">
 				<option>Select a quiz</option>
 				{props.quizData.map((quiz) => {
@@ -37,6 +41,8 @@ const Students = (props) => {
 					fetchedData={fetchedData}
 					quizId={quizId}
 					quizName={quizName}
+					setIsSubmit={setIsSubmit}
+					setTextMessage={setTextMessage}
 				/>
 			) : null}
 		</div>

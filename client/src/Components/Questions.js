@@ -52,10 +52,8 @@ const Questions = (props) => {
 			body: JSON.stringify(answer),
 		});
 		event.target.reset;
-
-		if (currentQuestionIndex >= props.fetchedData.questions_id.length - 1) {
-			alert("You submited the form successfully!");
-		}
+		props.setIsSubmit(true);
+		props.setTextMessage("Form submitted successfully!");
 	};
 
 	const checkHandler = (e) => {
@@ -97,7 +95,7 @@ const Questions = (props) => {
 			/>
 			<FormGroup>
 				<FormGroup className="answers">
-					<p>{fetchData.question}</p>
+					<p><strong>{fetchData.question}</strong></p>
 					{fetchData.question_code ? <p>{fetchData.question_code}</p> : null}
 				</FormGroup>
 				<FormGroup className="answers">
