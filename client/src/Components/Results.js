@@ -14,9 +14,30 @@ export default function Results(props) {
 				setAllResults(data);
 				console.log({ data });
 			});
+
+	};
+
+	const findQuestionResult=(actualQuestionId)=>{
+		let studentsAttemptsOnQuestion = allResults.filter((el)=>el.question_id=actualQuestionId);
+		console.log({ studentsAttemptsOnQuestion });
+
+		if(studentsAttemptsOnQuestion.length==0){
+			return("unknown");
+		}
+		if(studentsAttemptsOnQuestion.length>0){
+			console.log({ studentsAttemptsOnQuestion });
+		}
+
+		if(studentsAttemptsOnQuestion!==undefined&&studentsAttemptsOnQuestion.correct){
+
+
+			return("corect");
+
+		}
+		return("incorect");
 	};
 	useEffect(() => {
-		console.log({ quizRoute, allResults });
+
 		fetchResults();
 	},[quizRoute]);
 
@@ -107,26 +128,8 @@ export default function Results(props) {
 							}):<tr></tr>}</tr>
 							{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName)=>{
 								// const thisStudentRowResults=allResults.filter((answer)=>(answer.studentName==oneName));
+								// let  studentsAttemptsOnQuestion;
 
-								const findQuestionResult=(actualQuestionId)=>{
-									const  studentsAttemptsOnQuestion=allResults.filter((res)=>{
-										console.log({ actualQuestionId,res, oneName,studentsAttemptsOnQuestion });
-										res.question_id===actualQuestionId&&res.studentName==oneName;
-									});
-
-									if(studentsAttemptsOnQuestion!==undefined){
-										console.log({ studentsAttemptsOnQuestion });
-									}
-
-
-									if(studentsAttemptsOnQuestion!==undefined&&studentsAttemptsOnQuestion.correct){
-
-
-										return("corect");
-
-									}
-									return("incorect");
-								};
 								return(
 
 									<tr><td>{oneName}</td>{selQuizQuestions?selQuizQuestions.map((question)=>{

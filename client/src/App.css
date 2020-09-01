@@ -56,3 +56,6 @@ table, th, td {
 .incorect{
     background-color: red;
 }
+.unknown{
+    background-color: blue;
+}
