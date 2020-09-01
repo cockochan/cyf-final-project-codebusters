@@ -3,11 +3,12 @@ import React, { useState, useEffect } from "react";
 export default function Results(props) {
 	const [studentNames, setStudentNames]=useState([]);
 	const [selQuizQuestions, setSelQuizQuestions]=useState([]);
-	const [answeredQuestons, setAnsweredQuestons]=useState([]);
+	// const [answeredQuestons, setAnsweredQuestons]=useState([]);
+	const [quizRoute,setQuizRoute]=useState("");
 	const [allResults, setAllResults]=useState(null);
 	const [quizSelected, setQuizSelected]=useState(null);
 	const fetchResults =()=>{
-		fetch("http://localhost:3100/api/results/")
+		fetch(`http://localhost:3100/api/results/${quizRoute}`)
 			.then((response)=>response.json())
 			.then((data)=>{
 				setAllResults(data);
@@ -15,8 +16,9 @@ export default function Results(props) {
 			});
 	};
 	useEffect(() => {
+		console.log({ quizRoute, allResults });
 		fetchResults();
-	},[]);
+	},[quizRoute]);
 
 	useEffect(() => {
 
@@ -41,14 +43,16 @@ export default function Results(props) {
 
 	const makeNames=()=>{
 		let tempNames = [];
-		 allResults.map((oneAnswer)=>{
+		 if(allResults){
+			allResults.map((oneAnswer)=>{
 
-			if(studentNames&&!tempNames.includes(oneAnswer.studentName)){
-				console.log(oneAnswer.studentName);
-				tempNames.push(oneAnswer.studentName);
-			}
-		});
-		setStudentNames(tempNames);
+				if(studentNames&&!tempNames.includes(oneAnswer.studentName)){
+					console.log(oneAnswer.studentName);
+					tempNames.push(oneAnswer.studentName);
+				}
+			});
+			setStudentNames(tempNames);
+		}
 	};
 	useEffect(() => {
 		if(allResults){
@@ -59,13 +63,13 @@ export default function Results(props) {
 	const quizzToSeeResultsChosen=(e)=>{
 		console.log(e.target.value);
 
-
+		setQuizRoute(e.target.value);
 
 		const selectedQuiz=props.quizes.find((quiz)=>(quiz._id==e.target.value));
-		console.log(selectedQuiz);
+
 		setQuizSelected(selectedQuiz);
 		setSelQuizQuestions([]);
-		setAnsweredQuestons([]);
+
 	};
 	if(props.quizes&&allResults){
 		return (
@@ -82,13 +86,18 @@ export default function Results(props) {
 
 		  </select>
 
-		  {selQuizQuestions.map((res)=>{
+		  {/* {selQuizQuestions.map((res)=>{
 			  let tempAnsweredQuestion =[];
-					if(allResults.find((question)=>res.question_id==question.question_id)) {
-						tempAnsweredQuestion.push(question);
+
+					const foundResult = allResults.find((question)=>res.question_id==question.question_id);
+					if(foundResult!==undefined){
+						tempAnsweredQuestion.push(foundResult);
 						setAnsweredQuestons(tempAnsweredQuestion);
-					}
-				})}
+					} */}
+
+				{/* } */}
+
+				{/* )} */}
 				<div>
 					<table>
 						<thead>
@@ -97,16 +106,20 @@ export default function Results(props) {
 								return(<th className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
 							}):<tr></tr>}</tr>
 							{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName)=>{
-								const thisStudentRowResults=allResults.filter((answer)=>(answer.studentName==oneName));
-								console.log({ oneName });
-								const findQuestionResult=(actualQuestionId)=>{
-									const  studentsAttemptsOnQuestion=thisStudentRowResults.filter((res)=>{
-										console.log({ res,actualQuestionId,studentsAttemptsOnQuestion });
-										return (res.question_id===actualQuestionId);
-									});
-									console.log({ thisStudentRowResults, studentsAttemptsOnQuestion });
+								// const thisStudentRowResults=allResults.filter((answer)=>(answer.studentName==oneName));
 
-									if(studentsAttemptsOnQuestion&&studentsAttemptsOnQuestion.correct){
+								const findQuestionResult=(actualQuestionId)=>{
+									const  studentsAttemptsOnQuestion=allResults.filter((res)=>{
+										console.log({ actualQuestionId,res, oneName,studentsAttemptsOnQuestion });
+										res.question_id===actualQuestionId&&res.studentName==oneName;
+									});
+
+									if(studentsAttemptsOnQuestion!==undefined){
+										console.log({ studentsAttemptsOnQuestion });
+									}
+
+
+									if(studentsAttemptsOnQuestion!==undefined&&studentsAttemptsOnQuestion.correct){
 
 
 										return("corect");
