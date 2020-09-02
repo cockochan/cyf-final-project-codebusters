@@ -41,7 +41,7 @@ table, th, td {
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
-
+}
 .answer {
   padding: 0.2em;
 }
