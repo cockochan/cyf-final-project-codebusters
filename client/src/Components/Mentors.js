@@ -4,7 +4,7 @@ import "../App.css";
 import "../grid.css";
 
 export default function Mentors(props) {
-	const [newQuizzQuestions, setNewQuizzQuestions] = useState([]);
+	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
@@ -13,11 +13,11 @@ export default function Mentors(props) {
 
 	useEffect(() => {
 		const makeQuestions = () => {
-			let newQuizQuestions = [];
-			newQuizQuestions = newQuiz.questions_id.map((selId) => {
-				let found = props.questions.find((question) => question._id == selId);
-				newQuizQuestions.push(found);
-				setNewQuizzQuestions(newQuizQuestions);
+			let selectedQuestions = [];
+			selectedQuestions = newQuiz.questions_id.map((selectedId) => {
+				let found = props.questions.find((question) => question._id === selectedId);
+				selectedQuestions.push(found);
+				setNewQuizQuestions(selectedQuestions);
 			});
 		};
 		makeQuestions();
@@ -33,7 +33,7 @@ export default function Mentors(props) {
 	const submitQuiz = () => {
 		if (newQuiz.name.length < 8) {
 			alert("Quiz name should have at least 8 sybols");
-		} else if (newQuizzQuestions.length < 5) {
+		} else if (newQuizQuestions.length < 5) {
 			alert("Quizz  should have at least 5 questions");
 		} else {
 			sendQuiz();
@@ -65,8 +65,8 @@ export default function Mentors(props) {
 			...newQuiz,
 			questions_id: filteredQustionIds,
 		});
-		setNewQuizzQuestions(
-			newQuizzQuestions.filter((question) => question._id != event.target.value)
+		setNewQuizQuestions(
+			newQuizQuestions.filter((question) => question._id !== event.target.value)
 		);
 	};
 	if (props.questions) {
@@ -104,7 +104,7 @@ export default function Mentors(props) {
 						onKeyUp={newQuizName}
 						placeholder={"Enter quiz name"}
 					/>
-					{newQuizzQuestions.map((question) => (
+					{newQuizQuestions.map((question) => (
 						<div className="col-12 card" key={question.question}>
 							<button
 								key={question._id + question.question}
