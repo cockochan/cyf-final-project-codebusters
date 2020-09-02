@@ -40,6 +40,26 @@ export default function Results(props) {
 			return("incorect");
 		}
 	};
+	const findStudenAnswerResult=(actualQuestionId, oneName)=>{
+		let studentAnsweredId = allResults.filter((el)=>el.question_id==actualQuestionId);
+
+
+		let studentAnsweredQuestion = studentAnsweredId.filter((el)=>el.studentName==oneName);
+
+		if(studentAnsweredQuestion.length==0){
+			return("unknown");
+		}
+		if(studentAnsweredQuestion.length>0){
+
+		}
+
+		if(studentAnsweredQuestion!==undefined&&studentAnsweredQuestion[0]){
+
+
+			return(studentAnsweredQuestion[0].value);
+
+		}
+	};
 	useEffect(() => {
 
 		fetchResults();
@@ -111,18 +131,7 @@ export default function Results(props) {
 
 		  </select>
 
-		  {/* {selQuizQuestions.map((res)=>{
-			  let tempAnsweredQuestion =[];
 
-					const foundResult = allResults.find((question)=>res.question_id==question.question_id);
-					if(foundResult!==undefined){
-						tempAnsweredQuestion.push(foundResult);
-						setAnsweredQuestons(tempAnsweredQuestion);
-					} */}
-
-				{/* } */}
-
-				{/* )} */}
 				<div>
 					<table>
 						<thead>
@@ -131,15 +140,13 @@ export default function Results(props) {
 								return(<th className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
 							}):<tr></tr>}</tr>
 							{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName)=>{
-								// const thisStudentRowResults=allResults.filter((answer)=>(answer.studentName==oneName));
-								// let  studentsAttemptsOnQuestion;
 
 								return(
 
 									<tr><td>{oneName}</td>{selQuizQuestions?selQuizQuestions.map((question)=>{
 										// const resultat = findQuestionResult(question._id);
 
-										return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
+										return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)}</p>:<p>Loading question</p>}</th>);
 									}):null}</tr>
 
 								);
