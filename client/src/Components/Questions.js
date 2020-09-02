@@ -63,7 +63,7 @@ const Questions = (props) => {
 			...answer,
 			question_id: fetchData._id,
 			value: e.target.value,
-			correct: fetchData.correct_answer === e.target.name,
+			correct: fetchData.correct_answer === e.target.id,
 			timestamp: dayjs().format(),
 		});
 	};
@@ -87,96 +87,102 @@ const Questions = (props) => {
 	};
 
 	return (
-		<div style={{ margin: "10%" }}>
-			<Form onSubmit={submitHandler}>
-				<input
-					type="text"
-					placeholder="Enter your name"
-					onChange={changeHandler}
-				/>
-				<FormGroup>
-					<FormGroup>
-						<p>{fetchData.question}</p>
-						{fetchData.question_code ? <p>{fetchData.question_code}</p> : null}
-					</FormGroup>
-					<FormGroup>
-						{answer_a ? (
-							<Input
-								type="radio"
-								name="answer_a"
-								value={answer_a}
-								onClick={checkHandler}
-							/>
-						) : null}
-						{answer_a ? <Label for="answer_a">{answer_a}</Label> : null}
-					</FormGroup>
-
-					<FormGroup>
-						{answer_b ? (
-							<Input
-								type="radio"
-								name="answer_b"
-								value={answer_b}
-								onClick={checkHandler}
-							/>
-						) : null}
-						{answer_b ? <Label for="answer_b">{answer_b}</Label> : null}
-					</FormGroup>
-					<FormGroup>
-						{answer_c ? (
-							<Input
-								type="radio"
-								name="answer_c"
-								value={answer_c}
-								onClick={checkHandler}
-							/>
-						) : null}
-						{answer_c ? <Label for="answer_c">{answer_c}</Label> : null}
-					</FormGroup>
-					<FormGroup>
-						{answer_d ? (
-							<Input
-								type="radio"
-								name="answer_d"
-								value={answer_d}
-								onClick={checkHandler}
-							/>
-						) : null}
-						{answer_d ? <Label for="answer_d">{answer_d}</Label> : null}
-					</FormGroup>
-					<FormGroup>
-						{answer_e ? (
-							<Input
-								type="radio"
-								name="answer_e"
-								value={answer_e}
-								onClick={checkHandler}
-							/>
-						) : null}
-						{answer_e ? <Label for="answer_e">{answer_e}</Label> : null}
-					</FormGroup>
-					<FormGroup>
-						{answer_f ? (
-							<Input
-								type="radio"
-								name="answer_f"
-								value={answer_f}
-								onClick={checkHandler}
-							/>
-						) : null}
-						{answer_f ? <Label for="answer_f">{answer_f}</Label> : null}
-					</FormGroup>
-					<hr style={{ margin: "40px 0" }} />
+		<Form onSubmit={submitHandler} className="survey-form">
+			<input
+				type="text"
+				placeholder="Enter your name"
+				onChange={changeHandler}
+				className="answers"
+				required
+			/>
+			<FormGroup>
+				<FormGroup className="answers">
+					<p>{fetchData.question}</p>
+					{fetchData.question_code ? <p>{fetchData.question_code}</p> : null}
 				</FormGroup>
-				{currentQuestionIndex < props.fetchedData.questions_id.length - 1 ? (
-					<Button>Next</Button>
-				) : (
-					<Button type="button" onClick={submitForm}>
-            Submit
-					</Button>
-				)}
-			</Form>
-		</div>
+				<FormGroup className="answers">
+					{answer_a ? (
+						<Input
+							type="radio"
+							name="answer"
+							value={answer_a}
+							onClick={checkHandler}
+							id="answer_a"
+						/>
+					) : null}
+					{answer_a ? <Label for="answer_a">{answer_a}</Label> : null}
+				</FormGroup>
+
+				<FormGroup className="answers">
+					{answer_b ? (
+						<Input
+							type="radio"
+							name="answer"
+							value={answer_b}
+							onClick={checkHandler}
+							id="answer_b"
+						/>
+					) : null}
+					{answer_b ? <Label for="answer_b">{answer_b}</Label> : null}
+				</FormGroup>
+				<FormGroup className="answers">
+					{answer_c ? (
+						<Input
+							type="radio"
+							name="answer"
+							value={answer_c}
+							onClick={checkHandler}
+							id="answer_c"
+						/>
+					) : null}
+					{answer_c ? <Label for="answer_c">{answer_c}</Label> : null}
+				</FormGroup>
+				<FormGroup className="answers">
+					{answer_d ? (
+						<Input
+							type="radio"
+							name="answer"
+							value={answer_d}
+							onClick={checkHandler}
+							id="answer_d"
+						/>
+					) : null}
+					{answer_d ? <Label for="answer_d">{answer_d}</Label> : null}
+				</FormGroup>
+				<FormGroup className="answers">
+					{answer_e ? (
+						<Input
+							type="radio"
+							name="answer"
+							value={answer_e}
+							onClick={checkHandler}
+							id="answer_e"
+						/>
+					) : null}
+					{answer_e ? <Label for="answer_e">{answer_e}</Label> : null}
+				</FormGroup>
+				<FormGroup className="answers">
+					{answer_f ? (
+						<Input
+							type="radio"
+							name="answer"
+							value={answer_f}
+							onClick={checkHandler}
+							id="answer_f"
+						/>
+					) : null}
+					{answer_f ? <Label for="answer_f">{answer_f}</Label> : null}
+				</FormGroup>
+				<hr style={{ margin: "40px 0" }} />
+			</FormGroup>
+			{currentQuestionIndex < props.fetchedData.questions_id.length - 1 ? (
+				<Button className="answers">Next</Button>
+			) : (
+				<Button type="button" onClick={submitForm} className="answers">
+          Submit
+				</Button>
+			)}
+		</Form>
 	);
 };
 
