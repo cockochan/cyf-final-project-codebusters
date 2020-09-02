@@ -51,11 +51,11 @@ table, th, td {
     font-family: 'Inconsolata', monospace;
 }
 .corect{
-    background-color: green;
+    background-color: #93FF8E;
 }
 .incorect{
-    background-color: red;
+    background-color: #FF75C4;
 }
 .unknown{
-    background-color: blue;
+    background-color: #A8CAFF;
 }
