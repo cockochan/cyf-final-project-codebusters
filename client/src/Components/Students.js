@@ -1,28 +1,38 @@
 import React, { useState, useEffect } from "react";
 import Questions from "./Questions";
+import Message from "./Message.js";
 
 const Students = (props) => {
 	const [route, setRoute] = useState("");
+	const [optionState, setOptionState] = useState("");
 	const [quizId, setQuizId] = useState("");
-	const [quizName, setQuizName] = useState("");
-	const [fetchedData, setFetchedData] = useState([]);
+	const [textMessage, setTextMessage] = useState("");
+	const [quizData, setQuizData] = useState([]);
+	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	useEffect(() => {
 		fetch(`http://localhost:3100/api/${route}`)
 			.then((res) => res.json())
-			.then((data) => setFetchedData(data))
+			.then((data) => setQuizData(data))
 			.catch((err) => console.error(err));
 	}, [route]);
 
 	const selectHandler = (event) => {
 		setRoute(`quizzes/${event.target.value}`);
 		setQuizId(event.target.value);
-		setQuizName(event.target);
+		setOptionState(event.target.value);
 	};
 
 	return (
 		<div className="survey-page">
-			<select onChange={selectHandler} className="form-element">
+			{isSubmitted ? (
+				<Message setIsSubmitted={setIsSubmitted} textMessage={textMessage} />
+			) : null}
+			<select
+				onChange={selectHandler}
+				className="form-element"
+				value={optionState}
+			>
 				<option>Select a quiz</option>
 				{props.quizData.map((quiz) => {
 					return (
@@ -32,11 +42,14 @@ const Students = (props) => {
 					);
 				})}
 			</select>
-			{fetchedData.questions_id ? (
+			{quizData.questions_id ? (
 				<Questions
-					fetchedData={fetchedData}
+					quizData={quizData}
 					quizId={quizId}
-					quizName={quizName}
+					setIsSubmitted={setIsSubmitted}
+					setTextMessage={setTextMessage}
+					setRoute={setRoute}
+					setOptionState={setOptionState}
 				/>
 			) : null}
 		</div>

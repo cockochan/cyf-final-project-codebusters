@@ -167,7 +167,7 @@ client.connect(() => {
 			timestamp,
 			studentName,
 		} = req.body;
-		if (!studentName || !value) {
+		if (!studentName) {
 			return req.status(400).json("please provide the correct data!");
 		}
 		const db = client.db("quiz");
