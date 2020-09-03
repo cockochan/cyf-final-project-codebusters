@@ -11,7 +11,8 @@ export default function Results(props) {
 			.then((response)=>response.json())
 			.then((data)=>{
 				setAllResults(data);
-			});
+			}
+			)	.catch((err) => console.error(err));
 	};
 
 	const findQuestionResult=(actualQuestionId, oneName)=>{
@@ -63,7 +64,7 @@ export default function Results(props) {
 	},[quizSelected]);
 	const makeNames=()=>{
 		let tempNames = [];
-		 if(allResults){
+		 if(allResults!=="not found!"){
 			allResults.map((oneAnswer)=>{
 				if(studentNames&&!tempNames.includes(oneAnswer.studentName)){
 					tempNames.push(oneAnswer.studentName);
@@ -84,19 +85,30 @@ export default function Results(props) {
 		setSelQuizQuestions([]);
 		setQuizSelected(selectedQuiz);
 	};
-
-	if(props.quizes&&allResults){
+	if(allResults=="not found!"){
+		return(
+			<div className='col-12 centered'>
+				<h1> no results for this quiz have been submitted yet</h1>
+				<div className='col-12'>
+					<h1>Welcome to QuizzTime</h1>
+					<select name="quizzez" className="quizzez"  onChange={quizzToSeeResultsChosen}>
+						<option >select a quiz</option>
+						{props.quizes.map((quiz)=>{
+							return(<option value={quiz._id} >{quiz.name}</option>);
+						})}
+		  </select>
+				</div></div>);
+	} else if(props.quizes){
 		return (
-			<div className='col-12'>
-				<h1>Welcome to QuizzTime</h1>
-				<select name="quizzez"  onChange={quizzToSeeResultsChosen}>
+			<div  className='col-12 centered'>
+				<select name="quizzez" className="quizzez" onChange={quizzToSeeResultsChosen}>
 					<option >select a quiz</option>
 					{props.quizes.map((quiz)=>{
 						return(<option value={quiz._id} >{quiz.name}</option>);
 					})}
 		  </select>
 				<div>
-					<table>
+					{allResults&&allResults!=="not found!"?<table>
 						<thead>
 							<tr><td></td>{selQuizQuestions?selQuizQuestions.map((question)=>{
 								return(<th className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
@@ -111,10 +123,11 @@ export default function Results(props) {
 							):null}
 						</thead>
 
-					</table>
+					</table>:null}
 		  </div></div>
 		  );
 	} else{
 		return(<div>"no props"</div>);
 	}
 }
+
