@@ -114,25 +114,26 @@ export default function Results(props) {
 						return(<option value={quiz._id} >{quiz.name}</option>);
 					})}
 		  </select>
-		  <div className='centered'><h2>attempt number {attemptNumber+1} </h2><p>(change to see if some students made multiple attempts)</p></div>
-				<button onClick={decreaseAttemptNumber}>decrease attempt number </button>
-				<button onClick={increaseAttemptNumber}>increase attempt number </button>
-				{quizSelected&&allResults&&allResults!=="not found!"?<table>
-					<thead>
-						<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
-							return(<th className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
-						}):<tr></tr>}</tr>
-						{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName)=>{
-							return(
-								<tr><td>{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
-									return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)}</p>:<p>Loading question</p>}</th>);
-								}):null}</tr>
-							);
-						}
-						):null}
-					</thead>
 
-				</table>:null}
+				{quizSelected&&allResults&&allResults!=="not found!"?<div><div className='centered'><h3>attempt number {attemptNumber+1} </h3><p>(change to see if some students made multiple attempts)</p></div>
+					<button onClick={decreaseAttemptNumber}>decrease attempt number </button>
+					<button onClick={increaseAttemptNumber}>increase attempt number </button><table>
+						<thead>
+							<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
+								return(<th className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
+							}):<tr></tr>}</tr>
+							{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName)=>{
+								return(
+									<tr><td>{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
+										return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)}</p>:<p>Loading question</p>}</th>);
+									}):null}</tr>
+								);
+							}
+							):null}
+						</thead>
+
+					</table>
+		  </div>:null}
 		 </div>
 		  );
 	} else{
