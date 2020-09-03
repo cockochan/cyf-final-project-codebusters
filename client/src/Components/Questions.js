@@ -4,6 +4,8 @@ import dayjs from "dayjs";
 
 const Questions = (props) => {
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+	const [isChecked, setIsChecked] = useState(false);
+	const [radioId, setRadioId] = useState("");
 	const [route, setRoute] = useState("");
 	const [postData, setPostData] = useState({});
 	const [questionData, setQuestionData] = useState({});
@@ -45,6 +47,7 @@ const Questions = (props) => {
 			value: "",
 			correct: false,
 		});
+		setIsChecked(false);
 	};
 
 	const submitForm = (event) => {
@@ -67,6 +70,8 @@ const Questions = (props) => {
 			value: e.target.value,
 			correct: questionData.correct_answer === e.target.id,
 		});
+		setIsChecked(e.target.checked);
+		setRadioId(e.target.id);
 	};
 
 	if (!questionData.answers) {
@@ -114,6 +119,7 @@ const Questions = (props) => {
 							value={answer_a}
 							onClick={checkHandler}
 							id="answer_a"
+							checked={isChecked && radioId =="answer_a" ?true:false}
 						/>
 					) : null}
 					{answer_a ? <Label for="answer_a">{answer_a}</Label> : null}
@@ -127,6 +133,7 @@ const Questions = (props) => {
 							value={answer_b}
 							onClick={checkHandler}
 							id="answer_b"
+							checked={isChecked && radioId=="answer_b" ?true:false}
 						/>
 					) : null}
 					{answer_b ? <Label for="answer_b">{answer_b}</Label> : null}
@@ -139,6 +146,7 @@ const Questions = (props) => {
 							value={answer_c}
 							onClick={checkHandler}
 							id="answer_c"
+							checked={isChecked && radioId=="answer_c" ?true:false}
 						/>
 					) : null}
 					{answer_c ? <Label for="answer_c">{answer_c}</Label> : null}
@@ -151,6 +159,7 @@ const Questions = (props) => {
 							value={answer_d}
 							onClick={checkHandler}
 							id="answer_d"
+							checked={isChecked && radioId=="answer_d" ?true:false}
 						/>
 					) : null}
 					{answer_d ? <Label for="answer_d">{answer_d}</Label> : null}
@@ -163,6 +172,7 @@ const Questions = (props) => {
 							value={answer_e}
 							onClick={checkHandler}
 							id="answer_e"
+							checked={isChecked && radioId=="answer_e" ?true:false}
 						/>
 					) : null}
 					{answer_e ? <Label for="answer_e">{answer_e}</Label> : null}
@@ -175,6 +185,7 @@ const Questions = (props) => {
 							value={answer_f}
 							onClick={checkHandler}
 							id="answer_f"
+							checked={isChecked && radioId =="answer_f" ?true:false}
 						/>
 					) : null}
 					{answer_f ? <Label for="answer_f">{answer_f}</Label> : null}
