@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 .logo {
   width: 100px;
 }
@@ -34,7 +35,14 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+table, th, td {
+    border: 1px solid black;
+  }
+.cardBlock{
+    display:flex;
 
+    flex-wrap: wrap;
+}
 .answer {
   padding: 0.2em;
 }
@@ -60,6 +68,11 @@
   display: flex;
   justify-content: space-around;
   border-bottom: 0.5px solid lightgray;
+  list-style-type: none;
+  padding: 40px 0;
+  text-decoration: none;
+  font-size: 23px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .survey-form {
@@ -70,8 +83,10 @@
   justify-content: center;
   align-items: center;
   align-self: center;
-  width: 70%;
-  margin: 20px 0;
+  width: 50%;
+  margin-left:25%;
+  margin-right:25%
+
 }
 
 .survey-page {
@@ -98,7 +113,12 @@
 }
 
 .body {
-  font-family: "Roboto", sans-serif !important;
+  margin-top: 150px;
+  font-family: 'Roboto', sans-serif;
+}
+.quizez{
+  margin:5vh;
+  font-family: "Roboto", sans-serif;
   margin-bottom: 0px;
   font-size: 16px;
   min-height: 100%;
@@ -118,6 +138,22 @@
 .text-area {
   width: 80%;
   height: 100px;
+}
+.code{
+    font-weight: 900;
+    color: turquoise;
+    padding:5px;
+    background-color: darkslategrey;
+    font-family: 'Inconsolata', monospace;
+}
+.corect{
+    background-color: #93FF8E;
+}
+.incorect{
+    background-color: #FF75C4;
+}
+.unknown{
+    background-color: #A8CAFF;
 }
 
 .link-button {
@@ -144,7 +180,7 @@
 }
 .cyf-log {
   width: 250px;
-  height: 112px;
+  height: 112px;}
 .message-container {
   position: fixed;
   width: 30%;
@@ -189,4 +225,8 @@
   cursor: pointer;
   padding: 5px;
 
+}
+.centered{
+  justify-items: center;
+  text-align: center;
 }
