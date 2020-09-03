@@ -85,7 +85,7 @@ export default function Results(props) {
 		}
 	},[allResults]);
 
-	const quizzToSeeResultsChosen=(e)=>{
+	const quizToSeeResultsChosen=(e)=>{
 		setQuizRoute(e.target.value);
 		const selectedQuiz=props.quizes.find((quiz)=>(quiz._id==e.target.value));
 		setSelectedQuizQuestions([]);
@@ -97,7 +97,7 @@ export default function Results(props) {
 				<h1> no results for this quiz have been submitted yet</h1>
 				<div className='col-12'>
 					<h1>Welcome to QuizzTime</h1>
-					<select name="quizzez" className="quizzez"  onChange={quizzToSeeResultsChosen}>
+					<select name="quizez" className="quizez"  onChange={quizToSeeResultsChosen}>
 						<option >select a quiz</option>
 						{props.quizes.map((quiz)=>{
 							return(<option value={quiz._id} >{quiz.name}</option>);
@@ -108,7 +108,7 @@ export default function Results(props) {
 		return (
 			<div  className='col-12 centered'>
 				<h1>Chosse a quizz to see student results</h1>
-				<select name="quizzez" className="quizzez" onChange={quizzToSeeResultsChosen}>
+				<select name="quizzez" className="quizzez" onChange={quizToSeeResultsChosen}>
 					<option value="" disabled selected hidden>select a quiz</option>
 					{props.quizes.map((quiz)=>{
 						return(<option value={quiz._id} >{quiz.name}</option>);
@@ -119,10 +119,10 @@ export default function Results(props) {
 					<button onClick={decreaseAttemptNumber}>decrease attempt number </button>
 					<button onClick={increaseAttemptNumber}>increase attempt number </button><table>
 						<thead>
-							<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
-								return(<th className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
+							<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question, index)=>{
+								return(<th key={index} className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
 							}):<tr></tr>}</tr>
-							{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName)=>{
+							{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName, index)=>{
 								return(
 									<tr><td>{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
 										return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)}</p>:<p>Loading question</p>}</th>);

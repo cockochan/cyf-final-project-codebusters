@@ -40,7 +40,7 @@ table, th, td {
   }
 .cardBlock{
     display:flex;
-    flex-direction: row;
+
     flex-wrap: wrap;
 }
 .answer {
@@ -116,7 +116,7 @@ table, th, td {
   margin-top: 150px;
   font-family: 'Roboto', sans-serif;
 }
-.quizzez{
+.quizez{
   margin:5vh;
   font-family: "Roboto", sans-serif;
   margin-bottom: 0px;
@@ -180,7 +180,7 @@ table, th, td {
 }
 .cyf-log {
   width: 250px;
-  height: 112px;
+  height: 112px;}
 .message-container {
   position: fixed;
   width: 30%;
