@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 .logo {
   width: 100px;
 }
@@ -35,13 +35,17 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
-table, th, td {
-    border: 1px solid black;
-  }
-.cardBlock{
-    display:flex;
 
-    flex-wrap: wrap;
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+.cardBlock {
+  display: flex;
+
+  flex-wrap: wrap;
 }
 .answer {
   padding: 0.2em;
@@ -67,12 +71,14 @@ table, th, td {
   z-index: 1;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   border-bottom: 0.5px solid lightgray;
   list-style-type: none;
   padding: 40px 0;
   text-decoration: none;
   font-size: 23px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
+  height: 125px;
 }
 
 .survey-form {
@@ -84,9 +90,8 @@ table, th, td {
   align-items: center;
   align-self: center;
   width: 50%;
-  margin-left:25%;
-  margin-right:25%
-
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 .survey-page {
@@ -114,10 +119,11 @@ table, th, td {
 
 .body {
   margin-top: 150px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
-.quizez{
-  margin:5vh;
+
+.quizez {
+  margin: 5vh;
   font-family: "Roboto", sans-serif;
   margin-bottom: 0px;
   font-size: 16px;
@@ -139,21 +145,25 @@ table, th, td {
   width: 80%;
   height: 100px;
 }
-.code{
-    font-weight: 900;
-    color: turquoise;
-    padding:5px;
-    background-color: darkslategrey;
-    font-family: 'Inconsolata', monospace;
+
+.code {
+  font-weight: 900;
+  color: turquoise;
+  padding: 5px;
+  background-color: darkslategrey;
+  font-family: "Inconsolata", monospace;
 }
-.corect{
-    background-color: #93FF8E;
+
+.corect {
+  background-color: #93ff8e;
 }
-.incorect{
-    background-color: #FF75C4;
+
+.incorect {
+  background-color: #ff75c4;
 }
-.unknown{
-    background-color: #A8CAFF;
+
+.unknown {
+  background-color: #a8caff;
 }
 
 .link-button {
@@ -168,19 +178,24 @@ table, th, td {
   width: fit-content;
   font-weight: 700;
   padding: 0 1rem;
-  font-size: 1.25rem;
+  font-size: 19px;
   line-height: 1.5;
   border-radius: 0.3rem;
   margin: 2.5%;
   text-decoration: none;
   font-family: "Roboto", sans-serif;
+  height: 45px;
 }
+
 .link-button:hover {
   background-color: #f5f6fa;
 }
+
 .cyf-log {
   width: 250px;
-  height: 112px;}
+  height: 112px;
+}
+
 .message-container {
   position: fixed;
   width: 30%;
@@ -224,9 +239,9 @@ table, th, td {
   position: absolute;
   cursor: pointer;
   padding: 5px;
-
 }
-.centered{
+
+.centered {
   justify-items: center;
   text-align: center;
 }
