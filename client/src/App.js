@@ -26,28 +26,25 @@ const App = () => {
 		<main role="main">
 			<Router>
 				<nav className="navbar">
-					<ul className="nav-element">
-						<li className="nav-links">
-							<Link to="/Students" exact="true">
-                Student
-							</Link>
-						</li>
-						<li className="nav-links">
-							<Link to="/Mentors" exact="true">
-                Mentor
-							</Link>
-						</li>
-						<li className="nav-links">
-							<Link to="/Results" exact="true">
-                Quiz rezults
-							</Link>
-						</li>
-						<li className="nav-links">
-							<Link to="/NewQuestion" exact="true">
-                New question
-							</Link>
-						</li>
-					</ul>
+					<Link to="/" exact="true">
+						<img
+							src="https://codeyourfuture.io/wp-content/uploads/2019/03/cyf_brand.png"
+							alt="cyf_brand.png"
+							className="cyf-log"
+						/>
+					</Link>
+					<Link to="/Students" exact="true" className="link-button">
+            			Student
+					</Link>
+					<Link to="/Mentors" exact="true" className="link-button">
+            			Mentor
+					</Link>
+					<Link to="/Results" exact="true" className="link-button">
+            			Quiz rezults
+					</Link>
+					<Link to="/NewQuestion" exact="true" className="link-button">
+            			New question
+					</Link>
 				</nav>
 				<div className="body">
 					<Switch>
