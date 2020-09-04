@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import "../App.css";
 import "../grid.css";
-
+import ReactMarkdown from "react-markdown";
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
 	const [newQuiz, setNewQuiz] = useState({
@@ -76,7 +76,8 @@ export default function Mentors(props) {
 					{props.questions.map((question, index) => (
 						<div className="col-6 card" key={index}>
 							<div className="quizzQuestion">
-								<strong>{question.question}</strong>
+								{question.question_code?<ReactMarkdown className="code">{question.question_code}</ReactMarkdown>:null}
+								<ReactMarkdown>{question.question}</ReactMarkdown>
 							</div>
 							<div className="answers">
 								{Object.values(question.answers).map((value, index) => {
@@ -116,7 +117,8 @@ export default function Mentors(props) {
 							>
                 x
 							</button>
-							<div>{question.question}</div>
+							<ReactMarkdown className="code">{question.question_code}</ReactMarkdown>
+							<ReactMarkdown>{question.question}</ReactMarkdown>
 							<div className="answers">
 								{Object.entries(question.answers).map(([index, value]) => {
 									return (
