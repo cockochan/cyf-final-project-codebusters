@@ -10,7 +10,7 @@ const Students = (props) => {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	useEffect(() => {
-		fetch(`http://localhost:3100/api/${route}`)
+		fetch(`/api/${route}`)
 			.then((res) => res.json())
 			.then((data) => setQuizData(data))
 			.catch((err) => console.error(err));

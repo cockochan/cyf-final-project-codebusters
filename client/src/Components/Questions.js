@@ -20,12 +20,12 @@ const Questions = (props) => {
 	});
 	useEffect(() => {
 		fetch(
-			`http://localhost:3100/api/question/${props.quizData.questions_id[currentQuestionIndex]}`
+			`/api/question/${props.quizData.questions_id[currentQuestionIndex]}`
 		)
 			.then((res) => res.json())
 			.then((data) => setQuestionData(data))
 			.catch((err) => console.error(err));
-		fetch(`http://localhost:3100/api/${route}`, requestOption)
+		fetch(`/api/${route}`, requestOption)
 			.then((res) => res.json())
 			.then((data) => setPostData(data))
 			.catch((err) => console.error(err));
