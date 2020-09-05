@@ -12,11 +12,11 @@ const App = () => {
 	const [quizzes, setQuizzes] = useState([]);
 
 	useEffect(() => {
-		fetch("http://localhost:3100/api/questions")
+		fetch("/api/questions")
 			.then((res) => res.json())
 			.then((data) => setQuestions(data))
 			.catch((err) => console.error(err));
-		fetch("http://localhost:3100/api/quizzes")
+		fetch("/api/quizzes")
 			.then((res) => res.json())
 			.then((data) => setQuizzes(data))
 			.catch((err) => console.error(err));
