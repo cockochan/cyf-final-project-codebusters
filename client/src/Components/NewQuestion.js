@@ -39,7 +39,7 @@ export default function NewQuestion() {
 		});
 	};
 	const submitQuestion = () => {
-		fetch("http://localhost:3100/api/question", {
+		fetch("/api/question", {
 			method: "POST",
 			headers: { "Content-type": "application/json" },
 			body: JSON.stringify(questionToSet),
