@@ -57,7 +57,7 @@ export default function NewQuestion() {
 	const tagHandler = (event) => {
 		setQuestionToSet({
 			...questionToSet,
-			tags: [event.target.value.split(",")],
+			tags: event.target.value.split(","),
 		});
 	};
 
