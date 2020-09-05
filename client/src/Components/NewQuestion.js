@@ -54,6 +54,12 @@ export default function NewQuestion() {
 			question_code: event.target.value,
 		});
 	};
+	const tagHandler = (event) => {
+		setQuestionToSet({
+			...questionToSet,
+			tags: event.target.value.split(","),
+		});
+	};
 
 	const answerHandler = (event) => {
 		setQuestionToSet({
@@ -85,6 +91,13 @@ export default function NewQuestion() {
 					<textarea onKeyUp={questionHandler} className="text-area" />
 				</FormGroup>
 				<FormGroup className="form-element">
+					<input
+						type="text"
+						onKeyUp={tagHandler}
+						placeholder="Tags, coma separated *required"
+						name="answer_a"
+						required
+					/>
 					<input
 						type="text"
 						onKeyUp={answerHandler}

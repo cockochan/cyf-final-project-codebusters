@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import dayjs from "dayjs";
-
+import ReactMarkdown from "react-markdown";
 const Questions = (props) => {
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [isChecked, setIsChecked] = useState(false);
@@ -104,12 +104,12 @@ const Questions = (props) => {
 			/>
 			<FormGroup>
 				<FormGroup className="answers">
-					<p>
-						<strong>{questionData.question}</strong>
-					</p>
 					{questionData.question_code ? (
-						<p>{questionData.question_code}</p>
+						<ReactMarkdown className="code">{questionData.question_code}</ReactMarkdown>
 					) : null}
+					<ReactMarkdown>{questionData.question}</ReactMarkdown>
+
+
 				</FormGroup>
 				<FormGroup className="answers">
 					{answer_a ? (

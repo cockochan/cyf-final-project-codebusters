@@ -2,15 +2,34 @@ import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import "../App.css";
 import "../grid.css";
-
+import ReactMarkdown from "react-markdown";
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
+	const [tagsCollection, setTagsCollection]=useState([]);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
 		questions_id: [],
 	});
+	const findTags=()=>{
 
+		let tempTags=[];
+		if(props.questions){
+			tempTags=props.questions.map((question)=>{
+				question.tags.map((tag)=>{
+					if(!tempTags.includes(tag.name)&&tag.name!==undefined){
+						tempTags.push(tag.name);
+					} else{
+						null;
+					}
+
+				});
+				setTagsCollection(tempTags);
+			});
+
+		}
+
+	};
 	useEffect(() => {
 		const makeQuestions = () => {
 			let selectedQuestions = [];
@@ -21,6 +40,7 @@ export default function Mentors(props) {
 			});
 		};
 		makeQuestions();
+		findTags();
 	}, [newQuiz.questions_id, props.questions]);
 
 	const addQuestion = (event) => {
@@ -47,7 +67,6 @@ export default function Mentors(props) {
 			body: JSON.stringify(newQuiz),
 		})
 			.then((response) => response.json())
-			.then((data) => console.log(data))
 			.catch((err) => console.error(err));
 	};
 	const newQuizName = (event) => {
@@ -72,11 +91,17 @@ export default function Mentors(props) {
 	if (props.questions) {
 		return (
 			<div className="row">
+				<div className='filterButtons col-6'>
+					{tagsCollection.map((tag)=>{
+						return(<button>{tag}</button>);
+					})}
+				</div>
 				<div className="col-8 cardBlock">
 					{props.questions.map((question, index) => (
 						<div className="col-6 card" key={index}>
 							<div className="quizzQuestion">
-								<strong>{question.question}</strong>
+								{question.question_code?<ReactMarkdown className="code">{question.question_code}</ReactMarkdown>:null}
+								<ReactMarkdown className='centered'>{question.question}</ReactMarkdown>
 							</div>
 							<div className="answers">
 								{Object.values(question.answers).map((value, index) => {
@@ -87,7 +112,7 @@ export default function Mentors(props) {
 									);
 								})}
 							</div>
-							<button
+							<button className ='addQuestionButton'
 								id={question._id}
 								value={question._id}
 								onClick={addQuestion}
@@ -116,7 +141,8 @@ export default function Mentors(props) {
 							>
                 x
 							</button>
-							<div>{question.question}</div>
+							{question.question_code?<ReactMarkdown className="code">{question.question_code}</ReactMarkdown>:null}
+							<ReactMarkdown>{question.question}</ReactMarkdown>
 							<div className="answers">
 								{Object.entries(question.answers).map(([index, value]) => {
 									return (
