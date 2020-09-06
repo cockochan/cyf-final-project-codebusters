@@ -28,25 +28,20 @@ export default function Mentors(props) {
 		});
 		setFilteredQuestionsByTag(tempFilteredData);
 	};
-
-
 	const findTags=()=>{
 		let tempTags=[];
 		if(props.questions){
 			tempTags=props.questions.map((question)=>{
 				question.tags.map((tag)=>{
 					if(!tempTags.includes(tag)&&tag!==undefined){
-						console.log(tag);
 						tempTags.push(tag);
 					} else{
 						null;
 					}
-
 				});
 				setTagsCollection(tempTags);
 			});
 		}
-
 	};
 	useEffect(() => {
 		const makeQuestions = () => {
