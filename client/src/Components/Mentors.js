@@ -12,6 +12,9 @@ export default function Mentors(props) {
 		publishingDate: "",
 		questions_id: [],
 	});
+	const resetFilters = ()=>{
+		setFilteredQuestionsByTag(props.questions);
+	};
 	let tempFilteredData=[];
 	const tagClickHandler =(e)=>{
 		setFilteredQuestionsByTag(null);
@@ -108,6 +111,7 @@ export default function Mentors(props) {
 		return (
 			<div className="row">
 				<div className='filterButtons col-6'>
+					<button onClick={resetFilters}>reset filters</button>
 					{tagsCollection.map((tag)=>{
 						return(<button value={tag} onClick={tagClickHandler}>{tag}</button>);
 					})}
