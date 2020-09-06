@@ -6,19 +6,35 @@ import ReactMarkdown from "react-markdown";
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
 	const [tagsCollection, setTagsCollection]=useState([]);
+	const [filteredQuestionsByTag, setFilteredQuestionsByTag]=useState(props.questions);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
 		questions_id: [],
 	});
+	let tempFilterdData;
+	const tagClickHandler =(e)=>{
+		setFilteredQuestionsByTag(null);
+		tempFilterdData=props.questions.filter((question)=>{
+
+			question.tags.find((tag)=>tag==e.target.value);
+			console.log(e.target.value,question.tags);
+		});
+
+		console.log(tempFilterdData);
+		setFilteredQuestionsByTag(tempFilterdData);
+	};
+
+
 	const findTags=()=>{
 
 		let tempTags=[];
 		if(props.questions){
 			tempTags=props.questions.map((question)=>{
 				question.tags.map((tag)=>{
-					if(!tempTags.includes(tag.name)&&tag.name!==undefined){
-						tempTags.push(tag.name);
+					if(!tempTags.includes(tag)&&tag!==undefined){
+						console.log(tag);
+						tempTags.push(tag);
 					} else{
 						null;
 					}
@@ -41,6 +57,7 @@ export default function Mentors(props) {
 		};
 		makeQuestions();
 		findTags();
+		setFilteredQuestionsByTag(props.questions);
 	}, [newQuiz.questions_id, props.questions]);
 
 	const addQuestion = (event) => {
@@ -93,7 +110,7 @@ export default function Mentors(props) {
 			<div className="row">
 				<div className='filterButtons col-6'>
 					{tagsCollection.map((tag)=>{
-						return(<button>{tag}</button>);
+						return(<button value={tag} onClick={tagClickHandler}>{tag}</button>);
 					})}
 				</div>
 				<div className="col-8 cardBlock">
