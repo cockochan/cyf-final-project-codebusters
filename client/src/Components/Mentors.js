@@ -6,12 +6,32 @@ import ReactMarkdown from "react-markdown";
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
 	const [tagsCollection, setTagsCollection]=useState([]);
+	const [numberOfQuestions,setNumberOfQuestions]=useState(10);
 	const [filteredQuestionsByTag, setFilteredQuestionsByTag]=useState(props.questions);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
 		questions_id: [],
 	});
+	const clearQuiz=()=>{
+		setNewQuiz({
+			name: "",
+			publishingDate: "",
+			questions_id: [],
+		});
+	};
+	const autofillQuizz =()=>{
+		clearQuiz();
+		const shuffled = filteredQuestionsByTag.sort(() => 0.5 - Math.random());
+		// Get sub-array of first n elements after shuffled
+		let selected = shuffled.slice(0, numberOfQuestions);
+		let selectedIds = [];
+		selected.map((question)=>selectedIds.push(question._id));
+		setNewQuiz({
+			...newQuiz,
+			questions_id: selectedIds,
+		});
+	};
 	const resetFilters = ()=>{
 		setFilteredQuestionsByTag(props.questions);
 	};
@@ -55,7 +75,7 @@ export default function Mentors(props) {
 		makeQuestions();
 		findTags();
 		setFilteredQuestionsByTag(props.questions);
-	}, [newQuiz.questions_id, props.questions]);
+	}, [newQuiz.questions_id, props.questions,newQuiz]);
 
 	const addQuestion = (event) => {
 		setNewQuiz({
@@ -106,6 +126,8 @@ export default function Mentors(props) {
 		return (
 			<div className="row">
 				<div className='filterButtons col-6'>
+
+					<button onClick={ autofillQuizz }>autofill quiz</button>
 					<button onClick={resetFilters}>reset filters</button>
 					{tagsCollection.map((tag)=>{
 						return(<button value={tag} onClick={tagClickHandler}>{tag}</button>);
@@ -139,6 +161,7 @@ export default function Mentors(props) {
 				</div>
 				<div className="col-4 newQuiz">
 					<h1>New quiz</h1>
+					<button onClick={clearQuiz}> clear quiz</button>
 					<input
 						type="text"
 						onKeyUp={newQuizName}
