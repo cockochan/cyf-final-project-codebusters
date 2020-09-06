@@ -12,22 +12,22 @@ export default function Mentors(props) {
 		publishingDate: "",
 		questions_id: [],
 	});
-	let tempFilterdData;
+	let tempFilteredData=[];
 	const tagClickHandler =(e)=>{
 		setFilteredQuestionsByTag(null);
-		tempFilterdData=props.questions.filter((question)=>{
+		props.questions.map((question)=>{
 
-			question.tags.find((tag)=>tag==e.target.value);
-			console.log(e.target.value,question.tags);
+			if(question.tags.includes(e.target.value)) {
+				tempFilteredData=[...tempFilteredData,question];
+			} else{
+				null;
+			}
 		});
-
-		console.log(tempFilterdData);
-		setFilteredQuestionsByTag(tempFilterdData);
+		setFilteredQuestionsByTag(tempFilteredData);
 	};
 
 
 	const findTags=()=>{
-
 		let tempTags=[];
 		if(props.questions){
 			tempTags=props.questions.map((question)=>{
@@ -42,7 +42,6 @@ export default function Mentors(props) {
 				});
 				setTagsCollection(tempTags);
 			});
-
 		}
 
 	};
@@ -50,7 +49,7 @@ export default function Mentors(props) {
 		const makeQuestions = () => {
 			let selectedQuestions = [];
 			selectedQuestions = newQuiz.questions_id.map((selectedId) => {
-				let found = props.questions.find((question) => question._id === selectedId);
+				let found = filteredQuestionsByTag.find((question) => question._id === selectedId);
 				selectedQuestions.push(found);
 				setNewQuizQuestions(selectedQuestions);
 			});
@@ -105,7 +104,7 @@ export default function Mentors(props) {
 			newQuizQuestions.filter((question) => question._id !== event.target.value)
 		);
 	};
-	if (props.questions) {
+	if (filteredQuestionsByTag) {
 		return (
 			<div className="row">
 				<div className='filterButtons col-6'>
@@ -114,7 +113,7 @@ export default function Mentors(props) {
 					})}
 				</div>
 				<div className="col-8 cardBlock">
-					{props.questions.map((question, index) => (
+					{filteredQuestionsByTag.map((question, index) => (
 						<div className="col-6 card" key={index}>
 							<div className="quizzQuestion">
 								{question.question_code?<ReactMarkdown className="code">{question.question_code}</ReactMarkdown>:null}
