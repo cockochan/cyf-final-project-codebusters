@@ -3,62 +3,50 @@
 .logo {
   width: 100px;
 }
-
 .message {
   color: blue;
 }
-
 .message:hover {
   background-color: yellow;
 }
-
 .card {
   border: 2px solid grey;
   padding:15px;
 }
-
 .quizzPage {
   justify-items: center;
   padding: 10px;
 }
-
 .questionPage {
   justify-items: center;
   border: 2px solid grey;
 }
-
 .newQuiz {
   border: 2px solid black;
 }
 .addQuestionButton{
   margin-left:1.5vw;
-  
 }
 .cardBlock {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-
 table,
 th,
 td {
   border: 1px solid black;
 }
-
 .cardBlock {
   display: flex;
-
   flex-wrap: wrap;
 }
 .answer {
   padding: 0.2em;
 }
-
 .quizzQuestion {
   margin-top: 0.2em;
 }
-
 .code {
   font-weight: 900;
   color: turquoise;
@@ -66,7 +54,6 @@ td {
   background-color: darkslategrey;
   font-family: "Inconsolata", monospace;
 }
-
 .navbar {
   background-color: #ffffff;
   width: 100%;
@@ -84,7 +71,6 @@ td {
   font-family: "Roboto", sans-serif;
   height: 125px;
 }
-
 .survey-form {
   background-color: rgb(243, 243, 243);
   padding: 30px;
@@ -97,7 +83,6 @@ td {
   margin-left: 25%;
   margin-right: 25%;
 }
-
 .survey-page {
   display: flex;
   flex-direction: column;
@@ -108,24 +93,20 @@ td {
   display: flex;
   flex-direction: column;
 }
-
 .form-element {
   padding: 10px 0;
   margin: 0 0 20px 0;
   width: 30%;
 }
-
 .answers {
   padding: 10px;
   margin: 10px;
   font-size: 19px;
 }
-
 .body {
   margin-top: 150px;
   font-family: "Roboto", sans-serif;
 }
-
 .quizez {
   margin: 5vh;
   font-family: "Roboto", sans-serif;
@@ -134,7 +115,6 @@ td {
   min-height: 100%;
   margin-top: 125px;
 }
-
 .question-elements {
   width: 100%;
   padding: 10px;
@@ -144,12 +124,10 @@ td {
   align-items: center;
   margin: 20px 0;
 }
-
 .text-area {
   width: 80%;
   height: 100px;
 }
-
 .code {
   font-weight: 900;
   color: turquoise;
@@ -157,19 +135,15 @@ td {
   background-color: darkslategrey;
   font-family: "Inconsolata", monospace;
 }
-
 .corect {
   background-color: #93ff8e;
 }
-
 .incorect {
   background-color: #ff75c4;
 }
-
 .unknown {
   background-color: #a8caff;
 }
-
 .link-button {
   display: flex;
   justify-content: center;
@@ -194,12 +168,10 @@ td {
 .link-button:hover {
   background-color: #f5f6fa;
 }
-
 .cyf-log {
   width: 250px;
   height: 112px;
 }
-
 .message-container {
   position: fixed;
   width: 30%;
@@ -221,7 +193,6 @@ td {
   opacity: 0.96;
   border-radius: 5px;
 }
-
 .close-container {
   width: 95%;
   background-color: rgba(4, 199, 4, 0.01);
@@ -231,7 +202,6 @@ td {
   align-self: center;
   margin-top: 20px;
 }
-
 .close-message {
   width: 40px;
   height: 30px;
@@ -244,7 +214,6 @@ td {
   cursor: pointer;
   padding: 5px;
 }
-
 .centered {
   justify-items: center;
   text-align: center;

@@ -6,42 +6,76 @@ import ReactMarkdown from "react-markdown";
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
 	const [tagsCollection, setTagsCollection]=useState([]);
+	const [numberOfQuestions,setNumberOfQuestions]=useState(10);
+	const [filteredQuestionsByTag, setFilteredQuestionsByTag]=useState(props.questions);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
 		questions_id: [],
 	});
-	const findTags=()=>{
+	const clearQuiz=()=>{
+		setNewQuiz({
+			name: "",
+			publishingDate: "",
+			questions_id: [],
+		});
+	};
+	const autofillQuizz =()=>{
+		clearQuiz();
+		const shuffled = filteredQuestionsByTag.sort(() => 0.5 - Math.random());
+		// Get sub-array of first n elements after shuffled
+		let selected = shuffled.slice(0, numberOfQuestions);
+		let selectedIds = [];
+		selected.map((question)=>selectedIds.push(question._id));
+		setNewQuiz({
+			...newQuiz,
+			questions_id: selectedIds,
+		});
+	};
+	const resetFilters = ()=>{
+		setFilteredQuestionsByTag(props.questions);
+	};
+	let tempFilteredData=[];
+	const tagClickHandler =(e)=>{
+		setFilteredQuestionsByTag(null);
+		props.questions.map((question)=>{
 
+			if(question.tags.includes(e.target.value)) {
+				tempFilteredData=[...tempFilteredData,question];
+			} else{
+				null;
+			}
+		});
+		setFilteredQuestionsByTag(tempFilteredData);
+	};
+	const findTags=()=>{
 		let tempTags=[];
 		if(props.questions){
 			tempTags=props.questions.map((question)=>{
 				question.tags.map((tag)=>{
-					if(!tempTags.includes(tag.name)&&tag.name!==undefined){
-						tempTags.push(tag.name);
+					if(!tempTags.includes(tag)&&tag!==undefined){
+						tempTags.push(tag);
 					} else{
 						null;
 					}
-
 				});
 				setTagsCollection(tempTags);
 			});
-
 		}
-
 	};
 	useEffect(() => {
 		const makeQuestions = () => {
 			let selectedQuestions = [];
 			selectedQuestions = newQuiz.questions_id.map((selectedId) => {
-				let found = props.questions.find((question) => question._id === selectedId);
+				let found = filteredQuestionsByTag.find((question) => question._id === selectedId);
 				selectedQuestions.push(found);
 				setNewQuizQuestions(selectedQuestions);
 			});
 		};
 		makeQuestions();
 		findTags();
-	}, [newQuiz.questions_id, props.questions]);
+		setFilteredQuestionsByTag(props.questions);
+	}, [newQuiz.questions_id, props.questions,newQuiz]);
 
 	const addQuestion = (event) => {
 		setNewQuiz({
@@ -88,16 +122,19 @@ export default function Mentors(props) {
 			newQuizQuestions.filter((question) => question._id !== event.target.value)
 		);
 	};
-	if (props.questions) {
+	if (filteredQuestionsByTag) {
 		return (
 			<div className="row">
 				<div className='filterButtons col-6'>
+
+					<button onClick={ autofillQuizz }>autofill quiz</button>
+					<button onClick={resetFilters}>reset filters</button>
 					{tagsCollection.map((tag)=>{
-						return(<button>{tag}</button>);
+						return(<button value={tag} onClick={tagClickHandler}>{tag}</button>);
 					})}
 				</div>
 				<div className="col-8 cardBlock">
-					{props.questions.map((question, index) => (
+					{filteredQuestionsByTag.map((question, index) => (
 						<div className="col-6 card" key={index}>
 							<div className="quizzQuestion">
 								{question.question_code?<ReactMarkdown className="code">{question.question_code}</ReactMarkdown>:null}
@@ -124,6 +161,7 @@ export default function Mentors(props) {
 				</div>
 				<div className="col-4 newQuiz">
 					<h1>New quiz</h1>
+					<button onClick={clearQuiz}> clear quiz</button>
 					<input
 						type="text"
 						onKeyUp={newQuizName}
