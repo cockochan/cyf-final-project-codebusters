@@ -54,7 +54,7 @@ const App = () => {
 						<Route exact path="/Mentors">
 							<Mentors
 								questions={questions}
-								quizes={quizzes}
+								quizzes={quizzes}
 								setRoute={setRoute}
 								setQuizId={setQuizId}
 								setCode={setCode}
@@ -70,6 +70,7 @@ const App = () => {
 									quizData={quizzes}
 									route={route}
 									code={code}
+									setCode={setCode}
 									quizId={quizId}
 								/>
 							) : (

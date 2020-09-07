@@ -8,11 +8,10 @@ const RunQuiz = (props) => {
 			Math.random()
 				.toString(36)
 				.replace(/[^a-z0-9]+/g, "")
-				.substr(0, 3)
+				.substr(0, 4)
 		);
 	};
 
-	console.log(props.quizzes);
 	return (
 		<div>
 			<select onChange={selectHandler} className="form-element">
@@ -25,7 +24,7 @@ const RunQuiz = (props) => {
 					);
 				})}
 			</select>
-			{props.code ? <h3>code:{props.code}</h3> : null}
+			{props.code ? <h3>code: {props.code}</h3> : null}
 		</div>
 	);
 };

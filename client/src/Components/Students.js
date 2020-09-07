@@ -26,6 +26,7 @@ const Students = (props) => {
 					setIsSubmitted={setIsSubmitted}
 					textMessage={textMessage}
 					setOptionState={setOptionState}
+					setCode={props.setCode}
 				/>
 			) : null}
 			<input

@@ -131,19 +131,19 @@ export default function Mentors(props) {
 			<div className="row">
 				<div className="filterButtons col-6">
 					<RunQuiz
-						quizzes={props.quizes}
+						quizzes={props.quizzes}
 						setRoute={props.setRoute}
 						setCode={props.setCode}
 						code={props.code}
-						quizes={props.quizzes}
+						quizzes={props.quizzes}
 						setQuizId={props.setQuizId}
 						setData={props.setData}
 					/>
           ;<button onClick={autofillQuizz}>autofill quiz</button>
 					<button onClick={resetFilters}>reset filters</button>
-					{tagsCollection.map((tag) => {
+					{tagsCollection.map((tag, index) => {
 						return (
-							<button value={tag} onClick={tagClickHandler}>
+							<button value={tag} onClick={tagClickHandler} key={index}>
 								{tag}
 							</button>
 						);
