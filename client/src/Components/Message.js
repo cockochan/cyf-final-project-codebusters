@@ -7,7 +7,9 @@ const Message = (props) => {
 			<div className="close-container">
 				<span
 					className="close-message"
-					onClick={() => props.setIsSubmitted(false)}
+					onClick={() => {
+						props.setIsSubmitted(false), props.setOptionState(true);
+					}}
 				>
           OK
 				</span>

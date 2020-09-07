@@ -18,10 +18,9 @@ const Questions = (props) => {
 		timestamp: dayjs().format(),
 		studentName: "",
 	});
+
 	useEffect(() => {
-		fetch(
-			`/api/question/${props.quizData.questions_id[currentQuestionIndex]}`
-		)
+		fetch(`/api/question/${props.quizData.questions_id[currentQuestionIndex]}`)
 			.then((res) => res.json())
 			.then((data) => setQuestionData(data))
 			.catch((err) => console.error(err));
@@ -30,6 +29,7 @@ const Questions = (props) => {
 			.then((data) => setPostData(data))
 			.catch((err) => console.error(err));
 	}, [props.quizData.questions_id[currentQuestionIndex], route, requestOption]);
+
 	const submitHandler = (e) => {
 		setCurrentQuestionIndex(currentQuestionIndex + 1);
 		setRoute("results");
@@ -60,8 +60,6 @@ const Questions = (props) => {
 		event.target.reset;
 		props.setIsSubmitted(true);
 		props.setTextMessage("Form submitted successfully!");
-		props.setRoute("");
-		props.setOptionState("");
 	};
 
 	const checkHandler = (e) => {
@@ -105,11 +103,11 @@ const Questions = (props) => {
 			<FormGroup>
 				<FormGroup className="answers">
 					{questionData.question_code ? (
-						<ReactMarkdown className="code">{questionData.question_code}</ReactMarkdown>
+						<ReactMarkdown className="code">
+							{questionData.question_code}
+						</ReactMarkdown>
 					) : null}
 					<ReactMarkdown>{questionData.question}</ReactMarkdown>
-
-
 				</FormGroup>
 				<FormGroup className="answers">
 					{answer_a ? (
@@ -119,7 +117,7 @@ const Questions = (props) => {
 							value={answer_a}
 							onClick={checkHandler}
 							id="answer_a"
-							checked={isChecked && radioId =="answer_a" ?true:false}
+							checked={isChecked && radioId == "answer_a" ? true : false}
 						/>
 					) : null}
 					{answer_a ? <Label for="answer_a">{answer_a}</Label> : null}
@@ -133,7 +131,7 @@ const Questions = (props) => {
 							value={answer_b}
 							onClick={checkHandler}
 							id="answer_b"
-							checked={isChecked && radioId=="answer_b" ?true:false}
+							checked={isChecked && radioId == "answer_b" ? true : false}
 						/>
 					) : null}
 					{answer_b ? <Label for="answer_b">{answer_b}</Label> : null}
@@ -146,7 +144,7 @@ const Questions = (props) => {
 							value={answer_c}
 							onClick={checkHandler}
 							id="answer_c"
-							checked={isChecked && radioId=="answer_c" ?true:false}
+							checked={isChecked && radioId == "answer_c" ? true : false}
 						/>
 					) : null}
 					{answer_c ? <Label for="answer_c">{answer_c}</Label> : null}
@@ -159,7 +157,7 @@ const Questions = (props) => {
 							value={answer_d}
 							onClick={checkHandler}
 							id="answer_d"
-							checked={isChecked && radioId=="answer_d" ?true:false}
+							checked={isChecked && radioId == "answer_d" ? true : false}
 						/>
 					) : null}
 					{answer_d ? <Label for="answer_d">{answer_d}</Label> : null}
@@ -172,7 +170,7 @@ const Questions = (props) => {
 							value={answer_e}
 							onClick={checkHandler}
 							id="answer_e"
-							checked={isChecked && radioId=="answer_e" ?true:false}
+							checked={isChecked && radioId == "answer_e" ? true : false}
 						/>
 					) : null}
 					{answer_e ? <Label for="answer_e">{answer_e}</Label> : null}
@@ -185,7 +183,7 @@ const Questions = (props) => {
 							value={answer_f}
 							onClick={checkHandler}
 							id="answer_f"
-							checked={isChecked && radioId =="answer_f" ?true:false}
+							checked={isChecked && radioId == "answer_f" ? true : false}
 						/>
 					) : null}
 					{answer_f ? <Label for="answer_f">{answer_f}</Label> : null}
