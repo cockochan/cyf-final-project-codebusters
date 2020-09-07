@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-.logo {
-  width: 100px;
+.cyf-log {
+  display:inline-block;
+  width: 20vh;
+  height:auto;
 }
 
 .message {
@@ -193,12 +195,6 @@ td {
 .link-button:hover {
   background-color: #f5f6fa;
 }
-
-.cyf-log {
-  width: 250px;
-  height: 112px;
-}
-
 .message-container {
   position: fixed;
   width: 30%;

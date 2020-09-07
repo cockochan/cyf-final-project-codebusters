@@ -19,6 +19,7 @@ export default function Mentors(props) {
 			publishingDate: "",
 			questions_id: [],
 		});
+		setNewQuizQuestions([]);
 	};
 	const autofillQuizz =()=>{
 		clearQuiz();
