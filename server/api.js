@@ -75,11 +75,12 @@ client.connect(() => {
 	router.post("/quiz", (req, res) => {
 		const db = client.db("quiz");
 		const collection = db.collection("quizzes");
-		const { name, questions_id, publishingDate } = req.body;
+		const { name, questions_id, publishingDate, code } = req.body;
 		const quizObject = {
 			name: name,
 			questions_id,
 			publishingDate: publishingDate,
+			code:code,
 		};
 		if (!name || questions_id.length <= 0) {
 			return req.status(400).json("please provide the correct data!");
