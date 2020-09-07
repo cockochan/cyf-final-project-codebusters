@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Route, Link } from "react-router-dom";
 
 export default function Results(props) {
 	const [studentNames, setStudentNames]=useState([]);
@@ -70,7 +71,7 @@ export default function Results(props) {
 	},[quizSelected]);
 	const makeNames=()=>{
 		let tempNames = [];
-		 if(allResults!=="not found!"){
+		if(allResults!=="not found!"){
 			allResults.map((oneAnswer)=>{
 				if(studentNames&&!tempNames.includes(oneAnswer.studentName)){
 					tempNames.push(oneAnswer.studentName);
@@ -106,36 +107,46 @@ export default function Results(props) {
 				</div></div>);
 	} else if(props.quizes){
 		return (
-			<div  className='col-12 centered'>
-				<h1>Chosse a quizz to see student results</h1>
-				<select name="quizzez" className="quizzez" onChange={quizToSeeResultsChosen}>
-					<option value="" disabled selected hidden>select a quiz</option>
-					{props.quizes.map((quiz)=>{
-						return(<option value={quiz._id} >{quiz.name}</option>);
-					})}
+			<div>
+				<nav className= "navbar">
+					<Link to="/Mentors" exact="true" className="link-button">
+            			Mentor
+					</Link>
+					<Link to="/NewQuestion" exact="true" className="link-button">
+            			New Question
+					</Link>
+				</nav>
+				<div  className='col-12 centered'>
+					<h1>Chosse a quizz to see student results</h1>
+					<select name="quizzez" className="quizzez" onChange={quizToSeeResultsChosen}>
+						<option value="" disabled selected hidden>select a quiz</option>
+						{props.quizes.map((quiz)=>{
+							return(<option value={quiz._id} >{quiz.name}</option>);
+						})}
 		  </select>
 
-				{quizSelected&&allResults&&allResults!=="not found!"?<div><div className='centered'><h3>attempt number {attemptNumber+1} </h3><p>(change to see if some students made multiple attempts)</p></div>
-					<button onClick={decreaseAttemptNumber}>decrease attempt number </button>
-					<button onClick={increaseAttemptNumber}>increase attempt number </button><table>
-						<thead>
-							<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question, index)=>{
-								return(<th key={index} className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
-							}):<tr></tr>}</tr>
-							{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName, index)=>{
-								return(
-									<tr><td>{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
-										return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)}</p>:<p>Loading question</p>}</th>);
-									}):null}</tr>
-								);
-							}
-							):null}
-						</thead>
+					{quizSelected&&allResults&&allResults!=="not found!"?<div><div className='centered'><h3>attempt number {attemptNumber+1} </h3><p>(change to see if some students made multiple attempts)</p></div>
+						<button onClick={decreaseAttemptNumber}>decrease attempt number </button>
+						<button onClick={increaseAttemptNumber}>increase attempt number </button><table>
+							<thead>
+								<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question, index)=>{
+									return(<th key={index} className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
+								}):<tr></tr>}</tr>
+								{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName, index)=>{
+									return(
+										<tr><td>{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
+											return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)}</p>:<p>Loading question</p>}</th>);
+										}):null}</tr>
+									);
+								}
+								):null}
+							</thead>
 
-					</table>
+						</table>
 		  </div>:null}
 		 </div>
-		  );
+		 </div>
+		);
 	} else{
 		return(<div>no props</div>);
 	}

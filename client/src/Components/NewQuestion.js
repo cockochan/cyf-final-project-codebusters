@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { BrowserRouter as Route, Link } from "react-router-dom";
 import { FormGroup } from "reactstrap";
 
 export default function NewQuestion() {
@@ -82,103 +83,112 @@ export default function NewQuestion() {
 	};
 
 	return (
-		<div className="col-12">
-			<form className="survey-form" onSubmit={submitQuestion}>
-				<FormGroup className="question-elements">
+		<div>
+			<nav className="navbar">
+				<Link to="/Mentors" exact="true" className="link-button">
+            			Mentor
+				</Link>					<Link to="/Results" exact="true" className="link-button">
+            			Quiz Results
+				</Link>
+			</nav>
+			<div className="col-12">
+				<form className="survey-form" onSubmit={submitQuestion}>
+					<FormGroup className="question-elements">
           Code Illustration:{" "}
-					<textarea onKeyUp={codeHandler} className="text-area" />
+						<textarea onKeyUp={codeHandler} className="text-area" />
           Question,use markdown:
-					<textarea onKeyUp={questionHandler} className="text-area" />
-				</FormGroup>
-				<FormGroup className="form-element">
-					<input
-						type="text"
-						onKeyUp={tagHandler}
-						placeholder="Tags, coma separated *required"
-						name="answer_a"
-						required
-					/>
-					<input
-						type="text"
-						onKeyUp={answerHandler}
-						placeholder="answer a"
-						name="answer_a"
-					/>
-					<input
-						type="checkbox"
-						name={"answer_a_correct"}
-						onChange={answerCheck}
-					/>
-				</FormGroup>
-				<FormGroup className="form-element">
-					<input
-						type="text"
-						onKeyUp={answerHandler}
-						placeholder="answer b"
-						name="answer_b"
-					/>
-					<input
-						type="checkbox"
-						name={"answer_b_correct"}
-						onChange={answerCheck}
-					/>
-				</FormGroup>
-				<FormGroup className="form-element">
-					<input
-						type="text"
-						onKeyUp={answerHandler}
-						placeholder="answer c"
-						name="answer_c"
-					/>
-					<input
-						type="checkbox"
-						name={"answer_c_correct"}
-						onChange={answerCheck}
-					/>
-				</FormGroup>
-				<FormGroup className="form-element">
-					<input
-						type="text"
-						onKeyUp={answerHandler}
-						placeholder="answer d"
-						name="answer_d"
-					/>
-					<input
-						type="checkbox"
-						name={"answer_d_correct"}
-						onChange={answerCheck}
-					/>
-				</FormGroup>
-				<FormGroup className="form-element">
-					<input
-						type="text"
-						onKeyUp={answerHandler}
-						placeholder="answer e"
-						name="answer_e"
-					/>
-					<input
-						type="checkbox"
-						name={"answer_e_correct"}
-						onChange={answerCheck}
-					/>
-				</FormGroup>
-				<FormGroup className="form-element">
-					<input
-						type="text"
-						onKeyUp={answerHandler}
-						placeholder="answer f"
-						name="answer_f"
-					/>
-					<input
-						type="checkbox"
-						name={"answer_f_correct"}
-						onChange={answerCheck}
-					/>
-				</FormGroup>
-				<button> submit question</button>
-			</form>
-			<ReactMarkdown className="code" source={questionToSet.question_code} />
-			<ReactMarkdown source={markdown} />
+						<textarea onKeyUp={questionHandler} className="text-area" />
+					</FormGroup>
+					<FormGroup className="form-element">
+						<input
+							type="text"
+							onKeyUp={tagHandler}
+							placeholder="Tags, coma separated *required"
+							name="answer_a"
+							required
+						/>
+						<input
+							type="text"
+							onKeyUp={answerHandler}
+							placeholder="answer a"
+							name="answer_a"
+						/>
+						<input
+							type="checkbox"
+							name={"answer_a_correct"}
+							onChange={answerCheck}
+						/>
+					</FormGroup>
+					<FormGroup className="form-element">
+						<input
+							type="text"
+							onKeyUp={answerHandler}
+							placeholder="answer b"
+							name="answer_b"
+						/>
+						<input
+							type="checkbox"
+							name={"answer_b_correct"}
+							onChange={answerCheck}
+						/>
+					</FormGroup>
+					<FormGroup className="form-element">
+						<input
+							type="text"
+							onKeyUp={answerHandler}
+							placeholder="answer c"
+							name="answer_c"
+						/>
+						<input
+							type="checkbox"
+							name={"answer_c_correct"}
+							onChange={answerCheck}
+						/>
+					</FormGroup>
+					<FormGroup className="form-element">
+						<input
+							type="text"
+							onKeyUp={answerHandler}
+							placeholder="answer d"
+							name="answer_d"
+						/>
+						<input
+							type="checkbox"
+							name={"answer_d_correct"}
+							onChange={answerCheck}
+						/>
+					</FormGroup>
+					<FormGroup className="form-element">
+						<input
+							type="text"
+							onKeyUp={answerHandler}
+							placeholder="answer e"
+							name="answer_e"
+						/>
+						<input
+							type="checkbox"
+							name={"answer_e_correct"}
+							onChange={answerCheck}
+						/>
+					</FormGroup>
+					<FormGroup className="form-element">
+						<input
+							type="text"
+							onKeyUp={answerHandler}
+							placeholder="answer f"
+							name="answer_f"
+						/>
+						<input
+							type="checkbox"
+							name={"answer_f_correct"}
+							onChange={answerCheck}
+						/>
+					</FormGroup>
+					<button> submit question</button>
+				</form>
+				<ReactMarkdown className="code" source={questionToSet.question_code} />
+				<ReactMarkdown source={markdown} />
+			</div>
 		</div>
 	);
 }
