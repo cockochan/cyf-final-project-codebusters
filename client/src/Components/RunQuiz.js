@@ -4,21 +4,17 @@ const RunQuiz = (props) => {
 	const selectHandler = (event) => {
 		props.setRoute(`quizzes/${event.target.value}`);
 		props.setQuizId(event.target.value);
-		props.setCode(
-			Math.random()
-				.toString(36)
-				.replace(/[^a-z0-9]+/g, "")
-				.substr(0, 4)
-		);
+		const selectedQuiz = props.quizzes.find((quiz) => quiz._id === event.target.value);
+		props.setCode(selectedQuiz.code);
 	};
 
 	return (
 		<div>
 			<select onChange={selectHandler} className="form-element">
 				<option>Select a quiz</option>
-				{props.quizzes.map((quiz, i) => {
+				{props.quizzes.map((quiz) => {
 					return (
-						<option key={i} name={quiz.name} value={quiz._id}>
+						<option key={quiz._id} name={quiz.name} id={quiz.code} value={quiz._id}>
 							{quiz.name}
 						</option>
 					);

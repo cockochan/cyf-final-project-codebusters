@@ -15,12 +15,14 @@ export default function Mentors(props) {
 		name: "",
 		publishingDate: "",
 		questions_id: [],
+		code:"",
 	});
 	const clearQuiz = () => {
 		setNewQuiz({
 			name: "",
 			publishingDate: "",
 			questions_id: [],
+			code:"",
 		});
 	};
 	const autofillQuizz = () => {
@@ -112,6 +114,7 @@ export default function Mentors(props) {
 			...newQuiz,
 			publishingDate: dayjs().format(),
 			name: event.target.value,
+			code:Math.random().toString(36).replace(/[^a-z0-9]+/g, "").substr(0, 4),
 		});
 	};
 	const removeQuestion = (event) => {
