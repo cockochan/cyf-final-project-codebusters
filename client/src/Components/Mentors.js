@@ -6,11 +6,9 @@ import ReactMarkdown from "react-markdown";
 import RunQuiz from "./RunQuiz";
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
+	const [numberOfQuestions,setNumberOfQuestions]=useState(5);
+	const [filteredQuestionsByTag, setFilteredQuestionsByTag]=useState(props.questions);
 	const [tagsCollection, setTagsCollection] = useState([]);
-	const [numberOfQuestions, setNumberOfQuestions] = useState(10);
-	const [filteredQuestionsByTag, setFilteredQuestionsByTag] = useState(
-		props.questions
-	);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
@@ -129,8 +127,12 @@ export default function Mentors(props) {
 			newQuizQuestions.filter((question) => question._id !== event.target.value)
 		);
 	};
+		const selectHandler=(event)=>{
+			setNumberOfQuestions(event.target.value);
+		}
 	if (filteredQuestionsByTag) {
 		return (
+			
 			<div className="row">
 				<RunQuiz
 					quizzes={props.quizzes}
@@ -151,6 +153,14 @@ export default function Mentors(props) {
 						);
 					})}
 				</div>
+				<div>
+					 <p>Number of question</p>
+					 <select onChange={selectHandler}>
+							<option select value="5">5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+						</select>
+					 </div>
 				<div className="col-8 card-block">
 					{filteredQuestionsByTag.map((question, index) => (
 						<div className="col-6" key={index}>
