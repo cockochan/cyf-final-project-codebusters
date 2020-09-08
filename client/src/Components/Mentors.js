@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
 	const [tagsCollection, setTagsCollection]=useState([]);
-	const [numberOfQuestions,setNumberOfQuestions]=useState(10);
+	const [numberOfQuestions,setNumberOfQuestions]=useState(5);
 	const [filteredQuestionsByTag, setFilteredQuestionsByTag]=useState(props.questions);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
@@ -122,9 +122,14 @@ export default function Mentors(props) {
 			newQuizQuestions.filter((question) => question._id !== event.target.value)
 		);
 	};
+		const selectHandler=(event)=>{
+			setNumberOfQuestions(event.target.value);
+		}
 	if (filteredQuestionsByTag) {
 		return (
+			
 			<div className="row">
+			
 				<div className='filterButtons col-6'>
 
 					<button onClick={ autofillQuizz }>autofill quiz</button>
@@ -133,6 +138,14 @@ export default function Mentors(props) {
 						return(<button value={tag} onClick={tagClickHandler}>{tag}</button>);
 					})}
 				</div>
+				<div>
+					 <p>Number of question</p>
+					 <select onChange={selectHandler}>
+							<option select value="5">5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+						</select>
+					 </div>
 				<div className="col-8 cardBlock">
 					{filteredQuestionsByTag.map((question, index) => (
 						<div className="col-6 card" key={index}>
