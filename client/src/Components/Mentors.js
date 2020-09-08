@@ -22,6 +22,7 @@ export default function Mentors(props) {
 			questions_id: [],
 			code:"",
 		});
+		setNewQuizQuestions([]);
 	};
 	const autofillQuizz = () => {
 		clearQuiz();
@@ -127,12 +128,12 @@ export default function Mentors(props) {
 			newQuizQuestions.filter((question) => question._id !== event.target.value)
 		);
 	};
-		const selectHandler=(event)=>{
-			setNumberOfQuestions(event.target.value);
-		}
+	const selectHandler=(event)=>{
+		setNumberOfQuestions(event.target.value);
+	};
 	if (filteredQuestionsByTag) {
 		return (
-			
+
 			<div className="row">
 				<RunQuiz
 					quizzes={props.quizzes}
@@ -143,7 +144,7 @@ export default function Mentors(props) {
 					setData={props.setData}
 				/>
 				<div className="filterButtons col-6">
-          ;<button onClick={autofillQuizz}>autofill quiz</button>
+					<button onClick={autofillQuizz}>autofill quiz</button>
 					<button onClick={resetFilters}>reset filters</button>
 					{tagsCollection.map((tag, index) => {
 						return (
@@ -156,10 +157,10 @@ export default function Mentors(props) {
 				<div>
 					 <p>Number of question</p>
 					 <select onChange={selectHandler}>
-							<option select value="5">5</option>
-							<option value="10">10</option>
-							<option value="15">15</option>
-						</select>
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+					</select>
 					 </div>
 				<div className="col-8 card-block">
 					{filteredQuestionsByTag.map((question, index) => (
