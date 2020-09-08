@@ -134,16 +134,15 @@ export default function Mentors(props) {
 		return (
 			
 			<div className="row">
+				<RunQuiz
+					quizzes={props.quizzes}
+					setRoute={props.setRoute}
+					setCode={props.setCode}
+					code={props.code}
+					setQuizId={props.setQuizId}
+					setData={props.setData}
+				/>
 				<div className="filterButtons col-6">
-					<RunQuiz
-						quizzes={props.quizzes}
-						setRoute={props.setRoute}
-						setCode={props.setCode}
-						code={props.code}
-						quizzes={props.quizzes}
-						setQuizId={props.setQuizId}
-						setData={props.setData}
-					/>
           ;<button onClick={autofillQuizz}>autofill quiz</button>
 					<button onClick={resetFilters}>reset filters</button>
 					{tagsCollection.map((tag, index) => {
@@ -162,49 +161,72 @@ export default function Mentors(props) {
 							<option value="15">15</option>
 						</select>
 					 </div>
-				<div className="col-8 cardBlock">
+				<div className="col-8 card-block">
 					{filteredQuestionsByTag.map((question, index) => (
-						<div className="col-6 card" key={index}>
-							<div className="quizzQuestion">
+						<div className="col-6" key={index}>
+							<div className=" col-12 card">
+								<div className="question-and-code-containter">
+									{question.question_code ? (
+										<ReactMarkdown className="code">
+											{question.question_code}
+										</ReactMarkdown>
+									) : null}
+									<ReactMarkdown className="question">
+										{question.question}
+									</ReactMarkdown>
+								</div>
+								<div className="answers">
+									{Object.values(question.answers).map((value, index) => {
+										return (
+											<div key={index}>
+												<div className="col-12 answer">{value}</div>
+											</div>
+										);
+									})}
+								</div>
+								<button
+									className="quiz-button card-button"
+									id={question._id}
+									value={question._id}
+									onClick={addQuestion}
+								>
+                Add to quiz
+								</button>
+							</div>
+						</div>
+					))}
+				</div>
+				<div className="col-4 quiz-questions">
+					<div className="form-title">New quiz</div>
+					<div className="quiz-handler">
+						<button onClick={clearQuiz} className="quiz-button"> clear quiz</button>
+						<input
+							type="text"
+							onKeyUp={newQuizName}
+							placeholder={"Enter quiz name"}
+							className="input"
+						/>
+						<button onClick={submitQuiz} className="quiz-button">Submit</button>
+					</div>
+					{newQuizQuestions.map((question) => (
+						<div className="col-12 card" key={question.question}>
+							<div className="question-and-code-containter">
 								{question.question_code ? (
 									<ReactMarkdown className="code">
 										{question.question_code}
 									</ReactMarkdown>
 								) : null}
-								<ReactMarkdown className="centered">
-									{question.question}
-								</ReactMarkdown>
+								<ReactMarkdown className="question">{question.question}</ReactMarkdown>
 							</div>
 							<div className="answers">
-								{Object.values(question.answers).map((value, index) => {
+								{Object.entries(question.answers).map(([index, value]) => {
 									return (
 										<div key={index}>
-											<div className="col-12 answer">{value}</div>
+											<div className="col-6 answer">{value}</div>
 										</div>
 									);
 								})}
 							</div>
-							<button
-								className="addQuestionButton"
-								id={question._id}
-								value={question._id}
-								onClick={addQuestion}
-							>
-                Add to quiz
-							</button>
-						</div>
-					))}
-				</div>
-				<div className="col-4 newQuiz">
-					<h1>New quiz</h1>
-					<button onClick={clearQuiz}> clear quiz</button>
-					<input
-						type="text"
-						onKeyUp={newQuizName}
-						placeholder={"Enter quiz name"}
-					/>
-					{newQuizQuestions.map((question) => (
-						<div className="col-12 card" key={question.question}>
 							<button
 								key={question._id + question.question}
 								type="checkbox"
@@ -212,27 +234,12 @@ export default function Mentors(props) {
 								id="horns"
 								value={question._id}
 								onClick={removeQuestion}
+								className="quiz-button card-button"
 							>
-                x
+                Delete
 							</button>
-							{question.question_code ? (
-								<ReactMarkdown className="code">
-									{question.question_code}
-								</ReactMarkdown>
-							) : null}
-							<ReactMarkdown>{question.question}</ReactMarkdown>
-							<div className="answers">
-								{Object.entries(question.answers).map(([index, value]) => {
-									return (
-										<div key={index}>
-											<div className="col-6">{value}</div>
-										</div>
-									);
-								})}
-							</div>
 						</div>
 					))}
-					<button onClick={submitQuiz}>Submit</button>
 				</div>
 			</div>
 		);

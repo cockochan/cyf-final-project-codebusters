@@ -33,6 +33,7 @@ const Students = (props) => {
 				type="text"
 				onChange={changeHandler}
 				placeholder="Enter the code"
+				className="input"
 				autoFocus
 			/>
 			{quizData.questions_id && props.code === enteredCode && !optionState ? (

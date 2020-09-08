@@ -9,18 +9,22 @@ const RunQuiz = (props) => {
 	};
 
 	return (
-		<div>
-			<select onChange={selectHandler} className="form-element">
-				<option>Select a quiz</option>
-				{props.quizzes.map((quiz) => {
-					return (
-						<option key={quiz._id} name={quiz.name} id={quiz.code} value={quiz._id}>
-							{quiz.name}
-						</option>
-					);
-				})}
-			</select>
-			{props.code ? <h3>code: {props.code}</h3> : null}
+		<div className="col-12 quiz-selection">
+			<div className="col-6 select-container">
+				<select onChange={selectHandler} className=" col-5 select-input input">
+					<option>Select a quiz</option>
+					{props.quizzes.map((quiz) => {
+						return (
+							<option key={quiz._id} name={quiz.name} id={quiz.code} value={quiz._id}>
+								{quiz.name}
+							</option>
+						);
+					})}
+				</select>
+			</div>
+			<div className="col-6">
+				{props.code ? <h3>code: {props.code}</h3> : null}
+			</div>
 		</div>
 	);
 };
