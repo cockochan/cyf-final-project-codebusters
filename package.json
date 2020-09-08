@@ -78,7 +78,8 @@
     "react-vis": "^1.11.7",
     "reactstrap": "^8.5.1",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^1.2.0"
+    "semantic-ui-react": "^1.2.0",
+    "victory": "^35.0.8"
   },
   "engines": {
     "node": "^10 || ^12 || ^14"

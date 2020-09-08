@@ -6,7 +6,7 @@ import Students from "./Components/Students.js";
 import Mentors from "./Components/Mentors.js";
 import NewQuestion from "./Components/NewQuestion.js";
 import Results from "./Components/Results.js";
-
+import Chart from "./Components/Chart";
 const App = () => {
 	const [questions, setQuestions] = useState(null);
 	const [quizzes, setQuizzes] = useState([]);

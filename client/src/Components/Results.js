@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import Chart from "./Chart";
 export default function Results(props) {
 	const [studentNames, setStudentNames]=useState([]);
 	const [selectedQuizQuestions, setSelectedQuizQuestions]=useState([]);
@@ -96,7 +96,7 @@ export default function Results(props) {
 			<div className='col-12 centered'>
 				<h1> no results for this quiz have been submitted yet</h1>
 				<div className='col-12'>
-					<h1>Welcome to QuizzTime</h1>
+					<h1>Welcome to QuizTime</h1>
 					<select name="quizez" className="quizez"  onChange={quizToSeeResultsChosen}>
 						<option >select a quiz</option>
 						{props.quizes.map((quiz)=>{
@@ -107,7 +107,7 @@ export default function Results(props) {
 	} else if(props.quizes){
 		return (
 			<div  className='col-12 centered'>
-				<h1>Chosse a quizz to see student results</h1>
+				<h1>Chosse a quiz to see student results</h1>
 				<select name="quizzez" className="quizzez" onChange={quizToSeeResultsChosen}>
 					<option value="" disabled selected hidden>select a quiz</option>
 					{props.quizes.map((quiz)=>{
@@ -115,24 +115,26 @@ export default function Results(props) {
 					})}
 		  </select>
 
-				{quizSelected&&allResults&&allResults!=="not found!"?<div><div className='centered'><h3>attempt number {attemptNumber+1} </h3><p>(change to see if some students made multiple attempts)</p></div>
-					<button onClick={decreaseAttemptNumber}>decrease attempt number </button>
-					<button onClick={increaseAttemptNumber}>increase attempt number </button><table>
-						<thead>
-							<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question, index)=>{
-								return(<th key={index} className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
-							}):<tr></tr>}</tr>
-							{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName, index)=>{
-								return(
-									<tr><td>{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
-										return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)}</p>:<p>Loading question</p>}</th>);
-									}):null}</tr>
-								);
-							}
-							):null}
-						</thead>
+				{quizSelected&&allResults&&allResults!=="not found!"?<div><div className='centered'>
+					<h3>attempt number {attemptNumber+1}	{selectedQuizQuestions&&allResults?<Chart selectedQuizQuestions={selectedQuizQuestions} results={allResults} />:null} </h3><p>(change to see if some students made multiple attempts)</p></div>
+				<button onClick={decreaseAttemptNumber}>decrease attempt number </button>
+				<button onClick={increaseAttemptNumber}>increase attempt number </button><table>
+					<thead>
+						<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question, index)=>{
+							return(<th key={index} className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
+						}):<tr></tr>}</tr>
+						{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName, index)=>{
+							return(
+								<tr><td>{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
+									return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)}</p>:<p>Loading question</p>}</th>);
+								}):null}</tr>
+							);
+						}
+						):null}
+					</thead>
 
-					</table>
+				</table>
+
 		  </div>:null}
 		 </div>
 		  );
