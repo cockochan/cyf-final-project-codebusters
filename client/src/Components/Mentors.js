@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { BrowserRouter as Route, Link } from "react-router-dom";
 import "../App.css";
 import "../grid.css";
 import ReactMarkdown from "react-markdown";
@@ -135,6 +136,14 @@ export default function Mentors(props) {
 		return (
 
 			<div className="row">
+      <nav className="navbar">
+					<Link to="/Results" exact="true" className="link-button">
+            			Quiz Results
+					</Link>
+					<Link to="/NewQuestion" exact="true" className="link-button">
+            			New Question
+					</Link>
+				</nav>
 				<RunQuiz
 					quizzes={props.quizzes}
 					setRoute={props.setRoute}
@@ -191,7 +200,8 @@ export default function Mentors(props) {
 									value={question._id}
 									onClick={addQuestion}
 								>
-                Add to quiz
+
+                Add to Quiz
 								</button>
 							</div>
 						</div>

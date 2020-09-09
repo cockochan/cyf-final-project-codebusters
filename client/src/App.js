@@ -39,15 +39,6 @@ const App = () => {
 					<Link to="/Students" exact="true" className="link-button">
             Student
 					</Link>
-					<Link to="/Mentors" exact="true" className="link-button">
-            Mentor
-					</Link>
-					<Link to="/Results" exact="true" className="link-button">
-            Quiz rezults
-					</Link>
-					<Link to="/NewQuestion" exact="true" className="link-button">
-            New question
-					</Link>
 				</nav>
 				<div className="body">
 					<Switch>
