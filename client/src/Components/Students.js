@@ -2,53 +2,46 @@ import React, { useState, useEffect } from "react";
 import Questions from "./Questions";
 import Message from "./Message.js";
 const Students = (props) => {
-	const [route, setRoute] = useState("");
-	const [optionState, setOptionState] = useState("");
-	const [quizId, setQuizId] = useState("");
+	const [enteredCode, setEnteredCode] = useState("");
 	const [textMessage, setTextMessage] = useState("");
 	const [quizData, setQuizData] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [optionState, setOptionState] = useState(false);
 
 	useEffect(() => {
-		fetch(`http://localhost:3100/api/${route}`)
+		fetch(`/api/${props.route}`)
 			.then((res) => res.json())
 			.then((data) => setQuizData(data))
 			.catch((err) => console.error(err));
-	}, [route]);
+	}, [props.route]);
 
-	const selectHandler = (event) => {
-		setRoute(`quizzes/${event.target.value}`);
-		setQuizId(event.target.value);
-		setOptionState(event.target.value);
+	const changeHandler = (event) => {
+		setEnteredCode(event.target.value);
 	};
 
 	return (
 		<div className="survey-page">
 			{isSubmitted ? (
-				<Message setIsSubmitted={setIsSubmitted} textMessage={textMessage} />
+				<Message
+					setIsSubmitted={setIsSubmitted}
+					textMessage={textMessage}
+					setOptionState={setOptionState}
+					setCode={props.setCode}
+				/>
 			) : null}
-			<select
-				onChange={selectHandler}
-				className="form-element"
-				value={optionState}
-			>
-				<option>Select a quiz</option>
-				{props.quizData.map((quiz) => {
-					return (
-						<option key={quiz._id} name={quiz.name} value={quiz._id}>
-							{quiz.name}
-						</option>
-					);
-				})}
-			</select>
-			{quizData.questions_id ? (
+			<input
+				type="text"
+				onChange={changeHandler}
+				placeholder="Enter the code"
+				className="input"
+				autoFocus
+			/>
+			{quizData.questions_id && props.code === enteredCode && !optionState ? (
 				<Questions
 					quizData={quizData}
-					quizId={quizId}
+					quizId={props.quizId}
 					setIsSubmitted={setIsSubmitted}
 					setTextMessage={setTextMessage}
-					setRoute={setRoute}
-					setOptionState={setOptionState}
 				/>
 			) : null}
 		</div>

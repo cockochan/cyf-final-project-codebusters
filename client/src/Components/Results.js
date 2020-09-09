@@ -9,7 +9,7 @@ export default function Results(props) {
 	const [quizSelected, setQuizSelected]=useState(null);
 	const [attemptNumber, setAttemptNumber]=useState(0);
 	const fetchResults =()=>{
-		fetch(`http://localhost:3100/api/results/${quizRoute}`)
+		fetch(`/api/results/${quizRoute}`)
 			.then((response)=>response.json())
 			.then((data)=>{
 				setAllResults(data);

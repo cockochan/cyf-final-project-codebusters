@@ -10,13 +10,16 @@ import Results from "./Components/Results.js";
 const App = () => {
 	const [questions, setQuestions] = useState(null);
 	const [quizzes, setQuizzes] = useState([]);
+	const [route, setRoute] = useState("");
+	const [quizId, setQuizId] = useState("");
+	const [code, setCode] = useState("");
 
 	useEffect(() => {
-		fetch("http://localhost:3100/api/questions")
+		fetch("/api/questions")
 			.then((res) => res.json())
 			.then((data) => setQuestions(data))
 			.catch((err) => console.error(err));
-		fetch("http://localhost:3100/api/quizzes")
+		fetch("/api/quizzes")
 			.then((res) => res.json())
 			.then((data) => setQuizzes(data))
 			.catch((err) => console.error(err));
@@ -34,20 +37,33 @@ const App = () => {
 						/>
 					</Link>
 					<Link to="/Students" exact="true" className="link-button">
-            			Student
+            Student
 					</Link>
 				</nav>
 				<div className="body">
 					<Switch>
 						<Route exact path="/Mentors">
-							<Mentors questions={questions} quizes={quizzes} />
+							<Mentors
+								questions={questions}
+								quizzes={quizzes}
+								setRoute={setRoute}
+								setQuizId={setQuizId}
+								setCode={setCode}
+								code={code}
+							/>
 						</Route>
 						<Route exact path="/Results">
 							<Results questions={questions} quizes={quizzes} />
 						</Route>
 						<Route exact path="/Students">
 							{quizzes.length > 0 ? (
-								<Students quizData={quizzes} />
+								<Students
+									quizData={quizzes}
+									route={route}
+									code={code}
+									setCode={setCode}
+									quizId={quizId}
+								/>
 							) : (
 								<p>There is no quiz to show</p>
 							)}
