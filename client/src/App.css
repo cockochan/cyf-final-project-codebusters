@@ -294,8 +294,22 @@ td {
 justify-items: center;
 }
 .welcome{
-  
+font-style: normal;
+font-weight: 300;
+font-size: 3rem;
+line-height: 4rem;
 }
+.welcomeContainer{
+  margin-top:30%;
+  justify-items: center;
+}
+.welcomeBig{
+  color: #03A9F4;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 30rem;
+  line-height: 131px;
+  }
 .quizzTimeLogo{
   justify-self: center;
   width:15%;
