@@ -6,7 +6,7 @@ import Students from "./Components/Students.js";
 import Mentors from "./Components/Mentors.js";
 import NewQuestion from "./Components/NewQuestion.js";
 import Results from "./Components/Results.js";
-
+import Home from "./Components/Home";
 const App = () => {
 	const [questions, setQuestions] = useState(null);
 	const [quizzes, setQuizzes] = useState([]);
@@ -67,6 +67,9 @@ const App = () => {
 						</Route>
 						<Route exact path="/NewQuestion">
 							<NewQuestion />
+						</Route>
+						<Route exact path="/">
+							<Home />
 						</Route>
 					</Switch>
 				</div>

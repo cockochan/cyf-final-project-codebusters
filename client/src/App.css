@@ -287,7 +287,15 @@ td {
 .unknown {
   background-color: #03A9F4;
 }
-
+.logoContainer{
+justify-items: center;
+}
+.quizzTimeLogo{
+  justify-self: center;
+  width:50%;
+  margin-left:25%;
+  margin-right:25%;
+}
 /* New Question */
 /* **************************************************** */
 
