@@ -34,6 +34,9 @@ export default function Results(props) {
 		if(studentsAttemptsOnQuestion[attemptNumber]===undefined){
 			return("unknown");
 		}
+		if(studentsAttemptsOnQuestion[attemptNumber].value===""){
+			return("skipped");
+		}
 		if(studentsAttemptsOnQuestion!==undefined&&studentsAttemptsOnQuestion[attemptNumber].correct){
 			return("corect");
 		} else{
@@ -135,7 +138,7 @@ export default function Results(props) {
 								{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName, index)=>{
 									return(
 										<tr><td>{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
-											return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)}</p>:<p>Loading question</p>}</th>);
+											return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)!==""?findStudenAnswerResult(question._id, oneName):"skipped"}</p>:<p>Loading question</p>}</th>);
 										}):null}</tr>
 									);
 								}

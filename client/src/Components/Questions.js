@@ -18,7 +18,6 @@ const Questions = (props) => {
 		timestamp: dayjs().format(),
 		studentName: "",
 	});
-	console.log(props.quizData);
 	useEffect(() => {
 		fetch(`/api/question/${props.quizData.questions_id[currentQuestionIndex]}`)
 			.then((res) => res.json())

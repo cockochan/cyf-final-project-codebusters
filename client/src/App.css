@@ -35,6 +35,9 @@ html {
 .cyf-log {
   height: 5vh;
 }
+.skipped{
+  background-color:#BDBDBD;
+}
 
 .link-button {
   display: flex;
@@ -274,15 +277,15 @@ td {
 }
 
 .corect {
-  background-color: #93ff8e;
+  background-color:#81C784;;
 }
 
 .incorect {
-  background-color: #ff75c4;
+  background-color: #F44336;
 }
 
 .unknown {
-  background-color: #a8caff;
+  background-color: #03A9F4;
 }
 
 /* New Question */
