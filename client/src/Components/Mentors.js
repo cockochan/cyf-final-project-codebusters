@@ -137,6 +137,13 @@ export default function Mentors(props) {
 			<div className='container'>
 				<div className="row">
 					<nav className="navbar">
+						<Link to="/" exact="true">
+							<img
+								src="https://codeyourfuture.io/wp-content/uploads/2019/03/cyf_brand.png"
+								alt="cyf_brand.png"
+								className="cyf-log"
+							/>
+						</Link>
 						<Link to="/Results" exact="true" className="link-button">
             			Quiz Results
 						</Link>
