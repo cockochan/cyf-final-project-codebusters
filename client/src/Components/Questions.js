@@ -14,11 +14,11 @@ const Questions = (props) => {
 		question_id: props.quizData.questions_id[currentQuestionIndex],
 		correct: false,
 		value: "",
-		quiz_id: props.quizId,
+		quiz_id: props.quizData._id,
 		timestamp: dayjs().format(),
 		studentName: "",
 	});
-
+	console.log(props.quizData);
 	useEffect(() => {
 		fetch(`/api/question/${props.quizData.questions_id[currentQuestionIndex]}`)
 			.then((res) => res.json())

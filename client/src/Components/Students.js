@@ -36,9 +36,10 @@ const Students = (props) => {
 				className="input"
 				autoFocus
 			/>
-			{quizData.questions_id && props.code === enteredCode && !optionState ? (
+
+			{props.quizData.find((quiz) => quiz.code === enteredCode) && !optionState ? (
 				<Questions
-					quizData={quizData}
+					quizData={props.quizData.find((quiz) => quiz.code === enteredCode)}
 					quizId={props.quizId}
 					setIsSubmitted={setIsSubmitted}
 					setTextMessage={setTextMessage}
