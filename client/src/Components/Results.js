@@ -100,7 +100,7 @@ export default function Results(props) {
 			<div className='col-12 centered'>
 				<h1> no results for this quiz have been submitted yet</h1>
 				<div className='col-12'>
-					<h1>Welcome to QuizzTime</h1>
+					<h1>Welcome to QuizTime</h1>
 					<select name="quizez" className="quizez"  onChange={quizToSeeResultsChosen}>
 						<option >select a quiz</option>
 						{props.quizes.map((quiz)=>{
@@ -120,7 +120,7 @@ export default function Results(props) {
 					</Link>
 				</nav>
 				<div  className='col-12 centered'>
-					<h1>Chosse a quizz to see student results</h1>
+					<h1>Chosse a quiz to see student results</h1>
 					<select name="quizzez" className="quizzez" onChange={quizToSeeResultsChosen}>
 						<option value="" disabled selected hidden>select a quiz</option>
 						{props.quizes.map((quiz)=>{

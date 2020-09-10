@@ -12,7 +12,7 @@ const Students = (props) => {
 	};
 
 	return (
-		<div className="survey-page">
+		<div className="surveyPage col-12">
 			{isSubmitted ? (
 				<Message
 					setIsSubmitted={setIsSubmitted}
@@ -24,8 +24,8 @@ const Students = (props) => {
 			<input
 				type="text"
 				onChange={changeHandler}
-				placeholder="Enter the code"
-				className="input"
+				placeholder="Enter quiz code"
+				className="studentCodeinput"
 				autoFocus
 			/>
 
