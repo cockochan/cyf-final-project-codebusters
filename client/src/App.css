@@ -199,16 +199,14 @@ html {
   align-self: center;
 }
 
-/* .survey-page {
+.surveyPage {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70%;
-  margin: 5%;
   display: flex;
   flex-direction: column;
-} */
+}
 
 /* Message */
 /* **************************************************** */
@@ -283,7 +281,9 @@ td {
 .incorect {
   background-color: #F44336;
 }
-
+.studentCodeinput{
+  align-self: center;
+}
 .unknown {
   background-color: #03A9F4;
 }
