@@ -4,16 +4,8 @@ import Message from "./Message.js";
 const Students = (props) => {
 	const [enteredCode, setEnteredCode] = useState("");
 	const [textMessage, setTextMessage] = useState("");
-	const [quizData, setQuizData] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [optionState, setOptionState] = useState(false);
-
-	useEffect(() => {
-		fetch(`/api/${props.route}`)
-			.then((res) => res.json())
-			.then((data) => setQuizData(data))
-			.catch((err) => console.error(err));
-	}, [props.route]);
 
 	const changeHandler = (event) => {
 		setEnteredCode(event.target.value);
