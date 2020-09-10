@@ -207,6 +207,9 @@ html {
   display: flex;
   flex-direction: column;
 }
+.oneName{
+ text-align: center;
+}
 
 /* Message */
 /* **************************************************** */
@@ -290,9 +293,12 @@ td {
 .logoContainer{
 justify-items: center;
 }
+.welcome{
+  
+}
 .quizzTimeLogo{
   justify-self: center;
-  width:50%;
+  width:15%;
   margin-left:25%;
   margin-right:25%;
 }

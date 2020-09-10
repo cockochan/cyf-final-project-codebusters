@@ -137,7 +137,7 @@ export default function Results(props) {
 								}):<tr></tr>}</tr>
 								{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName, index)=>{
 									return(
-										<tr><td>{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
+										<tr><td className='oneName'>{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question)=>{
 											return(<th className={findQuestionResult(question._id, oneName)}>{question!==undefined?<p>{findStudenAnswerResult(question._id, oneName)!==""?findStudenAnswerResult(question._id, oneName):"skipped"}</p>:<p>Loading question</p>}</th>);
 										}):null}</tr>
 									);
