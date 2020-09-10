@@ -59,9 +59,6 @@ const App = () => {
 							{quizzes.length > 0 ? (
 								<Students
 									quizData={quizzes}
-									route={route}
-									code={code}
-									setCode={setCode}
 									quizId={quizId}
 								/>
 							) : (

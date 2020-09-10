@@ -136,7 +136,7 @@ export default function Mentors(props) {
 		return (
 
 			<div className="row">
-      <nav className="navbar">
+				<nav className="navbar">
 					<Link to="/Results" exact="true" className="link-button">
             			Quiz Results
 					</Link>
