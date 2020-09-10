@@ -80,16 +80,20 @@ html {
 }
 
 .select-input {
-  margin: 20px;
-  align-self: flex-end;
+  align-self: flex-start;
 }
-
+.topFilterSelect{
+  margin-left:15px;
+}
+.filterButtons{
+  margin-top:15px;
+}
 .card {
   background-color: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 3px 4px rgba(0, 0, 0, 0.12),
     0px 1px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  margin: 5px 0;
+  margin: 5px;
 }
 
 .quiz-button {
@@ -111,9 +115,9 @@ html {
   margin: 20px;
 }
 
-.quiz-questions {
+.quizQuestions {
   background-color: #eeeeee;
-  margin: 20px 0;
+  margin: 20px;
 }
 
 .quiz-handler {
@@ -124,23 +128,30 @@ html {
   background-color: #e5e5e5;
 }
 
-.card-block {
+.cardBlock {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20px 0;
+  justify-items: space-around;
+  align-items: flex-start;
+  margin-top: 15px ;
 }
 
 .answer {
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: 0.5px;
-  color: rgba(0, 0, 0, 0.6);
-  mix-blend-mode: normal;
+ /* Heading/ 6 - Open Sans SemiBold */
+
+ font-family: Open Sans;
+ font-style: normal;
+ font-weight: bold;
+ font-size: 10px;
+ line-height: 1rem;
+ /* identical to box height, or 150% */
+ 
+ letter-spacing: 0.15px;
+ 
+ /* Type / Black Secondary */
+ 
+ color: rgba(0, 0, 0, 0.6);
+ mix-blend-mode: normal;
 }
 
 .question,
@@ -175,7 +186,7 @@ html {
 .answers,
 .question-and-code-containter {
   padding: 5px;
-  margin: 15px 5px 5px 0;
+  margin: 5px 5px 5px 0;
 }
 
 .question-elements {
