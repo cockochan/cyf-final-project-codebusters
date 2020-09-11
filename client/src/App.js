@@ -53,7 +53,7 @@ const App = () => {
 							/>
 						</Route>
 						<Route exact path="/Results">
-							<Results questions={questions} quizes={quizzes} />
+							<Results questions={questions} quizzes={quizzes} />
 						</Route>
 						<Route exact path="/Students">
 							{quizzes.length > 0 ? (
