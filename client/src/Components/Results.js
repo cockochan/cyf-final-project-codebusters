@@ -124,7 +124,7 @@ export default function Results(props) {
 	};
 
 	return (
-		<div>
+		<div className="container">
 			<div>
 				<div className="col-12">
 					<h1>Welcome to QuizzTime</h1>
@@ -179,7 +179,7 @@ export default function Results(props) {
 								</table>
 							</div>
 						) : (
-							<h4>No body answer this quiz!</h4>
+							<h4>Nobody answered this quiz!</h4>
 						)}
 					</div>
 				) : (

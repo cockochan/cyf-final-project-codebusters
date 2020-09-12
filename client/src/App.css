@@ -126,7 +126,7 @@ html {
 .card-block {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: flex-start;
   margin: 20px 0;
   align-items: flex-start;
