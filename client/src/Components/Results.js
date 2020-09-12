@@ -31,10 +31,10 @@ export default function Results(props) {
 		if(studentsAttemptsOnQuestion.length==0){
 			return("unknown");
 		}
-		if(studentsAttemptsOnQuestion[attemptNumber]===undefined){
+		if(studentsAttemptsOnQuestion[studentsAttemptsOnQuestion.length-1]===undefined){
 			return("unknown");
 		}
-		if(studentsAttemptsOnQuestion!==undefined&&studentsAttemptsOnQuestion[attemptNumber].correct){
+		if(studentsAttemptsOnQuestion!==undefined&&studentsAttemptsOnQuestion[studentsAttemptsOnQuestion.length-1].correct){
 			return("corect");
 		} else{
 			return("incorect");
