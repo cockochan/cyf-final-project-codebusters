@@ -7,7 +7,7 @@ export default function Results(props) {
 	const [quizRoute,setQuizRoute]=useState("");
 	const [allResults, setAllResults]=useState(null);
 	const [quizSelected, setQuizSelected]=useState(null);
-	const [attemptNumber, setAttemptNumber]=useState(0);
+	// const [attemptNumber, setAttemptNumber]=useState(0);
 	const fetchResults =()=>{
 		fetch(`/api/results/${quizRoute}`)
 			.then((response)=>response.json())
@@ -16,14 +16,14 @@ export default function Results(props) {
 			}
 			)	.catch((err) => console.error(err));
 	};
-	const increaseAttemptNumber = () =>setAttemptNumber(attemptNumber+1);
-	const decreaseAttemptNumber =()=> {
-		if(attemptNumber>0){
-			setAttemptNumber(attemptNumber-1);
-		} else{
-			return("can't increase");
-		}
-	};
+	// const increaseAttemptNumber = () =>setAttemptNumber(attemptNumber+1);
+	// const decreaseAttemptNumber =()=> {
+	// 	if(attemptNumber>0){
+	// 		setAttemptNumber(attemptNumber-1);
+	// 	} else{
+	// 		return("can't increase");
+	// 	}
+	// };
 	const findQuestionResult=(actualQuestionId, oneName)=>{
 		let resultsforThisQuestion = allResults.filter((result)=>result.question_id==actualQuestionId);
 
@@ -48,8 +48,8 @@ export default function Results(props) {
 		}
 		if(studentAnsweredQuestion.length>0){
 		}
-		if(studentAnsweredQuestion!==undefined&&studentAnsweredQuestion[attemptNumber]){
-			return(studentAnsweredQuestion[attemptNumber].value);
+		if(studentAnsweredQuestion!==undefined&&studentAnsweredQuestion[studentAnsweredQuestion.length-1]){
+			return(studentAnsweredQuestion[studentAnsweredQuestion.length-1].value);
 		}
 	};
 	useEffect(() => {
@@ -117,7 +117,7 @@ export default function Results(props) {
 					</Link>
 				</nav>
 				<div  className='col-12 centered'>
-					<h1>Chosse a quizz to see student results</h1>
+					<h1>Chosse a quiz to see student results</h1>
 					<select name="quizzez" className="quizzez" onChange={quizToSeeResultsChosen}>
 						<option value="" disabled selected hidden>select a quiz</option>
 						{props.quizes.map((quiz)=>{
@@ -125,9 +125,10 @@ export default function Results(props) {
 						})}
 		  </select>
 
-					{quizSelected&&allResults&&allResults!=="not found!"?<div><div className='centered'><h3>attempt number {attemptNumber+1} </h3><p>(change to see if some students made multiple attempts)</p></div>
-						<button onClick={decreaseAttemptNumber}>decrease attempt number </button>
-						<button onClick={increaseAttemptNumber}>increase attempt number </button><table>
+					{quizSelected&&allResults&&allResults!=="not found!"?<div><div className='centered'><h3>attempt number  </h3><p>(change to see if some students made multiple attempts)</p></div>
+						{/* <button onClick={decreaseAttemptNumber}>decrease attempt number </button>
+						<button onClick={increaseAttemptNumber}>increase attempt number </button> */}
+						<table>
 							<thead>
 								<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question, index)=>{
 									return(<th key={index} className='col-2'>{question!==undefined?<p>{question.question}</p>:<p>Loading question</p>}</th>);
