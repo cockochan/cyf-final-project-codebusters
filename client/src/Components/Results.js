@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 export default function Results(props) {
+
 	const [quizQuestions, setQuizQuestions] = useState([]);
 	const [students, setStudents] = useState([]);
 	const [quizRoute, setQuizRoute] = useState("");
 	const [allResults, setAllResults] = useState(null);
 	const [quizSelected, setQuizSelected] = useState({});
 	const [quizSelectedResult, setQuizSelectedResult] = useState([]);
+	const [attemptNumber, setAttemptNumber] = useState(1);
 
 	useEffect(() => {
 		fetch("/api/results")
@@ -30,6 +32,7 @@ export default function Results(props) {
 	}
 
 	const changeHandler = (event) => {
+		setAttemptNumber(1);
 		setStudents([]);
 		setQuizRoute(`quizzes/${event.target.value}`);
 		const selectedResult = allResults.filter(
@@ -56,7 +59,11 @@ export default function Results(props) {
 				quizResult.studentName === student
         && quizResult.question_id === questionId
 		);
-		return allatemmpts[allatemmpts.length - 1].timestamp;
+		if (allatemmpts.length >= attemptNumber) {
+			return allatemmpts[allatemmpts.length - attemptNumber].timestamp;
+		} else {
+			return null;
+		}
 	};
 
 	const getValues = (student, questionId) => {
@@ -66,24 +73,30 @@ export default function Results(props) {
         && quizResult.question_id === questionId
 		);
 		if (allatemmpts.length > 0) {
-			let setTimestamp = getLastAttempt(student);
-
-			const finalResult = allatemmpts.find((attempt) => {
-				return attempt.timestamp >= setTimestamp;
-			});
-
-			if (finalResult && finalResult.value) {
-				return (
-					<td key={finalResult._id} className={colorState(finalResult.correct)}>
-						{finalResult.value}
-					</td>
-				);
+			let timestamp = getLastAttempt(student);
+			if (!timestamp) {
+				return null;
 			} else {
-				return (
-					<td key={Math.floor(Math.random(0) * 100000)} className="unknown">
-            No Answer
-					</td>
-				);
+				const finalResult = allatemmpts.find((attempt) => {
+					return attempt.timestamp >= timestamp;
+				});
+
+				if (finalResult && finalResult.value) {
+					return (
+						<td
+							key={finalResult._id}
+							className={colorState(finalResult.correct)}
+						>
+							{finalResult.value}
+						</td>
+					);
+				} else {
+					return (
+						<td key={Math.floor(Math.random(0) * 100000)} className="unknown">
+              No Answer
+						</td>
+					);
+				}
 			}
 		} else {
 			return (
@@ -100,6 +113,14 @@ export default function Results(props) {
 		} else {
 			return "incorect";
 		}
+	};
+
+	const previousAttempt = () => {
+		setAttemptNumber(attemptNumber + 1);
+	};
+
+	const nextAttempt = () => {
+		setAttemptNumber(attemptNumber - 1);
 	};
 
 	return (
@@ -122,8 +143,14 @@ export default function Results(props) {
 			<div>
 				{quizSelected._id ? (
 					<div>
-						<div>
-							{students.length > 0 ? (
+						{students.length > 0 ? (
+							<div>
+								<div>
+									<button onClick={previousAttempt} disabled={attemptNumber >=3}>Previous Attempt</button>
+									<button onClick={nextAttempt} disabled={attemptNumber <= 1}>
+                    Next Attempt
+									</button>
+								</div>
 								<table>
 									<thead>
 										<tr>
@@ -150,10 +177,10 @@ export default function Results(props) {
 										})}
 									</tbody>
 								</table>
-							) : (
-								<h4>No body answer this quiz!</h4>
-							)}
-						</div>
+							</div>
+						) : (
+							<h4>No body answer this quiz!</h4>
+						)}
 					</div>
 				) : (
 					<p>please select a quiz to see the result</p>
