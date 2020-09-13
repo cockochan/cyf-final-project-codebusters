@@ -56,9 +56,11 @@ export default function NewQuestion() {
 		});
 	};
 	const tagHandler = (event) => {
+		const tempTags = event.target.value.split(",");
+		const lowerTags = tempTags.map((tag)=>tag.toLowerCase().trim());
 		setQuestionToSet({
 			...questionToSet,
-			tags: event.target.value.split(","),
+			tags: lowerTags,
 		});
 	};
 
