@@ -149,7 +149,7 @@ export default function Results(props) {
 						{students.length > 0 ? (
 							<div className="results-container">
 								<div className="quiz-handler">
-									<button className="quiz-button card-button" onClick={previousAttempt} disabled={attemptNumber >= attemptCounter}>Previous Attempt</button>
+									<button className="quiz-button card-button" onClick={previousAttempt} disabled={attemptNumber > attemptCounter}>Previous Attempt</button>
 									<button className="quiz-button card-button" onClick={nextAttempt} disabled={attemptNumber <= 1}>
                     Next Attempt
 									</button>
