@@ -182,10 +182,10 @@ export default function Mentors(props) {
 								<button onClick={resetFilters}>reset filters</button>
 							</div>
 						</div>
-						<div className="col-8 card-block">
+						<div className="col-9 card-block">
 							{filteredQuestionsByTag.map((question, index) => (
 
-								<div className=" col-4 xl-col-3 md-col-4 sm-col-12 card" key={index}>
+								<div className=" col-3 card" key={index}>
 									<div className="question-and-code-containter">
 										{question.question_code ? (
 											<div>

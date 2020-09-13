@@ -86,8 +86,6 @@ html {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 3px 4px rgba(0, 0, 0, 0.12),
     0px 1px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  margin: 5px;
-  max-height: 0.5fr;
   overflow-wrap: break-word;
 }
 
