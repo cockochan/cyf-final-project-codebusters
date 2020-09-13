@@ -20,7 +20,7 @@ const Students = (props) => {
 	};
 
 	return (
-		<div className="survey-page">
+		<div className="container">
 			{isSubmitted ? (
 				<Message
 					setIsSubmitted={setIsSubmitted}
@@ -29,13 +29,14 @@ const Students = (props) => {
 					setCode={props.setCode}
 				/>
 			) : null}
-			<input
-				type="text"
-				onChange={changeHandler}
-				placeholder="Enter the code"
-				className="input"
-				autoFocus
-			/>
+			<div className="centered">
+				<input
+					type="text"
+					onChange={changeHandler}
+					placeholder="Enter the code"
+					className="input"
+					autoFocus
+				/></div>
 
 			{props.quizData.find((quiz) => quiz.code === enteredCode) && !optionState ? (
 				<Questions
