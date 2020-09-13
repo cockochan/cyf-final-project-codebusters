@@ -9,6 +9,7 @@ export default function Results(props) {
 	const [quizSelected, setQuizSelected] = useState({});
 	const [quizSelectedResult, setQuizSelectedResult] = useState([]);
 	const [attemptNumber, setAttemptNumber] = useState(1);
+	const [attemptCounter, setAttemptCounter] = useState(1);
 
 	useEffect(() => {
 		fetch("/api/results")
@@ -33,6 +34,7 @@ export default function Results(props) {
 
 	const changeHandler = (event) => {
 		setAttemptNumber(1);
+		setAttemptCounter(1);
 		setStudents([]);
 		setQuizRoute(`quizzes/${event.target.value}`);
 		const selectedResult = allResults.filter(
@@ -54,30 +56,31 @@ export default function Results(props) {
 
 	const getLastAttempt = (student) => {
 		const questionId = quizQuestions.length > 0 ? quizQuestions[0]._id : null;
-		const allatemmpts = quizSelectedResult.filter(
+		const allAttempts = quizSelectedResult.filter(
 			(quizResult) =>
 				quizResult.studentName === student
         && quizResult.question_id === questionId
 		);
-		if (allatemmpts.length >= attemptNumber) {
-			return allatemmpts[allatemmpts.length - attemptNumber].timestamp;
+		if (allAttempts.length >= attemptNumber) {
+			return allAttempts[allAttempts.length - attemptNumber].timestamp;
 		} else {
 			return null;
 		}
 	};
 
 	const getValues = (student, questionId) => {
-		const allatemmpts = quizSelectedResult.filter(
+		const allAttempts = quizSelectedResult.filter(
 			(quizResult) =>
 				quizResult.studentName === student
         && quizResult.question_id === questionId
 		);
-		if (allatemmpts.length > 0) {
+		if (allAttempts.length > 0) {
+			allAttempts.length>attemptCounter?setAttemptCounter(allAttempts.length):null;
 			let timestamp = getLastAttempt(student);
 			if (!timestamp) {
 				return null;
 			} else {
-				const finalResult = allatemmpts.find((attempt) => {
+				const finalResult = allAttempts.find((attempt) => {
 					return attempt.timestamp >= timestamp;
 				});
 
@@ -144,12 +147,13 @@ export default function Results(props) {
 				{quizSelected._id ? (
 					<div>
 						{students.length > 0 ? (
-							<div>
-								<div>
-									<button onClick={previousAttempt} disabled={attemptNumber >=3}>Previous Attempt</button>
-									<button onClick={nextAttempt} disabled={attemptNumber <= 1}>
+							<div className="results-container">
+								<div className="quiz-handler">
+									<button className="quiz-button card-button" onClick={previousAttempt} disabled={attemptNumber > attemptCounter}>Previous Attempt</button>
+									<button className="quiz-button card-button" onClick={nextAttempt} disabled={attemptNumber <= 1}>
                     Next Attempt
 									</button>
+									<span>All Attempt : {attemptCounter}</span>
 								</div>
 								<table>
 									<thead>

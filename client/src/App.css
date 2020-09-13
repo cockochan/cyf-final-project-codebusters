@@ -118,7 +118,8 @@ html {
 
 .quiz-handler {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
   padding: 20px 0;
   margin: 20px 0;
   background-color: #e5e5e5;
@@ -270,6 +271,10 @@ th,
 td {
   border: 1px solid black;
 }
+td,
+th{
+  padding: 7px;
+}
 
 .quizez {
   margin: 5vh;
@@ -292,6 +297,17 @@ td {
   background-color: #a8caff;
 }
 
+.results-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.no-border{
+  border: none;
+}
 /* New Question */
 /* **************************************************** */
 
