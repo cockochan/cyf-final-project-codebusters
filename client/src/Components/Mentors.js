@@ -152,36 +152,36 @@ export default function Mentors(props) {
 					</Link>
 				</nav><div className="container">
 					<div className='row'>
-						<div className='col-6 topFilterSelect'>
-							<RunQuiz
-								quizzes={props.quizzes}
-								setRoute={props.setRoute}
-								setCode={props.setCode}
-								code={props.code}
-								setQuizId={props.setQuizId}
-								setData={props.setData}
-							/>
-							<div className="filterButtons row">
-								<select  onChange={tagClickHandler}>
-									<option value="" disabled selected hidden>select tag filter</option>
-									{tagsCollection.map((tag, index) => {
-										return (
-											<option value={tag} name={tag} key={index} >{tag}</option>
-										);
-									})}
-								</select>
-								<div>
+
+						<RunQuiz
+							quizzes={props.quizzes}
+							setRoute={props.setRoute}
+							setCode={props.setCode}
+							code={props.code}
+							setQuizId={props.setQuizId}
+							setData={props.setData}
+						/>
+						<div className="filterButtons row">
+							<select  onChange={tagClickHandler}>
+								<option value="" disabled selected hidden>select tag filter</option>
+								{tagsCollection.map((tag, index) => {
+									return (
+										<option value={tag} name={tag} key={index} >{tag}</option>
+									);
+								})}
+							</select>
+							<div>
 					 <select onChange={selectHandler}>
 						 <option selected disabled>Number of question</option>
-										<option value="5">5</option>
-										<option value="10">10</option>
-										<option value="15">15</option>
-									</select>
+									<option value="5">5</option>
+									<option value="10">10</option>
+									<option value="15">15</option>
+								</select>
 					 </div>
-								<button onClick={autofillQuizz}>autofill quiz</button>
-								<button onClick={resetFilters}>reset filters</button>
-							</div>
+							<button onClick={autofillQuizz}>autofill quiz</button>
+							<button onClick={resetFilters}>reset filters</button>
 						</div>
+
 						<div className="col-9 card-block">
 							{filteredQuestionsByTag.map((question, index) => (
 

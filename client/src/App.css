@@ -73,12 +73,12 @@ html {
 
 .select-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .select-input {
-  margin: 20px;
-  align-self: flex-end;
+  align-self: flex-start;
+  padding-left: 0px;
 }
 
 .card {
@@ -88,7 +88,10 @@ html {
   border-radius: 5px;
   overflow-wrap: break-word;
 }
-
+.select-container{
+  align-items: flex-start;
+  justify-content: flex-start;
+}
 .quiz-button {
   background: #eeeeee;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 4px 5px rgba(0, 0, 0, 0.12),
@@ -164,7 +167,7 @@ html {
 
 .quiz-selection {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   margin: 20px 0;
   /* background-color: #eeeeee; */
@@ -211,6 +214,9 @@ html {
 /* Message */
 /* **************************************************** */
 
+.filterButtons{
+  padding-left:30px;
+}
 .message-container {
   position: fixed;
   width: 30%;
