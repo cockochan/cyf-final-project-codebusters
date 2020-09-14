@@ -7,6 +7,7 @@ const Questions = (props) => {
 	const [isChecked, setIsChecked] = useState(false);
 	const [radioId, setRadioId] = useState("");
 	const [route, setRoute] = useState("");
+	const [postData, setPostData] = useState({});
 	const [questionData, setQuestionData] = useState({});
 	const [requestOption, setRequestOption] = useState({ method: "GET" });
 	const [answer, setAnswer] = useState({
@@ -23,7 +24,11 @@ const Questions = (props) => {
 			.then((res) => res.json())
 			.then((data) => setQuestionData(data))
 			.catch((err) => console.error(err));
-	}, [props.quizData.questions_id[currentQuestionIndex]]);
+		fetch(`/api/${route}`, requestOption)
+			.then((res) => res.json())
+			.then((data) => setPostData(data))
+			.catch((err) => console.error(err));
+	}, [props.quizData.questions_id[currentQuestionIndex], route, requestOption]);
 
 	const submitHandler = (e) => {
 		setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -191,13 +196,13 @@ const Questions = (props) => {
 					onClick={(e) =>{
 						if(answer.value=="") {
 							window.confirm("Are you sure you want to skip this question?")
-					&& submitHandler(e);
+				&& submitHandler(e);
 						}else{
 							submitHandler(e);
 						}
 					}}
 				>
-				Next</Button>
+			Next</Button>
 			) : (
 				<Button type="button" onClick={submitForm} className="answers">
           Submit
