@@ -155,11 +155,11 @@ export default function Mentors(props) {
 
 						<RunQuiz
 							quizzes={props.quizzes}
-							setRoute={props.setRoute}
-							setCode={props.setCode}
-							code={props.code}
-							setQuizId={props.setQuizId}
-							setData={props.setData}
+							// setRoute={props.setRoute}
+							// setCode={props.setCode}
+							// code={props.code}
+							// setQuizId={props.setQuizId}
+							// setData={props.setData}
 						/>
 						<div className="filterButtons row">
 							<select  onChange={tagClickHandler}>

@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import dayjs from "dayjs";
 import ReactMarkdown from "react-markdown";
 const Questions = (props) => {
+
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [isChecked, setIsChecked] = useState(false);
 	const [radioId, setRadioId] = useState("");
@@ -18,7 +19,7 @@ const Questions = (props) => {
 		timestamp: dayjs().format(),
 		studentName: "",
 	});
-	console.log(props.quizData);
+
 	useEffect(() => {
 		fetch(`/api/question/${props.quizData.questions_id[currentQuestionIndex]}`)
 			.then((res) => res.json())

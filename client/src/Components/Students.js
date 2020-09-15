@@ -4,16 +4,16 @@ import Message from "./Message.js";
 const Students = (props) => {
 	const [enteredCode, setEnteredCode] = useState("");
 	const [textMessage, setTextMessage] = useState("");
-	const [quizData, setQuizData] = useState([]);
+	// const [quizData, setQuizData] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [optionState, setOptionState] = useState(false);
 
-	useEffect(() => {
-		fetch(`/api/${props.route}`)
-			.then((res) => res.json())
-			.then((data) => setQuizData(data))
-			.catch((err) => console.error(err));
-	}, [props.route]);
+	// useEffect(() => {
+	// 	fetch(`/api/${props.route}`)
+	// 		.then((res) => res.json())
+	// 		.then((data) => setQuizData(data))
+	// 		.catch((err) => console.error(err));
+	// }, [props.route]);
 
 	const changeHandler = (event) => {
 		setEnteredCode(event.target.value);
@@ -26,7 +26,7 @@ const Students = (props) => {
 					setIsSubmitted={setIsSubmitted}
 					textMessage={textMessage}
 					setOptionState={setOptionState}
-					setCode={props.setCode}
+					// setCode={props.setCode}
 				/>
 			) : null}
 			<div className="centered">
@@ -41,7 +41,7 @@ const Students = (props) => {
 			{props.quizData.find((quiz) => quiz.code === enteredCode) && !optionState ? (
 				<Questions
 					quizData={props.quizData.find((quiz) => quiz.code === enteredCode)}
-					quizId={props.quizId}
+					// quizId={props.quizId}
 					setIsSubmitted={setIsSubmitted}
 					setTextMessage={setTextMessage}
 				/>
