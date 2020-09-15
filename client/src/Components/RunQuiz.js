@@ -3,8 +3,6 @@ import React, { useState } from "react";
 const RunQuiz = (props) => {
 	const[code, setCode]=useState("");
 	const selectHandler = (event) => {
-		// props.setRoute(`quizzes/${event.target.value}`);
-		// props.setQuizId(event.target.value);
 		const selectedQuiz = props.quizzes.find((quiz) => quiz._id === event.target.value);
 		setCode(selectedQuiz.code);
 	};

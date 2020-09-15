@@ -153,14 +153,7 @@ export default function Mentors(props) {
 				</nav><div className="container">
 					<div className='row'>
 
-						<RunQuiz
-							quizzes={props.quizzes}
-							// setRoute={props.setRoute}
-							// setCode={props.setCode}
-							// code={props.code}
-							// setQuizId={props.setQuizId}
-							// setData={props.setData}
-						/>
+						<RunQuiz quizzes={props.quizzes} />
 						<div className="filterButtons row">
 							<select  onChange={tagClickHandler}>
 								<option value="" disabled selected hidden>select tag filter</option>
