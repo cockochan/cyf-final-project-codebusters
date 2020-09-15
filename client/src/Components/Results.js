@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Navbar from "./Navbar";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import your icons
@@ -184,150 +185,153 @@ export default function Results(props) {
 	};
 
 	return (
-		<div className="container">
-			<div>
-				<div className="col-12 quiz-handler">
-					<div className="col-6">
-						<h2>Welcome to Quiz Time</h2>
-						<select className="input select-input" onChange={changeHandler}>
-							<option>Select a Quiz</option>
-							{props.quizzes.map((quiz) => {
-								return (
-									<option key={quiz._id} value={quiz._id}>
-										{quiz.name}
-									</option>
-								);
-							})}
-						</select>
-					</div>
-					{quizQuestions.length > 0 ? (
-						<div className="quiz-handler col-5">
-							<button
-								className="quiz-button card-button"
-								onClick={previousAttempt}
-								disabled={attemptNumber >= attemptCounter}
-							>
-                Previous Attempt
-							</button>
-							<button
-								className="quiz-button card-button"
-								onClick={nextAttempt}
-								disabled={attemptNumber <= 1}
-							>
-                Next Attempt
-							</button>
-							<span>All Attempt : {attemptCounter - attemptNumber+1}</span>
+		<div>
+			<Navbar mentors="Mentors" results="Results" newquestion="New Question" />
+			<div className="container">
+				<div>
+					<div className="col-12 quiz-handler">
+						<div className="col-6">
+							<h2>Welcome to Quiz Time</h2>
+							<select className="input select-input" onChange={changeHandler}>
+								<option>Select a Quiz</option>
+								{props.quizzes.map((quiz) => {
+									return (
+										<option key={quiz._id} value={quiz._id}>
+											{quiz.name}
+										</option>
+									);
+								})}
+							</select>
 						</div>
-					) : null}
+						{quizQuestions.length > 0 ? (
+							<div className="quiz-handler col-5">
+								<button
+									className="quiz-button card-button"
+									onClick={previousAttempt}
+									disabled={attemptNumber >= attemptCounter}
+								>
+                Previous Attempt
+								</button>
+								<button
+									className="quiz-button card-button"
+									onClick={nextAttempt}
+									disabled={attemptNumber <= 1}
+								>
+                Next Attempt
+								</button>
+								<span>All Attempt : {attemptCounter - attemptNumber+1}</span>
+							</div>
+						) : null}
+					</div>
 				</div>
-			</div>
-			<div>
-				{isShowDetails ? (
-					<table>
-						<thead>
-							<tr>
-								<th>
-									<FontAwesomeIcon
-										icon={faTimes}
-										style={{
-											color: "red",
-											cursor: "pointer",
-											fontSize: "35px",
-										}}
-										onClick={closeDetails}
-									/>
-								</th>
-								{quizQuestions.length > 0
-									? quizQuestions.map((question) => {
-										return <th key={question._id}>{question.question}</th>;
-									})
-									: null}
-							</tr>
-						</thead>
-						<tbody>
-							{studentSelected.map((student, index) => {
-								return (
-									<tr key={index}>
-										<th>{student}</th>
-										{quizQuestions.map((question) =>
-											getValues(student, question._id)
-										)}
-									</tr>
-								);
-							})}
-						</tbody>
-					</table>
-				) : null}
-				{quizSelected._id ? (
-					<div>
-						{students.length > 0 ? (
-							<div className="results-container">
-								<div className="col-12">
-									<table className="col-10">
+				<div>
+					{isShowDetails ? (
+						<table>
+							<thead>
+								<tr>
+									<th>
+										<FontAwesomeIcon
+											icon={faTimes}
+											style={{
+												color: "red",
+												cursor: "pointer",
+												fontSize: "35px",
+											}}
+											onClick={closeDetails}
+										/>
+									</th>
+									{quizQuestions.length > 0
+										? quizQuestions.map((question) => {
+											return <th key={question._id}>{question.question}</th>;
+										})
+										: null}
+								</tr>
+							</thead>
+							<tbody>
+								{studentSelected.map((student, index) => {
+									return (
+										<tr key={index}>
+											<th>{student}</th>
+											{quizQuestions.map((question) =>
+												getValues(student, question._id)
+											)}
+										</tr>
+									);
+								})}
+							</tbody>
+						</table>
+					) : null}
+					{quizSelected._id ? (
+						<div>
+							{students.length > 0 ? (
+								<div className="results-container">
+									<div className="col-12">
+										<table className="col-10">
+											<thead>
+												<tr>
+													<th className="no-border"></th>
+													<th className="no-border">Score</th>
+													<th className="no-border"></th>
+												</tr>
+											</thead>
+											<tbody>
+												{students.length > 0
+													? students.map((student, index) => {
+														return (
+															<tr key={index}>
+																<th>{student}</th>
+																<td>
+																	{getScore(student)}/{quizQuestions.length}
+																</td>
+																<td>
+																	<button
+																		className="quiz-button"
+																		onClick={() => showDetail(student)}
+																	>
+                                    Show Ditails
+																	</button>
+																</td>
+															</tr>
+														);
+													})
+													: null}
+											</tbody>
+										</table>
+									</div>
+									<table>
 										<thead>
 											<tr>
-												<th className="no-border"></th>
-												<th className="no-border">Score</th>
-												<th className="no-border"></th>
+												<th>
+												</th>
+												{quizQuestions.length > 0
+													? quizQuestions.map((question) => {
+														return <th key={question._id}>{question.question}</th>;
+													})
+													: null}
 											</tr>
 										</thead>
 										<tbody>
-											{students.length > 0
-												? students.map((student, index) => {
-													return (
-														<tr key={index}>
-															<th>{student}</th>
-															<td>
-																{getScore(student)}/{quizQuestions.length}
-															</td>
-															<td>
-																<button
-																	className="quiz-button"
-																	onClick={() => showDetail(student)}
-																>
-                                    Show Ditails
-																</button>
-															</td>
-														</tr>
-													);
-												})
-												: null}
+											{students.map((student, index) => {
+												return (
+													<tr key={index}>
+														<th>{student}</th>
+														{quizQuestions.map((question) =>
+															getValues(student, question._id)
+														)}
+													</tr>
+												);
+											})}
 										</tbody>
 									</table>
 								</div>
-								<table>
-									<thead>
-										<tr>
-											<th>
-											</th>
-											{quizQuestions.length > 0
-												? quizQuestions.map((question) => {
-													return <th key={question._id}>{question.question}</th>;
-												})
-												: null}
-										</tr>
-									</thead>
-									<tbody>
-										{students.map((student, index) => {
-											return (
-												<tr key={index}>
-													<th>{student}</th>
-													{quizQuestions.map((question) =>
-														getValues(student, question._id)
-													)}
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
-						) : (
-							<h4>Nobody answered this quiz!</h4>
-						)}
-					</div>
-				) : (
-					<p>Please select a quiz to see the results</p>
-				)}
+							) : (
+								<h4>Nobody answered this quiz!</h4>
+							)}
+						</div>
+					) : (
+						<p>Please select a quiz to see the results</p>
+					)}
+				</div>
 			</div>
 		</div>
 	);

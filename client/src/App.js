@@ -36,13 +36,10 @@ const App = () => {
 							className="cyf-log"
 						/>
 					</Link>
-					<Link to="/Students" exact="true" className="link-button">
-            Student
-					</Link>
 				</nav>
 				<div className="body">
 					<Switch>
-						<Route exact path="/Mentors">
+						<Route exact path="/mentors/5wjhfxnr">
 							<Mentors
 								questions={questions}
 								quizzes={quizzes}
@@ -52,10 +49,10 @@ const App = () => {
 								code={code}
 							/>
 						</Route>
-						<Route exact path="/Results">
+						<Route exact path="/results/5wjhfxnr">
 							<Results questions={questions} quizzes={quizzes} />
 						</Route>
-						<Route exact path="/Students">
+						<Route exact path="/">
 							{quizzes.length > 0 ? (
 								<Students
 									quizData={quizzes}
@@ -68,7 +65,7 @@ const App = () => {
 								<p>There is no quiz to show</p>
 							)}
 						</Route>
-						<Route exact path="/NewQuestion">
+						<Route exact path="/newquestion/5wjhfxnr">
 							<NewQuestion />
 						</Route>
 					</Switch>
