@@ -97,7 +97,6 @@ export default function Mentors(props) {
 		if (newQuiz.name.length < 8) {
 			console.log("hi modal");
 			setModalText("Quiz name should have at least 8 sybols");
-			// alert("Quiz name should have at least 8 sybols");
 		} else if (newQuizQuestions.length < 5) {
 			setModalText("Quizz  should have at least 5 questions");
 		} else {
@@ -159,7 +158,7 @@ export default function Mentors(props) {
             			New Question
 					</Link>
 				</nav><div className="container">
-					{response?(response==="OK"?<Modal setModalText={setModalText} modalText={"submitted successfully"} setModalText={setModalText} />:<Modal setModalText={setModalText}  modalText={"something went wrong"} />):null}
+					{response?(response==="OK"?<Modal setModalText={setModalText} modalText={"submitted successfully"} />:<Modal setModalText={setModalText}  modalText={"something went wrong"} />):null}
 					<div className='row'>
 						<RunQuiz
 							quizzes={props.quizzes}
