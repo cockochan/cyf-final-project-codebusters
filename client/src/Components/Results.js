@@ -15,7 +15,6 @@ export default function Results(props) {
 	const [attemptNumber, setAttemptNumber] = useState(1);
 	const [attemptCounter, setAttemptCounter] = useState(1);
 	const [isShowDetails, setIsShowDetails] = useState(false);
-	const [decreaseAttempt, setDecreaseAttempt]=useState(0);
 
 	useEffect(() => {
 		fetch("/api/results")
@@ -125,12 +124,10 @@ export default function Results(props) {
 
 	const previousAttempt = () => {
 		setAttemptNumber(attemptNumber + 1);
-		setDecreaseAttempt(decreaseAttempt+1);
 	};
 
 	const nextAttempt = () => {
 		setAttemptNumber(attemptNumber - 1);
-		setDecreaseAttempt(decreaseAttempt - 1);
 	};
 
 	const getScore = (student) => {
@@ -219,7 +216,7 @@ export default function Results(props) {
 							>
                 Next Attempt
 							</button>
-							<span>All Attempt : {attemptCounter - decreaseAttempt}</span>
+							<span>All Attempt : {attemptCounter - attemptNumber+1}</span>
 						</div>
 					) : null}
 				</div>
