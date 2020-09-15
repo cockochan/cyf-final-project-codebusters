@@ -15,6 +15,7 @@ export default function Results(props) {
 	const [attemptNumber, setAttemptNumber] = useState(1);
 	const [attemptCounter, setAttemptCounter] = useState(1);
 	const [isShowDetails, setIsShowDetails] = useState(false);
+	const [decreaseAttempt, setDecreaseAttempt]=useState(0);
 
 	useEffect(() => {
 		fetch("/api/results")
@@ -124,10 +125,12 @@ export default function Results(props) {
 
 	const previousAttempt = () => {
 		setAttemptNumber(attemptNumber + 1);
+		setDecreaseAttempt(decreaseAttempt+1);
 	};
 
 	const nextAttempt = () => {
 		setAttemptNumber(attemptNumber - 1);
+		setDecreaseAttempt(decreaseAttempt - 1);
 	};
 
 	const getScore = (student) => {
@@ -156,7 +159,7 @@ export default function Results(props) {
 			: null;
 		let timestamp = getLastAttempt(student);
 		if (!timestamp) {
-			return null;
+			return 0;
 		} else {
 			const finalResult = allAttempts.find((attempt) => {
 				return attempt.timestamp >= timestamp;
@@ -188,7 +191,7 @@ export default function Results(props) {
 			<div>
 				<div className="col-12 quiz-handler">
 					<div className="col-6">
-						<h1>Welcome to QuizzTime</h1>
+						<h2>Welcome to Quiz Time</h2>
 						<select className="input select-input" onChange={changeHandler}>
 							<option>Select a Quiz</option>
 							{props.quizzes.map((quiz) => {
@@ -216,7 +219,7 @@ export default function Results(props) {
 							>
                 Next Attempt
 							</button>
-							<span>All Attempt : {attemptCounter}</span>
+							<span>All Attempt : {attemptCounter - decreaseAttempt}</span>
 						</div>
 					) : null}
 				</div>
@@ -326,7 +329,7 @@ export default function Results(props) {
 						)}
 					</div>
 				) : (
-					<p>Please select a quiz to see the result</p>
+					<p>Please select a quiz to see the results</p>
 				)}
 			</div>
 		</div>
