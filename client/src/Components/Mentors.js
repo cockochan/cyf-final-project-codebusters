@@ -5,11 +5,14 @@ import "../App.css";
 import "../grid.css";
 import ReactMarkdown from "react-markdown";
 import RunQuiz from "./RunQuiz";
+import Modal from "../Modal/Modal";
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
 	const [numberOfQuestions,setNumberOfQuestions]=useState(5);
 	const [filteredQuestionsByTag, setFilteredQuestionsByTag]=useState(props.questions);
 	const [tagsCollection, setTagsCollection] = useState([]);
+	const [response, setResponse]=useState(null);
+	const [modalText,setModalText]=useState(null);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
@@ -92,23 +95,28 @@ export default function Mentors(props) {
 
 	const submitQuiz = () => {
 		if (newQuiz.name.length < 8) {
-			alert("Quiz name should have at least 8 sybols");
+			console.log("hi modal");
+			setModalText("Quiz name should have at least 8 sybols");
+			// alert("Quiz name should have at least 8 sybols");
 		} else if (newQuizQuestions.length < 5) {
-			alert("Quizz  should have at least 5 questions");
+			setModalText("Quizz  should have at least 5 questions");
 		} else {
 			sendQuiz();
 		}
 	};
 	const sendQuiz = () => {
-		alert("done");
 		fetch("/api/quiz", {
 			method: "POST",
 			headers: { "Content-type": "application/json" },
 			body: JSON.stringify(newQuiz),
 		})
-			.then((response) => response.json())
+			.then((response) => {
+				response.json();
+				setResponse(response.statusText);
+			})
 			.catch((err) => console.error(err));
 	};
+
 	const newQuizName = (event) => {
 		setNewQuiz({
 			...newQuiz,
@@ -151,8 +159,8 @@ export default function Mentors(props) {
             			New Question
 					</Link>
 				</nav><div className="container">
+					{response?(response==="OK"?<Modal setModalText={setModalText} modalText={"submitted successfully"} setModalText={setModalText} />:<Modal setModalText={setModalText}  modalText={"something went wrong"} />):null}
 					<div className='row'>
-
 						<RunQuiz
 							quizzes={props.quizzes}
 							setRoute={props.setRoute}
@@ -181,7 +189,7 @@ export default function Mentors(props) {
 							<button onClick={autofillQuizz}>autofill quiz</button>
 							<button onClick={resetFilters}>reset filters</button>
 						</div>
-
+						{modalText?<Modal modalText={modalText} setModalText={setModalText} />:null}
 						<div className="col-9 card-block">
 							{filteredQuestionsByTag.map((question, index) => (
 
