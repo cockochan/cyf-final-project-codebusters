@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 
-export default function Results(props) {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import your icons
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
+export default function Results(props) {
 	const [quizQuestions, setQuizQuestions] = useState([]);
 	const [students, setStudents] = useState([]);
+	const [studentSelected, setStudentSelected] = useState([]);
 	const [quizRoute, setQuizRoute] = useState("");
 	const [allResults, setAllResults] = useState(null);
 	const [quizSelected, setQuizSelected] = useState({});
-	const [quizSelectedResult, setQuizSelectedResult] = useState([]);
+	const [quizSelectedResults, setQuizSelectedResults] = useState([]);
 	const [attemptNumber, setAttemptNumber] = useState(1);
 	const [attemptCounter, setAttemptCounter] = useState(1);
+	const [isShowDetails, setIsShowDetails] = useState(false);
 
 	useEffect(() => {
 		fetch("/api/results")
@@ -37,18 +42,18 @@ export default function Results(props) {
 		setAttemptCounter(1);
 		setStudents([]);
 		setQuizRoute(`quizzes/${event.target.value}`);
-		const selectedResult = allResults.filter(
+		const selectedResults = allResults.filter(
 			(result) => result.quiz_id === event.target.value
 		);
-		setQuizSelectedResult(selectedResult);
-		const names = selectedResult.map((result) => result.studentName);
-		if (selectedResult.length > 0) {
-			setStudents(uniqBy(names, JSON.stringify));
+		setQuizSelectedResults(selectedResults);
+		const names = selectedResults.map((result) => result.studentName);
+		if (selectedResults.length > 0) {
+			setStudents(uniqBy(names, JSON.stringify));//remove duplicated names from array
 
-			const ids = props.quizzes.find((quiz) => quiz._id === event.target.value)
+			const questionIds = props.quizzes.find((quiz) => quiz._id === event.target.value)
 				.questions_id;
-			const questions = ids.map((id) => {
-				return props.questions.find((question) => question._id === id);
+			const questions = questionIds.map((questionId) => {
+				return props.questions.find((question) => question._id === questionId);
 			});
 			setQuizQuestions(questions);
 		}
@@ -56,7 +61,7 @@ export default function Results(props) {
 
 	const getLastAttempt = (student) => {
 		const questionId = quizQuestions.length > 0 ? quizQuestions[0]._id : null;
-		const allAttempts = quizSelectedResult.filter(
+		const allAttempts = quizSelectedResults.filter(
 			(quizResult) =>
 				quizResult.studentName === student
         && quizResult.question_id === questionId
@@ -69,13 +74,12 @@ export default function Results(props) {
 	};
 
 	const getValues = (student, questionId) => {
-		const allAttempts = quizSelectedResult.filter(
+		const allAttempts = quizSelectedResults.filter(
 			(quizResult) =>
 				quizResult.studentName === student
         && quizResult.question_id === questionId
 		);
 		if (allAttempts.length > 0) {
-			allAttempts.length>attemptCounter?setAttemptCounter(allAttempts.length):null;
 			let timestamp = getLastAttempt(student);
 			if (!timestamp) {
 				return null;
@@ -112,9 +116,9 @@ export default function Results(props) {
 
 	const colorState = (correct) => {
 		if (correct) {
-			return "corect";
+			return "correct";
 		} else {
-			return "incorect";
+			return "incorrect";
 		}
 	};
 
@@ -126,44 +130,179 @@ export default function Results(props) {
 		setAttemptNumber(attemptNumber - 1);
 	};
 
+	const getScore = (student) => {
+		let studentScores = 0;
+		if (quizQuestions.length > 0) {
+			quizQuestions.map((question) => {
+				studentScores = studentScores + scoreCounter(student, question._id);
+			});
+			return studentScores;
+		}
+	};
+
+	//calculat the scores
+	const scoreCounter = (student, questionId) => {
+		const allAttempts = quizSelectedResults.filter(
+			(quizResult) =>
+				quizResult.studentName === student
+        && quizResult.question_id === questionId
+		);
+		if (allAttempts.length <= 0) {
+			return 0;
+		}
+
+		allAttempts.length > attemptCounter
+			? setAttemptCounter(allAttempts.length)
+			: null;
+		let timestamp = getLastAttempt(student);
+		if (!timestamp) {
+			return 0;
+		} else {
+			const finalResult = allAttempts.find((attempt) => {
+				return attempt.timestamp >= timestamp;
+			});
+
+			if (!finalResult || !finalResult.value) {
+				return 0;
+			}
+			if (finalResult.correct) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
+	};
+
+	const showDetail = (student) => {
+		setIsShowDetails(true);
+		setStudentSelected([student]);
+	};
+
+	const closeDetails = () => {
+		setIsShowDetails(false);
+		setStudentSelected([]);
+	};
+
 	return (
 		<div className="container">
 			<div>
-				<div className="col-12">
-					<h1>Welcome to QuizzTime</h1>
-					<select className="input select-input" onChange={changeHandler}>
-						<option>Select a Quiz</option>
-						{props.quizzes.map((quiz) => {
-							return (
-								<option key={quiz._id} value={quiz._id}>
-									{quiz.name}
-								</option>
-							);
-						})}
-					</select>
+				<div className="col-12 quiz-handler">
+					<div className="col-6">
+						<h2>Welcome to Quiz Time</h2>
+						<select className="input select-input" onChange={changeHandler}>
+							<option>Select a Quiz</option>
+							{props.quizzes.map((quiz) => {
+								return (
+									<option key={quiz._id} value={quiz._id}>
+										{quiz.name}
+									</option>
+								);
+							})}
+						</select>
+					</div>
+					{quizQuestions.length > 0 ? (
+						<div className="quiz-handler col-5">
+							<button
+								className="quiz-button card-button"
+								onClick={previousAttempt}
+								disabled={attemptNumber >= attemptCounter}
+							>
+                Previous Attempt
+							</button>
+							<button
+								className="quiz-button card-button"
+								onClick={nextAttempt}
+								disabled={attemptNumber <= 1}
+							>
+                Next Attempt
+							</button>
+							<span>All Attempt : {attemptCounter - attemptNumber+1}</span>
+						</div>
+					) : null}
 				</div>
 			</div>
 			<div>
+				{isShowDetails ? (
+					<table>
+						<thead>
+							<tr>
+								<th>
+									<FontAwesomeIcon
+										icon={faTimes}
+										style={{
+											color: "red",
+											cursor: "pointer",
+											fontSize: "35px",
+										}}
+										onClick={closeDetails}
+									/>
+								</th>
+								{quizQuestions.length > 0
+									? quizQuestions.map((question) => {
+										return <th key={question._id}>{question.question}</th>;
+									})
+									: null}
+							</tr>
+						</thead>
+						<tbody>
+							{studentSelected.map((student, index) => {
+								return (
+									<tr key={index}>
+										<th>{student}</th>
+										{quizQuestions.map((question) =>
+											getValues(student, question._id)
+										)}
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				) : null}
 				{quizSelected._id ? (
 					<div>
 						{students.length > 0 ? (
 							<div className="results-container">
-								<div className="quiz-handler">
-									<button className="quiz-button card-button" onClick={previousAttempt} disabled={attemptNumber > attemptCounter}>Previous Attempt</button>
-									<button className="quiz-button card-button" onClick={nextAttempt} disabled={attemptNumber <= 1}>
-                    Next Attempt
-									</button>
-									<span>All Attempt : {attemptCounter}</span>
+								<div className="col-12">
+									<table className="col-10">
+										<thead>
+											<tr>
+												<th className="no-border"></th>
+												<th className="no-border">Score</th>
+												<th className="no-border"></th>
+											</tr>
+										</thead>
+										<tbody>
+											{students.length > 0
+												? students.map((student, index) => {
+													return (
+														<tr key={index}>
+															<th>{student}</th>
+															<td>
+																{getScore(student)}/{quizQuestions.length}
+															</td>
+															<td>
+																<button
+																	className="quiz-button"
+																	onClick={() => showDetail(student)}
+																>
+                                    Show Ditails
+																</button>
+															</td>
+														</tr>
+													);
+												})
+												: null}
+										</tbody>
+									</table>
 								</div>
 								<table>
 									<thead>
 										<tr>
-											<th></th>
+											<th>
+											</th>
 											{quizQuestions.length > 0
 												? quizQuestions.map((question) => {
-													return (
-														<th key={question._id}>{question.question}</th>
-													);
+													return <th key={question._id}>{question.question}</th>;
 												})
 												: null}
 										</tr>
@@ -187,7 +326,7 @@ export default function Results(props) {
 						)}
 					</div>
 				) : (
-					<p>please select a quiz to see the result</p>
+					<p>Please select a quiz to see the results</p>
 				)}
 			</div>
 		</div>
