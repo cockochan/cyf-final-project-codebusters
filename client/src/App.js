@@ -10,9 +10,6 @@ import Results from "./Components/Results.js";
 const App = () => {
 	const [questions, setQuestions] = useState(null);
 	const [quizzes, setQuizzes] = useState([]);
-	const [route, setRoute] = useState("");
-	const [quizId, setQuizId] = useState("");
-	const [code, setCode] = useState("");
 
 	useEffect(() => {
 		fetch("/api/questions")
@@ -46,10 +43,6 @@ const App = () => {
 							<Mentors
 								questions={questions}
 								quizzes={quizzes}
-								setRoute={setRoute}
-								setQuizId={setQuizId}
-								setCode={setCode}
-								code={code}
 							/>
 						</Route>
 						<Route exact path="/Results">
@@ -57,13 +50,7 @@ const App = () => {
 						</Route>
 						<Route exact path="/Students">
 							{quizzes.length > 0 ? (
-								<Students
-									quizData={quizzes}
-									route={route}
-									code={code}
-									setCode={setCode}
-									quizId={quizId}
-								/>
+								<Students quizData={quizzes} />
 							) : (
 								<p>There is no quiz to show</p>
 							)}
