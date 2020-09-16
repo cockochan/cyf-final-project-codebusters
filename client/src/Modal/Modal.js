@@ -5,10 +5,8 @@ export default function Mentors(props) {
 
     	return(
     		<React.Fragment>
-    			{/* <button onClick={()=> this.setState({ isOpen:true })}>Open modal</button> */}
     			{isOpen && (<div className='modal'>
     				<div className='modal-body'>
-    					{/* <h1>{props.modalText}</h1> */}
     					<h1>{props.modalText}</h1>
 					{props.func?<button onClick={()=> {
 						setIsOpen(false);

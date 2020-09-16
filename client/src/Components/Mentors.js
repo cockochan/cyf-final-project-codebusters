@@ -11,7 +11,6 @@ export default function Mentors(props) {
 	const [numberOfQuestions,setNumberOfQuestions]=useState(5);
 	const [filteredQuestionsByTag, setFilteredQuestionsByTag]=useState(props.questions);
 	const [tagsCollection, setTagsCollection] = useState([]);
-	const [response, setResponse]=useState(null);
 	const [modalText,setModalText]=useState(null);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
@@ -95,10 +94,9 @@ export default function Mentors(props) {
 
 	const submitQuiz = () => {
 		if (newQuiz.name.length < 8) {
-			console.log("hi modal");
-			setModalText("Quiz name should have at least 8 sybols");
+			setModalText("Quiz name should have at least 8 characters");
 		} else if (newQuizQuestions.length < 5) {
-			setModalText("Quizz  should have at least 5 questions");
+			setModalText("Quiz  should have at least 5 questions");
 		} else {
 			sendQuiz();
 		}
@@ -111,7 +109,7 @@ export default function Mentors(props) {
 		})
 			.then((response) => {
 				response.json();
-				setResponse(response.statusText);
+				setModalText(response.statusText);
 			})
 			.catch((err) => console.error(err));
 	};
@@ -158,7 +156,7 @@ export default function Mentors(props) {
             			New Question
 					</Link>
 				</nav><div className="container">
-					{response?(response==="OK"?<Modal setModalText={setModalText} modalText={"submitted successfully"} />:<Modal setModalText={setModalText}  modalText={"something went wrong"} />):null}
+					{modalText?(modalText==="OK"?<Modal modalText={"submitted successfully"} />:<Modal modalText={"something went wrong"} />):null}
 					<div className='row'>
 						<RunQuiz
 							quizzes={props.quizzes}
