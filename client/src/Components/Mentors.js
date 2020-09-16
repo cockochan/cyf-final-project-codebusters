@@ -3,11 +3,13 @@ import dayjs from "dayjs";
 import Navbar from "./Navbar";
 import ReactMarkdown from "react-markdown";
 import RunQuiz from "./RunQuiz";
+import Modal from "../Modal/Modal";
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
 	const [numberOfQuestions,setNumberOfQuestions]=useState(5);
 	const [filteredQuestionsByTag, setFilteredQuestionsByTag]=useState(props.questions);
 	const [tagsCollection, setTagsCollection] = useState([]);
+	const [modalText,setModalText]=useState(null);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
@@ -90,23 +92,26 @@ export default function Mentors(props) {
 
 	const submitQuiz = () => {
 		if (newQuiz.name.length < 8) {
-			alert("Quiz name should have at least 8 sybols");
+			setModalText("Quiz name should have at least 8 characters");
 		} else if (newQuizQuestions.length < 5) {
-			alert("Quizz  should have at least 5 questions");
+			setModalText("Quiz  should have at least 5 questions");
 		} else {
 			sendQuiz();
 		}
 	};
 	const sendQuiz = () => {
-		alert("done");
 		fetch("/api/quiz", {
 			method: "POST",
 			headers: { "Content-type": "application/json" },
 			body: JSON.stringify(newQuiz),
 		})
-			.then((response) => response.json())
+			.then((response) => {
+				response.json();
+				setModalText(response.statusText);
+			})
 			.catch((err) => console.error(err));
 	};
+
 	const newQuizName = (event) => {
 		setNewQuiz({
 			...newQuiz,
@@ -136,7 +141,7 @@ export default function Mentors(props) {
 				<Navbar mentors="Mentors" results="Results" newquestion ="New Question" />
 				<div className="container">
 					<div className='row'>
-
+					{modalText?(modalText==="OK"?<Modal modalText={"submitted successfully"} />:<Modal modalText={"something went wrong"} />):null}
 						<RunQuiz quizzes={props.quizzes} />
 						<div className="filterButtons row">
 						<div>
@@ -160,7 +165,7 @@ export default function Mentors(props) {
 							<button className="btn btn-light ml-2" onClick={autofillQuizz}>autofill quiz</button>
 							<button className ="btn btn-light ml-2" onClick={resetFilters}>reset filters</button>
 						</div>
-
+						{modalText?<Modal modalText={modalText} setModalText={setModalText} />:null}
 						<div className="col-7 card-block">
 							{filteredQuestionsByTag.map((question, index) => (
 
