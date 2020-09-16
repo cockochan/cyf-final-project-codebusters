@@ -32,8 +32,8 @@ html {
   height: 125px;
 }
 
-.cyf-log {
-  height: 5vh;
+.cyf-logo {
+  height: 90px;
 }
 
 .link-button {
@@ -43,7 +43,6 @@ html {
   color: #596275;
   left: 321px;
   top: 1114px;
-  border: 1px solid #ccc;
   box-sizing: border-box;
   width: fit-content;
   font-weight: 700;
@@ -58,7 +57,7 @@ html {
 }
 
 .link-button:hover {
-  background-color: #f5f6fa;
+  color: #000000;
 }
 
 .input {
@@ -270,6 +269,7 @@ table,
 th,
 td {
   border: 1px solid black;
+  border-radius:3px ;
 }
 td,
 th{
@@ -285,11 +285,11 @@ th{
   margin-top: 125px;
 }
 
-.corect {
+.correct {
   background-color: #93ff8e;
 }
 
-.incorect {
+.incorrect {
   background-color: #ff75c4;
 }
 

@@ -3,8 +3,7 @@ import React from "react";
 const Message = (props) => {
 	const messageHandler = () => {
 		props.setIsSubmitted(false);
-		props.setOptionState(true);
-		props.setCode("");
+		props.setOptionState?props.setOptionState(true):null;
 	};
 	return (
 		<div className="message-container">

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { BrowserRouter as Route, Link } from "react-router-dom";
-import "../App.css";
-import "../grid.css";
+import Navbar from "./Navbar";
 import ReactMarkdown from "react-markdown";
 import RunQuiz from "./RunQuiz";
 import Modal from "../Modal/Modal";
@@ -140,32 +138,11 @@ export default function Mentors(props) {
 	if (filteredQuestionsByTag) {
 		return (
 			<div className='main'>
-
-				<nav className="navbar">
-					<Link to="/" exact="true">
-						<img
-							src="https://codeyourfuture.io/wp-content/uploads/2019/03/cyf_brand.png"
-							alt="cyf_brand.png"
-							className="cyf-log"
-						/>
-					</Link>
-					<Link to="/Results" exact="true" className="link-button">
-            			Quiz Results
-					</Link>
-					<Link to="/NewQuestion" exact="true" className="link-button">
-            			New Question
-					</Link>
-				</nav><div className="container">
-					{modalText?(modalText==="OK"?<Modal modalText={"submitted successfully"} />:<Modal modalText={"something went wrong"} />):null}
+				<Navbar mentors="Mentors" results="Results" newquestion ="New Question" />
+				<div className="container">
 					<div className='row'>
-						<RunQuiz
-							quizzes={props.quizzes}
-							setRoute={props.setRoute}
-							setCode={props.setCode}
-							code={props.code}
-							setQuizId={props.setQuizId}
-							setData={props.setData}
-						/>
+					{modalText?(modalText==="OK"?<Modal modalText={"submitted successfully"} />:<Modal modalText={"something went wrong"} />):null}
+						<RunQuiz quizzes={props.quizzes} />
 						<div className="filterButtons row">
 							<select  onChange={tagClickHandler}>
 								<option value="" disabled selected hidden>select tag filter</option>
