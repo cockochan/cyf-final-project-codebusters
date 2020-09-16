@@ -13,15 +13,24 @@ const Navbar =(props) => {
 					className="cyf-log"
 				/>
 			</a>
-			<a href="/mentors/5wjhfxnr" className="link-button">
-				{props.mentors}
-			</a>
-			<a href="/results/5wjhfxnr" className="link-button">
-				{props.results}
-			</a>
-			<a href="/newquestion/5wjhfxnr" className="link-button">
-				{props.newquestion}
-			</a>
+			{
+				props.mentors ? <a href="/mentors/5wjhfxnr" className="link-button">
+					{props.mentors}
+				</a>
+					: null
+			}
+			{
+				props.results ? <a href="/results/5wjhfxnr" className="link-button">
+					{props.results}
+				</a>
+					: null
+			}
+			{
+				props.newquestion ? <a href="/newquestion/5wjhfxnr" className="link-button">
+					{props.newquestion}
+				</a>
+					: null
+			}
 		</nav>
 	);
 };

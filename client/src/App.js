@@ -6,6 +6,7 @@ import Students from "./Components/Students.js";
 import Mentors from "./Components/Mentors.js";
 import NewQuestion from "./Components/NewQuestion.js";
 import Results from "./Components/Results.js";
+import Navbar from "./Components/Navbar";
 
 const App = () => {
 	const [questions, setQuestions] = useState(null);
@@ -28,15 +29,7 @@ const App = () => {
 	return (
 		<main role="main">
 			<Router>
-				<nav className="navbar">
-					<Link to="/" exact="true">
-						<img
-							src="https://codeyourfuture.io/wp-content/uploads/2019/03/cyf_brand.png"
-							alt="cyf_brand.png"
-							className="cyf-log"
-						/>
-					</Link>
-				</nav>
+				<Navbar />
 				<div className="body">
 					<Switch>
 						<Route exact path="/mentors/5wjhfxnr">
