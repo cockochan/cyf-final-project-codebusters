@@ -7,13 +7,11 @@ import Students from "./Components/Students.js";
 import Mentors from "./Components/Mentors.js";
 import NewQuestion from "./Components/NewQuestion.js";
 import Results from "./Components/Results.js";
+import Navbar from "./Components/Navbar";
 
 const App = () => {
 	const [questions, setQuestions] = useState(null);
 	const [quizzes, setQuizzes] = useState([]);
-	const [route, setRoute] = useState("");
-	const [quizId, setQuizId] = useState("");
-	const [code, setCode] = useState("");
 
 	useEffect(() => {
 		fetch("/api/questions")
@@ -29,47 +27,26 @@ const App = () => {
 	return (
 		<main role="main">
 			<Router>
-				<nav className="navbar">
-					<Link to="/" exact="true">
-						<img
-							src="https://codeyourfuture.io/wp-content/uploads/2019/03/cyf_brand.png"
-							alt="cyf_brand.png"
-							className="cyf-log"
-						/>
-					</Link>
-					<Link to="/Students" exact="true" className="link-button">
-            Student
-					</Link>
-				</nav>
+				<Navbar />
 				<div className="body">
 					<Switch>
-						<Route exact path="/Mentors">
+						<Route exact path="/mentors/5wjhfxnr">
 							<Mentors
 								questions={questions}
 								quizzes={quizzes}
-								setRoute={setRoute}
-								setQuizId={setQuizId}
-								setCode={setCode}
-								code={code}
 							/>
 						</Route>
-						<Route exact path="/Results">
+						<Route exact path="/results/5wjhfxnr">
 							<Results questions={questions} quizzes={quizzes} />
 						</Route>
-						<Route exact path="/Students">
+						<Route exact path="/">
 							{quizzes.length > 0 ? (
-								<Students
-									quizData={quizzes}
-									route={route}
-									code={code}
-									setCode={setCode}
-									quizId={quizId}
-								/>
+								<Students quizData={quizzes} />
 							) : (
 								<p>There is no quiz to show</p>
 							)}
 						</Route>
-						<Route exact path="/NewQuestion">
+						<Route exact path="/newquestion/5wjhfxnr">
 							<NewQuestion />
 						</Route>
 					</Switch>

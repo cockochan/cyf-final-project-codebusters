@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import dayjs from "dayjs";
 import ReactMarkdown from "react-markdown";
 const Questions = (props) => {
+
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [isChecked, setIsChecked] = useState(false);
 	const [radioId, setRadioId] = useState("");
@@ -18,7 +19,7 @@ const Questions = (props) => {
 		timestamp: dayjs().format(),
 		studentName: "",
 	});
-	console.log(props.quizData);
+
 	useEffect(() => {
 		fetch(`/api/question/${props.quizData.questions_id[currentQuestionIndex]}`)
 			.then((res) => res.json())
@@ -91,7 +92,7 @@ const Questions = (props) => {
 	};
 
 	return (
-		<Form onSubmit={submitHandler} className="survey-form">
+		<Form  className="survey-form">
 			<input
 				type="text"
 				placeholder="Enter your name"
@@ -115,7 +116,7 @@ const Questions = (props) => {
 							type="radio"
 							name="answer"
 							value={answer_a}
-							onClick={checkHandler}
+							onChange={checkHandler}
 							id="answer_a"
 							checked={isChecked && radioId == "answer_a" ? true : false}
 						/>
@@ -129,7 +130,7 @@ const Questions = (props) => {
 							type="radio"
 							name="answer"
 							value={answer_b}
-							onClick={checkHandler}
+							onChange={checkHandler}
 							id="answer_b"
 							checked={isChecked && radioId == "answer_b" ? true : false}
 						/>
@@ -142,7 +143,7 @@ const Questions = (props) => {
 							type="radio"
 							name="answer"
 							value={answer_c}
-							onClick={checkHandler}
+							onChange={checkHandler}
 							id="answer_c"
 							checked={isChecked && radioId == "answer_c" ? true : false}
 						/>
@@ -155,7 +156,7 @@ const Questions = (props) => {
 							type="radio"
 							name="answer"
 							value={answer_d}
-							onClick={checkHandler}
+							onChange={checkHandler}
 							id="answer_d"
 							checked={isChecked && radioId == "answer_d" ? true : false}
 						/>
@@ -168,7 +169,7 @@ const Questions = (props) => {
 							type="radio"
 							name="answer"
 							value={answer_e}
-							onClick={checkHandler}
+							onChange={checkHandler}
 							id="answer_e"
 							checked={isChecked && radioId == "answer_e" ? true : false}
 						/>
@@ -191,7 +192,18 @@ const Questions = (props) => {
 				<hr style={{ margin: "40px 0" }} />
 			</FormGroup>
 			{currentQuestionIndex < props.quizData.questions_id.length - 1 ? (
-				<Button className="answers">Next</Button>
+
+				<Button className="answers"
+					onClick={(e) =>{
+						if(answer.value=="") {
+							window.confirm("Are you sure you want to skip this question?")
+				&& submitHandler(e);
+						}else{
+							submitHandler(e);
+						}
+					}}
+				>
+			Next</Button>
 			) : (
 				<Button type="button" onClick={submitForm} className="answers">
           Submit

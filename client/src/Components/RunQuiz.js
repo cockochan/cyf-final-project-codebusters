@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 const RunQuiz = (props) => {
+	const[code, setCode]=useState("");
 	const selectHandler = (event) => {
-		props.setRoute(`quizzes/${event.target.value}`);
-		props.setQuizId(event.target.value);
 		const selectedQuiz = props.quizzes.find((quiz) => quiz._id === event.target.value);
-		props.setCode(selectedQuiz.code);
+		setCode(selectedQuiz.code);
 	};
 
 	return (
@@ -23,7 +22,7 @@ const RunQuiz = (props) => {
 			</select>
 
 			<div className="col-6">
-				{props.code ? <h3>code: {props.code}</h3> : null}
+				{code ? <h3>Code: {code}</h3> : null}
 			</div>
 		</div>
 	);

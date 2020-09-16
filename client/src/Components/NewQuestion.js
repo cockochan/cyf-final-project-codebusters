@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "./Navbar";
 import ReactMarkdown from "react-markdown";
 import { BrowserRouter as Route, Link } from "react-router-dom";
 import { FormGroup } from "reactstrap";
@@ -86,13 +87,7 @@ export default function NewQuestion() {
 
 	return (
 		<div className="row">
-    			<nav className="navbar">
-				<Link to="/Mentors" exact="true" className="link-button">
-            			Mentor
-				</Link>					<Link to="/Results" exact="true" className="link-button">
-            			Quiz Results
-				</Link>
-			</nav>
+    			<Navbar mentors="Mentors" results="Results" newquestion="New Question" />
 			<div className=" col-2"></div>
 			<form className="survey-form col-8" onSubmit={submitQuestion}>
 				<div className=" col-2"></div>
