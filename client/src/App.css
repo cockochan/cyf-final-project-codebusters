@@ -14,7 +14,7 @@ html {
   background-color: #e5e5e5;
 }
 
-.navbar {
+.navbar{
   background-color: #ffffff;
   width: 100%;
   top: 0;
@@ -30,6 +30,11 @@ html {
   font-size: 23px;
   font-family: "Roboto", sans-serif;
   height: 125px;
+}
+
+.links-container {
+  display: flex;
+  justify-content: space-around;
 }
 
 .cyf-logo {
