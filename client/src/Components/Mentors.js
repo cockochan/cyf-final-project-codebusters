@@ -144,30 +144,32 @@ export default function Mentors(props) {
 					{modalText?(modalText==="OK"?<Modal modalText={"submitted successfully"} />:<Modal modalText={"something went wrong"} />):null}
 						<RunQuiz quizzes={props.quizzes} />
 						<div className="filterButtons row">
-							<select  onChange={tagClickHandler}>
-								<option value="" disabled selected hidden>select tag filter</option>
+						<div>
+					 <select class="btn btn-light dropdown-toggle pt-2" onChange={selectHandler}>
+						 <option selected disabled>Number of question</option>
+									<option value="5">5</option>
+									<option value="10">10</option>
+									<option value="15">15</option>
+									<option value="20">20</option>
+								</select>
+					 </div>
+							<select class="btn btn-light dropdown-toggle ml-2" onChange={tagClickHandler}>
+								<option value="" disabled selected hidden>Select tag filter</option>
 								{tagsCollection.map((tag, index) => {
 									return (
 										<option value={tag} name={tag} key={index} >{tag}</option>
 									);
 								})}
 							</select>
-							<div>
-					 <select onChange={selectHandler}>
-						 <option selected disabled>Number of question</option>
-									<option value="5">5</option>
-									<option value="10">10</option>
-									<option value="15">15</option>
-								</select>
-					 </div>
-							<button onClick={autofillQuizz}>autofill quiz</button>
-							<button onClick={resetFilters}>reset filters</button>
+							
+							<button className="btn btn-light ml-2" onClick={autofillQuizz}>autofill quiz</button>
+							<button className ="btn btn-light ml-2" onClick={resetFilters}>reset filters</button>
 						</div>
 						{modalText?<Modal modalText={modalText} setModalText={setModalText} />:null}
-						<div className="col-9 card-block">
+						<div className="col-7 card-block">
 							{filteredQuestionsByTag.map((question, index) => (
 
-								<div className=" col-3 card" key={index}>
+								<div className=" col-12 card mb-2" key={index}>
 									<div className="question-and-code-containter">
 										{question.question_code ? (
 											<div>
@@ -191,7 +193,7 @@ export default function Mentors(props) {
 										})}
 									</div>
 									<button
-										className="quiz-button card-button"
+										className="card-button btn btn-primary btn-sm w-25"
 										id={question._id}
 										value={question._id}
 										onClick={addQuestion}
@@ -203,20 +205,20 @@ export default function Mentors(props) {
 
 							))}
 						</div>
-						<div className="col-3 quizQuestions">
+						<div className="col-5 quiz-questions">
 							<div className="form-title">New quiz</div>
 							<div className="quiz-handler">
-								<button onClick={clearQuiz} className="quiz-button"> clear quiz</button>
 								<input
 									type="text"
 									onKeyUp={newQuizName}
 									placeholder={"Enter quiz name"}
 									className="input"
 								/>
-								<button onClick={submitQuiz} className="quiz-button">Submit</button>
+								<button onClick={clearQuiz} className="btn btn-primary ml-2"> Clear quiz</button>
+								<button onClick={submitQuiz} className="btn btn-primary ml-2">Submit</button>
 							</div>
 							{newQuizQuestions.map((question) => (
-								<div className="col-12 card" key={question.question}>
+								<div className="col-12 card mb-2" key={question.question}>
 									<div className="question-and-code-containter">
 										{question.question_code ? (
 											<ReactMarkdown className="code">
@@ -234,21 +236,23 @@ export default function Mentors(props) {
 											);
 										})}
 									</div>
-									<button
+									<button 
 										key={question._id + question.question}
 										type="checkbox"
 										checked="checked"
 										id="horns"
 										value={question._id}
 										onClick={removeQuestion}
-										className="quiz-button card-button"
+										className=" card-button btn btn-danger mb-2 btn-sm w-25"
 									>
                 Delete
 									</button>
 								</div>
 							))}
 						</div>
-					</div></div></div>
+					</div>
+					 </div>
+					 </div>
 		);
 	} else {
 		return <div>No questions loaded</div>;

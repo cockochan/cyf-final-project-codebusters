@@ -91,23 +91,10 @@ html {
   align-items: flex-start;
   justify-content: flex-start;
 }
-.quiz-button {
-  background: #eeeeee;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 4px 5px rgba(0, 0, 0, 0.12),
-    0px 1px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  cursor: pointer;
-  border: 0.1px solid #d5d5d5;
-  outline: none;
-  padding: 7px;
-}
-
-.quiz-button:hover {
-  background-color: #ffffff;
-}
 
 .card-button {
-  margin: 20px;
+  margin: 0 0 8px 0;
+  align-self: flex-end;
 }
 
 .quiz-questions {
@@ -129,7 +116,7 @@ html {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 20px 0;
+  margin-top: 20px ;
   align-items: flex-start;
 }
 
@@ -137,8 +124,8 @@ html {
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 14px;
+  line-height: 20px;
   letter-spacing: 0.5px;
   color: rgba(0, 0, 0, 0.6);
   mix-blend-mode: normal;
@@ -146,11 +133,12 @@ html {
 
 .question,
 .code {
+  margin-top: 20px;
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
-  font-size: 24px;
-  line-height: 33px;
+  font-size: 16px;
+  line-height: 20px;
   color: #000000;
   justify-content: space-evenly;
 }
@@ -169,22 +157,15 @@ html {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin: 20px 0;
+  margin: 10px 0;
   /* background-color: #eeeeee; */
 }
 
-.answers,
-.question-and-code-containter {
-  padding: 5px;
-  margin: 15px 5px 5px 0;
-}
-
 .question-elements {
-  padding: 10px;
+  padding: 5px 10px 10px 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
 }
 
 /* Students */
@@ -199,17 +180,6 @@ html {
   align-items: center;
   align-self: center;
 }
-
-/* .survey-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 70%;
-  margin: 5%;
-  display: flex;
-  flex-direction: column;
-} */
 
 /* Message */
 /* **************************************************** */
@@ -285,16 +255,16 @@ th{
   margin-top: 125px;
 }
 
-.correct {
-  background-color: #93ff8e;
+.corect {
+  background-color: #89ff9c;
 }
 
-.incorrect {
-  background-color: #ff75c4;
+.incorect {
+  background-color: #fa7f74;
 }
 
 .unknown {
-  background-color: #a8caff;
+  background-color: #9ed3ff;
 }
 
 .results-container{

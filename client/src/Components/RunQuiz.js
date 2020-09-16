@@ -10,7 +10,7 @@ const RunQuiz = (props) => {
 	return (
 		<div className="col-12 quiz-selection">
 
-			<select onChange={selectHandler} className="select-input input">
+			<select onChange={selectHandler} className="btn btn-light dropdown-toggle">
 				<option>Select a quiz</option>
 				{props.quizzes.map((quiz) => {
 					return (

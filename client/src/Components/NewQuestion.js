@@ -185,7 +185,7 @@ export default function NewQuestion() {
 						/>
 					</FormGroup>
 				</div>
-				<button> submit question</button>
+				<button className="btn btn-secondary"> Submit question</button>
 			</form>
 			<div className="col-2"></div>
 		</div>
