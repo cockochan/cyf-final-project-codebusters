@@ -20,22 +20,28 @@ const Students = (props) => {
 					setOptionState={setOptionState}
 				/>
 			) : null}
-			<div className="centered">
-				<input
-					type="text"
-					onChange={changeHandler}
-					placeholder="Enter the code"
-					className="input"
-					autoFocus
-				/></div>
 
-			{props.quizData.find((quiz) => quiz.code === enteredCode) && !optionState ? (
-				<Questions
-					quizData={props.quizData.find((quiz) => quiz.code === enteredCode)}
-					setIsSubmitted={setIsSubmitted}
-					setTextMessage={setTextMessage}
-				/>
-			) : null}
+			{props.quizData.find((quiz) => quiz.code === enteredCode)
+      && !optionState ? (
+					<Questions
+						quizData={props.quizData.find((quiz) => quiz.code === enteredCode)}
+						setIsSubmitted={setIsSubmitted}
+						setTextMessage={setTextMessage}
+					/>
+				) : (
+					<div className="centered">
+						<p>
+            Please enter the code provided by your teacher to begin the quiz
+						</p>
+						<input
+							type="text"
+							onChange={changeHandler}
+							placeholder="Enter the code"
+							className="input"
+							autoFocus
+						/>
+					</div>
+				)}
 		</div>
 	);
 };
