@@ -49,10 +49,11 @@ export default function Results(props) {
 		setQuizSelectedResults(selectedResults);
 		const names = selectedResults.map((result) => result.studentName);
 		if (selectedResults.length > 0) {
-			setStudents(uniqBy(names, JSON.stringify));//remove duplicated names from array
+			setStudents(uniqBy(names, JSON.stringify)); //remove duplicated names from array
 
-			const questionIds = props.quizzes.find((quiz) => quiz._id === event.target.value)
-				.questions_id;
+			const questionIds = props.quizzes.find(
+				(quiz) => quiz._id === event.target.value
+			).questions_id;
 			const questions = questionIds.map((questionId) => {
 				return props.questions.find((question) => question._id === questionId);
 			});
@@ -88,7 +89,6 @@ export default function Results(props) {
 				const finalResult = allAttempts.find((attempt) => {
 					return attempt.timestamp >= timestamp;
 				});
-
 				if (finalResult && finalResult.value) {
 					return (
 						<td
@@ -210,16 +210,18 @@ export default function Results(props) {
 									onClick={previousAttempt}
 									disabled={attemptNumber >= attemptCounter}
 								>
-                Previous Attempt
+                  Previous Attempt
 								</button>
 								<button
 									className="quiz-button card-button"
 									onClick={nextAttempt}
 									disabled={attemptNumber <= 1}
 								>
-                Next Attempt
+                  Next Attempt
 								</button>
-								<span>All Attempt : {attemptCounter - attemptNumber+1}</span>
+								<span>
+                  Current Attempt : {attemptCounter - attemptNumber + 1}
+								</span>
 							</div>
 						) : null}
 					</div>
@@ -240,24 +242,27 @@ export default function Results(props) {
 											onClick={closeDetails}
 										/>
 									</th>
-									{quizQuestions.length > 0
-										? quizQuestions.map((question) => {
-											return <th key={question._id}>{question.question}</th>;
+
+									{studentSelected.length > 0
+										? studentSelected.map((student, index) => {
+											return <th key={index}>{student}</th>;
 										})
 										: null}
 								</tr>
 							</thead>
 							<tbody>
-								{studentSelected.map((student, index) => {
-									return (
-										<tr key={index}>
-											<th>{student}</th>
-											{quizQuestions.map((question) =>
-												getValues(student, question._id)
-											)}
-										</tr>
-									);
-								})}
+								{quizQuestions.length > 0
+									? quizQuestions.map((question) => {
+										return (
+											<tr key={question._id}>
+												<th key={question._id}>{question.question}</th>
+												{studentSelected.map((student) => {
+													return getValues(student, question._id);
+												})}
+											</tr>
+										);
+									})
+									: null}
 							</tbody>
 						</table>
 					) : null}
@@ -266,10 +271,10 @@ export default function Results(props) {
 							{students.length > 0 ? (
 								<div className="results-container">
 									<div className="col-12">
-										<table className="col-10">
+										<table className="col-6">
 											<thead>
 												<tr>
-													<th className="no-border"></th>
+													<th className="no-border">Name</th>
 													<th className="no-border">Score</th>
 													<th className="no-border"></th>
 												</tr>
@@ -288,7 +293,7 @@ export default function Results(props) {
 																		className="quiz-button"
 																		onClick={() => showDetail(student)}
 																	>
-                                    Show Ditails
+                                      Show Ditails
 																	</button>
 																</td>
 															</tr>
@@ -298,31 +303,6 @@ export default function Results(props) {
 											</tbody>
 										</table>
 									</div>
-									<table>
-										<thead>
-											<tr>
-												<th>
-												</th>
-												{quizQuestions.length > 0
-													? quizQuestions.map((question) => {
-														return <th key={question._id}>{question.question}</th>;
-													})
-													: null}
-											</tr>
-										</thead>
-										<tbody>
-											{students.map((student, index) => {
-												return (
-													<tr key={index}>
-														<th>{student}</th>
-														{quizQuestions.map((question) =>
-															getValues(student, question._id)
-														)}
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
 								</div>
 							) : (
 								<h4>Nobody answered this quiz!</h4>
