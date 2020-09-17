@@ -293,7 +293,7 @@ export default function Results(props) {
 																		className="quiz-button"
 																		onClick={() => showDetail(student)}
 																	>
-                                      Show Ditails
+                                      Show Details
 																	</button>
 																</td>
 															</tr>
