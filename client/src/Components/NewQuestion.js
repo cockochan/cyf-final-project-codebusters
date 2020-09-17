@@ -86,9 +86,9 @@ export default function NewQuestion() {
 	};
 
 	return (
-		<div className="row">
+		<div >
     			<Navbar mentors="Mentors" results="Results" newquestion="New Question" />
-			<div className=" col-2"></div>
+			<div className="row"></div>
 			<form className="survey-form col-8" onSubmit={submitQuestion}>
 				<div className=" col-2"></div>
 
