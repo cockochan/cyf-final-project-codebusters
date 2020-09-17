@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import dayjs from "dayjs";
 import ReactMarkdown from "react-markdown";
+import Modal from "../Modal/Modal";
 const Questions = (props) => {
 
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -9,6 +10,7 @@ const Questions = (props) => {
 	const [radioId, setRadioId] = useState("");
 	const [route, setRoute] = useState("");
 	const [postData, setPostData] = useState({});
+	const [modalText, setModalText]=useState(null);
 	const [questionData, setQuestionData] = useState({});
 	const [requestOption, setRequestOption] = useState({ method: "GET" });
 	const [answer, setAnswer] = useState({
@@ -32,23 +34,33 @@ const Questions = (props) => {
 	}, [props.quizData.questions_id[currentQuestionIndex], route, requestOption]);
 
 	const submitHandler = (e) => {
-		setCurrentQuestionIndex(currentQuestionIndex + 1);
-		setRoute("results");
-		setRequestOption({
-			method: "POST",
-			headers: { "Content-type": "application/json" },
-			body: JSON.stringify(answer),
-		});
 		e.preventDefault();
-		e.target.reset;
-		setAnswer({
-			...answer,
-			question_id: props.quizData.questions_id[currentQuestionIndex + 1],
-			timestamp: dayjs().format(),
-			value: "",
-			correct: false,
-		});
-		setIsChecked(false);
+		const submitionProcess =()=>{
+			setCurrentQuestionIndex(currentQuestionIndex + 1);
+			setRoute("results");
+			setRequestOption({
+				method: "POST",
+				headers: { "Content-type": "application/json" },
+				body: JSON.stringify(answer),
+			});
+
+			// e.target.reset;
+			setAnswer({
+				...answer,
+				question_id: props.quizData.questions_id[currentQuestionIndex + 1],
+				timestamp: dayjs().format(),
+				value: "",
+				correct: false,
+			});
+			setIsChecked(false);
+		};
+		if(answer.value=="") {
+			window.confirm("Are you sure you want to skip this question?")&&submitionProcess();
+
+		}else{
+			submitionProcess();
+		}
+
 	};
 
 	const submitForm = (event) => {
@@ -58,9 +70,9 @@ const Questions = (props) => {
 			headers: { "Content-type": "application/json" },
 			body: JSON.stringify(answer),
 		});
-		event.target.reset;
-		props.setIsSubmitted(true);
-		props.setTextMessage("Form submitted successfully!");
+		// event.target.reset;
+		// props.setIsSubmitted(true);
+		// setModalText("Form submitted successfully!");
 	};
 
 	const checkHandler = (e) => {
@@ -92,17 +104,18 @@ const Questions = (props) => {
 	};
 
 	return (
-		<Form  className="survey-form">
-			<input
-				type="text"
-				placeholder="Enter your name"
-				onChange={changeHandler}
-				className="answers"
-				required
-				autoFocus
-			/>
-			<FormGroup>
+		<Form  className="survey-form"  onSubmit={submitHandler}>
+
+			<FormGroup >
 				<FormGroup className="answers">
+					<input
+						type="text"
+						placeholder="Enter your name"
+						onChange={changeHandler}
+						className="answers"
+						required
+						autoFocus
+					/>
 					{questionData.question_code ? (
 						<ReactMarkdown className="code">
 							{questionData.question_code}
@@ -193,22 +206,15 @@ const Questions = (props) => {
 			</FormGroup>
 			{currentQuestionIndex < props.quizData.questions_id.length - 1 ? (
 
-				<Button className="answers"
-					onClick={(e) =>{
-						if(answer.value=="") {
-							window.confirm("Are you sure you want to skip this question?")
-				&& submitHandler(e);
-						}else{
-							submitHandler(e);
-						}
-					}}
-				>
+				<Button
+			 className="answers">
 			Next</Button>
 			) : (
-				<Button type="button" onClick={submitForm} className="answers">
+				<Button type="button"  className="answers">
           Submit
 				</Button>
 			)}
+			{modalText?<Modal modalText={modalText} setModalText={setModalText} />:null}
 		</Form>
 	);
 };
