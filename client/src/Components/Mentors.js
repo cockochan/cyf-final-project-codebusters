@@ -137,15 +137,15 @@ export default function Mentors(props) {
 	};
 	if (filteredQuestionsByTag) {
 		return (
-			<div className='main'>
+			<div>
 				<Navbar mentors="Mentors" results="Results" newquestion ="New Question" />
 				<div className="container">
 					<div className='row'>
-					{modalText?(modalText==="OK"?<Modal modalText={"submitted successfully"} />:<Modal modalText={"something went wrong"} />):null}
+						{modalText?(modalText==="OK"?<Modal modalText={"submitted successfully"} />:<Modal modalText={"something went wrong"} />):null}
 						<RunQuiz quizzes={props.quizzes} />
 						<div className="filterButtons row">
-						<div>
-					 <select class="btn btn-light dropdown-toggle pt-2" onChange={selectHandler}>
+							<div>
+					 <select className="btn btn-light dropdown-toggle pt-2" onChange={selectHandler}>
 						 <option selected disabled>Number of question</option>
 									<option value="5">5</option>
 									<option value="10">10</option>
@@ -153,7 +153,7 @@ export default function Mentors(props) {
 									<option value="20">20</option>
 								</select>
 					 </div>
-							<select class="btn btn-light dropdown-toggle ml-2" onChange={tagClickHandler}>
+							<select className="btn btn-light dropdown-toggle ml-2" onChange={tagClickHandler}>
 								<option value="" disabled selected hidden>Select tag filter</option>
 								{tagsCollection.map((tag, index) => {
 									return (
@@ -161,7 +161,7 @@ export default function Mentors(props) {
 									);
 								})}
 							</select>
-							
+
 							<button className="btn btn-light ml-2" onClick={autofillQuizz}>autofill quiz</button>
 							<button className ="btn btn-light ml-2" onClick={resetFilters}>reset filters</button>
 						</div>
@@ -236,7 +236,7 @@ export default function Mentors(props) {
 											);
 										})}
 									</div>
-									<button 
+									<button
 										key={question._id + question.question}
 										type="checkbox"
 										checked="checked"

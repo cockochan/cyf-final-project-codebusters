@@ -9,7 +9,6 @@ html {
 }
 
 .body {
-  margin-top: 150px;
   font-family: "Roboto", sans-serif;
   background-color: #e5e5e5;
 }
@@ -21,7 +20,7 @@ html {
   position: fixed;
   z-index: 1;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 0.5px solid lightgray;
   list-style-type: none;
@@ -32,9 +31,10 @@ html {
   height: 125px;
 }
 
-.links-container {
+.links-container,
+.logo-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 .centered{
   align-self: center;
@@ -46,7 +46,7 @@ html {
 
 .link-button {
   display: flex;
-  justify-content: center;
+  justify-content:flex-start;
   align-items: center;
   color: #596275;
   left: 321px;

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import "./grid.css";
- import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 import Students from "./Components/Students.js";
 import Mentors from "./Components/Mentors.js";
 import NewQuestion from "./Components/NewQuestion.js";
 import Results from "./Components/Results.js";
-import Navbar from "./Components/Navbar";
 
 const App = () => {
 	const [questions, setQuestions] = useState(null);
@@ -27,7 +26,6 @@ const App = () => {
 	return (
 		<main role="main">
 			<Router>
-				<Navbar />
 				<div className="body">
 					<Switch>
 						<Route exact path="/mentors/5wjhfxnr">
