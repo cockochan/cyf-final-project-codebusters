@@ -72,7 +72,6 @@ const Questions = (props) => {
 			body: JSON.stringify(answer),
 		});
 		event.target.reset;
-		// props.setIsSubmitted(true);
 		setSubmittedModalText("Form submitted successfully!");
 	};
 
@@ -125,19 +124,18 @@ const Questions = (props) => {
 						) : null}
 						<ReactMarkdown>{questionData.question}</ReactMarkdown>
 					</FormGroup>
-					<FormGroup className="answers">
-						{answer_a ? (
-							<Input
-								type="radio"
-								name="answer"
-								value={answer_a}
-								onChange={checkHandler}
-								id="answer_a"
-								checked={isChecked && radioId == "answer_a" ? true : false}
-							/>
-						) : null}
-						{answer_a ? <Label for="answer_a">{answer_a}</Label> : null}
-					</FormGroup>
+
+					{answer_a ? (<FormGroup className="answers">
+						<Input
+							type="radio"
+							name="answer"
+							value={answer_a}
+							onChange={checkHandler}
+							id="answer_a"
+							checked={isChecked && radioId == "answer_a" ? true : false}
+						/>
+						 <Label for="answer_a">{answer_a}</Label></FormGroup>) : null}
+
 
 					<FormGroup className="answers">
 						{answer_b ? (
