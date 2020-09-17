@@ -39,6 +39,7 @@ html {
 .centered{
   align-self: center;
   text-align: center;
+  position: relative;
 }
 .cyf-logo {
   height: 90px;
@@ -319,4 +320,22 @@ th{
 }
 .formLeftAlign{
   align-items: flex-start;
+}
+.backGroundImage{
+  width: 100%;
+  height: auto;
+}
+.intro-text{
+  position: absolute; top: 25%; width: 30%; 
+  margin-left: 34%;
+} 
+.quiz-time{
+  position: absolute; top: 5%;
+  margin-left: 37%;
+  color: #BE90D4;
+  font-weight: bold;
+  font-size: 60px;
+  font-stretch: extra-expanded;
+  
+
 }

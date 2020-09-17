@@ -162,8 +162,8 @@ export default function Mentors(props) {
 								})}
 							</select>
 
-							<button className="btn btn-light ml-2" onClick={autofillQuizz}>autofill quiz</button>
-							<button className ="btn btn-light ml-2" onClick={resetFilters}>reset filters</button>
+							<button className="btn btn-light ml-2" onClick={autofillQuizz}>Autofill quiz</button>
+							<button className ="btn btn-light ml-2" onClick={resetFilters}>Reset filters</button>
 						</div>
 						{modalText?<Modal modalText={modalText} setModalText={setModalText} />:null}
 						<div className="col-7 card-block">
