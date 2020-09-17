@@ -36,7 +36,10 @@ html {
   display: flex;
   justify-content: space-around;
 }
-
+.centered{
+  align-self: center;
+  text-align: center;
+}
 .cyf-logo {
   height: 90px;
 }
