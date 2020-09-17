@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Modal.css";
 export default function Mentors(props) {
 	const [isOpen,setIsOpen]=useState(true);
-
     	return(
     		<React.Fragment>
     			{isOpen && (<div className='modal'>
@@ -11,13 +10,14 @@ export default function Mentors(props) {
 					{props.func?<button onClick={()=> {
 						setIsOpen(false);
 						props.func();
+						props.setModalText(null);
 					}
 					}>proceed</button>:null}
 					<button className='modalButton' onClick={()=> {
 						setIsOpen(false);
 						props.setModalText(null);
 					}
-					}>ok</button>
+					}>close</button>
     				</div>
     			</div>)}
     		</React.Fragment>
