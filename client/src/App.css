@@ -13,7 +13,7 @@ html {
   background-color: #e5e5e5;
 }
 
-.navbar{
+.navbar {
   background-color: #ffffff;
   width: 100%;
   top: 0;
@@ -36,18 +36,20 @@ html {
   display: flex;
   justify-content: center;
 }
-.centered{
+
+.centered {
   align-self: center;
   text-align: center;
   position: relative;
 }
+
 .cyf-logo {
   height: 90px;
 }
 
 .link-button {
   display: flex;
-  justify-content:flex-start;
+  justify-content: flex-start;
   align-items: center;
   color: #596275;
   left: 321px;
@@ -74,6 +76,7 @@ html {
   border: none;
   border-radius: 4px;
   outline: none;
+  width: 100%;
 }
 
 /* Mentors */
@@ -96,7 +99,8 @@ html {
   border-radius: 5px;
   overflow-wrap: break-word;
 }
-.select-container{
+
+.select-container {
   align-items: flex-start;
   justify-content: flex-start;
 }
@@ -125,7 +129,7 @@ html {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 20px ;
+  margin-top: 20px;
   align-items: flex-start;
 }
 
@@ -140,8 +144,7 @@ html {
   mix-blend-mode: normal;
 }
 
-.question{
-
+.question {
   margin-top: 20px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -151,6 +154,7 @@ html {
   color: #000000;
   justify-content: space-evenly;
 }
+
 .code {
   margin-top: 20px;
   font-family: Open Sans;
@@ -177,7 +181,6 @@ html {
   justify-content: flex-start;
   align-items: center;
   margin: 10px 0;
-  /* background-color: #eeeeee; */
 }
 
 .question-elements {
@@ -191,7 +194,7 @@ html {
 /* **************************************************** */
 
 .survey-form {
-  background-color:  #EEEEEE;;
+  background-color: #eeeeee;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -203,9 +206,10 @@ html {
 /* Message */
 /* **************************************************** */
 
-.filterButtons{
-  padding-left:30px;
+.filterButtons {
+  padding-left: 30px;
 }
+
 .message-container {
   position: fixed;
   width: 30%;
@@ -254,15 +258,90 @@ html {
 /* Results */
 /* **************************************************** */
 
-table,
-th,
-td {
-  border: 1px solid black;
-  border-radius:3px ;
+.top-margin {
+  margin-top: 40px;
 }
+
+.result-handler {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.quiz-result-handler {
+  padding: 10px 0;
+  margin: 10px 0;
+}
+
+.select-result {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.attempt-handler-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.current-attempt-handler {
+  width: 40%;
+}
+
+.attempt-buttons-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.attempt-handler {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-align {
+  margin: 60px 0 0 30px;
+}
+
+.tables-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.table-score {
+  font-size: 16px;
+  background-color: #ffffff;
+  /* margin-left: 15px; */
+  width: 100%;
+}
+
+tr {
+  color: #5b5757;
+}
+
 td,
-th{
-  padding: 7px;
+th {
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table-head {
+  background-color: #d2d2d2;
+  font-weight: bold;
+}
+
+.table-body {
+  background-color: #ffffff;
+}
+
+.score-row {
+  cursor: pointer;
 }
 
 .quizez {
@@ -286,7 +365,7 @@ th{
   background-color: #9ed3ff;
 }
 
-.results-container{
+.results-container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -294,9 +373,10 @@ th{
   padding: 30px 0;
 }
 
-.no-border{
+.no-border {
   border: none;
 }
+
 /* New Question */
 /* **************************************************** */
 
@@ -304,31 +384,38 @@ th{
   width: 80%;
   height: 100px;
 }
-.form-element{
+
+.form-element {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 3%;
   display: flex;
 }
-.tagField{
-  margin:3%;
-  border-color: #BDBDBD;
+
+.tagField {
+  margin: 3%;
+  border-color: #bdbdbd;
 }
-.text-area{
+
+.text-area {
   align-self: center;
 }
-.formLeftAlign{
+
+.formLeftAlign {
   align-items: flex-start;
 }
+
 .backGroundImage{
   width: 100%;
   height: auto;
 }
+
 .intro-text{
   position: absolute; top: 25%; width: 30%; 
   margin-left: 34%;
 } 
+
 .quiz-time{
   position: absolute; top: 5%;
   margin-left: 37%;
@@ -336,6 +423,5 @@ th{
   font-weight: bold;
   font-size: 60px;
   font-stretch: extra-expanded;
-  
-
 }
+

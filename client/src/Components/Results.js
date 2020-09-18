@@ -187,121 +187,131 @@ export default function Results(props) {
 	return (
 		<div>
 			<Navbar mentors="Mentors" results="Results" newquestion="New Question" />
-			<div className="container">
+			<div className="container top-margin">
 				<div>
-					<div className="col-12 quiz-handler">
-						<div className="col-6">
-							<h2>Welcome to Quiz Time</h2>
-							<select className="input select-input" onChange={changeHandler}>
-								<option>Select a Quiz</option>
-								{props.quizzes.map((quiz) => {
-									return (
-										<option key={quiz._id} value={quiz._id}>
-											{quiz.name}
-										</option>
-									);
-								})}
-							</select>
-						</div>
-						{quizQuestions.length > 0 ? (
-							<div className="quiz-handler col-5">
-								<button
-									className="quiz-button card-button"
-									onClick={previousAttempt}
-									disabled={attemptNumber >= attemptCounter}
-								>
-                  Previous Attempt
-								</button>
-								<button
-									className="quiz-button card-button"
-									onClick={nextAttempt}
-									disabled={attemptNumber <= 1}
-								>
-                  Next Attempt
-								</button>
-								<span>
-                  Current Attempt : {attemptCounter - attemptNumber + 1}
-								</span>
+					<div className="col-12 quiz-result-handler">
+						<div className="result-handler">
+							<div className="col-4 select-result">
+								<select className="input " onChange={changeHandler}>
+									<option>Select a Quiz</option>
+									{props.quizzes.map((quiz) => {
+										return (
+											<option key={quiz._id} value={quiz._id}>
+												{quiz.name}
+											</option>
+										);
+									})}
+								</select>
 							</div>
-						) : null}
+							<div className="col-8 attempt-handler-container">
+								{quizQuestions.length > 0 ? (
+									<div className="attempt-handler col-12">
+										<div className="current-attempt-handler">
+											<span>
+                        Current Attempt: {attemptCounter - attemptNumber + 1}
+											</span>
+										</div>
+										<div className=" attempt-buttons-container">
+											<button
+												className="btn btn-primary btn-sm w-20"
+												onClick={previousAttempt}
+												disabled={attemptNumber >= attemptCounter}
+												style={{ marginLeft: "10px" }}
+											>
+                        Previous Attempt
+											</button>
+											<button
+												className="btn btn-primary btn-sm w-20"
+												onClick={nextAttempt}
+												disabled={attemptNumber <= 1}
+												style={{ marginLeft: "10px" }}
+											>
+                        Next Attempt
+											</button>
+										</div>
+									</div>
+								) : null}
+							</div>
+						</div>
 					</div>
 				</div>
 				<div>
-					{isShowDetails ? (
-						<table>
-							<thead>
-								<tr>
-									<th>
-										<FontAwesomeIcon
-											icon={faTimes}
-											style={{
-												color: "red",
-												cursor: "pointer",
-												fontSize: "35px",
-											}}
-											onClick={closeDetails}
-										/>
-									</th>
-
-									{studentSelected.length > 0
-										? studentSelected.map((student, index) => {
-											return <th key={index}>{student}</th>;
-										})
-										: null}
-								</tr>
-							</thead>
-							<tbody>
-								{quizQuestions.length > 0
-									? quizQuestions.map((question) => {
-										return (
-											<tr key={question._id}>
-												<th key={question._id}>{question.question}</th>
-												{studentSelected.map((student) => {
-													return getValues(student, question._id);
-												})}
-											</tr>
-										);
-									})
-									: null}
-							</tbody>
-						</table>
-					) : null}
 					{quizSelected._id ? (
 						<div>
 							{students.length > 0 ? (
 								<div className="results-container">
-									<div className="col-12">
-										<table className="col-6">
-											<thead>
-												<tr>
-													<th className="no-border">Name</th>
-													<th className="no-border">Score</th>
-													<th className="no-border"></th>
-												</tr>
-											</thead>
-											<tbody>
-												{students.length > 0
-													? students.map((student, index) => {
-														return (
-															<tr key={index}>
-																<th>{student}</th>
-																<td>
-																	{getScore(student)}/{quizQuestions.length}
-																</td>
-																<td>
-																	<button
-																		className="quiz-button"
-																		onClick={() => showDetail(student)}
-																	>
-                                      Show Details
-																	</button>
-																</td>
-															</tr>
-														);
-													})
-													: null}
-											</tbody>
-										</table>
+									<div className="col-12 tables-container">
+										<div className="col-4">
+											<table className="table-score">
+												<thead className="table-head">
+													<tr>
+														<th className="no-border">Name</th>
+														<th className="no-border">Score</th>
+														<th className="no-border"></th>
+													</tr>
+												</thead>
+												<tbody className="table-body">
+													{students.length > 0
+														? students.map((student, index) => {
+															return (
+																<tr
+																	key={index}
+																	onClick={() => showDetail(student)}
+																	className="score-row"
+																>
+																	<th>{student}</th>
+																	<td>
+																		{getScore(student)}/{quizQuestions.length}
+																	</td>
+																</tr>
+															);
+														})
+														: null}
+												</tbody>
+											</table>
+										</div>
+										<div className="col-8">
+											{isShowDetails ? (
+												<table className="table-body col-12">
+													<thead className="table-head">
+														<tr>
+															<th>
+																<FontAwesomeIcon
+																	icon={faTimes}
+																	style={{
+																		color: "red",
+																		cursor: "pointer",
+																		fontSize: "35px",
+																	}}
+																	onClick={closeDetails}
+																/>
+															</th>
+															{studentSelected.length > 0
+																? studentSelected.map((student, index) => {
+																	return <th key={index}>{student}</th>;
+																})
+																: null}
+														</tr>
+													</thead>
+													<tbody>
+														{quizQuestions.length > 0
+															? quizQuestions.map((question) => {
+																return (
+																	<tr key={question._id}>
+																		<th key={question._id}>
+																			{question.question}
+																		</th>
+																		{studentSelected.map((student) => {
+																			return getValues(student, question._id);
+																		})}
+																	</tr>
+																);
+															})
+															: null}
+													</tbody>
+												</table>
+											) : null}
+										</div>
 									</div>
 								</div>
 							) : (
@@ -309,7 +319,9 @@ export default function Results(props) {
 							)}
 						</div>
 					) : (
-						<p>Please select a quiz to see the results</p>
+						<p className="info-align">
+              Please select a quiz to see the results
+						</p>
 					)}
 				</div>
 			</div>
