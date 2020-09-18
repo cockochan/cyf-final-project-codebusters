@@ -278,9 +278,7 @@ export default function Mentors(props) {
 											return (
 												<div key={index}>
 													<div className="answer">
-														{" "}
-														{value ? "_ " : null}
-														{value}
+														{value ? value: null}
 													</div>
 												</div>
 											);
