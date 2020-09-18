@@ -108,31 +108,28 @@ export default function AllResults(props) {
 						})}
 		  </select>
 
-					{quizSelected&&allResults&&allResults!=="not found!"?<div><div className='centered'><h3>attempt number  </h3><p>(change to see if some students made multiple attempts)</p></div>
-						{/* <button onClick={decreaseAttemptNumber}>decrease attempt number </button>
-						<button onClick={increaseAttemptNumber}>increase attempt number </button> */}
-						<table>
-							<thead>
-								<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question, index)=>{
+					{quizSelected&&allResults&&allResults!=="not found!"?<div><div className='centered'>
+					</div>
+					<table>
+						<thead>
+							<tr><td></td>{selectedQuizQuestions?selectedQuizQuestions.map((question, index)=>{
 
-									{question.question;}
+								{question.question;}
 
-									return(<th  key={index} className='col-1'>{question!==undefined?<div data-tip data-for={question.question}>{index+1}<ReactTooltip id={question.question} place="top" effect="solid" >{question.question}</ReactTooltip></div>:<p>Loading question</p>}</th>);
-								}):<tr></tr>}</tr>
-								{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName, index)=>{
-									return(
+								return(<th  key={index} className='col-1'></th>);
+							}):<tr></tr>}</tr>
+							{studentNames&&quizSelected?studentNames.filter(Boolean).map((oneName, index)=>{
+								return(
 
-										<tr><td className="col-1">{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question,index)=>{
-											return(<th className={findQuestionResult(question._id, oneName)} data-tip data-for={findStudenAnswerResult(question._id, oneName)}>{question!==undefined?<div>{index+1}<ReactTooltip id={findStudenAnswerResult(question._id, oneName)} place="top" effect="solid">
-												{findStudenAnswerResult(question._id, oneName)}
-										  </ReactTooltip></div>:<p>Loading question</p>}</th>);
-										}):null}</tr>
-									);
-								}
-								):null}
-							</thead>
+									<tr><td className="col-1">{oneName}</td>{selectedQuizQuestions?selectedQuizQuestions.map((question,index)=>{
+										return(<th className={findQuestionResult(question._id, oneName)} data-tip data-for={findStudenAnswerResult(question._id, oneName)}></th>);
+									}):null}</tr>
+								);
+							}
+							):null}
+						</thead>
 
-						</table>
+					</table>
 		  </div>:null}
 		 </div>
 		 </div>
