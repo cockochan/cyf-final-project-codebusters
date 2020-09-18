@@ -6,7 +6,7 @@ import Students from "./Components/Students.js";
 import Mentors from "./Components/Mentors.js";
 import NewQuestion from "./Components/NewQuestion.js";
 import Results from "./Components/Results.js";
-
+import AllResults from "./Components/AllResults";
 const App = () => {
 	const [questions, setQuestions] = useState(null);
 	const [quizzes, setQuizzes] = useState([]);
@@ -39,6 +39,9 @@ const App = () => {
 					<Link to="/Students" exact="true" className="link-button">
             Student
 					</Link>
+					<Link to="/AllResults" exact="true" className="link-button">
+            Student
+					</Link>
 				</nav>
 				<div className="body">
 					<Switch>
@@ -54,6 +57,9 @@ const App = () => {
 						</Route>
 						<Route exact path="/Results">
 							<Results questions={questions} quizes={quizzes} />
+						</Route>
+						<Route exact path="/AllResults">
+							<AllResults questions={questions} quizes={quizzes} />
 						</Route>
 						<Route exact path="/Students">
 							{quizzes.length > 0 ? (
