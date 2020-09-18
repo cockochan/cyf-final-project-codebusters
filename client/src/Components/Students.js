@@ -38,7 +38,7 @@ const Students = (props) => {
 							<h1 className="quiz-time">Quiz Time</h1>
 							<div className="intro-text">
 								<p>
-             					Enter the provided code by your teacher to begin the quiz
+								Enter the code provided by your tutor to start the quiz
 								</p>
 								<input
 								type="text"

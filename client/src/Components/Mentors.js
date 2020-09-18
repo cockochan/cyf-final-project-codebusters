@@ -218,7 +218,7 @@ export default function Mentors(props) {
 									placeholder={"Enter quiz name"}
 									className="input"
 								/>
-								<button onClick={clearQuiz} className="btn btn-primary ml-2"> Clear quiz</button>
+								<button onClick={clearQuiz} className="btn btn-primary ml-2"> Clear</button>
 								<button onClick={submitQuiz} className="btn btn-primary ml-2">Submit</button>
 							</div>
 							{newQuizQuestions.map((question) => (
