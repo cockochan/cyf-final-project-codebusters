@@ -208,7 +208,8 @@ export default function Results(props) {
 									<div className="attempt-handler col-12">
 										<div className="current-attempt-handler">
 											<span>
-                        Current Attempt: {attemptCounter - attemptNumber + 1}
+                        Current Attempt:{" "}
+												<strong>{attemptCounter - attemptNumber + 1}</strong>
 											</span>
 										</div>
 										<div className=" attempt-buttons-container">
@@ -247,7 +248,6 @@ export default function Results(props) {
 													<tr>
 														<th className="no-border">Name</th>
 														<th className="no-border">Score</th>
-														<th className="no-border"></th>
 													</tr>
 												</thead>
 												<tbody className="table-body">
@@ -319,9 +319,9 @@ export default function Results(props) {
 							)}
 						</div>
 					) : (
-						<p className="info-align">
+						<h4 className="info-align">
               Please select a quiz to see the results
-						</p>
+						</h4>
 					)}
 				</div>
 			</div>
