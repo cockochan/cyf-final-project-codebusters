@@ -64,12 +64,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.5",
-    "bootstrap": "^4.5.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-brands-svg-icons": "^5.14.0",
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "bootstrap": "^4.5.2",
     "cors": "^2.8.5",
     "dayjs": "^1.8.34",
     "dotenv": "^8.2.0",
@@ -81,6 +81,7 @@
     "react-markdown": "^4.3.1",
     "react-router-dom": "^5.2.0",
     "react-table": "^7.5.0",
+    "react-tooltip": "^4.2.10",
     "reactstrap": "^8.5.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^1.2.0"
