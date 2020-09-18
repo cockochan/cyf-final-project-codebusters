@@ -82,7 +82,7 @@ export default function NewQuestion() {
 		e.preventDefault();
 
 
-		setModalText("Are you sure you want to skip this question?");
+		setModalText("submitted, clear the form");
 
 
 	};
@@ -102,7 +102,7 @@ export default function NewQuestion() {
 		<div >
     			<Navbar mentors="Mentors" results="Results" newquestion="New Question" />
 			<div className="row formPage">
-				<form className="survey-form col-8" id="newQuestionForm" >
+				<form className="survey-form col-8" id="newQuestionForm" onSubmit={submitHandler} >
 					<textarea onKeyUp={codeHandler} className="text-area" placeholder="Code illustration" />
 					<textarea onKeyUp={questionHandler} className="text-area"  required placeholder="Question text use markdown" />
 
@@ -197,7 +197,7 @@ export default function NewQuestion() {
 						</FormGroup>
 
 					</div>
-					<button  type="button" className="btn btn-secondary" onClick={submitHandler}> Submit question</button>
+					<button  className="btn btn-secondary" > Submit question</button>
 				</form>
 				{modalText?<Modal modalText={modalText} setModalText={setModalText} func={refreshPage} />:null}
 
