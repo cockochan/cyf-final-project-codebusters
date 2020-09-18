@@ -84,10 +84,14 @@ export default function Mentors(props) {
 	}, [newQuiz.questions_id, props.questions, newQuiz]);
 
 	const addQuestion = (event) => {
-		setNewQuiz({
-			...newQuiz,
-			questions_id: [...newQuiz.questions_id, event.target.value],
-		});
+		if(newQuiz.questions_id.filter((id)=>id===event.target.value).length===0){
+			setNewQuiz({
+				...newQuiz,
+				questions_id: [...newQuiz.questions_id, event.target.value],
+			});
+		} else{
+			setModalText("this question is already in the quiz");
+		}
 	};
 
 	const submitQuiz = () => {
