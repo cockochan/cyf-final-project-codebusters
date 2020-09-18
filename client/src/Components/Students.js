@@ -14,7 +14,7 @@ const Students = (props) => {
 	};
 
 	return (
-		<div >
+		<div className="background">
 			<Navbar />
 			<div className="container">
 				{isSubmitted ? (
@@ -33,17 +33,21 @@ const Students = (props) => {
 							setTextMessage={setTextMessage}
 						/>
 					) : (
-						<div className="centered">
-							<p>
-            Please enter the code provided by your teacher to begin the quiz
-							</p>
-							<input
+						<div className ="centered">
+							<img className="backGroundImage" src="client/src/img/Hoarding1.svg"/>
+							<h1 className="quiz-time">Quiz Time</h1>
+							<div className="intro-text">
+								<p>
+             					Enter the provided code by your teacher to begin the quiz
+								</p>
+								<input
 								type="text"
 								onChange={changeHandler}
-								placeholder="Enter the code"
+								placeholder="Enter the code here.."
 								className="input"
 								autoFocus
-							/>
+								/>
+							</div>
 						</div>
 					)}
 			</div>
