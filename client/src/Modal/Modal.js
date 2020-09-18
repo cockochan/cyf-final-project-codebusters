@@ -6,14 +6,14 @@ export default function Mentors(props) {
     		<React.Fragment>
     			{isOpen && (<div className='modal'>
     				<div className='modal-body'>
-    					<p className='modalText'>{props.modalText}</p>
+    					<h4 className='modalText'>{props.modalText}</h4>
 					{props.func?<button onClick={()=> {
 						setIsOpen(false);
 						props.func();
 						props.setModalText(null);
 					}
 					}>proceed</button>:null}
-					<button className='modalButton' onClick={()=> {
+					<button className="card-button btn btn-primary btn-sm w-25" onClick={()=> {
 						setIsOpen(false);
 						props.setModalText(null);
 					}

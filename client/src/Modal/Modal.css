@@ -8,17 +8,18 @@
     background: rgba(0,0,0, 0.5);
     display:flex;
     justify-content: center;
+    justify-items: center;
     padding-top: 5rem;
     z-index:2;
 }
 .modal-body{
+    display: flex;
     padding: 2rem;
     width:10vw;
     max-width: 500px;
     border-radius:5px;
     background: white;
     height:25vh;
-    align-content: center;
 }
 .modalText{
     color:grey;
