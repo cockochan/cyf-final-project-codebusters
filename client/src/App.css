@@ -323,6 +323,12 @@ html {
   width: 100%;
 }
 
+.scroll-table{
+  max-height: 750px;
+  overflow:scroll;
+  display: block;
+}
+
 tr {
   color: #5b5757;
 }

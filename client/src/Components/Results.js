@@ -242,7 +242,7 @@ export default function Results(props) {
 							{students.length > 0 ? (
 								<div className="results-container">
 									<div className="col-12 tables-container">
-										<div className="col-4">
+										<div className="col-4 scroll-table">
 											<table className="table-score">
 												<thead className="table-head">
 													<tr>
