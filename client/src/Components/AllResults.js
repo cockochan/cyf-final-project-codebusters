@@ -86,7 +86,7 @@ export default function AllResults(props) {
 	if(allResults=="not found!"){
 		return(
 			<div className='col-12 centered'>
-				<h1> no results for this quiz have been submitted yet</h1>
+				<p> no results for this quiz have been submitted yet</p>
 				<div className='col-12'>
 					<h1>Welcome to QuizzTime</h1>
 					<select name="quizez" className="quizez"  onChange={quizToSeeResultsChosen}>
@@ -99,8 +99,8 @@ export default function AllResults(props) {
 	} else if(props.quizzes){
 		return (
 			<div>
-				<div className="allresults"  className='col-6 centered'>
-					<h1>Chosse a quiz to see student results</h1>
+				<div className="allresults"  className='col-4centered'>
+					<h4>Chosse a quiz to see student results</h4>
 					<select name="quizzez" className="quizzez" onChange={quizToSeeResultsChosen}>
 						<option value="" disabled selected hidden>select a quiz</option>
 						{props.quizzes.map((quiz)=>{
