@@ -5,6 +5,7 @@ import { BrowserRouter as Route, Link } from "react-router-dom";
 import { FormGroup } from "reactstrap";
 
 export default function NewQuestion() {
+	const [modalText, setModalText]=useState(null);
 	const [questionToSet, setQuestionToSet] = useState({
 		question: "",
 		description: "",
@@ -48,7 +49,7 @@ export default function NewQuestion() {
 		})
 			.then((response) => response.json())
 			.catch((err) => console.error(err));
-		alert("question submitted");
+		setModalText("question submitted");
 	};
 	const codeHandler = (event) => {
 		setQuestionToSet({
@@ -184,6 +185,7 @@ export default function NewQuestion() {
 							onChange={answerCheck}
 						/>
 					</FormGroup>
+					{modalText?<Modal modalText={modalText} />:null}
 				</div>
 				<button className="btn btn-secondary"> Submit question</button>
 			</form>
