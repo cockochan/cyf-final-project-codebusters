@@ -16,6 +16,7 @@ export default function Results(props) {
 	const [attemptNumber, setAttemptNumber] = useState(1);
 	const [attemptCounter, setAttemptCounter] = useState(1);
 	const [isShowDetails, setIsShowDetails] = useState(false);
+	const [sortBy, setSortBy] = useState(null);
 
 	useEffect(() => {
 		fetch("/api/results")
@@ -42,6 +43,7 @@ export default function Results(props) {
 		setAttemptNumber(1);
 		setAttemptCounter(1);
 		setStudents([]);
+		setIsShowDetails(false);
 		setQuizRoute(`quizzes/${event.target.value}`);
 		const selectedResults = allResults.filter(
 			(result) => result.quiz_id === event.target.value
@@ -183,6 +185,24 @@ export default function Results(props) {
 		setIsShowDetails(false);
 		setStudentSelected([]);
 	};
+	useEffect(() => {
+		const sortHandler = () => {
+			setStudents((s) => s.sort());
+		};
+		const sortByScore = () => {
+			setStudents((s) =>
+				s.sort(function (studentA, studentB) {
+   	       return getScore(studentA) - getScore(studentB);
+		  })
+			);
+		};
+
+		if (sortBy === "name") {
+			sortHandler();
+		} else if (sortBy === "score") {
+			sortByScore();
+		}
+	}, [sortBy]);
 
 	return (
 		<div>
@@ -192,7 +212,7 @@ export default function Results(props) {
 					<div className="col-12 quiz-result-handler">
 						<div className="result-handler">
 							<div className="col-4 select-result">
-								<select className="input " onChange={changeHandler}>
+								<select className="input" onChange={changeHandler}>
 									<option>Select a Quiz</option>
 									{props.quizzes.map((quiz) => {
 										return (
@@ -246,27 +266,37 @@ export default function Results(props) {
 											<table className="table-score">
 												<thead className="table-head">
 													<tr>
-														<th className="no-border">Name</th>
-														<th className="no-border">Score</th>
+														<th
+															className="no-border"
+															onClick={() => setSortBy("name")}
+															style={{ cursor: "pointer" }}
+														>
+                              Name
+														</th>
+														<th
+															className="no-border"
+															onClick={() => setSortBy("score")}
+															style={{ cursor: "pointer" }}
+														>
+                              Score
+														</th>
 													</tr>
 												</thead>
 												<tbody className="table-body">
-													{students.length > 0
-														? students.map((student, index) => {
-															return (
-																<tr
-																	key={index}
-																	onClick={() => showDetail(student)}
-																	className="score-row"
-																>
-																	<th>{student}</th>
-																	<td>
-																		{getScore(student)}/{quizQuestions.length}
-																	</td>
-																</tr>
-															);
-														})
-														: null}
+													{students.map((student, index) => {
+														return (
+															<tr
+																key={index}
+																onClick={() => showDetail(student)}
+																className="score-row"
+															>
+																<th>{student}</th>
+																<td>
+																	{getScore(student)}/{quizQuestions.length}
+																</td>
+															</tr>
+														);
+													})}
 												</tbody>
 											</table>
 										</div>
