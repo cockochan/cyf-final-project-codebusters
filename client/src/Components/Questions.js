@@ -41,8 +41,6 @@ const Questions = (props) => {
 			headers: { "Content-type": "application/json" },
 			body: JSON.stringify(answer),
 		});
-
-		// e.target.reset;
 		setAnswer({
 			...answer,
 			question_id: props.quizData.questions_id[currentQuestionIndex + 1],
@@ -61,9 +59,7 @@ const Questions = (props) => {
 		}else{
 			submitionProcess();
 		}
-
 	};
-
 	const submitForm = (event) => {
 		setRoute("results");
 		setRequestOption({
