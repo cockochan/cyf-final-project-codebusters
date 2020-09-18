@@ -72,9 +72,11 @@ const Questions = (props) => {
 			body: JSON.stringify(answer),
 		});
 		event.target.reset;
-		setSubmittedModalText("Form submitted successfully!");
+		setSubmittedModalText("Form submitted successfully, start new quiz?");
 	};
-
+	const refreshPage=()=>{
+		location.reload();
+	};
 	const checkHandler = (e) => {
 		setAnswer({
 			...answer,
@@ -217,7 +219,7 @@ const Questions = (props) => {
 
 			</Form>
 			{modalText?<Modal modalText={modalText} setModalText={setModalText} func={submitionProcess} />:null}
-			{submittedModalText?<Modal modalText={submittedModalText} setModalText={setSubmittedModalText} />:null}
+			{submittedModalText?<Modal modalText={submittedModalText} setModalText={setSubmittedModalText} func={refreshPage} />:null}
 		</div>
 	);
 };
