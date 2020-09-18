@@ -113,6 +113,9 @@ html {
 .quiz-questions {
   background-color: #eeeeee;
   margin: 20px 0;
+  height: 700px;
+  overflow:scroll;
+  display: block;
 }
 
 .quiz-handler {
@@ -131,6 +134,9 @@ html {
   align-items: flex-start;
   margin-top: 20px;
   align-items: flex-start;
+  height: 750px;
+  overflow:scroll;
+  display: block;
 }
 
 .answer {
@@ -314,7 +320,6 @@ html {
 .table-score {
   font-size: 16px;
   background-color: #ffffff;
-  /* margin-left: 15px; */
   width: 100%;
 }
 
