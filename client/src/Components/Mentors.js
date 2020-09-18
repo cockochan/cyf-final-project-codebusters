@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import ReactMarkdown from "react-markdown";
 import RunQuiz from "./RunQuiz";
 import Modal from "../Modal/Modal";
+import AllResults from "./AllResults";
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
 	const [numberOfQuestions,setNumberOfQuestions]=useState(5);
@@ -147,6 +148,7 @@ export default function Mentors(props) {
 					<div className='row'>
 						{modalText?(modalText==="OK"?<Modal modalText={"submitted successfully"} />:<Modal modalText={"something went wrong"} />):null}
 						<RunQuiz quizzes={props.quizzes} />
+						<AllResults quizzes={props.quizzes} questions={props.questions} />
 						<div className="filterButtons row">
 							<div>
 					 <select className="btn btn-light dropdown-toggle pt-2" onChange={selectHandler}>
