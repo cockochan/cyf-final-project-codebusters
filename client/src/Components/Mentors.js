@@ -150,7 +150,7 @@ export default function Mentors(props) {
 						<div className="filterButtons row">
 							<div>
 					 <select className="btn btn-light dropdown-toggle pt-2" onChange={selectHandler}>
-						 <option selected disabled>Number of question</option>
+						 <option>Number of question</option>
 									<option value="5">5</option>
 									<option value="10">10</option>
 									<option value="15">15</option>
@@ -158,7 +158,7 @@ export default function Mentors(props) {
 								</select>
 					 </div>
 							<select className="btn btn-light dropdown-toggle ml-2" onChange={tagClickHandler}>
-								<option value="" disabled selected hidden>Select tag filter</option>
+								<option value="">Select tag filter</option>
 								{tagsCollection.map((tag, index) => {
 									return (
 										<option value={tag} name={tag} key={index} >{tag}</option>
