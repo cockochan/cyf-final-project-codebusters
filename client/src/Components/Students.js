@@ -17,13 +17,7 @@ const Students = (props) => {
 		<div className="background">
 			<Navbar />
 			<div className="container">
-				{isSubmitted ? (
-					<Message
-						setIsSubmitted={setIsSubmitted}
-						textMessage={textMessage}
-						setOptionState={setOptionState}
-					/>
-				) : null}
+
 
 				{props.quizData.find((quiz) => quiz.code === enteredCode)
       && !optionState ? (
@@ -34,18 +28,18 @@ const Students = (props) => {
 						/>
 					) : (
 						<div className ="centered">
-							<img className="backGroundImage" src="client/src/img/Hoarding1.svg"/>
+							<img className="backGroundImage" src="client/src/img/Hoarding1.svg" />
 							<h1 className="quiz-time">Quiz Time</h1>
 							<div className="intro-text">
 								<p>
 								Enter the code provided by your tutor to start the quiz
 								</p>
 								<input
-								type="text"
-								onChange={changeHandler}
-								placeholder="Enter the code here.."
-								className="input"
-								autoFocus
+									type="text"
+									onChange={changeHandler}
+									placeholder="Enter the code here.."
+									className="input"
+									autoFocus
 								/>
 							</div>
 						</div>
