@@ -228,7 +228,7 @@ export default function Mentors(props) {
 										{Object.values(question.answers).map((value, index) => {
 											return (
 												<div key={index}>
-													<div className="col-12 answer">{value}</div>
+													<div className="col-12 answer">{value?value:null}</div>
 												</div>
 											);
 										})}
