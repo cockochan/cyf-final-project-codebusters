@@ -107,7 +107,7 @@ const Questions = (props) => {
 
 				<FormGroup >
 					<FormGroup className="answers">
-						{currentQuestionIndex===0?<input
+						{currentQuestionIndex==0?<input
 							type="text"
 							placeholder="Enter your name"
 							onChange={changeHandler}
