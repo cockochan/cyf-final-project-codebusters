@@ -31,7 +31,7 @@ const Students = (props) => {
 							<img className="backGroundImage" src={Img} />
 							<h1 className="quiz-time">Quiz Time</h1>
 							<div className="intro-text">
-								<p>
+								<p className="students-intro-text">
 								Enter the code provided by your tutor to start the quiz
 								</p>
 								<input
