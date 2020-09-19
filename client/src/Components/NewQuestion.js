@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import ReactMarkdown from "react-markdown";
 import { BrowserRouter as Route, Link } from "react-router-dom";
-import { FormGroup } from "reactstrap";
-
+import { Form, FormGroup } from "reactstrap";
+import Modal from "../Modal/Modal";
 export default function NewQuestion() {
+	const [modalText, setModalText]=useState(null);
 	const [questionToSet, setQuestionToSet] = useState({
 		question: "",
 		description: "",
@@ -40,7 +41,7 @@ export default function NewQuestion() {
 			question: e.target.value,
 		});
 	};
-	const submitQuestion = () => {
+	const submitionProcess = () => {
 		fetch("/api/question", {
 			method: "POST",
 			headers: { "Content-type": "application/json" },
@@ -48,7 +49,7 @@ export default function NewQuestion() {
 		})
 			.then((response) => response.json())
 			.catch((err) => console.error(err));
-		alert("question submitted");
+		setModalText("question submitted");
 	};
 	const codeHandler = (event) => {
 		setQuestionToSet({
@@ -74,6 +75,18 @@ export default function NewQuestion() {
 			},
 		});
 	};
+	const refreshPage=()=>{
+		location.reload();
+	};
+	const submitHandler = (e) => {
+		e.preventDefault();
+
+
+		setModalText("submitted");
+
+
+	};
+
 
 	const answerCheck = (event) => {
 		setQuestionToSet({
@@ -88,106 +101,107 @@ export default function NewQuestion() {
 	return (
 		<div >
     			<Navbar mentors="Mentors" results="Results" newquestion="New Question" />
-			<div className="row"></div>
-			<form className="survey-form col-8" onSubmit={submitQuestion}>
-				<div className=" col-2"></div>
+			<div className="row formPage">
+				<form className="survey-form col-8" id="newQuestionForm" onSubmit={submitHandler} >
+					<textarea onKeyUp={codeHandler} className="text-area" placeholder="Code illustration" />
+					<textarea onKeyUp={questionHandler} className="text-area"  required placeholder="Question text use markdown" />
 
-				<div> Code Illustration:{" "}</div>
-				<textarea onKeyUp={codeHandler} className="text-area" />
-				<div> Question,use markdown:{" "}</div>
-				<textarea onKeyUp={questionHandler} className="text-area" />
+					<div className="formLeftAlign">
+						<FormGroup className="form-element">
+							<input
+								type="text"
+								className="tagField col-12"
+								onKeyUp={tagHandler}
+								placeholder="Tags, coma separated *required"
+								name="answer_a"
+								required
+							/>
 
-				<div className="formLeftAlign">
-					<input
-						type="text"
-						className="tagField"
-						onKeyUp={tagHandler}
-						placeholder="Tags, coma separated *required"
-						name="answer_a"
-						required
-					/>
+						</FormGroup>
+						<FormGroup className="form-element">
+							<input
+								type="text"
+								onKeyUp={answerHandler}
+								placeholder="answer a"
+								name="answer_a"
+							/>
+							<input className="checkB"
+								type="checkbox"
+								name={"answer_a_correct"}
+								onChange={answerCheck}
+							/></FormGroup>
+						<FormGroup className="form-element">
+							<input
+								type="text"
+								onKeyUp={answerHandler}
+								placeholder="answer b"
+								name="answer_b"
+							/>
+							<input className="checkB"
+								type="checkbox"
+								name={"answer_b_correct"}
+								onChange={answerCheck}
+							/>
+						</FormGroup>
+						<FormGroup className="form-element">
+							<input
+								type="text"
+								onKeyUp={answerHandler}
+								placeholder="answer c"
+								name="answer_c"
+							/>
+							<input className="checkB"
+								type="checkbox"
+								name={"answer_c_correct"}
+								onChange={answerCheck}
+							/>
+						</FormGroup>
+						<FormGroup className="form-element">
+							<input
+								type="text"
+								onKeyUp={answerHandler}
+								placeholder="answer d"
+								name="answer_d"
+							/>
+							<input className="checkB"
+								type="checkbox"
+								name={"answer_d_correct"}
+								onChange={answerCheck}
+							/>
+						</FormGroup>
+						<FormGroup className="form-element">
+							<input
+								type="text"
+								onKeyUp={answerHandler}
+								placeholder="answer e"
+								name="answer_e"
+							/>
+							<input className="checkB"
+								type="checkbox"
+								name={"answer_e_correct"}
+								onChange={answerCheck}
+							/>
+						</FormGroup>
+						<FormGroup className="form-element">
+							<input
+								type="text"
+								onKeyUp={answerHandler}
+								placeholder="answer f"
+								name="answer_f"
+							/>
+							<input className="checkB"
+								type="checkbox"
+								name={"answer_f_correct"}
+								onChange={answerCheck}
+							/>
+						</FormGroup>
 
-					<FormGroup className="form-element">
-						<input
-							type="text"
-							onKeyUp={answerHandler}
-							placeholder="answer a"
-							name="answer_a"
-						/>
-						<input
-							type="checkbox"
-							name={"answer_a_correct"}
-							onChange={answerCheck}
-						/></FormGroup>
-					<FormGroup className="form-element">
-						<input
-							type="text"
-							onKeyUp={answerHandler}
-							placeholder="answer b"
-							name="answer_b"
-						/>
-						<input
-							type="checkbox"
-							name={"answer_b_correct"}
-							onChange={answerCheck}
-						/>
-					</FormGroup>
-					<FormGroup className="form-element">
-						<input
-							type="text"
-							onKeyUp={answerHandler}
-							placeholder="answer c"
-							name="answer_c"
-						/>
-						<input
-							type="checkbox"
-							name={"answer_c_correct"}
-							onChange={answerCheck}
-						/>
-					</FormGroup>
-					<FormGroup className="form-element">
-						<input
-							type="text"
-							onKeyUp={answerHandler}
-							placeholder="answer d"
-							name="answer_d"
-						/>
-						<input
-							type="checkbox"
-							name={"answer_d_correct"}
-							onChange={answerCheck}
-						/>
-					</FormGroup>
-					<FormGroup className="form-element">
-						<input
-							type="text"
-							onKeyUp={answerHandler}
-							placeholder="answer e"
-							name="answer_e"
-						/>
-						<input
-							type="checkbox"
-							name={"answer_e_correct"}
-							onChange={answerCheck}
-						/>
-					</FormGroup>
-					<FormGroup className="form-element">
-						<input
-							type="text"
-							onKeyUp={answerHandler}
-							placeholder="answer f"
-							name="answer_f"
-						/>
-						<input
-							type="checkbox"
-							name={"answer_f_correct"}
-							onChange={answerCheck}
-						/>
-					</FormGroup>
-				</div>
-				<button className="btn btn-secondary"> Submit question</button>
-			</form>
-			<div className="col-2"></div>
-		</div>
+					</div>
+					<button  className="btn btn-secondary" > Submit question</button>
+				</form>
+				{modalText?<Modal modalText={modalText} setModalText={setModalText} func={refreshPage} close={false} />:null}
+
+
+			</div></div>
 	);
 }

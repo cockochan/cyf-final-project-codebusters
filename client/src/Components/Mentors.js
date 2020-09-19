@@ -12,7 +12,8 @@ export default function Mentors(props) {
 		props.questions
 	);
 	const [tagsCollection, setTagsCollection] = useState([]);
-	const [modalText, setModalText] = useState(null);
+	const [modalText,setModalText]=useState(null);
+	const [submittedModalText, setSubmittedModalText]=useState(null);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
@@ -27,6 +28,7 @@ export default function Mentors(props) {
 			code: "",
 		});
 		setNewQuizQuestions([]);
+		QuizName.value="";
 	};
 	const autofillQuizz = () => {
 		clearQuiz();
@@ -117,7 +119,7 @@ export default function Mentors(props) {
 		})
 			.then((response) => {
 				response.json();
-				setModalText(response.statusText);
+				setSubmittedModalText(response.statusText);
 			})
 			.catch((err) => console.error(err));
 	};
@@ -157,14 +159,8 @@ export default function Mentors(props) {
 					newquestion="New Question"
 				/>
 				<div className="container">
-					<div className="row">
-						{modalText ? (
-							modalText === "OK" ? (
-								<Modal modalText={"submitted successfully"} />
-							) : (
-								<Modal modalText={"something went wrong"} />
-							)
-						) : null}
+					<div className='row'>
+						{submittedModalText?(submittedModalText==="OK"?<Modal modalText={"submitted successfully"} func={clearQuiz} close={false} setModalText={setSubmittedModalText} />:<Modal modalText={"something went wrong"} func={clearQuiz} />):null}
 						<RunQuiz quizzes={props.quizzes} />
 						<div className="filterButtons row">
 							<div>
@@ -194,9 +190,7 @@ export default function Mentors(props) {
                 Reset filters
 							</button>
 						</div>
-						{modalText ? (
-							<Modal modalText={modalText} setModalText={setModalText} />
-						) : null}
+						{modalText?<Modal modalText={modalText} setModalText={setModalText} close={true}  />:null}
 						<div className="col-7 card-block">
 							{filteredQuestionsByTag.map((question, index) => (
 								<div className=" col-12 card mb-2" key={index}>
@@ -238,6 +232,7 @@ export default function Mentors(props) {
 							<div className="form-title">New quiz</div>
 							<div className="quiz-handler">
 								<input
+									id="QuizName"
 									type="text"
 									onKeyUp={newQuizName}
 									placeholder={"Enter quiz name"}

@@ -171,7 +171,19 @@ html {
   color: #000000;
   justify-content: space-evenly;
 }
+.form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
 
+.input-student-name{
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
 .form-title {
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -208,21 +220,10 @@ html {
   justify-content: center;
   align-items: center;
 }
-.form-container{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+.formPage{
+  justify-items: center;
   justify-content: center;
 }
-
-.input-student-name{
-  padding: 5px;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-}
-
-
 /* Message */
 /* **************************************************** */
 
@@ -409,18 +410,26 @@ tr:nth-child(even) {
 .text-area {
   width: 80%;
   height: 100px;
+  margin:3%;
 }
 
 .form-element {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 3%;
+  background-color: #eeeeee;
   display: flex;
+margin-left:15%;
+  padding-left:3%;
+}
+.tagField{
+  align-self:flex-start;
+  margin-bottom:50%;
 }
 
 .tagField {
   margin: 3%;
+  margin-left:-15%;
   border-color: #bdbdbd;
 }
 
@@ -430,6 +439,9 @@ tr:nth-child(even) {
 
 .formLeftAlign {
   align-items: flex-start;
+}
+.checkB{
+  margin:15px;
 }
 
 .backGroundImage{
