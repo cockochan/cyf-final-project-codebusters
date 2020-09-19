@@ -68,7 +68,7 @@ const Questions = (props) => {
 			body: JSON.stringify(answer),
 		});
 		event.target.reset;
-		setSubmittedModalText("Form submitted successfully, start new quiz?");
+		setSubmittedModalText("Form submitted successfully");
 	};
 	const refreshPage=()=>{
 		location.reload();
