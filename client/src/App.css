@@ -12,13 +12,20 @@ html {
   font-family: "Roboto", sans-serif;
   background-color: #e5e5e5;
 }
-
-.navbar {
-  background-color: #ffffff;
+.navbar-container{
   width: 100%;
   top: 0;
   position: fixed;
   z-index: 1;
+}
+
+.margin-body{
+  margin-top: 150px;
+}
+
+.navbar {
+  background-color: #ffffff;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -113,7 +120,7 @@ html {
 .quiz-questions {
   background-color: #eeeeee;
   margin: 20px 0;
-  height: 700px;
+  height: 650px;
   overflow:scroll;
   display: block;
 }
@@ -134,7 +141,7 @@ html {
   align-items: flex-start;
   margin-top: 20px;
   align-items: flex-start;
-  height: 750px;
+  height: 650px;
   overflow:scroll;
   display: block;
 }
@@ -279,10 +286,6 @@ html {
 /* Results */
 /* **************************************************** */
 
-.top-margin {
-  margin-top: 40px;
-}
-
 .result-handler {
   display: flex;
   justify-content: space-around;
@@ -340,7 +343,7 @@ html {
 }
 
 .scroll-table{
-  max-height: 750px;
+  max-height: 650px;
   overflow:scroll;
   display: block;
 }

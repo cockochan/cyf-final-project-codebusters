@@ -232,7 +232,7 @@ export default function Results(props) {
 	return (
 		<div>
 			<Navbar mentors="Mentors" results="Results" newquestion="New Question" />
-			<div className="container top-margin">
+			<div className="container margin-body">
 				<div>
 					<div className="col-12 quiz-result-handler">
 						<div className="result-handler">

@@ -165,7 +165,7 @@ export default function Mentors(props) {
 					results="Results"
 					newquestion="New Question"
 				/>
-				<div className="container">
+				<div className="container margin-body" >
 					<div className='row'>
 						{submittedModalText?(submittedModalText==="OK"?<Modal modalText={"submitted successfully"} func={clearQuiz} close={false} setModalText={setSubmittedModalText} />:<Modal modalText={"something went wrong"} func={clearQuiz} />):null}
 						<RunQuiz quizzes={props.quizzes} />
