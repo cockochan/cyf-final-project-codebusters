@@ -187,14 +187,14 @@ export default function Results(props) {
 	};
 	useEffect(() => {
 		const sortHandler = () => {
-			setStudents((s) => s.sort());
+			setStudents((s) => [].concat(s.sort()));
 		};
 		const sortByScore = () => {
 			setStudents((s) =>
-				s.sort(function (studentA, studentB) {
-   	       return getScore(studentA) - getScore(studentB);
-		  })
-			);
+				[].concat(s.sort(function (studentA, studentB) {
+					return getScore(studentA) - getScore(studentB);
+				})
+				));
 		};
 
 		if (sortBy === "name") {
