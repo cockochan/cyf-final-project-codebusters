@@ -14,11 +14,15 @@ export default function Mentors(props) {
 						props.setModalText(null);
 					}
 					}>proceed</button>:null}
+<<<<<<< Updated upstream
 					<button className="card-button btn btn-primary btn-sm w-25" onClick={()=> {
+=======
+					{props.close!==false?<button className='modalButton' onClick={()=> {
+>>>>>>> Stashed changes
 						setIsOpen(false);
 						props.setModalText(null);
 					}
-					}>close</button>
+					}>close</button>:null}
     				</div>
     			</div>)}
     		</React.Fragment>
