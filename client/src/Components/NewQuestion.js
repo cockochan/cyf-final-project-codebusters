@@ -82,7 +82,7 @@ export default function NewQuestion() {
 		e.preventDefault();
 
 
-		setModalText("submitted, clear the form");
+		setModalText("submitted");
 
 
 	};
@@ -199,7 +199,7 @@ export default function NewQuestion() {
 					</div>
 					<button  className="btn btn-secondary" > Submit question</button>
 				</form>
-				{modalText?<Modal modalText={modalText} setModalText={setModalText} func={refreshPage} />:null}
+				{modalText?<Modal modalText={modalText} setModalText={setModalText} func={refreshPage} close={false} />:null}
 
 
 			</div></div>
