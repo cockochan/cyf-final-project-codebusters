@@ -201,12 +201,12 @@ html {
 
 .survey-form {
   background-color: #eeeeee;
-  padding: 30px;
+  padding: 20px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  align-self: center;
 }
 .formPage{
   justify-items: center;
@@ -320,6 +320,7 @@ html {
   justify-content: space-between;
   align-items: flex-start;
 }
+
 .table-score {
   font-size: 16px;
   background-color: #ffffff;
@@ -450,3 +451,24 @@ margin-left:15%;
   font-stretch: extra-expanded;
 }
 
+.answer-form{
+  background-color: #ffff;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  line-height: 20px;
+}
+
+.radio-form{
+ transform: scale(1.5);
+vertical-align: middle;
+margin-top: -25px;
+}
+
+.quistion-form{
+  margin-top: 20px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+}
