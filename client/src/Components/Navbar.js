@@ -1,6 +1,5 @@
 import React from "react";
 import "../App.css";
-import { BrowserRouter as Link } from "react-router-dom";
 
 const Navbar = (props) => {
 	return (
@@ -15,7 +14,7 @@ const Navbar = (props) => {
 						/>
 					</a>
 				</div>
-				<div className="links-container col-4">
+				<div className="links-container col-8">
 					{props.mentors ? (
 						<a href="/mentors/5wjhfxnr" className="link-button">
 							{props.mentors}
