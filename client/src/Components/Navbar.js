@@ -3,7 +3,7 @@ import "../App.css";
 
 const Navbar = (props) => {
 	return (
-		<nav className="navbar-container row">
+		<nav className="navbar-container">
 			<div className="navbar col-12">
 				<div className="col-4">
 					<a className="logo-container" href="/">
