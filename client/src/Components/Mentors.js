@@ -12,12 +12,8 @@ export default function Mentors(props) {
 		props.questions
 	);
 	const [tagsCollection, setTagsCollection] = useState([]);
-<<<<<<< Updated upstream
-	const [modalText, setModalText] = useState(null);
-=======
 	const [modalText,setModalText]=useState(null);
 	const [submittedModalText, setSubmittedModalText]=useState(null);
->>>>>>> Stashed changes
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
@@ -100,13 +96,8 @@ export default function Mentors(props) {
 				...newQuiz,
 				questions_id: [...newQuiz.questions_id, event.target.value],
 			});
-<<<<<<< Updated upstream
 		} else {
 			setModalText("this question is already in the quiz");
-=======
-		} else{
-			setSubmittedModalText("this question is already in the quiz");
->>>>>>> Stashed changes
 		}
 	};
 
@@ -167,19 +158,8 @@ export default function Mentors(props) {
 					newquestion="New Question"
 				/>
 				<div className="container">
-<<<<<<< Updated upstream
-					<div className="row">
-						{modalText ? (
-							modalText === "OK" ? (
-								<Modal modalText={"submitted successfully"} />
-							) : (
-								<Modal modalText={"something went wrong"} />
-							)
-						) : null}
-=======
 					<div className='row'>
 						{submittedModalText?(submittedModalText==="OK"?<Modal modalText={"submitted successfully"} func={clearQuiz} />:<Modal modalText={"something went wrong"} func={clearQuiz} />):null}
->>>>>>> Stashed changes
 						<RunQuiz quizzes={props.quizzes} />
 						<div className="filterButtons row">
 							<div>
@@ -209,13 +189,7 @@ export default function Mentors(props) {
                 Reset filters
 							</button>
 						</div>
-<<<<<<< Updated upstream
-						{modalText ? (
-							<Modal modalText={modalText} setModalText={setModalText} />
-						) : null}
-=======
 						{modalText?<Modal modalText={modalText} setModalText={setModalText} close={false}  />:null}
->>>>>>> Stashed changes
 						<div className="col-7 card-block">
 							{filteredQuestionsByTag.map((question, index) => (
 								<div className=" col-12 card mb-2" key={index}>
