@@ -14,11 +14,7 @@ export default function Mentors(props) {
 						props.setModalText(null);
 					}
 					}>proceed</button>:null}
-<<<<<<< Updated upstream
-					<button className="card-button btn btn-primary btn-sm w-25" onClick={()=> {
-=======
-					{props.close!==false?<button className='modalButton' onClick={()=> {
->>>>>>> Stashed changes
+					{props.close!==false?<button className='btn-primary btn-sm w-25 modal-button' onClick={()=> {
 						setIsOpen(false);
 						props.setModalText(null);
 					}

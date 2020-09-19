@@ -15,6 +15,8 @@
 }
 .modal-body{
     display: flex;
+    flex-direction:column;
+    justify-content: space-around;
     padding: 2rem;
     width:10vw;
     max-width: 500px;
@@ -22,4 +24,7 @@
     background: white;
     height:25vh;
 
+}
+.modal-button{
+    align-self: flex-end;
 }

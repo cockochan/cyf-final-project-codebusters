@@ -189,7 +189,7 @@ export default function Mentors(props) {
                 Reset filters
 							</button>
 						</div>
-						{modalText?<Modal modalText={modalText} setModalText={setModalText} close={false}  />:null}
+						{modalText?<Modal modalText={modalText} setModalText={setModalText} close={true}  />:null}
 						<div className="col-7 card-block">
 							{filteredQuestionsByTag.map((question, index) => (
 								<div className=" col-12 card mb-2" key={index}>
