@@ -16,6 +16,8 @@ export default function Results(props) {
 	const [attemptNumber, setAttemptNumber] = useState(1);
 	const [attemptCounter, setAttemptCounter] = useState(1);
 	const [isShowDetails, setIsShowDetails] = useState(false);
+	const [sortBy, setSortBy] = useState(null);
+	const [isDescending, setIsDescending] = useState(false);
 
 	useEffect(() => {
 		fetch("/api/results")
@@ -42,6 +44,7 @@ export default function Results(props) {
 		setAttemptNumber(1);
 		setAttemptCounter(1);
 		setStudents([]);
+		setIsShowDetails(false);
 		setQuizRoute(`quizzes/${event.target.value}`);
 		const selectedResults = allResults.filter(
 			(result) => result.quiz_id === event.target.value
@@ -183,6 +186,47 @@ export default function Results(props) {
 		setIsShowDetails(false);
 		setStudentSelected([]);
 	};
+	useEffect(() => {
+		const sortHandler = () => {
+			setStudents((s) => [].concat(s.sort()));
+		};
+		const sortByScore = () => {
+			!isDescending
+				? setStudents((s) =>
+					[].concat(
+						s.sort(function (a, b) {
+							if (getScore(a) > getScore(b)) {
+								return -1;
+							} else {
+								return 1;
+							}
+						})
+					)
+				)
+				: setStudents((s) =>
+					[].concat(
+						s.sort(function (a, b) {
+							if (getScore(a) > getScore(b)) {
+								return 1;
+							} else {
+								return -1;
+							}
+						})
+					)
+				);
+		};
+
+		if (sortBy === "name") {
+			sortHandler();
+		} else if (sortBy === "score") {
+			sortByScore();
+		}
+	}, [sortBy, isDescending]);
+
+	const sortScores = () => {
+		setIsDescending(!isDescending);
+		setSortBy("score");
+	};
 
 	return (
 		<div>
@@ -192,15 +236,17 @@ export default function Results(props) {
 					<div className="col-12 quiz-result-handler">
 						<div className="result-handler">
 							<div className="col-4 select-result">
-								<select className="input " onChange={changeHandler}>
+								<select className="input" onChange={changeHandler}>
 									<option>Select a Quiz</option>
-									{props.quizzes.map((quiz) => {
-										return (
-											<option key={quiz._id} value={quiz._id}>
-												{quiz.name}
-											</option>
-										);
-									})}
+									{props.quizzes.length
+										? props.quizzes.map((quiz) => {
+											return (
+												<option key={quiz._id} value={quiz._id}>
+													{quiz.name}
+												</option>
+											);
+										})
+										: null}
 								</select>
 							</div>
 							<div className="col-8 attempt-handler-container">
@@ -246,27 +292,37 @@ export default function Results(props) {
 											<table className="table-score">
 												<thead className="table-head">
 													<tr>
-														<th className="no-border">Name</th>
-														<th className="no-border">Score</th>
+														<th
+															className="no-border"
+															onClick={() => setSortBy("name")}
+															style={{ cursor: "pointer" }}
+														>
+                              Name
+														</th>
+														<th
+															className="no-border"
+															onClick={sortScores}
+															style={{ cursor: "pointer" }}
+														>
+                              Score
+														</th>
 													</tr>
 												</thead>
 												<tbody className="table-body">
-													{students.length > 0
-														? students.map((student, index) => {
-															return (
-																<tr
-																	key={index}
-																	onClick={() => showDetail(student)}
-																	className="score-row"
-																>
-																	<th>{student}</th>
-																	<td>
-																		{getScore(student)}/{quizQuestions.length}
-																	</td>
-																</tr>
-															);
-														})
-														: null}
+													{students.map((student, index) => {
+														return (
+															<tr
+																key={index}
+																onClick={() => showDetail(student)}
+																className="score-row"
+															>
+																<th>{student}</th>
+																<td>
+																	{getScore(student)}/{quizQuestions.length}
+																</td>
+															</tr>
+														);
+													})}
 												</tbody>
 											</table>
 										</div>
