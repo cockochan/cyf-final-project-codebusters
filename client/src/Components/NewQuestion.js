@@ -6,6 +6,7 @@ import { Form, FormGroup } from "reactstrap";
 import Modal from "../Modal/Modal";
 export default function NewQuestion() {
 	const [modalText, setModalText]=useState(null);
+	const [noAnswerModalText,setNoAnswerModalText]=useState(null);
 	const [questionToSet, setQuestionToSet] = useState({
 		question: "",
 		description: "",
@@ -86,7 +87,26 @@ export default function NewQuestion() {
 	};
 	const submitHandler = (e) => {
 		e.preventDefault();
-		submitionProcess();
+		if(questionToSet.answers.answer_a===""
+		&&questionToSet.answers.answer_b===""
+		&&questionToSet.answers.answer_c===""
+		&&questionToSet.answers.answer_d===""
+		&&questionToSet.answers.answer_e===""
+		&&questionToSet.answers.answer_f===""
+		) {
+			setNoAnswerModalText("write down some answers");
+		} else if(
+			questionToSet.correct_answers.answer_a_correct===false
+			&&questionToSet.correct_answers.answer_b_correct===false
+			&&questionToSet.correct_answers.answer_c_correct===false
+			&&questionToSet.correct_answers.answer_d_correct===false
+			&&questionToSet.correct_answers.answer_e_correct===false
+			&&questionToSet.correct_answers.answer_f_correct===false
+		){
+			setNoAnswerModalText("check the boxes near correct answers");
+		} else{
+			submitionProcess();
+		}
 
 		// setModalText("submitted");
 
@@ -206,7 +226,7 @@ export default function NewQuestion() {
 					<button  className="btn btn-secondary" > Submit question</button>
 				</form>
 				{modalText?<Modal modalText={modalText} setModalText={setModalText} func={refreshPage} close={false} />:null}
-
+				{noAnswerModalText?<Modal modalText={noAnswerModalText} setModalText={setNoAnswerModalText}  close={true} />:null}
 
 			</div></div>
 	);
