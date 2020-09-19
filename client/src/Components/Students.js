@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Questions from "./Questions";
 import Message from "./Message.js";
 import Navbar from "./Navbar";
-
+import Img from "../img/Hoarding1.svg";
 const Students = (props) => {
 	const [enteredCode, setEnteredCode] = useState("");
 	const [textMessage, setTextMessage] = useState("");
@@ -28,7 +28,7 @@ const Students = (props) => {
 						/>
 					) : (
 						<div className ="centered">
-							<img className="backGroundImage" src="client/src/img/Hoarding1.svg" />
+							<img className="backGroundImage" src={Img} />
 							<h1 className="quiz-time">Quiz Time</h1>
 							<div className="intro-text">
 								<p>
