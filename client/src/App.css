@@ -453,7 +453,10 @@ margin-left:15%;
   position: absolute; top: 25%; width: 30%; 
   margin-left: 34%;
 } 
-
+.students-intro-text{
+  font-weight: 900;
+  color: #942e74;
+}
 .quiz-time{
   position: absolute; top: 5%;
   margin-left: 37%;
