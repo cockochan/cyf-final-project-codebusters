@@ -28,6 +28,7 @@ export default function Mentors(props) {
 			code: "",
 		});
 		setNewQuizQuestions([]);
+		QuizName.value="";
 	};
 	const autofillQuizz = () => {
 		clearQuiz();
@@ -118,7 +119,7 @@ export default function Mentors(props) {
 		})
 			.then((response) => {
 				response.json();
-				setModalText(response.statusText);
+				setSubmittedModalText(response.statusText);
 			})
 			.catch((err) => console.error(err));
 	};
@@ -159,7 +160,7 @@ export default function Mentors(props) {
 				/>
 				<div className="container">
 					<div className='row'>
-						{submittedModalText?(submittedModalText==="OK"?<Modal modalText={"submitted successfully"} func={clearQuiz} />:<Modal modalText={"something went wrong"} func={clearQuiz} />):null}
+						{submittedModalText?(submittedModalText==="OK"?<Modal modalText={"submitted successfully"} func={clearQuiz} close={false} setModalText={setSubmittedModalText} />:<Modal modalText={"something went wrong"} func={clearQuiz} />):null}
 						<RunQuiz quizzes={props.quizzes} />
 						<div className="filterButtons row">
 							<div>
@@ -231,6 +232,7 @@ export default function Mentors(props) {
 							<div className="form-title">New quiz</div>
 							<div className="quiz-handler">
 								<input
+									id="QuizName"
 									type="text"
 									onKeyUp={newQuizName}
 									placeholder={"Enter quiz name"}
