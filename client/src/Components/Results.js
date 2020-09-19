@@ -382,7 +382,7 @@ export default function Results(props) {
 									</div>
 								</div>
 							) : (
-								<h4>Nobody answered this quiz!</h4>
+								<h4 className="info-align">Nobody answered this quiz!</h4>
 							)}
 						</div>
 					) : (
