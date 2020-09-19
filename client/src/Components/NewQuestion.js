@@ -107,7 +107,7 @@ export default function NewQuestion() {
 	return (
 		<div >
     			<Navbar mentors="Mentors" results="Results" newquestion="New Question" />
-			<div className="row formPage">
+			<div className="row formPage margin-body">
 				<form className="survey-form col-8" id="newQuestionForm" onSubmit={submitHandler} >
 					<textarea onKeyUp={codeHandler} className="text-area" placeholder="Code illustration" />
 					<textarea onKeyUp={questionHandler} className="text-area"  required placeholder="Question text use markdown" />
