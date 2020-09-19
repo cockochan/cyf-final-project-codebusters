@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Modal.css";
 export default function Mentors(props) {
+
 	const [isOpen,setIsOpen]=useState(true);
     	return(
     		<React.Fragment>
