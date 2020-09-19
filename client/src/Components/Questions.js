@@ -107,14 +107,14 @@ const Questions = (props) => {
 
 				<FormGroup >
 					<FormGroup className="answers">
-						<input
+						{currentQuestionIndex===0?<input
 							type="text"
 							placeholder="Enter your name"
 							onChange={changeHandler}
 							className="answers"
 							required
 							autoFocus
-						/>
+						/>:null}
 						{questionData.question_code ? (
 							<ReactMarkdown className="code">
 								{questionData.question_code}
