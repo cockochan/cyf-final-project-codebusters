@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import your icons
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import ReactTooltip from "react-tooltip";
 
 export default function Results(props) {
 	const [quizQuestions, setQuizQuestions] = useState([]);
@@ -289,6 +290,12 @@ export default function Results(props) {
 								<div className="results-container">
 									<div className="col-12 tables-container">
 										<div className="col-4 scroll-table">
+											<ReactTooltip id="sortByScore" place="top" effect="solid">
+                        Sort the result by score
+											</ReactTooltip>
+											<ReactTooltip id="sortByName" place="top" effect="solid">
+                        Sort the result by Name
+											</ReactTooltip>
 											<table className="table-score">
 												<thead className="table-head">
 													<tr>
@@ -296,6 +303,8 @@ export default function Results(props) {
 															className="no-border"
 															onClick={() => setSortBy("name")}
 															style={{ cursor: "pointer" }}
+															data-tip
+															data-for="sortByName"
 														>
                               Name
 														</th>
@@ -303,6 +312,8 @@ export default function Results(props) {
 															className="no-border"
 															onClick={sortScores}
 															style={{ cursor: "pointer" }}
+															data-tip
+															data-for="sortByScore"
 														>
                               Score
 														</th>
