@@ -79,7 +79,7 @@ export default function Mentors(props) {
 	const makeQuestions = () => {
 		let selectedQuestions = [];
 		selectedQuestions = newQuiz.questions_id.map((selectedId) => {
-			let found = filteredQuestionsByTag.find(
+			let found = props.questions.find(
 				(question) => question._id === selectedId
 			);
 			selectedQuestions.push(found);
