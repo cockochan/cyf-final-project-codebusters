@@ -17,6 +17,7 @@ export default function Results(props) {
 	const [attemptCounter, setAttemptCounter] = useState(1);
 	const [isShowDetails, setIsShowDetails] = useState(false);
 	const [sortBy, setSortBy] = useState(null);
+	const [isDescending, setIsDescending] = useState(false);
 
 	useEffect(() => {
 		fetch("/api/results")
@@ -190,11 +191,29 @@ export default function Results(props) {
 			setStudents((s) => [].concat(s.sort()));
 		};
 		const sortByScore = () => {
-			setStudents((s) =>
-				[].concat(s.sort(function (studentA, studentB) {
-					return getScore(studentA) - getScore(studentB);
-				})
-				));
+			!isDescending
+				? setStudents((s) =>
+					[].concat(
+						s.sort(function (a, b) {
+							if (getScore(a) > getScore(b)) {
+								return -1;
+							} else {
+								return 1;
+							}
+						})
+					)
+				)
+				: setStudents((s) =>
+					[].concat(
+						s.sort(function (a, b) {
+							if (getScore(a) > getScore(b)) {
+								return 1;
+							} else {
+								return -1;
+							}
+						})
+					)
+				);
 		};
 
 		if (sortBy === "name") {
@@ -202,7 +221,12 @@ export default function Results(props) {
 		} else if (sortBy === "score") {
 			sortByScore();
 		}
-	}, [sortBy]);
+	}, [sortBy, isDescending]);
+
+	const sortScores = () => {
+		setIsDescending(!isDescending);
+		setSortBy("score");
+	};
 
 	return (
 		<div>
@@ -214,13 +238,15 @@ export default function Results(props) {
 							<div className="col-4 select-result">
 								<select className="input" onChange={changeHandler}>
 									<option>Select a Quiz</option>
-									{props.quizzes.map((quiz) => {
-										return (
-											<option key={quiz._id} value={quiz._id}>
-												{quiz.name}
-											</option>
-										);
-									})}
+									{props.quizzes.length
+										? props.quizzes.map((quiz) => {
+											return (
+												<option key={quiz._id} value={quiz._id}>
+													{quiz.name}
+												</option>
+											);
+										})
+										: null}
 								</select>
 							</div>
 							<div className="col-8 attempt-handler-container">
@@ -275,7 +301,7 @@ export default function Results(props) {
 														</th>
 														<th
 															className="no-border"
-															onClick={() => setSortBy("score")}
+															onClick={sortScores}
 															style={{ cursor: "pointer" }}
 														>
                               Score
