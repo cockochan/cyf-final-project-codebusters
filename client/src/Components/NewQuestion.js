@@ -80,7 +80,7 @@ export default function NewQuestion() {
 	};
 	const submitHandler = (e) => {
 		e.preventDefault();
-
+		submitionProcess();
 
 		setModalText("submitted");
 
