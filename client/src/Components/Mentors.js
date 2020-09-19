@@ -47,15 +47,19 @@ export default function Mentors(props) {
 	};
 	let tempFilteredData = [];
 	const tagClickHandler = (e) => {
-		setFilteredQuestionsByTag(null);
-		props.questions.map((question) => {
-			if (question.tags.includes(e.target.value)) {
-				tempFilteredData = [...tempFilteredData, question];
-			} else {
-				null;
-			}
-		});
-		setFilteredQuestionsByTag(tempFilteredData);
+		if(e.target.value!==""){
+			setFilteredQuestionsByTag(null);
+			props.questions.map((question) => {
+				if (question.tags.includes(e.target.value)) {
+					tempFilteredData = [...tempFilteredData, question];
+				} else {
+					null;
+				}
+			} );
+			setFilteredQuestionsByTag(tempFilteredData);
+		}else{
+			setFilteredQuestionsByTag(props.questions);
+		}
 	};
 	const findTags = () => {
 		let tempTags = [];
@@ -72,22 +76,25 @@ export default function Mentors(props) {
 			});
 		}
 	};
+	const makeQuestions = () => {
+		let selectedQuestions = [];
+		selectedQuestions = newQuiz.questions_id.map((selectedId) => {
+			let found = filteredQuestionsByTag.find(
+				(question) => question._id === selectedId
+			);
+			selectedQuestions.push(found);
+			setNewQuizQuestions(selectedQuestions);
+		});
+	};
 	useEffect(() => {
-		const makeQuestions = () => {
-			let selectedQuestions = [];
-			selectedQuestions = newQuiz.questions_id.map((selectedId) => {
-				let found = filteredQuestionsByTag.find(
-					(question) => question._id === selectedId
-				);
-				selectedQuestions.push(found);
-				setNewQuizQuestions(selectedQuestions);
-			});
-		};
+		makeQuestions();
+		findTags();
+	}, [newQuiz.questions_id, props.questions]);
+	useEffect(() => {
 		makeQuestions();
 		findTags();
 		setFilteredQuestionsByTag(props.questions);
-	}, [newQuiz.questions_id, props.questions, newQuiz]);
-
+	}, [ props.questions]);
 	const addQuestion = (event) => {
 		if (
 			newQuiz.questions_id.filter((id) => id === event.target.value).length
