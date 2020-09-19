@@ -102,16 +102,16 @@ const Questions = (props) => {
 	};
 
 	return (
-		<div className="row form-container">
-			<Form  className="survey-form col-8"  onSubmit={submitHandler}>
+		<div>
+			<Form  className="survey-form"  onSubmit={submitHandler}>
 
 				<FormGroup >
-					<FormGroup>
+					<FormGroup className="answers">
 						<input
-						    className="input-student-name"
 							type="text"
 							placeholder="Enter your name"
 							onChange={changeHandler}
+							className="answers"
 							required
 							autoFocus
 						/>
@@ -120,12 +120,11 @@ const Questions = (props) => {
 								{questionData.question_code}
 							</ReactMarkdown>
 						) : null}
-						<ReactMarkdown className="quistion-form">{questionData.question}</ReactMarkdown>
+						<ReactMarkdown>{questionData.question}</ReactMarkdown>
 					</FormGroup>
 
-					{answer_a ? (<FormGroup>
+					{answer_a ? (<FormGroup className="answers">
 						<Input
-						className="radio-form"
 							type="radio"
 							name="answer"
 							value={answer_a}
@@ -133,13 +132,12 @@ const Questions = (props) => {
 							id="answer_a"
 							checked={isChecked && radioId == "answer_a" ? true : false}
 						/>
-						 <Label className="answer-form" for="answer_a">{answer_a}</Label></FormGroup>) : null}
+						 <Label for="answer_a">{answer_a}</Label></FormGroup>) : null}
 
 
-					<FormGroup>
+					<FormGroup className="answers">
 						{answer_b ? (
 							<Input
-								className="radio-form"
 								type="radio"
 								name="answer"
 								value={answer_b}
@@ -148,12 +146,11 @@ const Questions = (props) => {
 								checked={isChecked && radioId == "answer_b" ? true : false}
 							/>
 						) : null}
-						{answer_b ? <Label className="answer-form" for="answer_b">{answer_b}</Label> : null}
+						{answer_b ? <Label for="answer_b">{answer_b}</Label> : null}
 					</FormGroup>
-					<FormGroup>
+					<FormGroup className="answers">
 						{answer_c ? (
 							<Input
-								className="radio-form"
 								type="radio"
 								name="answer"
 								value={answer_c}
@@ -162,12 +159,11 @@ const Questions = (props) => {
 								checked={isChecked && radioId == "answer_c" ? true : false}
 							/>
 						) : null}
-						{answer_c ? <Label className="answer-form" for="answer_c">{answer_c}</Label> : null}
+						{answer_c ? <Label for="answer_c">{answer_c}</Label> : null}
 					</FormGroup>
-					<FormGroup>
+					<FormGroup className="answers">
 						{answer_d ? (
 							<Input
-								className="radio-form"
 								type="radio"
 								name="answer"
 								value={answer_d}
@@ -176,12 +172,11 @@ const Questions = (props) => {
 								checked={isChecked && radioId == "answer_d" ? true : false}
 							/>
 						) : null}
-						{answer_d ? <Label className="answer-form" for="answer_d">{answer_d}</Label> : null}
+						{answer_d ? <Label for="answer_d">{answer_d}</Label> : null}
 					</FormGroup>
-					<FormGroup>
+					<FormGroup className="answers">
 						{answer_e ? (
 							<Input
-								className="radio-form"
 								type="radio"
 								name="answer"
 								value={answer_e}
@@ -190,12 +185,11 @@ const Questions = (props) => {
 								checked={isChecked && radioId == "answer_e" ? true : false}
 							/>
 						) : null}
-						{answer_e ? <Label className="answer-form" for="answer_e">{answer_e}</Label> : null}
+						{answer_e ? <Label for="answer_e">{answer_e}</Label> : null}
 					</FormGroup>
-					<FormGroup>
+					<FormGroup className="answers">
 						{answer_f ? (
 							<Input
-								className="radio-form"
 								type="radio"
 								name="answer"
 								value={answer_f}
@@ -210,11 +204,11 @@ const Questions = (props) => {
 				</FormGroup>
 				{currentQuestionIndex < props.quizData.questions_id.length - 1 ? (
 
-					<Button>
-			Next
-					</Button>
+					<Button
+			 className="answers">
+			Next</Button>
 				) : (
-					<Button type="button" onClick={submitForm}>
+					<Button type="button"  className="answers" onClick={submitForm}>
           Submit
 					</Button>
 				)}
