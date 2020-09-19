@@ -215,7 +215,7 @@ const Questions = (props) => {
 
 			</Form>
 			{modalText?<Modal modalText={modalText} setModalText={setModalText} func={submitionProcess} />:null}
-			{submittedModalText?<Modal modalText={submittedModalText} setModalText={setSubmittedModalText} func={refreshPage} />:null}
+			{submittedModalText?<Modal modalText={submittedModalText} setModalText={setSubmittedModalText} func={refreshPage}  close={false} />:null}
 		</div>
 	);
 };
