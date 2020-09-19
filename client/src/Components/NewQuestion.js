@@ -47,9 +47,15 @@ export default function NewQuestion() {
 			headers: { "Content-type": "application/json" },
 			body: JSON.stringify(questionToSet),
 		})
-			.then((response) => response.json())
-			.catch((err) => console.error(err));
-		setModalText("question submitted");
+
+			.then((response) => {
+				response.json();
+				if(response.statusText=="OK"){
+					setModalText("submitted successfully");
+				} else{
+					setModalText(`something went wrong error code ${response.statusText} `);
+				}
+			});
 	};
 	const codeHandler = (event) => {
 		setQuestionToSet({
@@ -82,7 +88,7 @@ export default function NewQuestion() {
 		e.preventDefault();
 		submitionProcess();
 
-		setModalText("submitted");
+		// setModalText("submitted");
 
 
 	};
