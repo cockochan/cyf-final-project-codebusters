@@ -111,7 +111,7 @@ const Questions = (props) => {
 							type="text"
 							placeholder="Enter your name"
 							onChange={changeHandler}
-							className="answers"
+							className="input"
 							required
 							autoFocus
 						/>:null}

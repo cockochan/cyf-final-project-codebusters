@@ -4,7 +4,7 @@ import { BrowserRouter as Link } from "react-router-dom";
 
 const Navbar = (props) => {
 	return (
-		<nav className="row">
+		<nav className="navbar-container row">
 			<div className="navbar col-12">
 				<div className="col-4">
 					<a className="logo-container" href="/">

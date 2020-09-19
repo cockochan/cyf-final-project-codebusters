@@ -16,7 +16,7 @@ const Students = (props) => {
 	return (
 		<div className="background">
 			<Navbar />
-			<div className="container">
+			<div className="container margin-body">
 
 
 				{props.quizData.find((quiz) => quiz.code === enteredCode)
