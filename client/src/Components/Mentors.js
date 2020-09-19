@@ -4,24 +4,27 @@ import Navbar from "./Navbar";
 import ReactMarkdown from "react-markdown";
 import RunQuiz from "./RunQuiz";
 import Modal from "../Modal/Modal";
+
 export default function Mentors(props) {
 	const [newQuizQuestions, setNewQuizQuestions] = useState([]);
-	const [numberOfQuestions,setNumberOfQuestions]=useState(5);
-	const [filteredQuestionsByTag, setFilteredQuestionsByTag]=useState(props.questions);
+	const [numberOfQuestions, setNumberOfQuestions] = useState(5);
+	const [filteredQuestionsByTag, setFilteredQuestionsByTag] = useState(
+		props.questions
+	);
 	const [tagsCollection, setTagsCollection] = useState([]);
-	const [modalText,setModalText]=useState(null);
+	const [modalText, setModalText] = useState(null);
 	const [newQuiz, setNewQuiz] = useState({
 		name: "",
 		publishingDate: "",
 		questions_id: [],
-		code:"",
+		code: "",
 	});
 	const clearQuiz = () => {
 		setNewQuiz({
 			name: "",
 			publishingDate: "",
 			questions_id: [],
-			code:"",
+			code: "",
 		});
 		setNewQuizQuestions([]);
 	};
@@ -84,12 +87,15 @@ export default function Mentors(props) {
 	}, [newQuiz.questions_id, props.questions, newQuiz]);
 
 	const addQuestion = (event) => {
-		if(newQuiz.questions_id.filter((id)=>id===event.target.value).length===0){
+		if (
+			newQuiz.questions_id.filter((id) => id === event.target.value).length
+      === 0
+		) {
 			setNewQuiz({
 				...newQuiz,
 				questions_id: [...newQuiz.questions_id, event.target.value],
 			});
-		} else{
+		} else {
 			setModalText("this question is already in the quiz");
 		}
 	};
@@ -121,7 +127,10 @@ export default function Mentors(props) {
 			...newQuiz,
 			publishingDate: dayjs().format(),
 			name: event.target.value,
-			code:Math.random().toString(36).replace(/[^a-z0-9]+/g, "").substr(0, 4),
+			code: Math.random()
+				.toString(36)
+				.replace(/[^a-z0-9]+/g, "")
+				.substr(0, 4),
 		});
 	};
 	const removeQuestion = (event) => {
@@ -136,16 +145,26 @@ export default function Mentors(props) {
 			newQuizQuestions.filter((question) => question._id !== event.target.value)
 		);
 	};
-	const selectHandler=(event)=>{
+	const selectHandler = (event) => {
 		setNumberOfQuestions(event.target.value);
 	};
 	if (filteredQuestionsByTag) {
 		return (
 			<div>
-				<Navbar mentors="Mentors" results="Results" newquestion ="New Question" />
+				<Navbar
+					mentors="Mentors"
+					results="Results"
+					newquestion="New Question"
+				/>
 				<div className="container">
-					<div className='row'>
-						{modalText?(modalText==="OK"?<Modal modalText={"submitted successfully"} />:<Modal modalText={"something went wrong"} />):null}
+					<div className="row">
+						{modalText ? (
+							modalText === "OK" ? (
+								<Modal modalText={"submitted successfully"} />
+							) : (
+								<Modal modalText={"something went wrong"} />
+							)
+						) : null}
 						<RunQuiz quizzes={props.quizzes} />
 						<div className="filterButtons row">
 							<div>
@@ -161,25 +180,33 @@ export default function Mentors(props) {
 								<option value="">Select tag filter</option>
 								{tagsCollection.map((tag, index) => {
 									return (
-										<option value={tag} name={tag} key={index} >{tag}</option>
+										<option value={tag} name={tag} key={index}>
+											{tag}
+										</option>
 									);
 								})}
 							</select>
 
-							<button className="btn btn-light ml-2" onClick={autofillQuizz}>Autofill quiz</button>
-							<button className ="btn btn-light ml-2" onClick={resetFilters}>Reset filters</button>
+							<button className="btn btn-light ml-2" onClick={autofillQuizz}>
+                Autofill quiz
+							</button>
+							<button className="btn btn-light ml-2" onClick={resetFilters}>
+                Reset filters
+							</button>
 						</div>
-						{modalText?<Modal modalText={modalText} setModalText={setModalText} />:null}
+						{modalText ? (
+							<Modal modalText={modalText} setModalText={setModalText} />
+						) : null}
 						<div className="col-7 card-block">
 							{filteredQuestionsByTag.map((question, index) => (
-
 								<div className=" col-12 card mb-2" key={index}>
 									<div className="question-and-code-containter">
 										{question.question_code ? (
 											<div>
 												<ReactMarkdown className="code">
 													{question.question_code}
-												</ReactMarkdown></div>
+												</ReactMarkdown>
+											</div>
 										) : null}
 										<div>
 											<ReactMarkdown className="question">
@@ -191,7 +218,7 @@ export default function Mentors(props) {
 										{Object.values(question.answers).map((value, index) => {
 											return (
 												<div key={index}>
-													<div className="col-12 answer">{value}</div>
+													<div className="col-12 answer">{value?value:null}</div>
 												</div>
 											);
 										})}
@@ -202,11 +229,9 @@ export default function Mentors(props) {
 										value={question._id}
 										onClick={addQuestion}
 									>
-
-                Add to Quiz
+                    Add to Quiz
 									</button>
 								</div>
-
 							))}
 						</div>
 						<div className="col-5 quiz-questions">
@@ -218,8 +243,13 @@ export default function Mentors(props) {
 									placeholder={"Enter quiz name"}
 									className="input"
 								/>
-								<button onClick={clearQuiz} className="btn btn-primary ml-2"> Clear</button>
-								<button onClick={submitQuiz} className="btn btn-primary ml-2">Submit</button>
+								<button onClick={clearQuiz} className="btn btn-primary ml-2">
+									{" "}
+                  Clear
+								</button>
+								<button onClick={submitQuiz} className="btn btn-primary ml-2">
+                  Submit
+								</button>
 							</div>
 							{newQuizQuestions.map((question) => (
 								<div className="col-12 card mb-2" key={question.question}>
@@ -229,13 +259,17 @@ export default function Mentors(props) {
 												{question.question_code}
 											</ReactMarkdown>
 										) : null}
-										<ReactMarkdown className="question">{question.question}</ReactMarkdown>
+										<ReactMarkdown className="question">
+											{question.question}
+										</ReactMarkdown>
 									</div>
 									<div className="answers">
 										{Object.entries(question.answers).map(([index, value]) => {
 											return (
 												<div key={index}>
-													<div className="col-6 answer">{value}</div>
+													<div className="answer">
+														{value ? value: null}
+													</div>
 												</div>
 											);
 										})}
@@ -249,14 +283,14 @@ export default function Mentors(props) {
 										onClick={removeQuestion}
 										className=" card-button btn btn-danger mb-2 btn-sm w-25"
 									>
-                Delete
+                    Delete
 									</button>
 								</div>
 							))}
 						</div>
 					</div>
-					 </div>
-					 </div>
+				</div>
+			</div>
 		);
 	} else {
 		return <div>No questions loaded</div>;
