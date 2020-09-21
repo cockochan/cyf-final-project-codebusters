@@ -31,7 +31,6 @@ export default function Mentors(props) {
 		QuizName.value="";
 	};
 	const autofillQuizz = () => {
-		clearQuiz();
 		const shuffled = filteredQuestionsByTag.sort(() => 0.5 - Math.random());
 		// Get sub-array of first n elements after shuffled
 		let selected = shuffled.slice(0, numberOfQuestions);
@@ -43,6 +42,7 @@ export default function Mentors(props) {
 		});
 	};
 	const resetFilters = () => {
+		tagSelect.value="";
 		setFilteredQuestionsByTag(props.questions);
 	};
 	let tempFilteredData = [];
@@ -179,8 +179,8 @@ export default function Mentors(props) {
 									<option value="20">20</option>
 								</select>
 					 </div>
-							<select className="btn btn-light dropdown-toggle ml-2" onChange={tagClickHandler}>
-								<option value="">🏷️ Select tag filter</option>
+							<select id="tagSelect"className="btn btn-light dropdown-toggle ml-2" onChange={tagClickHandler}>
+								<option default value="">🏷️ Select tag filter</option>
 								{tagsCollection.map((tag, index) => {
 									return (
 										<option value={tag} name={tag} key={index}>
