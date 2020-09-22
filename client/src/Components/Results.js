@@ -75,7 +75,10 @@ export default function Results(props) {
 		if (allAttempts.length >= attemptNumber) {
 			return allAttempts[allAttempts.length - attemptNumber].timestamp;
 		} else {
-			return null;
+			setStudents((students) =>
+				[].concat(
+					students.filter((studentName) => studentName !== student))
+			);
 		}
 	};
 
