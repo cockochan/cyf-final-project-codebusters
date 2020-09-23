@@ -19,6 +19,7 @@ export default function Results(props) {
 	const [isShowDetails, setIsShowDetails] = useState(false);
 	const [sortBy, setSortBy] = useState(null);
 	const [isDescending, setIsDescending] = useState(false);
+	const [allStudents, setAllStudents]=useState([]);
 
 	useEffect(() => {
 		fetch("/api/results")
@@ -45,6 +46,7 @@ export default function Results(props) {
 		setAttemptNumber(1);
 		setAttemptCounter(1);
 		setStudents([]);
+		setAllStudents([]);
 		setIsShowDetails(false);
 		setQuizRoute(`quizzes/${event.target.value}`);
 		const selectedResults = allResults.filter(
@@ -53,6 +55,7 @@ export default function Results(props) {
 		setQuizSelectedResults(selectedResults);
 		const names = selectedResults.map((result) => result.studentName);
 		if (selectedResults.length > 0) {
+			setAllStudents(uniqBy(names, JSON.stringify));
 			setStudents(uniqBy(names, JSON.stringify)); //remove duplicated names from array
 
 			const questionIds = props.quizzes.find(
@@ -131,10 +134,12 @@ export default function Results(props) {
 	};
 
 	const previousAttempt = () => {
+		setStudents(allStudents);
 		setAttemptNumber(attemptNumber + 1);
 	};
 
 	const nextAttempt = () => {
+		setStudents(allStudents);
 		setAttemptNumber(attemptNumber - 1);
 	};
 
